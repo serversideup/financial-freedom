@@ -1,0 +1,6 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+@import 'animations/scale-in-center.css';
+
+@import 'tailwindcss/utilities';

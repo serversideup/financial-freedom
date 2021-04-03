@@ -14,7 +14,7 @@ return [
     */
 
     'stateful' => [
-        'stoic-money.521.test'
+        env('SANCTUM_STATEFUL_DOMAINS')
     ],
 
     /*

@@ -14,7 +14,7 @@
                         Name
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ transaction.name }}
+                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.name"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -22,7 +22,7 @@
                         Date
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ formatDate( transaction.date ) }}
+                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.date"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,7 +30,7 @@
                         Description
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ transaction.description }}
+                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.description"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -118,6 +118,9 @@ export default {
     data(){
         return {
             form: {
+                name: '',
+                date: '',
+                description: '',
                 tags: [],
                 receipt: ''
             }
@@ -140,6 +143,9 @@ export default {
 
     mounted(){
         this.form.tags = this.transaction.tags;
+        this.form.name = this.transaction.name;
+        this.form.date = this.transaction.date;
+        this.form.description = this.transaction.description;
     },
     
     methods: {
@@ -162,9 +168,12 @@ export default {
         saveChanges(){
             let formData = new FormData();
 
-            formData.append('receipt', this.form.receipt);
-            formData.append('tags', JSON.stringify( this.form.tags ) );
-            formData.append('_method', 'PUT');
+            formData.append( 'receipt', this.form.receipt );
+            formData.append( 'tags', JSON.stringify( this.form.tags ) );
+            formData.append( 'name', this.form.name );
+            formData.append( 'date', this.form.date );
+            formData.append( 'description', this.form.description );
+            formData.append( '_method', 'PUT' );
 
             this.$inertia.post('/transactions/'+this.transaction.id, formData);
         }

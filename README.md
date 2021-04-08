@@ -1,61 +1,60 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+    <img src="https://raw.githubusercontent.com/serversideup/stoic-money/main/public/img/logo_transparent_icon.png" width="200">
 </p>
 
-## About Laravel
+Stoic Money provides you the tools to flexibly manage your budget, provide insight on your spending habits, guide you in your financial goals, and securely allow advisors to help. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Why "Stoic" money? Money can be emotional in many ways. Remaining stoic while managing your money will lead to greater financial success. Being stoic while approaching your finances will lead to a more financially sound life. We will facilitate your financial stoicism with an easy to use budgeting system, helping you to set set realistic goals, and being honest with yourself about your spending habits. By practicing stoic financial management, you will live a more financially sound and peaceful life.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## What We Believe
+Stoic Money is built upon the following principles.
 
-## Learning Laravel
+### 🕵️‍♂️ Privacy Focused
+Your money is a private matter. We 100% respect your privacy and would never sell your data. Our code is 💯% Open Sourced so feel free to browse around and see how your data is being used. 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🧬 Flexible
+Everyone has an opinion on how to budget, what techniques work best, etc. Stoic Money allows you to combine these methods in an un-opinionated fashion to help you save money and achieve your financial goals. Our opinion is money management should be self managed. We provide you with a place to learn, experiment and set goals following whatever teacher you have.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+We made Stoic Money extensible and open source so if you want to provide some insight in a dashboard widget or expand a calculation, go for it! Our plugin system will allow for that.
 
-## Laravel Sponsors
+### 🎓 Educational
+Reality is the greatest of teachers. Whatever you financial circumstances, stoic money will help you become educated on what you are doing and how your spending habits contribute to your financial success.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 🤝 Involvement
+We encourage involvement in the development of stoic money. If you want to learn about the app, contribute to the app, have a question, or want to share your thoughts and opinions, we are here to listen. It takes a village. However, we have a 0% ass hole policy. Treat others with respect and you will be treated with respect. If you disrespect others, we will ban your account. Period.
 
-### Premium Partners
+### 🔒 Secure
+Financial data should be private. Our application is built from the ground up with security in mind. We respect your data and have security measures in place so your data remains your data.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+### 👍 Stoic
+You have what money you have so work with it. The numbers don't lie. Every day do your best and take one step forward to achieving your financial goals. So much of money management is psychological. Stoic Money aims to make managing your money seamless and un-emotional so you can achieve more financial success with as little friction as possible.
 
-## Contributing
+## Features
+* Transaction tagging, splitting, line item management
+* Simple and powerful budgeting and notification system (coming soon)
+* Goal setting and timeline of achievemnts (coming soon)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## Contributing and Questions
+One of the main goals of Stoic Money is to develop a frictionless, easy to contribute to, open-source application. 100% of our roadmap, releases, documentation, and code will live in GitHub. 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Feature Requests
+If you want to see a feature added to Stoic Money, we'd love to hear it! Head over to our [issues section](https://github.com/serversideup/stoic-money/issues) and open a new issue with the label of "Feature Request". Jot down as much as you can about your new feature. All work will be done publicly to organize and get the feature on the timeline.
 
-## Security Vulnerabilities
+### Bug Reports
+If you experience a bug, we need to fix it! Head over to the [issues section](https://github.com/serversideup/stoic-money/issues) and open a new issue with the label "Bug". Please include as much detail (OS, Browser, console errors, etc) as possible.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Code Contributions
+Code contributions are not only appreciated, but also encouraged. If you are curious about the internal structure of your app, head over to the [wiki](https://github.com/serversideup/stoic-money/wiki). We've done our best to document the internal structure of Stoic Money so your friction from checking out the repo to submitting code is as minimal and easy as possible!
+
+
+### Security Enhancements
+These are the ONLY issues that should be handled privately. If you find a security vulnerability, reach out to us directly at hello@serversideup.net. We will fix and deploy immediately.
+
+## Self Hosting
+_Coming Soon_
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Stoic Money is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

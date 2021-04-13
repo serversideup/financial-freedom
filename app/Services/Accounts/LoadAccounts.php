@@ -11,16 +11,20 @@ use App\Models\Accounts\CheckingAccount;
 class LoadAccounts
 {
     private $user;
+    private $accounts;
+    private $types;
+
     private $cashAccounts;
     private $creditCards;
     private $loans;
     private $savingsAccounts;
     private $checkingAccounts;
 
-    public function __construct( $user )
+    public function __construct( $user, $types = [] )
     {
         $this->user = $user;
         $this->accounts = [];
+        $this->types = $types;
     }
 
     public function load()
@@ -42,35 +46,45 @@ class LoadAccounts
 
     private function loadCashAccounts()
     {
-        $this->cashAccounts = CashAccount::where('user_id', '=', $this->user->id)
-                                          ->get();
+        if( empty( $this->types ) || in_array( 'cash', $this->types ) ){
+            $this->cashAccounts = CashAccount::where('user_id', '=', $this->user->id)
+                                            ->get();
+        }
     }
 
     private function loadCreditCards()
     {
-        $this->creditCards = CreditCard::where('user_id', '=', $this->user->id)
-                                        ->with('institution')
-                                        ->get();
+        if( empty( $this->types ) || in_array( 'credit-cards', $this->types ) ){
+            $this->creditCards = CreditCard::where('user_id', '=', $this->user->id)
+                                            ->with('institution')
+                                            ->get();
+        }
     }
 
     private function loadLoans()
     {
-        $this->loans = Loan::where('user_id', '=', $this->user->id)
-                            ->with('institution')
-                            ->get();
+        if( empty( $this->types ) || in_array( 'loans', $this->types ) ){
+            $this->loans = Loan::where('user_id', '=', $this->user->id)
+                                ->with('institution')
+                                ->get();
+        }
     }
 
     private function loadSavingsAccounts()
     {
-        $this->savingsAccounts = SavingsAccount::where('user_id', '=', $this->user->id)
-                                                ->with('institution')
-                                                ->get();
+        if( empty( $this->types ) || in_array( 'savings', $this->types ) ){
+            $this->savingsAccounts = SavingsAccount::where('user_id', '=', $this->user->id)
+                                                    ->with('institution')
+                                                    ->get();
+        }
     }
 
     private function loadCheckingAccounts()
     {
-        $this->checkingAccounts = CheckingAccount::where('user_id', '=', $this->user->id)
-                                                ->with('institution')
-                                                ->get();
+        if( empty( $this->types ) || in_array('checking', $this->types ) ){
+            $this->checkingAccounts = CheckingAccount::where('user_id', '=', $this->user->id)
+                                                     ->with('institution')
+                                                     ->get();
+        }
     }
 }

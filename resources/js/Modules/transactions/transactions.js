@@ -3,6 +3,7 @@ export const transactions = {
 
     state: () => ({
         transactions: [],
+        loading: false
     }),
 
     actions: {
@@ -12,12 +13,20 @@ export const transactions = {
     mutations: {
         setTransactions( state, transactions ){
             state.transactions = transactions;
+        },
+
+        setLoading( state, loading ){
+            state.loading = loading;
         }
     },
 
     getters: {
         getTransactions( state ){
             return state.transactions;
+        },
+
+        getLoading( state ){
+            return state.loading;
         }
     }
 }

@@ -127,6 +127,7 @@
             loadTransactions(){
                 Papa.parse(this.transactions, {
                     header: true,
+                    skipEmptyLines: true,
                     complete: function(results) {
                         this.formatTransactions( results.data );
                     }.bind(this)

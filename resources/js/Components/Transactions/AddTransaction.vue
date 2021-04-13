@@ -20,14 +20,14 @@
                     <div class="mt-1 rounded-md shadow-sm">
                         <select id="account" v-model="form.account" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
                             <option value=""></option>
-                            <optgroup label="Credit Cards" v-if="$page.creditCards.length > 0 ">
-                                <option v-for="account in $page.creditCards"
+                            <optgroup label="Credit Cards" v-if="$page.accounts.credit_cards.length > 0 ">
+                                <option v-for="account in $page.accounts.credit_cards"
                                     v-bind:key="'credit-card-'+account.id"
                                     v-bind:value="account"
                                     v-text="account.institution.name+': '+account.name"></option>
                             </optgroup>
-                            <optgroup label="Checking Accounts" v-if="$page.checkingAccounts.length > 0">
-                                <option v-for="account in $page.checkingAccounts"
+                            <optgroup label="Checking Accounts" v-if="$page.accounts.checking_accounts.length > 0">
+                                <option v-for="account in $page.accounts.checking_accounts"
                                     v-bind:key="'checking-account-'+account.id"
                                     v-bind:value="account"
                                     v-text="account.institution.name+': '+account.name"></option>

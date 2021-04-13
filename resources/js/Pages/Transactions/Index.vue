@@ -113,8 +113,19 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr v-show="loading">
+                                        <td colspan="7" class="text-center font-sans p-10">
+                                            <img class="inline-block" src="/img/ui/loading.svg"/>
+                                        </td>
+                                    </tr>
+                                    <tr v-show="!loading && transactions.length == 0">
+                                        <td colspan="7" class="text-center font-sans p-10">
+                                            No transactions have been entered for the filters provided.
+                                        </td>
+                                    </tr>
                                     <tr v-for="transaction in transactions"
-                                        v-bind:key="'transaction-'+transaction.id">
+                                        v-bind:key="'transaction-'+transaction.id"
+                                        v-show="!loading && transactions.length > 0">
                                         <td class="px-6 py-3">
                                             <input type="checkbox" :value="transaction.id" v-model="selectedTransactions"/>
                                         </td>
@@ -202,10 +213,6 @@
 
 
     export default {
-        props: [
-            'initialTransactions'
-        ],
-
         components: {
             AppLayout,
             AddTransaction,
@@ -228,7 +235,8 @@
 
         computed: {
             ...mapState('transactions', {
-                transactions: state => state.transactions
+                transactions: state => state.transactions,
+                loading: state => state.loading
             }),
 
             dateRange(){
@@ -250,7 +258,7 @@
                 this.setCurrentMonth();
                 this.setStartDate();
                 this.setEndDate();
-                this.$store.commit( 'transactions/setTransactions', this.initialTransactions );
+                this.loadTransactions();
             },
 
             bindEvents(){
@@ -289,25 +297,47 @@
 
             viewPreviousMonth(){
                 let previousMonth = moment( this.currentMonth ).subtract(1, 'month');
+                this.$store.commit( 'transactions/setLoading', true );
 
                 TransactionsAPI.index( {
                     start_date: moment( previousMonth, 'MMM YYYY' ).startOf('month').format('YYYY-MM-DD'),
                     end_date: moment( previousMonth, 'MMM YYYY' ).endOf('month').format('YYYY-MM-DD')
                 }).then( function( response ){
                     this.currentMonth = moment( previousMonth );
+                    this.startDate = moment( this.currentMonth, 'MMM YYYY').startOf('month').format('YYYY-MM-DD');
+                    this.endDate = moment( this.currentMonth, 'MMM YYYY').endOf('month').format('YYYY-MM-DD');
+
                     this.$store.commit( 'transactions/setTransactions', response.data );
+                    this.$store.commit( 'transactions/setLoading', false );
                 }.bind(this));
             },
 
             viewNextMonth(){
                 let nextMonth = moment( this.currentMonth ).add(1, 'month');
+                this.$store.commit( 'transactions/setLoading', true );
 
                 TransactionsAPI.index( {
                     start_date: moment( nextMonth, 'MMM YYYY' ).startOf('month').format('YYYY-MM-DD'),
                     end_date: moment( nextMonth, 'MMM YYYY' ).endOf('month').format('YYYY-MM-DD')
                 }).then( function( response ){
                     this.currentMonth = moment( nextMonth );
+                    this.startDate = moment( this.currentMonth, 'MMM YYYY').startOf('month').format('YYYY-MM-DD');
+                    this.endDate = moment( this.currentMonth, 'MMM YYYY').endOf('month').format('YYYY-MM-DD');
+                    
                     this.$store.commit( 'transactions/setTransactions', response.data );
+                    this.$store.commit( 'transactions/setLoading', false );
+                }.bind(this));
+            },
+
+            loadTransactions(){
+                this.$store.commit( 'transactions/setLoading', true );
+
+                TransactionsAPI.index( {
+                    start_date: moment( this.currentMonth, 'MMM YYYY' ).startOf('month').format('YYYY-MM-DD'),
+                    end_date: moment( this.currentMonth, 'MMM YYYY' ).endOf('month').format('YYYY-MM-DD')
+                }).then( function( response ){
+                    this.$store.commit( 'transactions/setTransactions', response.data );
+                    this.$store.commit( 'transactions/setLoading', false );
                 }.bind(this));
             },
 

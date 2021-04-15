@@ -306,6 +306,8 @@
                     </div>
                 </div>
             </main>
+
+            <notification/>
         </div>
     </div>
 </template>
@@ -317,6 +319,7 @@
     import JetDropdownLink from './../Jetstream/DropdownLink'
     import JetNavLink from './../Jetstream/NavLink'
     import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
+    import Notification from '../Components/Global/Notification';
 
     export default {
         components: {
@@ -326,8 +329,9 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
+            Notification
         },
-
+        
         data() {
             return {
                 showingNavigationDropdown: false,

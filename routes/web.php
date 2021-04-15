@@ -41,7 +41,6 @@ Route::post('/transactions/{transaction}/splits', [TransactionsSplitsController:
 Route::get('/transactions/{transaction}/receipt', [TransactionsReceiptController::class, 'show']);
 
 Route::get('/accounts', [AccountsController::class, 'index']);
-Route::get('/accounts/create', [AccountsController::class, 'create']);
 Route::get('/accounts/{account}/edit', [AccountsController::class, 'edit']);
 Route::post('/accounts', [AccountsController::class, 'store']);
 

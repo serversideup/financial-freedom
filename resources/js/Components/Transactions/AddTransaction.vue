@@ -158,6 +158,12 @@ export default {
             this.$inertia.post('/transactions', this.form)
                 .then(function( response ){
                     EventBus.$emit('load-transactions');
+                    EventBus.$emit('notify', {
+                        type: 'success',
+                        title: 'Transaction Added',
+                        message: 'Your transaction was added successfully.',
+                        action: 'clear'
+                    });
                     this.cancel();
                 }.bind(this));
         },

@@ -38,10 +38,10 @@ class TransactionsController extends Controller
     {
         $accountLoader = new LoadAccounts( Auth::user(), ['credit-cards', 'checking'] );
         $accounts = $accountLoader->load();
-        
+
         return Inertia::render('Transactions/Import/Import', [
-            'checkingAccounts' => $accounts->checking_accounts,
-            'creditCards' => $accounts->credit_cards
+            'checkingAccounts' => $accounts['checking_accounts'],
+            'creditCards' => $accounts['credit_cards']
         ]);
     }
 

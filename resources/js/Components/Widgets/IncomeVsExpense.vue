@@ -126,8 +126,8 @@ export default {
                                         return value.label
                                     }),
                                     datasets: [{
-                                        backgroundColor: 'rgba( 66, 124, 199, .5 )',
-                                        borderColor: 'rgba( 66, 124, 199, 1 )',
+                                        backgroundColor: 'rgb(240, 82, 82)',
+                                        borderColor: 'rgb(240, 82, 82)',
                                         borderWidth: 3,
                                         label: 'Expenses',
                                         data: [
@@ -136,8 +136,8 @@ export default {
                                             this.chartData[2].expenses.toFixed(2)
                                         ],
                                     }, {
-                                        backgroundColor: 'rgba( 211, 164, 40, .5 )',
-                                        borderColor: 'rgba( 211, 164, 40, 1 )',
+                                        backgroundColor: 'rgb( 14, 159, 110 )',
+                                        borderColor: 'rgb( 14, 159, 110 )',
                                         borderWidth: 3,
                                         label: 'Income',
                                         data: [

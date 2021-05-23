@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  php:
+    ####################################
+    # Allow CI to set our image for us
+    ####################################
+    image: ${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}
+    ####################################
+    # Swarm configuration
+    ####################################
+    networks:
+      - web-public
+    volumes:
+      - "storage_private:/var/www/html/storage/app/private/"
+      - "storage_public:/var/www/html/storage/app/public/"
+      - "storage_sessions:/var/www/html/storage/framework/sessions"
+      - "storage_logs:/var/www/html/storage/logs"
+    environment:
+      PHP_POOL_NAME: "${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}"
+      NEW_RELIC_LICENSE_KEY: "${NEW_RELIC_LICENSE}"
+      NEW_RELIC_APP_NAME: "${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}"
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 5s
+        order: start-first
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.rule=${TRAEFIK_HOST_RULE}"
+        - "traefik.http.routers.${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.entrypoints=websecure"
+        - "traefik.http.routers.${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.tls=true"
+        - "traefik.http.routers.${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.loadbalancer.server.port=443"
+        - "traefik.http.services.${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.loadbalancer.server.scheme=https"
+
+volumes:
+  storage_private:
+  storage_public:
+  storage_sessions:
+  storage_logs:
+
+networks:
+  web-public:
+    external: true

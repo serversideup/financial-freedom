@@ -34,7 +34,7 @@
         <div class="bg-cool-gray-50 px-5 py-3">
             <div class="text-sm leading-5">
                 <inertia-link :href="'/cash-accounts/'+account.id" class="font-medium text-lochmara-600 hover:text-lochmara-900 transition ease-in-out duration-150">
-                    View transactions
+                    View account
                 </inertia-link>
             </div>
         </div>

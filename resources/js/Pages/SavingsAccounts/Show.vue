@@ -1,10 +1,10 @@
 <template>
     <app-layout>
-        <div v-if="loaded">
+        <div>
             <div class="mt-2 md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 flex items-center w-full sm:text-3xl sm:leading-9 sm:truncate">
-                        <img :src="checkingAccount.institution.logo" class="h-8 w-8 mr-2 rounded-full"/> {{ checkingAccount.name }}
+                        <img :src="savingsAccount.institution.logo" class="h-8 w-8 mr-2 rounded-full"/> {{ savingsAccount.name }}
                     </h2>
                 </div>
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
@@ -25,70 +25,55 @@
                 </span>
             </div>
         </div>
-        <div class="mt-5" v-if="loaded">
-            <div class="mt-5">
-                <stats
-                    :checking-account="checkingAccount"/>
+        <div class="mt-5">
+            <stats
+                :savings-account="savingsAccount"/>
+            
+            <div class="flex mt-5">
                 
-                <div class="flex mt-5">
-                    <allocation
-                        :current-balance="checkingAccount.current_balance"
-                        :account="checkingAccount"
-                    />
-                </div>
             </div>
         </div>
+
         <edit/>
     </app-layout>
 </template>
 
 <script>
-    import CheckingAccountsAPI from '../../api/checkingAccounts.js';
     import AppLayout from './../../Layouts/AppLayout'
-    import Stats from '../../Components/Accounts/CheckingAccount/Stats.vue';
-    import Allocation from '../../Components/Accounts/Allocation.vue';
-    import Edit from '../../Components/Accounts/CheckingAccount/Edit.vue';
+    import Stats from '../../Components/Accounts/SavingsAccount/Stats.vue';
+    import Edit from '../../Components/Accounts/SavingsAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
+    import SavingsAccountAPI from '../../api/savingsAccounts.js';
 
     export default {
-        props: ['id'],
-
-        data(){
-            return {
-                loaded: false,
-                checkingAccount: {}
-            }
-        },
+        props: ['savingsAccount'],
 
         components: {
             AppLayout,
             Stats,
-            Allocation,
             Edit
         },
 
         mounted(){
             this.bindEvents();
-            this.loadCheckingAccount();
         },
 
         methods: {
             bindEvents(){
-                EventBus.$on('checking-account-updated', function(){
-                    this.loadCheckingAccount();
+                EventBus.$on( 'savings-account-updated', function(){
+                    this.loadSavingsAccount();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit('prompt-edit-account', this.checkingAccount);
+                EventBus.$emit( 'prompt-edit-account', this.savingsAccount );
             },
 
-            loadCheckingAccount(){
-                CheckingAccountsAPI.show( this.id )
+            loadSavingsAccount(){
+                SavingsAccountAPI.show( this.savingsAccount.id )
                     .then( function( response ){
-                        this.checkingAccount = response.data;
-                        this.loaded = true;
-                    }.bind(this) );
+                        this.savingsAccount = response.data;
+                    }.bind(this));
             }
         }
     }

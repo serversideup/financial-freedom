@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers\Web\Accounts;
 
-use Auth;
-use Redirect;
-
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 
-use App\Models\Institutions\Institution;
-
-use App\Http\Requests\Accounts\StoreAccountRequest;
-use App\Services\Accounts\StoreAccount;
-use App\Services\Accounts\LoadAccounts;
+use App\Services\Institutions\LoadInstitutions;
 
 class AccountsController extends Controller
 {
@@ -24,29 +17,11 @@ class AccountsController extends Controller
 
     public function index()
     {
-        $loadAccounts = new LoadAccounts( Auth::user() );
-        $accounts = $loadAccounts->load();
+        $loadInstitutions = new LoadInstitutions();
+        $institutions = $loadInstitutions->load();
 
         return Inertia::render('Accounts/Index', [
-            'accounts' => $accounts
+            'institutions' => $institutions
         ]);
-    }
-
-    public function create()
-    {
-        $institutions = Institution::orderBy('name', 'ASC')->get();
-
-        return Inertia::render('Accounts/Create', [
-            'institutions' => $institutions,
-            'csrf' => csrf_token()
-        ]);
-    }
-
-    public function store( StoreAccountRequest $request )
-    {
-        $storeAccount = new StoreAccount( $request->user(), $request->all() );
-        $storeAccount->store();
-
-        return Redirect::to('/accounts');
     }
 }

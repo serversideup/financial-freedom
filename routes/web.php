@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Accounts\AccountsController;
 use App\Http\Controllers\Web\CheckingAccounts\CheckingAccountsController;
+use App\Http\Controllers\Web\SavingsAccounts\SavingsAccountsController;
+
 use App\Http\Controllers\Web\Transactions\TransactionsController;
 use App\Http\Controllers\Web\Transactions\TransactionsSplitsController;
 use App\Http\Controllers\Web\Transactions\TransactionsReceiptController;
@@ -44,6 +46,10 @@ Route::get('/accounts', [AccountsController::class, 'index']);
 Route::get('/accounts/{account}/edit', [AccountsController::class, 'edit']);
 Route::post('/accounts', [AccountsController::class, 'store']);
 
+Route::get('/cash-accounts/{cashAccount}',[] );
+Route::get('/credit-cards/{creditCard}', [] );
+Route::get('/loans/{loan}', [LoanController::class]);
+Route::get('/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::get('/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 
 Route::get('/admin/institutions', [AdminInstitutionsController::class, 'show']);

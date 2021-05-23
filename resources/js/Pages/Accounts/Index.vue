@@ -46,7 +46,9 @@
                 />
         </div>
 
-        <add-account/>
+        <add-account
+            :institutions="institutions"/>
+
     </app-layout>
 </template>
 
@@ -59,11 +61,18 @@
     import SavingsAccountCard from '../../Components/Accounts/SavingsAccountCard';
     import CreditAccountCard from '../../Components/Accounts/CreditAccountCard';
     import AddAccount from '../../Components/Accounts/AddAccount.vue';
+    import AccountsAPI from '../../api/accounts.js';
 
     import { EventBus } from '../../event-bus.js';
 
     export default {
-        props: ['accounts'],
+        props: ['institutions'],
+
+        data(){
+            return {
+                accounts: []
+            }
+        },
 
         components: {
             AppLayout,
@@ -77,17 +86,18 @@
 
         mounted(){
             this.bindEvents();
+            this.loadAccounts();
         },
 
         methods: {
             bindEvents(){
                 EventBus.$on('reload-accounts', function(){
-                    this.reloadAccounts();
+                    this.loadAccounts();
                 }.bind(this));
             },
 
-            reloadAccounts(){
-                AccountAPI.index()
+            loadAccounts(){
+                AccountsAPI.index()
                     .then( function( response ){
                         this.accounts = response.data;
                     }.bind(this) );

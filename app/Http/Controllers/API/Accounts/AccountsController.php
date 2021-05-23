@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API\Accounts;
 use App\Http\Controllers\Controller;
 use App\Services\Accounts\LoadAccounts;
 use Auth;
-use Request;
+
+use App\Http\Requests\Accounts\StoreAccountRequest;
+use App\Services\Accounts\StoreAccount;
 
 class AccountsController extends Controller
 {
@@ -20,5 +22,13 @@ class AccountsController extends Controller
         $accounts = $accountsLoader->load();
 
         return response()->json( $accounts );
+    }
+
+    public function store( StoreAccountRequest $request )
+    {
+        $storeAccount = new StoreAccount( $request->user(), $request->all() );
+        $storeAccount->store();
+
+        return response()->json( null, 201 );
     }
 }

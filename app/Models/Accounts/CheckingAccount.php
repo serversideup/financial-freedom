@@ -27,6 +27,11 @@ class CheckingAccount extends Model
         return $this->morphMany('App\Models\Transactions\Transaction', 'accountable');
     }
 
+    public function allocations()
+    {
+        return $this->morphMany('App\Models\Allocations\Allocation', 'accountable');
+    }
+
     public function getAccountTypeAttribute()
     {
         return 'checking';

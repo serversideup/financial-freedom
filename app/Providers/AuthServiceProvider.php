@@ -4,6 +4,12 @@ namespace App\Providers;
 
 use App\Models\Team;
 use App\Policies\TeamPolicy;
+
+use App\Models\Accounts\SavingsAccount;
+use App\Policies\SavingsAccountPolicy;
+use App\Models\Accounts\CheckingAccount;
+use App\Policies\CheckingAccountPolicy;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -15,6 +21,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        SavingsAccount::class => SavingsAccountPolicy::class,
+        CheckingAccount::class => CheckingAccountPolicy::class
     ];
 
     /**

@@ -19,4 +19,14 @@ class SavingsAccount extends Model
     {
         return $this->hasOne('App\Models\Institutions\Institution', 'id', 'institution_id');
     }
+
+    public function transactions()
+    {
+        return $this->morphMany('App\Models\Transactions\Transaction', 'accountable');
+    }
+
+    public function allocations()
+    {
+        return $this->morphMany('App\Models\Allocations\Allocation', 'accountable');
+    }
 }

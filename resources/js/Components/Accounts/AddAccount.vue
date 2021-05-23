@@ -41,6 +41,86 @@
                         <input v-model="form.number" id="account-number" type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
                     </div>
                 </div>
+                <div class="sm:col-span-3" v-show="form.type != 'cash'">
+                    <label for="institution" class="block text-sm font-medium leading-5 text-gray-700">
+                        Institution
+                    </label>
+                    <div class="mt-1 rounded-md shadow-sm">
+                        <select id="institution" v-model="form.institution" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                            <option value=""></option>
+                            <option v-for="(institution, key) in institutions"
+                                v-bind:key="'institution-'+key"
+                                v-bind:value="institution.id"
+                                v-text="institution.name"/>
+                        </select>
+                    </div>
+                </div>
+                <div class="sm:col-span-3" v-show="form.type == 'loan'">
+                    <label for="open-date" class="block text-sm font-medium leading-5 text-gray-700">
+                        Open Date
+                    </label>
+                    <div class="mt-1 rounded-md shadow-sm">
+                        <input v-model="form.open_date" id="open-date" type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                    </div>
+                </div>
+                <div class="sm:col-span-3">
+                    <label for="description" class="block text-sm font-medium leading-5 text-gray-700">
+                        Description
+                    </label>
+                    <div class="mt-1 rounded-md shadow-sm">
+                        <input v-model="form.description" id="description" type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                    </div>
+                </div>
+                <div class="sm:col-span-3">
+                    <div>
+                        <label for="initial-balance" class="block text-sm font-medium leading-5 text-gray-700">Initial Balance</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm sm:leading-5">
+                                    $
+                                </span>
+                            </div>
+                            <input id="initial-balance" v-model="form.initial_balance" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
+                                    USD
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sm:col-span-3" v-show="form.type == 'loan' || form.type == 'credit-card'">
+                    <div>
+                        <label for="interest-rate" class="block text-sm font-medium leading-5 text-gray-700">Interest Rate</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm sm:leading-5">
+                                    %
+                                </span>
+                            </div>
+                            <input id="interest-rate" v-model="form.interest_rate" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="sm:col-span-3" v-show="form.type == 'loan'">
+                    <div>
+                        <label for="payment-amount" class="block text-sm font-medium leading-5 text-gray-700">Payment Amount</label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm sm:leading-5">
+                                    $
+                                </span>
+                            </div>
+                            <input id="payment-amount" v-model="form.payment_amount" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
+                                    USD
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </template>
         <template v-slot:footer>
@@ -57,8 +137,11 @@
 <script>
 import AppModal from '../Global/AppModal.vue';
 import { EventBus } from '../../event-bus.js';
+import AccountsAPI from '../../api/accounts.js';
 
 export default {
+    props: ['institutions'],
+
     components: {
         AppModal
     },
@@ -99,15 +182,36 @@ export default {
         cancel(){
             this.show = false;
             this.resetForm();
-            EventBus.$emit('close-modal');
         },
 
         addAccount(){
+            AccountsAPI.store( this.form )
+                .then( function( response ){
+                    EventBus.$emit('notify', {
+                        type: 'success',
+                        title: 'Account Added',
+                        message: 'You can now add transactions, set goals, and budget for this account!',
+                        action: 'close'
+                    });
 
+                    EventBus.$emit('reload-accounts');
+
+                    this.resetForm();
+                }.bind(this) );
         },
 
         resetForm(){
-            
+            this.show = false;
+
+            this.form.name = '';
+            this.form.type = '';
+            this.form.number = '';
+            this.form.description = '';
+            this.form.institution = '';
+            this.form.open_date = '';
+            this.form.payment_amount = 0.00;
+            this.form.initial_balance = 0.00;
+            this.form.interest_rate = 0.000;
         }
     }
 }

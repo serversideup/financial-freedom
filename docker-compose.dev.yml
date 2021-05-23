@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  php:
+    volumes:
+      - .:/var/www/html/
+    networks:
+      - web-public
+    ####################################
+    # Local development config
+    ####################################
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stoic-money.rule=Host(`stoic-money.dev.test`)"
+      - "traefik.http.routers.stoic-money.entrypoints=websecure"
+      - "traefik.http.routers.stoic-money.tls=true"
+      - "traefik.http.services.stoic-money.loadbalancer.server.port=443"
+      - "traefik.http.services.stoic-money.loadbalancer.server.scheme=https"
+
+  node:
+    image: node:lts
+    volumes:
+      - .:/usr/src/app/
+    working_dir: /usr/src/app/
+    networks: 
+      - web-public
+  
+  meilisearch:
+    image: getmeili/meilisearch
+    volumes: 
+      - ./volumes/meilisearch/data.ms:/data.ms
+    networks:
+      - web-public
+
+  redis:
+    image: redis:6
+    command: "redis-server --appendonly yes --requirepass redispassword"
+    volumes:
+     - ./volumes/redis/data:/data
+    networks:
+     - web-public
+
+networks:
+  web-public:
+    external: true

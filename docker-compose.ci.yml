@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  php:
+    networks:
+      - web-ci
+    volumes:
+      - .:/var/www/html/
+  mariadb:
+    # Use the latest MariaDB image
+    image: mariadb:10.5
+    networks:
+      - web-ci
+    environment:
+        MYSQL_ROOT_PASSWORD: "cirootpassword"
+        MYSQL_DATABASE: "cidatabase"
+        MYSQL_USER: "ciuser"
+        MYSQL_PASSWORD: "cipassword"
+
+  node:
+    image: node:lts
+    volumes:
+      - .:/usr/src/app/
+    working_dir: /usr/src/app/
+    networks: 
+      - web-ci
+
+networks:
+  web-ci:

@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  php:
+    ####################################
+    # Base image (for development)
+    ####################################
+    build: .

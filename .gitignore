@@ -13,7 +13,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-docker-*
-Jenkinsfile
-Dockerfile
 volumes/*

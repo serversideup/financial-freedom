@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\API\Accounts;
 
 use App\Http\Controllers\Controller;
-use App\Services\Accounts\LoadAccounts;
-use Auth;
-
 use App\Http\Requests\Accounts\StoreAccountRequest;
+use App\Services\Accounts\LoadAccounts;
 use App\Services\Accounts\StoreAccount;
+use Auth;
 
 class AccountsController extends Controller
 {

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\Transactions\TransactionsController;
 use App\Http\Controllers\API\Accounts\AccountsController;
+use App\Http\Controllers\API\Institutions\InstitutionsController;
 use App\Http\Controllers\API\Tags\TagsController;
 use App\Http\Controllers\API\SavingsAccounts\SavingsAccountsController;
 
@@ -25,6 +26,8 @@ use App\Http\Controllers\API\CheckingAccounts\CheckingAccountsAllocationsControl
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/v1/institutions', [InstitutionsController::class, 'index']);
 
 Route::get('/v1/accounts', [AccountsController::class, 'index']);
 Route::post('/v1/accounts', [AccountsController::class, 'store']);

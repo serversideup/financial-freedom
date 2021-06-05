@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API\CheckingAccounts;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CheckingAccounts\AllocateCheckingAccountRequest;
+use App\Models\Accounts\CheckingAccount;
+use App\Services\Allocations\LoadAllocations;
+use App\Services\Allocations\StoreAllocation;
+
 use Request;
 use Auth;
-
-use App\Http\Controllers\Controller;
-use App\Models\Accounts\CheckingAccount;
-use App\Services\Allocations\StoreAllocation;
 
 class CheckingAccountsAllocationsController extends Controller
 {
@@ -19,18 +21,15 @@ class CheckingAccountsAllocationsController extends Controller
 
     public function index( CheckingAccount $checkingAccount )
     {
-        $account = CheckingAccount::where('id', '=', $checkingAccount->id)
-                                  ->with('allocations')
-                                  ->first();
+        $loadAllocations = new LoadAllocations( 'checking-account', $checkingAccount->id );
+        $allocations = $loadAllocations->load();
 
-        $allocations = $account->allocations;
-
-        return response()->json( $allocations ? $allocations : [] );
+        return response()->json( $allocations ? $allocations : [] );      
     }
 
-    public function store( CheckingAccount $checkingAccount )
+    public function store( AllocateCheckingAccountRequest $request, CheckingAccount $checkingAccount )
     {
-        $storeAllocation = new StoreAllocation( Auth::user(), Request::all(), $checkingAccount );
+        $storeAllocation = new StoreAllocation( Auth::user(), $request->all(), $checkingAccount );
         $allocation = $storeAllocation->store();
         
         return response()->json( $allocation, 201 );

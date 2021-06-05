@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div>
+        <div v-if="loaded">
             <div class="mt-2 md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 flex items-center w-full sm:text-3xl sm:leading-9 sm:truncate">
@@ -46,7 +46,14 @@
     import SavingsAccountAPI from '../../api/savingsAccounts.js';
 
     export default {
-        props: ['savingsAccount'],
+        props: ['id'],
+
+        data(){
+            return {
+                loaded: false,
+                savingsAccount: {}
+            }
+        },
 
         components: {
             AppLayout,
@@ -56,6 +63,7 @@
 
         mounted(){
             this.bindEvents();
+            this.loadSavingsAccount();
         },
 
         methods: {
@@ -70,9 +78,10 @@
             },
 
             loadSavingsAccount(){
-                SavingsAccountAPI.show( this.savingsAccount.id )
+                SavingsAccountAPI.show( this.id )
                     .then( function( response ){
                         this.savingsAccount = response.data;
+                        this.loaded = true;
                     }.bind(this));
             }
         }

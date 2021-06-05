@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Accounts\AccountsController;
 use App\Http\Controllers\Web\CheckingAccounts\CheckingAccountsController;
 use App\Http\Controllers\Web\SavingsAccounts\SavingsAccountsController;
+use App\Http\Controllers\Web\Loans\LoansController;
 
 use App\Http\Controllers\Web\Transactions\TransactionsController;
 use App\Http\Controllers\Web\Transactions\TransactionsSplitsController;
@@ -12,7 +13,6 @@ use App\Http\Controllers\Web\Transactions\TransactionsReceiptController;
 
 use App\Http\Controllers\Admin\Reports\AdminReportsController;
 use App\Http\Controllers\Admin\Institutions\AdminInstitutionsController;
-use App\Models\Accounts\Account;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +37,7 @@ Route::get('/transactions/import', [TransactionsController::class, 'import']);
 Route::get('/transactions/{transaction}', [TransactionsController::class, 'show']);
 Route::post('/transactions', [TransactionsController::class, 'store']);
 Route::put('/transactions/{transaction}', [TransactionsController::class, 'update']);
-
 Route::post('/transactions/{transaction}/splits', [TransactionsSplitsController::class, 'store']);
-
 Route::get('/transactions/{transaction}/receipt', [TransactionsReceiptController::class, 'show']);
 
 Route::get('/accounts', [AccountsController::class, 'index']);
@@ -48,7 +46,7 @@ Route::post('/accounts', [AccountsController::class, 'store']);
 
 Route::get('/cash-accounts/{cashAccount}',[] );
 Route::get('/credit-cards/{creditCard}', [] );
-Route::get('/loans/{loan}', [LoanController::class]);
+Route::get('/loans/{loan}', [LoansController::class, 'show']);
 Route::get('/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::get('/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 

@@ -62,14 +62,14 @@
     import CreditAccountCard from '../../Components/Accounts/CreditAccountCard';
     import AddAccount from '../../Components/Accounts/AddAccount.vue';
     import AccountsAPI from '../../api/accounts.js';
+    import InstitutionsAPI from '../../api/institutions.js';
 
     import { EventBus } from '../../event-bus.js';
 
     export default {
-        props: ['institutions'],
-
         data(){
             return {
+                institutions: [],
                 accounts: []
             }
         },
@@ -87,6 +87,7 @@
         mounted(){
             this.bindEvents();
             this.loadAccounts();
+            this.loadInstitutions();
         },
 
         methods: {
@@ -100,6 +101,13 @@
                 AccountsAPI.index()
                     .then( function( response ){
                         this.accounts = response.data;
+                    }.bind(this) );
+            },
+
+            loadInstitutions(){
+                InstitutionsAPI.index()
+                    .then( function( response ){
+                        this.institutions = response.data;
                     }.bind(this) );
             },
 

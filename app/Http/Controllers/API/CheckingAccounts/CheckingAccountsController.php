@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\CheckingAccounts;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CheckingAccounts\UpdateCheckingAccountRequest;
+use App\Models\Accounts\CheckingAccount;
 use App\Services\Accounts\ShowAccount;
 use App\Services\Accounts\UpdateAccount;
 
@@ -20,14 +22,14 @@ class CheckingAccountsController extends Controller
     {
         $showAccount = new ShowAccount( 
             $request->user(),
-            $checkingAccount,
+            $checkingAccount->id,
             'checking'
         );
         
         return response()->json( $showAccount->show() );
     }
 
-    public function update( \Illuminate\Http\Request $request, CheckingAccount $checkingAccount )
+    public function update( UpdateCheckingAccountRequest $request, CheckingAccount $checkingAccount )
     {
         $updateAccount = new UpdateAccount(
             $request->user(),

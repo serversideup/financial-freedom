@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\SavingsAccounts;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SavingsAccounts\UpdateSavingsAccountRequest;
+use App\Models\Accounts\SavingsAccount;
 use App\Services\Accounts\ShowAccount;
 use App\Services\Accounts\UpdateAccount;
 
@@ -20,14 +22,14 @@ class SavingsAccountsController extends Controller
     {
         $showAccount = new ShowAccount( 
             $request->user(), 
-            $savingsAccount, 
+            $savingsAccount->id, 
             'savings' 
         );
 
         return response()->json( $showAccount->show() );
     }
 
-    public function update( \Illuminate\Http\Request $request, SavingsAcount $savingsAccount )
+    public function update( UpdateSavingsAccountRequest $request, SavingsAcount $savingsAccount )
     {
         $updateAccount = new UpdateAccount(
             $request->user(),

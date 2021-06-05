@@ -17,17 +17,17 @@
                     <label for="acount" class="block text-sm font-medium leading-5 text-gray-700">
                         Account
                     </label>
-                    <div class="mt-1 rounded-md shadow-sm">
+                    <div class="mt-1 rounded-md shadow-sm" v-if="Object.keys( accounts ).length > 0">
                         <select id="account" v-model="form.account" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
                             <option value=""></option>
-                            <optgroup label="Credit Cards" v-if="$page.accounts.credit_cards.length > 0 ">
-                                <option v-for="account in $page.accounts.credit_cards"
+                            <optgroup label="Credit Cards" v-if="accounts.credit_cards.length > 0 ">
+                                <option v-for="account in accounts.credit_cards"
                                     v-bind:key="'credit-card-'+account.id"
                                     v-bind:value="account"
                                     v-text="account.institution.name+': '+account.name"></option>
                             </optgroup>
-                            <optgroup label="Checking Accounts" v-if="$page.accounts.checking_accounts.length > 0">
-                                <option v-for="account in $page.accounts.checking_accounts"
+                            <optgroup label="Checking Accounts" v-if="accounts.checking_accounts.length > 0">
+                                <option v-for="account in accounts.checking_accounts"
                                     v-bind:key="'checking-account-'+account.id"
                                     v-bind:value="account"
                                     v-text="account.institution.name+': '+account.name"></option>
@@ -111,6 +111,7 @@
 <script>
 import AppModal from '../Global/AppModal.vue';
 import { EventBus } from '../../event-bus.js';
+import AccountsAPI from '../../api/accounts.js';
 
 export default {
     components: {
@@ -119,6 +120,8 @@ export default {
 
     data(){
         return {
+            accounts: [],
+
             show: false,
 
             form: {
@@ -135,6 +138,7 @@ export default {
 
     mounted(){
         this.bindEvents();
+        this.loadAccounts();
     },
 
     methods: {
@@ -145,6 +149,13 @@ export default {
 
             EventBus.$on('close-modal', function(){
                 this.show = false;
+            }.bind(this));
+        },
+
+        loadAccounts(){
+            AccountsAPI.index()
+            .then( function( response ){
+                this.accounts = response.data;
             }.bind(this));
         },
 

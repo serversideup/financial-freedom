@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Web\Transactions;
 
 use App\Http\Controllers\Controller;
-use App\Services\Accounts\LoadAccounts;
+use App\Models\Transactions\Transaction;
 use App\Services\Transactions\AddTransaction;
-use App\Services\Transactions\LoadTransactions;
 use App\Services\Transactions\ShowTransaction;
 use App\Services\Transactions\UpdateTransaction;
 use Inertia\Inertia;
@@ -18,20 +17,13 @@ class TransactionsController extends Controller
     {
         $this->middleware('auth:sanctum');
         $this->middleware('verified');
+        $this->middleware('can:show,transaction')->only('show');
+        $this->middleware('can:update,transaction')->only('update');
     }
 
     public function index()
     {
-        $transactionLoader = new LoadTransactions( Auth::user(), Request::all() );
-        $transactions = $transactionLoader->load();
-        
-        $accountLoader = new LoadAccounts( Auth::user() );
-        $accounts = $accountLoader->load();
-
-        return Inertia::render('Transactions/Index', [
-            'transactions' => $transactions,
-            'accounts' => $accounts
-        ]);
+        return Inertia::render('Transactions/Index');
     }
 
     public function import()
@@ -45,9 +37,9 @@ class TransactionsController extends Controller
         ]);
     }
 
-    public function show( $transaction )
+    public function show( Transaction $transaction )
     {
-        $showTransaction = new ShowTransaction( Auth::user(), $transaction );
+        $showTransaction = new ShowTransaction( Auth::user(), $transaction->id );
         $transaction = $showTransaction->show();
 
         return Inertia::render('Transactions/Show/Show', [
@@ -63,11 +55,11 @@ class TransactionsController extends Controller
         return redirect('/transactions');
     }
 
-    public function update( $transactionID )
+    public function update( Transaction $transaction )
     {
-        $updateTransaction = new UpdateTransaction( $transactionID, Request::all() );
+        $updateTransaction = new UpdateTransaction( $transaction->id, Request::all() );
         $updateTransaction->update();
 
-        return redirect('/transactions/'.$transactionID);
+        return redirect('/transactions/'.$transaction->id);
     }
 }

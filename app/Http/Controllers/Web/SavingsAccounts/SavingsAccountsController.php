@@ -17,13 +17,8 @@ class SavingsAccountsController extends Controller
 
     public function show( SavingsAccount $savingsAccount )
     {
-        $savingsAccount = SavingsAccount::where('id', '=', $savingsAccount)
-                                          ->with('institution')
-                                          ->with('transactions')
-                                          ->first();
-
         return Inertia::render('SavingsAccounts/Show', [
-            'savingsAccount' => $savingsAccount
+            'id' => $savingsAccount->id
         ]);
     }
 }

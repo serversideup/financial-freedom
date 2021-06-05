@@ -200,17 +200,11 @@
     import AddTransaction from '../../Components/Transactions/AddTransaction'
     import TotalSpent from './Index/TotalSpent';
     import TotalIncome from './Index/TotalIncome';
-
+    import TransactionsAPI from '../../api/transactions.js';
     import { FormatMoney } from '../../Mixins/formatMoney';
     import { EventBus } from '../../event-bus';
-
-    import TransactionsAPI from '../../api/transactions.js';
-
     import { mapState } from 'vuex';
-
     import moment from 'moment';
-    import tippy from 'tippy.js';
-
 
     export default {
         components: {

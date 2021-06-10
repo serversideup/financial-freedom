@@ -62,6 +62,7 @@
 <script>
 import AppModal from '../Global/AppModal.vue';
 import CheckingAccountAPI from '../../api/checkingAccounts.js';
+import CashAccountsAPI from '../../api/cashAccounts.js';
 import { EventBus } from '../../event-bus.js';
 
 export default {
@@ -115,21 +116,34 @@ export default {
                         description: this.form.description,
                         amount: this.form.amount
                     }).then( function( response ){
-                        EventBus.$emit('notify', {
-                            type: 'success',
-                            title: 'Allocation Created',
-                            message: 'Your "'+response.data.name+'" allocation has been created!',
-                            action: 'close'
-                        });
-
-                        EventBus.$emit('allocation-added');
-
-                        this.show = false;
-                        this.resetForm();
+                        this.handleSuccessfulAllocation( response.data.name );
+                    }.bind(this));
+                break;
+                case 'cash':
+                    CashAccountsAPI.addAllocation( this.account.id, {
+                        name: this.form.name,
+                        description: this.form.description,
+                        amount: this.form.amount
+                    }).then( function( response ){
+                        this.handleSuccessfulAllocation( response.data.name );
                     }.bind(this));
                 break;
             }
             
+        },
+
+        handleSuccessfulAllocation( name ){
+            EventBus.$emit('notify', {
+                type: 'success',
+                title: 'Allocation Created',
+                message: 'Your "'+name+'" allocation has been created!',
+                action: 'close'
+            });
+
+            EventBus.$emit('allocation-added');
+
+            this.show = false;
+            this.resetForm();
         },
 
         resetForm(){

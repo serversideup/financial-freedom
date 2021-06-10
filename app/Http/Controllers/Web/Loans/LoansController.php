@@ -17,6 +17,8 @@ class LoansController extends Controller
 
     public function show( Loan $loan )
     {
-        
+        return Inertia::render('Loans/Show', [
+            'id' => $loan->id
+        ]);
     }
 }

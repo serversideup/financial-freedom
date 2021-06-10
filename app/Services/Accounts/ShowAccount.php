@@ -67,7 +67,9 @@ class ShowAccount
 
     private function bindInstitution()
     {
-        $this->query->with('institution');
+        if( in_array( $this->accountType, ['checking', 'savings', 'loan', 'credit-card'] ) ){
+            $this->query->with('institution');
+        }
     }
 
     private function bindTransactions()

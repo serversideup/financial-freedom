@@ -1,0 +1,19 @@
+import axios from 'axios';
+
+export default {
+    show( id ){
+        return axios.get( '/api/v1/cash-accounts/'+id );
+    },
+
+    update( id, data ){
+        return axios.put( '/api/v1/cash-accounts/'+id, data );
+    },
+
+    getAllocations( id ){
+        return axios.get( '/api/v1/cash-accounts/'+id+'/allocations' );
+    },
+
+    addAllocation( id, data ){
+        return axios.post( '/api/v1/cash-accounts/'+id+'/allocations', data);
+    }
+}

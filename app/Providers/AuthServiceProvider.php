@@ -7,10 +7,21 @@ use App\Policies\TeamPolicy;
 
 use App\Models\Accounts\SavingsAccount;
 use App\Policies\SavingsAccountPolicy;
+
 use App\Models\Accounts\CheckingAccount;
 use App\Policies\CheckingAccountPolicy;
+
 use App\Models\Transactions\Transaction;
 use App\Policies\TransactionPolicy;
+
+use App\Models\Accounts\CashAccount;
+use App\Policies\CashAccountPolicy;
+
+use App\Models\Accounts\CreditCard;
+use App\Policies\CreditCardPolicy;
+
+use App\Models\Accounts\Loan;
+use App\Policies\LoanPolicy;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -25,7 +36,10 @@ class AuthServiceProvider extends ServiceProvider
         Team::class => TeamPolicy::class,
         SavingsAccount::class => SavingsAccountPolicy::class,
         CheckingAccount::class => CheckingAccountPolicy::class,
-        Transaction::class => TransactionPolicy::class
+        Transaction::class => TransactionPolicy::class,
+        CashAccount::class => CashAccountPolicy::class,
+        Loan::class => LoanPolicy::class,
+        CreditCard::class => CreditCardPolicy::class
     ];
 
     /**

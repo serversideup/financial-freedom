@@ -4,7 +4,7 @@
             <div class="mt-2 md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 flex items-center w-full sm:text-3xl sm:leading-9 sm:truncate">
-                        <img :src="loan.institution.logo" class="h-8 w-8 mr-2 rounded-full"/> {{ loan.name }}
+                        {{ cashAccount.name }}
                     </h2>
                 </div>
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
@@ -26,18 +26,29 @@
             </div>
         </div>
         <div class="mt-5" v-if="loaded">
+            <div class="mt-5">
+                <stats
+                    :cash-account="cashAccount"/>
 
+                <div class="flex mt-5">
+                    <allocation
+                        :current-balance="cashAccount.current_balance"
+                        :account="cashAccount"
+                    />
+                </div>
+            </div>
         </div>
-
         <edit/>
     </app-layout>
 </template>
 
 <script>
-    import LoansAPI from '../../api/loans.js';
+    import CashAccountsAPI from '../../api/cashAccounts.js';
     import AppLayout from './../../Layouts/AppLayout'
+    import Stats from '../../Components/Accounts/CashAccount/Stats.vue';
+    import Allocation from '../../Components/Accounts/Allocation.vue';
+    import Edit from '../../Components/Accounts/CashAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
-    import Edit from '../../Components/Accounts/Loan/Edit.vue';
 
     export default {
         props: ['id'],
@@ -45,35 +56,37 @@
         data(){
             return {
                 loaded: false,
-                loan: {}
+                cashAccount: {}
             }
         },
 
         components: {
             AppLayout,
+            Allocation,
+            Stats,
             Edit
         },
 
         mounted(){
             this.bindEvents();
-            this.loadLoan();
+            this.loadCashAccount();
         },
 
         methods: {
             bindEvents(){
-                EventBus.$on('loan-updated', function(){
-                    this.loadLoan();
+                EventBus.$on('cash-account-updated', function(){
+                    this.loadCashAccount();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit('prompt-edit-account', this.loan);
+                EventBus.$emit('prompt-edit-account', this.cashAccount);
             },
 
-            loadLoan(){
-                LoansAPI.show( this.id )
+            loadCashAccount(){
+                CashAccountsAPI.show( this.id )
                     .then( function( response ){
-                        this.loan = response.data;
+                        this.cashAccount = response.data;
                         this.loaded = true;
                     }.bind(this) );
             }

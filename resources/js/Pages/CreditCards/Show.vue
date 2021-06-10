@@ -4,7 +4,7 @@
             <div class="mt-2 md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 flex items-center w-full sm:text-3xl sm:leading-9 sm:truncate">
-                        <img :src="loan.institution.logo" class="h-8 w-8 mr-2 rounded-full"/> {{ loan.name }}
+                        <img :src="creditCard.institution.logo" class="h-8 w-8 mr-2 rounded-full"/> {{ creditCard.name }}
                     </h2>
                 </div>
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
@@ -34,10 +34,10 @@
 </template>
 
 <script>
-    import LoansAPI from '../../api/loans.js';
+    import CreditCardsAPI from '../../api/creditCards.js';
     import AppLayout from './../../Layouts/AppLayout'
     import { EventBus } from '../../event-bus.js';
-    import Edit from '../../Components/Accounts/Loan/Edit.vue';
+    import Edit from '../../Components/Accounts/CreditCard/Edit.vue';
 
     export default {
         props: ['id'],
@@ -45,7 +45,7 @@
         data(){
             return {
                 loaded: false,
-                loan: {}
+                creditCard: {}
             }
         },
 
@@ -56,24 +56,24 @@
 
         mounted(){
             this.bindEvents();
-            this.loadLoan();
+            this.loadCreditCard();
         },
 
         methods: {
             bindEvents(){
-                EventBus.$on('loan-updated', function(){
-                    this.loadLoan();
+                EventBus.$on('credit-card-updated', function(){
+                    this.creditCard();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit('prompt-edit-account', this.loan);
+                EventBus.$emit('prompt-edit-account', this.creditCard);
             },
 
-            loadLoan(){
-                LoansAPI.show( this.id )
+            loadCreditCard(){
+                CreditCardsAPI.show( this.id )
                     .then( function( response ){
-                        this.loan = response.data;
+                        this.creditCard = response.data;
                         this.loaded = true;
                     }.bind(this) );
             }

@@ -36,7 +36,7 @@ class CheckingAccountsController extends Controller
             $request->all()
         );
 
-        $updateAccount->update( $updateAccount->id, 'checking-account' );
+        $updateAccount->update( $checkingAccount->id, 'checking-account' );
 
         return response()->json('', 204);
     }

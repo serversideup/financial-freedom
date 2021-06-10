@@ -2,8 +2,8 @@
 
 namespace App\Services\Allocations;
 
-use App\Models\Allocations\Allocation;
 use App\Models\Accounts\CheckingAccount;
+use App\Models\Accounts\CashAccount;
 
 class LoadAllocations
 {
@@ -31,6 +31,11 @@ class LoadAllocations
                 $this->account = CheckingAccount::where('id', '=', $this->id)
                                                 ->with('allocations')
                                                 ->first();
+            break;
+            case 'cash-account':
+                $this->account = CashAccount::where('id', '=', $this->id)
+                                            ->with('allocations')
+                                            ->first();
             break;
         }
     }

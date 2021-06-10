@@ -31,13 +31,22 @@ class UpdateAccount
             case 'checking-account':
                 return $this->updateCheckingAccount( $id );
             break;
+            case 'cash-account':
+                return $this->updateCashAccount( $id );
+            break;
+            case 'loan':
+                return $this->updateLoan( $id );
+            break;
+            case 'credit-card':
+                return $this->updateCreditCard( $id );
+            break;
         }
     }
 
     private function hydrateLocal( $data )
     {
         $this->name = $data['name'];
-        $this->number = $data['number'];
+        $this->number = isset( $data['number'] ) ? $data['number'] : '';
         $this->description = $data['description'];
         $this->currentBalance = $data['current_balance'];
     }
@@ -64,5 +73,40 @@ class UpdateAccount
         $checkingAccount->current_balance = $this->currentBalance;
         
         $checkingAccount->save();
+    }
+
+    private function updateCashAccount( $id )
+    {
+        $cashAccount = CashAccount::where('id', '=', $id)->first();
+
+        $cashAccount->name = $this->name;
+        $cashAccount->description = $this->description;
+        $cashAccount->current_balance = $this->currentBalance;
+
+        $cashAccount->save();
+    }
+
+    private function updateLoan( $id )
+    {
+        $loan = Loan::where('id', '=', $id)->first();
+
+        $loan->name = $this->name;
+        $loan->number = $this->number;
+        $loan->description = $this->description;
+        $loan->current_balance = $this->currentBalance;
+
+        $loan->save();
+    }
+
+    private function updateCreditCard( $id )
+    {
+        $creditCard = CreditCard::where('id', '=', $id)->first();
+
+        $creditCard->name = $this->name;
+        $creditCard->number = $this->number;
+        $creditCard->description = $this->description;
+        $creditCard->current_balance = $this->currentBalance;
+
+        $creditCard->save();
     }
 }

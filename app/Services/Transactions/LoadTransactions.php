@@ -3,19 +3,26 @@
 namespace App\Services\Transactions;
 
 use App\Models\Transactions\Transaction;
+use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 
 class LoadTransactions{
     private $user;
+    private $account;
     private $query;
     private $startDate;
     private $endDate;
     private $orderBy;
     private $orderDirection;
 
-    public function __construct( $user, $data )
+    public function __construct( $user, $data, $account = null )
     {
         $this->user = $user;
+        
+        if( $account ){
+            $this->account = $account;
+        }
+
         $this->syncData( $data );
     }
 
@@ -24,6 +31,7 @@ class LoadTransactions{
         $this->initializeQuery();
         $this->filterUser();
         $this->filterDateRange();
+        $this->filterAccount();
         $this->addAccount();
         $this->addTags();
         $this->addSplits();
@@ -47,11 +55,26 @@ class LoadTransactions{
         $this->query->whereBetween('date', [ $this->startDate, $this->endDate ]);
     }
 
+    private function filterAccount()
+    {
+        if( $this->account ){
+            $this->query->whereHasMorph( 
+                'accountable', 
+                [get_class( $this->account ), Transaction::class ],
+                function( Builder $query ){
+                    $query->where('accountable_id', '=', $this->account->id);
+                }
+            );
+        }
+    }
+
     private function addAccount()
     {
-        $this->query->with(['accountable' => function( $query ){
-            $query->with('institution');
-        }]);
+        if( !$this->account ){
+            $this->query->with(['accountable' => function( $query ){
+                $query->with('institution');
+            }]);
+        }
     }
 
     private function addTags()

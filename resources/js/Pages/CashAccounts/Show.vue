@@ -26,16 +26,16 @@
             </div>
         </div>
         <div class="mt-5" v-if="loaded">
-            <div class="mt-5">
-                <stats
-                    :cash-account="cashAccount"/>
+            <stats
+                :cash-account="cashAccount"/>
 
-                <div class="flex mt-5">
-                    <allocation
-                        :current-balance="cashAccount.current_balance"
-                        :account="cashAccount"
-                    />
-                </div>
+            <div class="grid grid-cols-2 gap-4 mt-5">
+                <allocation
+                    :current-balance="cashAccount.current_balance"
+                    :account="cashAccount"
+                />
+                <transactions
+                    :account="cashAccount"/>
             </div>
         </div>
         <edit/>
@@ -49,6 +49,7 @@
     import Allocation from '../../Components/Accounts/Allocation.vue';
     import Edit from '../../Components/Accounts/CashAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
+    import Transactions from '../../Components/Accounts/Transactions.vue';
 
     export default {
         props: ['id'],
@@ -64,7 +65,8 @@
             AppLayout,
             Allocation,
             Stats,
-            Edit
+            Edit,
+            Transactions
         },
 
         mounted(){

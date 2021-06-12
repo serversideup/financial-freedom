@@ -25,12 +25,13 @@
                 </span>
             </div>
         </div>
-        <div class="mt-5">
+        <div class="mt-5" v-if="loaded">
             <stats
                 :savings-account="savingsAccount"/>
             
-            <div class="flex mt-5">
-                
+            <div class="grid grid-cols-2 gap-4 mt-5">
+                <transactions
+                    :account="savingsAccount"/>
             </div>
         </div>
 
@@ -44,6 +45,7 @@
     import Edit from '../../Components/Accounts/SavingsAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
     import SavingsAccountAPI from '../../api/savingsAccounts.js';
+    import Transactions from '../../Components/Accounts/Transactions.vue';
 
     export default {
         props: ['id'],
@@ -58,7 +60,8 @@
         components: {
             AppLayout,
             Stats,
-            Edit
+            Edit,
+            Transactions
         },
 
         mounted(){

@@ -26,7 +26,10 @@
             </div>
         </div>
         <div class="mt-5" v-if="loaded">
-
+            <div class="grid grid-cols-2 gap-4 mt-5">
+                <transactions
+                    :account="loan"/>
+            </div>
         </div>
 
         <edit/>
@@ -38,6 +41,7 @@
     import AppLayout from './../../Layouts/AppLayout'
     import { EventBus } from '../../event-bus.js';
     import Edit from '../../Components/Accounts/Loan/Edit.vue';
+    import Transactions from '../../Components/Accounts/Transactions.vue';
 
     export default {
         props: ['id'],
@@ -51,7 +55,8 @@
 
         components: {
             AppLayout,
-            Edit
+            Edit,
+            Transactions
         },
 
         mounted(){

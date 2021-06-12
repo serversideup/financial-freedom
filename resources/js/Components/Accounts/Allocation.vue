@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1/2">
+    <div>
         <div class="mb-3 md:flex md:items-center md:justify-end">
             <span class="relative z-0 inline-flex shadow-sm rounded-md">
                 <button v-on:click="promptAddAllocation()" class="-ml-px relative cursor-pointer inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
@@ -22,7 +22,7 @@
             <div class="px-4 py-5 font-semibold font-sans text-astronaut-500 sm:px-6">
                 Current Allocation
             </div>
-            <div class="py-5">
+            <div class="py-5 h-96">
                 <canvas id="current-allocation"></canvas>
             </div>
         </div>

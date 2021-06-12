@@ -3,18 +3,27 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\Institutions\InstitutionsController;
 use App\Http\Controllers\API\Transactions\TransactionsController;
 use App\Http\Controllers\API\Accounts\AccountsController;
+use App\Http\Controllers\API\Tags\TagsController;
+
 use App\Http\Controllers\API\CashAccounts\CashAccountsController;
 use App\Http\Controllers\API\CashAccounts\CashAccountsAllocationsController;
-use App\Http\Controllers\API\Institutions\InstitutionsController;
-use App\Http\Controllers\API\Tags\TagsController;
+use App\Http\Controllers\API\CashAccounts\CashAccountsTransactionsController;
+
 use App\Http\Controllers\API\SavingsAccounts\SavingsAccountsController;
+use App\Http\Controllers\API\SavingsAccounts\SavingsAccountsTransactionsController;
 
 use App\Http\Controllers\API\CheckingAccounts\CheckingAccountsController;
 use App\Http\Controllers\API\CheckingAccounts\CheckingAccountsAllocationsController;
+use App\Http\Controllers\API\CheckingAccounts\CheckingAccountsTransactionsController;
+
 use App\Http\Controllers\API\CreditCards\CreditCardsController;
+use App\Http\Controllers\API\CreditCards\CreditCardsTransactionsController;
+
 use App\Http\Controllers\API\Loans\LoansController;
+use App\Http\Controllers\API\Loans\LoansTransactionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,26 +45,51 @@ Route::get('/v1/institutions', [InstitutionsController::class, 'index']);
 Route::get('/v1/accounts', [AccountsController::class, 'index']);
 Route::post('/v1/accounts', [AccountsController::class, 'store']);
 
+/**
+ * Savings Accounts Endpoints
+ */
 Route::get('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::put('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'update']);
 
+Route::get('/v1/savings-accounts/{savingsAccount}/transactions', [SavingsAccountsTransactionsController::class, 'index']);
+
+/**
+ * Cash Accounts Endpoints
+ */
 Route::get('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'show']);
 Route::put('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'update']);
 
 Route::get('/v1/cash-accounts/{cashAccount}/allocations', [CashAccountsAllocationsController::class, 'index']);
 Route::post('/v1/cash-accounts/{cashAccount}/allocations', [CashAccountsAllocationsController::class, 'store']);
 
+Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransactionsController::class, 'index']);
+
+/**
+ * Checking Accounts Endpoints
+ */
 Route::get('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 Route::put('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'update']);
 
 Route::get('/v1/checking-accounts/{checkingAccount}/allocations', [CheckingAccountsAllocationsController::class, 'index']);
 Route::post('/v1/checking-accounts/{checkingAccount}/allocations', [CheckingAccountsAllocationsController::class, 'store']);
 
+Route::get('/v1/checking-accounts/{checkingAccount}/transactions', [CheckingAccountsTransactionsController::class, 'index']);
+
+/**
+ * Loans Endpoints
+ */
 Route::get('/v1/loans/{loan}', [LoansController::class, 'show']);
 Route::put('/v1/loans/{loan}', [LoansController::class, 'update']);
 
+Route::get('/v1/loans/{loan}/transactions', [LoansTransactionsController::class, 'index']);
+
+/**
+ * Credit Cards Endpoints
+ */
 Route::get('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'show']);
 Route::put('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'update']);
+
+Route::get('/v1/credit-cards/{creditCard}/transactions', [CreditCardsTransactionsController::class, 'index']);
 
 Route::get('/v1/transactions', [TransactionsController::class, 'index']);
 Route::post('/v1/transactions/import', [TransactionsController::class, 'import']);

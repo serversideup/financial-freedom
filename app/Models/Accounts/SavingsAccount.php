@@ -15,6 +15,8 @@ class SavingsAccount extends Model
 
     protected $table = 'savings_accounts';
 
+    protected $appends = ['account_type'];
+    
     public function institution()
     {
         return $this->hasOne('App\Models\Institutions\Institution', 'id', 'institution_id');
@@ -28,5 +30,10 @@ class SavingsAccount extends Model
     public function allocations()
     {
         return $this->morphMany('App\Models\Allocations\Allocation', 'accountable');
+    }
+
+    public function getAccountTypeAttribute()
+    {
+        return 'savings';
     }
 }

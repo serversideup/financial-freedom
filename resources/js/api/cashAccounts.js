@@ -15,5 +15,11 @@ export default {
 
     addAllocation( id, data ){
         return axios.post( '/api/v1/cash-accounts/'+id+'/allocations', data);
+    },
+
+    transactions( id, params ){
+        return axios.get('/api/v1/cash-accounts/'+id+'/transactions', {
+            params: params
+        });
     }
 }

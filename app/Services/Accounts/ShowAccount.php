@@ -28,7 +28,6 @@ class ShowAccount
         $this->filterID();
         $this->filterUser();
         $this->bindInstitution();
-        $this->bindTransactions();
         $this->bindAllocations();
 
         return $this->query->first();
@@ -70,11 +69,6 @@ class ShowAccount
         if( in_array( $this->accountType, ['checking', 'savings', 'loan', 'credit-card'] ) ){
             $this->query->with('institution');
         }
-    }
-
-    private function bindTransactions()
-    {
-        $this->query->with('transactions');
     }
 
     private function bindAllocations()

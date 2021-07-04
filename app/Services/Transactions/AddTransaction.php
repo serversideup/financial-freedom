@@ -73,7 +73,12 @@ class AddTransaction
         $this->name = $data['name'];
         $this->date = date( 'Y-m-d', strtotime( $data['date'] ) );
         $this->description = $data['description'];
-        $this->tags = isset( $data['tags'] ) ? json_decode( $data['tags'] ) : null;
+
+        if( isset( $data['tags'] ) ){
+            $this->tags = is_array( $data['tags'] ) ? json_decode( json_encode( $data['tags'] ) ) : json_decode( $data['tags'] );
+        }else{
+            $this->tags = null;
+        }
     }
 
     private function loadAccount( $account )

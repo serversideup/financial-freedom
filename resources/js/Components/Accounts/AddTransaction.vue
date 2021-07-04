@@ -81,6 +81,14 @@
                         <textarea id="description" v-model="form.description" rows="3" class="form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
                     </div>
                 </div>
+                <div class="sm:col-span-6">
+                    <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
+                        Tags
+                    </label>
+                    <tags
+                        :unique="'add-transaction-tag'"
+                        :existing="form.tags"/>
+                </div>
             </form>
         </template>
         <template v-slot:footer>
@@ -97,12 +105,14 @@
 <script>
 import AppModal from '../Global/AppModal.vue';
 import { EventBus } from '../../event-bus.js';
+import Tags from '../../Components/Transactions/Tags.vue';
 
 export default {
     props: ['account'],
 
     components: {
-        AppModal
+        AppModal,
+        Tags
     },
 
     data(){
@@ -125,6 +135,12 @@ export default {
 
     mounted(){
         this.bindEvents();
+        this.form.account = this.account;
+    },
+
+    beforeDestroy(){
+        EventBus.$off('prompt-add-transaction');
+        EventBus.$off('close-modal');
     },
 
     methods: {
@@ -159,12 +175,12 @@ export default {
         },
 
         resetForm(){
-            this.form.account = {};
             this.form.date = '';
             this.form.amount = 0.00;
             this.form.direction = 'outflow';
             this.form.name = '';
             this.form.description = '';
+            this.form.tags = [];
         }
     }
 }

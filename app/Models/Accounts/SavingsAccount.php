@@ -3,9 +3,12 @@
 namespace App\Models\Accounts;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class SavingsAccount extends Model
 {
+    use Searchable;
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -14,7 +17,6 @@ class SavingsAccount extends Model
     public $incrementing = true;
 
     protected $table = 'savings_accounts';
-
     protected $appends = ['account_type'];
     
     public function institution()
@@ -35,5 +37,10 @@ class SavingsAccount extends Model
     public function getAccountTypeAttribute()
     {
         return 'savings';
+    }
+
+    public function searchableAs()
+    {
+        return 'savings_accounts_index';
     }
 }

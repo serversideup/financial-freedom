@@ -3,9 +3,12 @@
 namespace App\Models\Accounts;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class CashAccount extends Model
 {
+    use Searchable;
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -14,7 +17,6 @@ class CashAccount extends Model
     public $incrementing = true;
 
     protected $table = 'cash_accounts';
-
     protected $appends = ['account_type'];
     
     public function transactions()
@@ -30,5 +32,10 @@ class CashAccount extends Model
     public function getAccountTypeAttribute()
     {
         return 'cash';
+    }
+
+    public function searchableAs()
+    {
+        return 'cash_accounts_index';
     }
 }

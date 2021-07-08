@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Models\Accounts;
+use Laravel\Scout\Searchable;
 
 use Illuminate\Database\Eloquent\Model;
 
 class CreditCard extends Model
 {
+    use Searchable;
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -30,5 +33,10 @@ class CreditCard extends Model
     public function getAccountTypeAttribute()
     {
         return 'credit-card';
+    }
+
+    public function searchableAs()
+    {
+        return 'credit_cards_index';
     }
 }

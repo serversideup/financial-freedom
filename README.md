@@ -12,7 +12,11 @@
 </p>
 
 # An Open Source Alternative to Mint.com & YNAB
-Your budgeting data should be owned and controlled by you -- no questions asked.
+Your budgeting data should be owned and controlled by you -- no questions asked. **Personal finance should be <u>personal</u>.**
+
+<p align="center">
+		<img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/preview.png" width="1200" alt="Financial Freedom Preview Screenshot">
+</p>
 
 # What does "Financial Freedom" give you?
 ### 💪 Freedom

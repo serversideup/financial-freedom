@@ -48,7 +48,9 @@ Code contributions are not only appreciated, but also encouraged. If you are cur
 
 
 ### Security Enhancements
-If you find a security vulnerability, please let us know as soon as possible. [View our Responsible Disclosure Policy →](https://www.notion.so/Responsible-Disclosure-Policy-421a6a3be1714d388ebbadba7eebbdc8)
+If you find a security vulnerability, please let us know as soon as possible.
+
+[View our Responsible Disclosure Policy →](https://www.notion.so/Responsible-Disclosure-Policy-421a6a3be1714d388ebbadba7eebbdc8)
 
 ## Self Hosting
 _Coming Soon_

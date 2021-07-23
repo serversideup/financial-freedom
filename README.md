@@ -1,60 +1,50 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/serversideup/stoic-money/main/public/img/logo_transparent_icon.png" width="200">
+		<img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/GithubHeader.png" width="1200" alt="Financial Freedom Logo and Slogan">
+</p>
+<p align="center">
+  <a title="Documentation" href="https://github.com/serversideup/financial-freedom/wiki"><strong>Documentation</strong></a>
+  &#x2022;
+  <a title="Support Us" href="https://github.com/sponsors/serversideup"><strong>👉 Help make this app better</strong></a>
+</p>
+<p align="center">
+	<a href="https://github.com/serversideup/financial-freedom/blob/master/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/financial-freedom" alt="License"></a>
+	<a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
 </p>
 
-Stoic Money provides you the tools to flexibly manage your budget, provide insight on your spending habits, guide you in your financial goals, and securely allow advisors to help. 
+# An Open Source Alternative to Mint.com & YNAB
+Your budgeting data should be owned and controlled by you -- no questions asked.
 
-Why "Stoic" money? Money can be emotional in many ways. Remaining stoic while managing your money will lead to greater financial success. Being stoic while approaching your finances will lead to a more financially sound life. We will facilitate your financial stoicism with an easy to use budgeting system, helping you to set set realistic goals, and being honest with yourself about your spending habits. By practicing stoic financial management, you will live a more financially sound and peaceful life.
+# What does "Financial Freedom" give you?
+### 💪 Freedom
+Just as our name says, you will have the freedom to do whatever you want in this application. Export your data, add your own features -- whatever you want to do. You own 100% of your data because you can host this application anywhere you want.
 
-
-## What We Believe
-Stoic Money is built upon the following principles.
-
-### 🕵️‍♂️ Privacy Focused
-Your money is a private matter. We 100% respect your privacy and would never sell your data. Our code is 💯% Open Sourced so feel free to browse around and see how your data is being used. 
-
-### 🧬 Flexible
-Everyone has an opinion on how to budget, what techniques work best, etc. Stoic Money allows you to combine these methods in an un-opinionated fashion to help you save money and achieve your financial goals. Our opinion is money management should be self managed. We provide you with a place to learn, experiment and set goals following whatever teacher you have.
-
-We made Stoic Money extensible and open source so if you want to provide some insight in a dashboard widget or expand a calculation, go for it! Our plugin system will allow for that.
-
-### 🎓 Educational
-Reality is the greatest of teachers. Whatever you financial circumstances, stoic money will help you become educated on what you are doing and how your spending habits contribute to your financial success.
-
-### 🤝 Involvement
-We encourage involvement in the development of stoic money. If you want to learn about the app, contribute to the app, have a question, or want to share your thoughts and opinions, we are here to listen. It takes a village. However, we have a 0% ass hole policy. Treat others with respect and you will be treated with respect. If you disrespect others, we will ban your account. Period.
-
-### 🔒 Secure
-Financial data should be private. Our application is built from the ground up with security in mind. We respect your data and have security measures in place so your data remains your data.
-
-### 👍 Stoic
-You have what money you have so work with it. The numbers don't lie. Every day do your best and take one step forward to achieving your financial goals. So much of money management is psychological. Stoic Money aims to make managing your money seamless and un-emotional so you can achieve more financial success with as little friction as possible.
+### 🕵️‍♂️ Privacy
+Everything about this application is open and free. Review the source code yourself and you'll fully understand your data will entirely remain as your own, running on any piece of hardware that you choose.
 
 ## Features
-* Transaction tagging, splitting, line item management
-* Simple and powerful budgeting and notification system (coming soon)
-* Goal setting and timeline of achievemnts (coming soon)
+* ✅ Transaction tagging, splitting, line item management
+* ✅ Integration with Plaid.com (coming soon)
+* ✅ Simple and powerful budgeting and notification system (coming soon)
+* ✅ Goal setting and timeline of achievemnts (coming soon)
 
 
 ## Contributing and Questions
-One of the main goals of Stoic Money is to develop a frictionless, easy to contribute to, open-source application. 100% of our roadmap, releases, documentation, and code will live in GitHub. 
+One of the main goals of Financial Freedom is to develop a frictionless, easy to contribute to, open-source application. 100% of our roadmap, releases, documentation, and code will live in GitHub. 
+
+This is a very young project and we'll start organizing things as we go. If you have any questions, comments, or ideas, feel free to open an thread on our community .
 
 ### Feature Requests
-If you want to see a feature added to Stoic Money, we'd love to hear it! Head over to our [issues section](https://github.com/serversideup/stoic-money/issues) and open a new issue with the label of "Feature Request". Jot down as much as you can about your new feature. All work will be done publicly to organize and get the feature on the timeline.
+If you want to see a feature added to Financial Freedom, we'd love to hear it! Check out the guide on our community on [how to submit a feature request →](https://community.serversideup.net/t/requesting-features-for-financial-freedom/460/)
 
 ### Bug Reports
-If you experience a bug, we need to fix it! Head over to the [issues section](https://github.com/serversideup/stoic-money/issues) and open a new issue with the label "Bug". Please include as much detail (OS, Browser, console errors, etc) as possible.
+If you experience a bug, let us know so we can fix it! [Report a bug →](https://github.com/serversideup/financial-freedom/issues/new?labels=Bug%3A+Needs+Confirmation+%F0%9F%A7%90&template=bug_report.md&title=)
 
 ### Code Contributions
 Code contributions are not only appreciated, but also encouraged. If you are curious about the internal structure of your app, head over to the [wiki](https://github.com/serversideup/stoic-money/wiki). We've done our best to document the internal structure of Stoic Money so your friction from checking out the repo to submitting code is as minimal and easy as possible!
 
 
 ### Security Enhancements
-These are the ONLY issues that should be handled privately. If you find a security vulnerability, reach out to us directly at hello@serversideup.net. We will fix and deploy immediately.
+If you find a security vulnerability, please let us know as soon as possible. [View our Responsible Disclosure Policy →](https://www.notion.so/Responsible-Disclosure-Policy-421a6a3be1714d388ebbadba7eebbdc8)
 
 ## Self Hosting
 _Coming Soon_
-
-## License
-
-Stoic Money is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

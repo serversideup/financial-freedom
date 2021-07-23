@@ -14,7 +14,7 @@
 				]"
 			>
 				{{ tag.name }}
-				<span class="cursor-pointer" @click="remove( index )">&times;</span>
+				<span class="cursor-pointer" @click.stop="remove( index )">&times;</span>
       		</span>
    		</template>
 

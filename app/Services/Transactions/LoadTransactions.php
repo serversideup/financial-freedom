@@ -4,11 +4,18 @@ namespace App\Services\Transactions;
 
 use App\Models\Transactions\Transaction;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Accounts\CashAccount;
+use App\Models\Accounts\CreditCard;
+use App\Models\Accounts\Loan;
+use App\Models\Accounts\CheckingAccount;
+use App\Models\Accounts\SavingsAccount;
 use Carbon\Carbon;
 
 class LoadTransactions{
     private $user;
     private $account;
+    private $tags;
+    private $direction;
     private $query;
     private $startDate;
     private $endDate;
@@ -32,6 +39,9 @@ class LoadTransactions{
         $this->filterUser();
         $this->filterDateRange();
         $this->filterAccount();
+        $this->filterTags();
+        $this->filterDirection();
+        $this->filterUser();
         $this->addAccount();
         $this->addTags();
         $this->addSplits();
@@ -68,6 +78,22 @@ class LoadTransactions{
         }
     }
 
+    private function filterTags()
+    {
+        if( !empty( $this->tags ) ){
+            $this->query->whereHas('tags', function( $query ){
+                $query->whereIn('id', $this->tags );
+            });
+        }
+    }
+
+    private function filterDirection()
+    {
+        if( $this->direction != 'all' ){
+            $this->query->where('direction', '=', $this->direction );
+        }
+    }
+
     private function addAccount()
     {
         if( !$this->account ){
@@ -96,6 +122,18 @@ class LoadTransactions{
 
     private function syncData( $data )
     {
+        if( isset( $data['account'] ) && isset( $data['account_type'] ) ){
+            $this->loadAccount( $data['account'], $data['account_type'] );
+        }
+
+        $this->direction = isset( $data['direction'] )
+                            ? $data['direction']
+                            : 'all';
+
+        $this->tags = isset( $data['tags'] )
+                        ? explode(',', $data['tags'])
+                        : [];
+
         $this->startDate = isset( $data['start_date'] )
                            ? date('Y-m-d', strtotime( $data['start_date'] ) ) 
                            : Carbon::now()->firstOfMonth()->format('Y-m-d');
@@ -111,5 +149,26 @@ class LoadTransactions{
         $this->orderDirection = isset( $data['order_direction'] )
                                     ? $data['order_direction']
                                     : 'DESC';
+    }
+
+    private function loadAccount( $id, $type )
+    {
+        switch( $type ){
+            case 'cash':
+                $this->account = CashAccount::where('id', '=', $id)->first();
+            break;
+            case 'loan':
+                $this->account = Loan::where('id', '=', $id)->first();
+            break;
+            case 'checking':
+                $this->account = CheckingAccount::where('id', '=', $id)->first();
+            break;
+            case 'savings':
+                $this->account = SavingsAccount::where('id', '=', $id)->first();
+            break;
+            case 'credit-card':
+                $this->account = CreditCard::where('id', '=', $id)->first();
+            break;
+        }
     }
 }

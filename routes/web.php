@@ -14,6 +14,7 @@ use App\Http\Controllers\Web\Transactions\TransactionsSplitsController;
 use App\Http\Controllers\Web\Transactions\TransactionsReceiptController;
 
 use App\Http\Controllers\Admin\Reports\AdminReportsController;
+use App\Http\Controllers\Admin\Transactions\AdminTransactionsController;
 use App\Http\Controllers\Admin\Institutions\AdminInstitutionsController;
 
 /*
@@ -33,14 +34,21 @@ Route::get('/', function () {
 
 Route::get('/admin', [AdminReportsController::class, 'show']);
 
+/**
+ * Transactions Endpoints
+ */
 Route::get('/transactions', [TransactionsController::class, 'index']);
-Route::get('/transactions/create', [TransactionsController::class, 'create']);
 Route::get('/transactions/import', [TransactionsController::class, 'import']);
 Route::get('/transactions/{transaction}', [TransactionsController::class, 'show']);
+Route::get('/transactions/{transaction}/receipt', [TransactionsReceiptController::class, 'show']);
+
+/**
+ * @TODO: Convert to API only Endpoints
+ */
 Route::post('/transactions', [TransactionsController::class, 'store']);
 Route::put('/transactions/{transaction}', [TransactionsController::class, 'update']);
 Route::post('/transactions/{transaction}/splits', [TransactionsSplitsController::class, 'store']);
-Route::get('/transactions/{transaction}/receipt', [TransactionsReceiptController::class, 'show']);
+
 
 Route::get('/accounts', [AccountsController::class, 'index']);
 Route::get('/accounts/{account}/edit', [AccountsController::class, 'edit']);
@@ -51,6 +59,8 @@ Route::get('/credit-cards/{creditCard}', [CreditCardsController::class, 'show'] 
 Route::get('/loans/{loan}', [LoansController::class, 'show']);
 Route::get('/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::get('/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
+
+Route::get('/admin/transactions', [AdminTransactionsController::class, 'show']);
 
 Route::get('/admin/institutions', [AdminInstitutionsController::class, 'show']);
 Route::get('/admin/institutions/create', [AdminInstitutionsController::class, 'create']);

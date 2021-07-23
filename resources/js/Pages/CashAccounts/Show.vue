@@ -27,15 +27,23 @@
         </div>
         <div class="mt-5" v-if="loaded">
             <stats
-                :cash-account="cashAccount"/>
+                :account="cashAccount"
+                :type="'cash'"
+                :fields="[
+                    'current_balance', 
+                    'amount_changed', 
+                    'transactions_changed'
+                ]"/>
 
             <div class="grid grid-cols-2 gap-4 mt-5">
                 <allocation
                     :current-balance="cashAccount.current_balance"
                     :account="cashAccount"
                 />
-                <transactions
-                    :account="cashAccount"/>
+                <transactions-table
+                    :account="cashAccount"
+                    :columns="['amount', 'date', 'name', 'category']"
+                    :buttons="['filter', 'add']"/>
             </div>
         </div>
         <edit/>
@@ -43,13 +51,13 @@
 </template>
 
 <script>
-    import CashAccountsAPI from '../../api/cashAccounts.js';
     import AppLayout from './../../Layouts/AppLayout'
-    import Stats from '../../Components/Accounts/CashAccount/Stats.vue';
+    import CashAccountsAPI from '../../api/cashAccounts.js';
+    import Stats from '../../Components/Accounts/Stats.vue';
     import Allocation from '../../Components/Accounts/Allocation.vue';
     import Edit from '../../Components/Accounts/CashAccount/Edit.vue';
+    import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
     import { EventBus } from '../../event-bus.js';
-    import Transactions from '../../Components/Accounts/Transactions.vue';
 
     export default {
         props: ['id'],
@@ -66,7 +74,7 @@
             Allocation,
             Stats,
             Edit,
-            Transactions
+            TransactionsTable
         },
 
         mounted(){

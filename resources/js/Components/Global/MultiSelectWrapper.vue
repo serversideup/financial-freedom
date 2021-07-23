@@ -1,5 +1,5 @@
 <template>
-    <div class="form-input block w-full sm:text-sm sm:leading-5">
+    <div class="form-input w-full flex flex-wrap sm:text-sm sm:leading-5">
         <span
             v-for="(tag, index) in selected"
             :key="unique+'-tag-'+index"
@@ -23,12 +23,12 @@
 
         <div
             v-show="showAutocomplete"
-            class="absolute z-50 cursor-pointer bg-white pt-5px pb-5px shadow border border-input border-1px z-top overflow-y-auto max-h-40 max-w-40"
+            class="absolute text-left z-50 cursor-pointer bg-white pt-5px pb-5px shadow border border-input border-1px z-top overflow-y-auto max-h-40 max-w-40"
         >
             <div
                 v-for="(result, index) in results"
                 :key="unique+'-'+index"
-                @click="selectFromAutocomplete( result )"
+                @click.stop="selectFromAutocomplete( result )"
             >
                 <slot name="autocomplete" :result="result" />
             </div>

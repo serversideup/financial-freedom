@@ -76,7 +76,6 @@
 
 <script>
     import AppLayout from './../../../Layouts/AppLayout'
-    import AdminNav from './../../../Components/Admin/Layout/AdminNav'
 
     export default {
         props: [
@@ -96,8 +95,7 @@
         },
 
         components: {
-            AppLayout,
-            AdminNav
+            AppLayout
         },
 
         methods: {

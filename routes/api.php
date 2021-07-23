@@ -95,3 +95,4 @@ Route::get('/v1/transactions', [TransactionsController::class, 'index']);
 Route::post('/v1/transactions/import', [TransactionsController::class, 'import']);
 
 Route::get('/v1/tags', [TagsController::class, 'index']);
+Route::put('/v1/tags/{tag}', [TagsController::class, 'update']);

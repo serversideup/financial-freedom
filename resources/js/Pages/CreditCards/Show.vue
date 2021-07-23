@@ -30,8 +30,10 @@
                 :credit-card="creditCard"/>
 
             <div class="grid grid-cols-2 gap-4 mt-5">
-                <transactions
-                    :account="creditCard"/>
+                <transactions-table
+                    :account="creditCard"
+                    :columns="['amount', 'date', 'name', 'category']"
+                    :buttons="['filter', 'add']"/>
             </div>
         </div>
 
@@ -45,7 +47,7 @@
     import { EventBus } from '../../event-bus.js';
     import Edit from '../../Components/Accounts/CreditCard/Edit.vue';
     import Stats from '../../Components/Accounts/CreditCard/Stats.vue';
-    import Transactions from '../../Components/Accounts/Transactions.vue';
+    import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
 
     export default {
         props: ['id'],
@@ -61,7 +63,7 @@
             AppLayout,
             Edit,
             Stats,
-            Transactions
+            TransactionsTable
         },
 
         mounted(){

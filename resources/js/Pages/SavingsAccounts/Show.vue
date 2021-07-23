@@ -30,8 +30,10 @@
                 :savings-account="savingsAccount"/>
             
             <div class="grid grid-cols-2 gap-4 mt-5">
-                <transactions
-                    :account="savingsAccount"/>
+                <transactions-table
+                    :account="savingsAccount"
+                    :columns="['amount', 'date', 'name', 'category']"
+                    :buttons="['filter', 'add']"/>
             </div>
         </div>
 
@@ -45,7 +47,7 @@
     import Edit from '../../Components/Accounts/SavingsAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
     import SavingsAccountAPI from '../../api/savingsAccounts.js';
-    import Transactions from '../../Components/Accounts/Transactions.vue';
+    import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
 
     export default {
         props: ['id'],
@@ -61,7 +63,7 @@
             AppLayout,
             Stats,
             Edit,
-            Transactions
+            TransactionsTable
         },
 
         mounted(){

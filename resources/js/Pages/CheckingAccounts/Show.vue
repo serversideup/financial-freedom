@@ -21,15 +21,23 @@
         <div class="mt-5" v-if="loaded">
             <div class="mt-5">
                 <stats
-                    :checking-account="checkingAccount"/>
+                    :account="checkingAccount"
+                    :type="'checking'"
+                    :fields="[
+                        'current_balance',
+                        'amount_changed',
+                        'transactions_changed'
+                    ]"/>
                 
                 <div class="grid grid-cols-2 gap-4 mt-5">
                     <allocation
                         :current-balance="checkingAccount.current_balance"
                         :account="checkingAccount"
                     />
-                    <transactions
-                        :account="checkingAccount"/>
+                    <transactions-table
+                        :account="checkingAccount"
+                        :columns="['amount', 'date', 'name', 'category']"
+                        :buttons="['filter', 'add']"/>
                 </div>
             </div>
         </div>
@@ -40,9 +48,9 @@
 <script>
     import CheckingAccountsAPI from '../../api/checkingAccounts.js';
     import AppLayout from './../../Layouts/AppLayout'
-    import Stats from '../../Components/Accounts/CheckingAccount/Stats.vue';
+    import Stats from '../../Components/Accounts/Stats.vue';
     import Allocation from '../../Components/Accounts/Allocation.vue';
-    import Transactions from '../../Components/Accounts/Transactions.vue';
+    import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
     import Edit from '../../Components/Accounts/CheckingAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
 
@@ -60,7 +68,7 @@
             AppLayout,
             Stats,
             Allocation,
-            Transactions,
+            TransactionsTable,
             Edit
         },
 

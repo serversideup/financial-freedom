@@ -1,28 +1,19 @@
 <template>
-    <app-layout>
-        <div class="flex flex-col">
-            <main class="flex-1 overflow-y-auto focus:outline-none" tabindex="0">
-                <div class="relative max-w-4xl mx-auto md:px-8 xl:px-0">
-                    <div class="pt-10 pb-16">
-                        <div class="px-4 sm:px-6 md:px-0">
-                            <h1 class="text-3xl leading-9 font-extrabold text-gray-900">Platform Settings</h1>
-                        </div>
-                        <admin-nav/>
-        			</div>
-      			</div>
-			</main>
+    <admin-layout>
+        <div class="flex-1 max-h-screen xl:overflow-y-auto">
+            <div class="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
+            
+            </div>
         </div>
-    </app-layout>
+    </admin-layout>
 </template>
 
 <script>
-    import AppLayout from './../../Layouts/AppLayout'
-    import AdminNav from './../../Components/Admin/Layout/AdminNav'
+    import AdminLayout from './../../Layouts/AdminLayout'
 
     export default {
         components: {
-            AppLayout,
-            AdminNav
+            AdminLayout,
         }
     }
 </script>

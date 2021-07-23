@@ -30,5 +30,7 @@
         "vue-template-compiler": "^2.6.10",
         "vuex": "^3.6.0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "dayjs": "^1.10.6"
+    }
 }

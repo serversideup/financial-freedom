@@ -3,6 +3,8 @@
 /public/storage
 /public/css/app.css
 /public/js/app.js
+/public/js/bug-snatch.js
+/public/js/bug-snatch.js.map
 /storage/*.key
 /vendor
 .env

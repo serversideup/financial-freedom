@@ -1,7 +1,4 @@
 version: '3.7'
 services:
   php:
-    ####################################
-    # Base image (for development)
-    ####################################
     image: serversideup/php:8.0-fpm-nginx

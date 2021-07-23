@@ -25,7 +25,7 @@ services:
       - web-public
   
   meilisearch:
-    hostname: "stoic-money_meilisearch"
+    hostname: "financial-freedom_meilisearch"
     image: getmeili/meilisearch
     volumes: 
       - ./volumes/meilisearch/data.ms:/data.ms
@@ -33,7 +33,7 @@ services:
       - web-public
 
   redis:
-    hostname: "stoic-money_redis"
+    hostname: "financial-freedom_redis"
     image: redis:6
     command: "redis-server --appendonly yes --requirepass redispassword"
     volumes:

@@ -47,7 +47,7 @@ If you experience a bug, let us know so we can fix it! [Report a bug →](https:
 Code contributions are not only appreciated, but also encouraged. If you are curious about the internal structure of your app, head over to the [wiki](https://github.com/serversideup/financial-freedom/wiki). We've done our best to document the internal structure of Financial Freedom so your friction from checking out the repo to submitting code is as minimal and easy as possible!
 
 
-### Security Enhancements
+### Security Disclosures
 If you find a security vulnerability, please let us know as soon as possible.
 
 [View Our Responsible Disclosure Policy →](https://www.notion.so/Responsible-Disclosure-Policy-421a6a3be1714d388ebbadba7eebbdc8)

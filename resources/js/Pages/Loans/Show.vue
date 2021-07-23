@@ -26,6 +26,15 @@
             </div>
         </div>
         <div class="mt-5" v-if="loaded">
+            <stats
+                :account="loan"
+                :type="'loan'"
+                :fields="[
+                    'current_balance',
+                    'interest_rate',
+                    'payment_amount'
+                ]"/>
+
             <div class="grid grid-cols-2 gap-4 mt-5">
                 <transactions-table
                     :account="loan"
@@ -41,6 +50,7 @@
 <script>
     import LoansAPI from '../../api/loans.js';
     import AppLayout from './../../Layouts/AppLayout'
+    import Stats from '../../Components/Accounts/Stats.vue';
     import { EventBus } from '../../event-bus.js';
     import Edit from '../../Components/Accounts/Loan/Edit.vue';
     import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
@@ -57,6 +67,7 @@
 
         components: {
             AppLayout,
+            Stats,
             Edit,
             TransactionsTable
         },

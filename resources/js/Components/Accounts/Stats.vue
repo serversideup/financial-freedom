@@ -28,6 +28,20 @@
                 </dl>
             </div>
         </div>
+        <div v-if="showInterestRate" class="border-t border-gray-200 md:border-0 md:border-l">
+            <div class="px-4 py-5 sm:p-6">
+                <dl>
+                    <dt class="text-base leading-6 font-normal text-gray-900">
+                        Interest Rate
+                    </dt>
+                    <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
+                        <div class="flex items-baseline text-2xl leading-8 font-semibold text-astronaut-600">
+                            {{ account.interest_rate }}%
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
         <div v-if="showTransactionsChanged" class="border-t border-gray-200 md:border-0 md:border-l">
             <div class="px-4 py-5 sm:p-6">
                 <dl>
@@ -37,6 +51,20 @@
                     <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
                         <div class="flex items-baseline text-2xl leading-8 font-semibold text-astronaut-600">
                             {{ numberOfTransactions }}
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div v-if="showPaymentAmount" class="border-t border-gray-200 md:border-0 md:border-l">
+            <div class="px-4 py-5 sm:p-6">
+                <dl>
+                    <dt class="text-base leading-6 font-normal text-gray-900">
+                        Payment Amount
+                    </dt>
+                    <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
+                        <div class="flex items-baseline text-2xl leading-8 font-semibold text-astronaut-600">
+                            {{ formatMoney( account.payment_amount ) }}
                         </div>
                     </dd>
                 </dl>
@@ -83,21 +111,33 @@ export default {
         },
 
         showCurrentBalance(){
-            let types = ['cash', 'checking'];
+            let types = ['cash', 'checking', 'credit-card', 'savings', 'loan'];
 
             return this.fields.includes('current_balance') && types.includes( this.type );
         },
 
         showAmountChanged(){
-            let types = ['cash', 'checking'];
+            let types = ['cash', 'checking', 'credit-card', 'savings'];
 
             return this.fields.includes('amount_changed') && types.includes( this.type );
         },
 
         showTransactionsChanged(){
-            let types = ['cash', 'checking'];
+            let types = ['cash', 'checking', 'credit-card', 'savings'];
 
             return this.fields.includes('transactions_changed') && types.includes( this.type );
+        },
+
+        showInterestRate(){
+            let types = ['loan'];
+
+            return this.fields.includes('interest_rate') && types.includes( this.type );
+        },
+
+        showPaymentAmount(){
+            let types = ['loan'];
+
+            return this.fields.includes('payment_amount') && types.includes( this.type );
         }
     },
 

@@ -27,7 +27,13 @@
         </div>
         <div class="mt-5" v-if="loaded">
             <stats
-                :savings-account="savingsAccount"/>
+                :account="savingsAccount"
+                :type="'savings'"
+                :fields="[
+                    'current_balance',
+                    'amount_changed',
+                    'transactions_changed'
+                ]"/>
             
             <div class="grid grid-cols-2 gap-4 mt-5">
                 <transactions-table
@@ -43,7 +49,7 @@
 
 <script>
     import AppLayout from './../../Layouts/AppLayout'
-    import Stats from '../../Components/Accounts/SavingsAccount/Stats.vue';
+    import Stats from '../../Components/Accounts/Stats.vue';
     import Edit from '../../Components/Accounts/SavingsAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
     import SavingsAccountAPI from '../../api/savingsAccounts.js';

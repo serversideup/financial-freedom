@@ -27,7 +27,13 @@
         </div>
         <div class="mt-5" v-if="loaded">
             <stats
-                :credit-card="creditCard"/>
+                :account="creditCard"
+                :type="'credit-card'"
+                :fields="[
+                    'current_balance',
+                    'amount_changed',
+                    'transactions_changed'
+                ]"/>
 
             <div class="grid grid-cols-2 gap-4 mt-5">
                 <transactions-table
@@ -46,7 +52,7 @@
     import AppLayout from './../../Layouts/AppLayout'
     import { EventBus } from '../../event-bus.js';
     import Edit from '../../Components/Accounts/CreditCard/Edit.vue';
-    import Stats from '../../Components/Accounts/CreditCard/Stats.vue';
+    import Stats from '../../Components/Accounts/Stats.vue';
     import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
 
     export default {

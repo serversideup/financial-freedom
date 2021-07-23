@@ -4,4 +4,4 @@ services:
     ####################################
     # Base image (for development)
     ####################################
-    build: .
+    image: serversideup/php:8.0-fpm-nginx

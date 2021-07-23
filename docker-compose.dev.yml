@@ -10,11 +10,11 @@ services:
     ####################################
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.stoic-money.rule=Host(`stoic-money.dev.test`)"
-      - "traefik.http.routers.stoic-money.entrypoints=websecure"
-      - "traefik.http.routers.stoic-money.tls=true"
-      - "traefik.http.services.stoic-money.loadbalancer.server.port=443"
-      - "traefik.http.services.stoic-money.loadbalancer.server.scheme=https"
+      - "traefik.http.routers.financial-freedom.rule=Host(`financial-freedom.dev.test`)"
+      - "traefik.http.routers.financial-freedom.entrypoints=websecure"
+      - "traefik.http.routers.financial-freedom.tls=true"
+      - "traefik.http.services.financial-freedom.loadbalancer.server.port=443"
+      - "traefik.http.services.financial-freedom.loadbalancer.server.scheme=https"
 
   node:
     image: node:lts

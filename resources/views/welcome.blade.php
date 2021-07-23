@@ -14,7 +14,7 @@
                 <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
                     <div class="w-0 flex-1 flex">
                         <a href="#" class="inline-flex">
-                            <img class="h-8 w-auto sm:h-10" src="/img/logo_transparent_icon.png" alt="Stoic Money">
+                            <img class="h-8 w-auto sm:h-10" src="/img/logo_transparent_icon.svg" alt="Financial Freedom">
                         </a>
                     </div>
                     <div class="-mr-2 -my-2 md:hidden">

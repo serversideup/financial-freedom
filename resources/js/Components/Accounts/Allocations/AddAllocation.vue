@@ -60,10 +60,9 @@
 </template>
 
 <script>
-import AppModal from '../Global/AppModal.vue';
-import CheckingAccountAPI from '../../api/checkingAccounts.js';
-import CashAccountsAPI from '../../api/cashAccounts.js';
-import { EventBus } from '../../event-bus.js';
+import AppModal from '../../Global/AppModal.vue';
+import AllocationsAPI from '../../../api/allocations.js';
+import { EventBus } from '../../../event-bus.js';
 
 export default {
     props: [
@@ -109,27 +108,15 @@ export default {
         },
 
         addAllocation(){
-            switch( this.account.account_type ){
-                case 'checking':
-                    CheckingAccountAPI.addAllocation( this.account.id, {
-                        name: this.form.name,
-                        description: this.form.description,
-                        amount: this.form.amount
-                    }).then( function( response ){
-                        this.handleSuccessfulAllocation( response.data.name );
-                    }.bind(this));
-                break;
-                case 'cash':
-                    CashAccountsAPI.addAllocation( this.account.id, {
-                        name: this.form.name,
-                        description: this.form.description,
-                        amount: this.form.amount
-                    }).then( function( response ){
-                        this.handleSuccessfulAllocation( response.data.name );
-                    }.bind(this));
-                break;
-            }
-            
+            AllocationsAPI.store( {
+                account_id: this.account.id,
+                account_type: this.account.account_type,
+                name: this.form.name,
+                description: this.form.description,
+                amount: this.form.amount
+            }).then( function( response ){
+                this.handleSuccessfulAllocation( response.data.name );
+            }.bind(this));            
         },
 
         handleSuccessfulAllocation( name ){

@@ -33,16 +33,15 @@
 </template>
 
 <script>
-import AddAllocation from '../Allocations/AddAllocation.vue';
-import EditAllocations from '../Allocations/EditAllocations.vue';
-import CheckingAccountsAPI from '../../api/checkingAccounts.js';
-import CashAccountsAPI from '../../api/cashAccounts.js';
+import AddAllocation from './Allocations/AddAllocation.vue';
+import EditAllocations from './Allocations/EditAllocations.vue';
+import AllocationsAPI from '../../api/allocations.js';
 import Chart from 'chart.js';
 import { FormatMoney } from '../../Mixins/formatMoney.js';
 import { EventBus } from '../../event-bus.js';
 
 export default {
-    props: ['currentBalance', 'account'],
+    props: ['account'],
 
     data(){
         return {
@@ -62,7 +61,6 @@ export default {
     },
 
     computed: {
-        // TODO: Abstract to Mixin
         unallocatedAmount(){
             let totalAllocated = 0.00;
             
@@ -70,7 +68,7 @@ export default {
                 totalAllocated += parseFloat( allocation.amount )
             });
 
-            return parseFloat( this.currentBalance )
+            return parseFloat( this.account.current_balance )
                     - parseFloat( totalAllocated );
         }
     },
@@ -85,31 +83,27 @@ export default {
             EventBus.$on('allocation-added', function(){
                 this.loadAllocations();
             }.bind(this));
+            
+            EventBus.$on('allocation-deleted', function(){
+                this.loadAllocations();
+            }.bind(this));
+
+            EventBus.$on('allocations-updated', function(){
+                this.loadAllocations();
+            }.bind(this));
         },
 
-        // Ensure this works for ALL accounts. This means
-        // reading from the param.
         loadAllocations(){
             this.chartData = [];
             this.allocations = [];
 
-            switch( this.account.account_type ){
-                case 'checking':
-                    CheckingAccountsAPI.getAllocations( this.account.id )
-                        .then( function( response ){
-                            this.allocations = response.data;
-                            this.configureChart();
-                        }.bind(this));
-                break;
-                case 'cash':
-                    CashAccountsAPI.getAllocations( this.account.id )
-                        .then( function( response ){
-                            this.allocations = response.data;
-                            this.configureChart();
-                        }.bind(this));
-                break;
-            }
-            
+            AllocationsAPI.index({
+                account_type: this.account.account_type,
+                account_id: this.account.id
+            }).then( function( response ){
+                this.allocations = response.data;
+                this.configureChart();
+            }.bind(this));            
         },
 
         configureChart(){

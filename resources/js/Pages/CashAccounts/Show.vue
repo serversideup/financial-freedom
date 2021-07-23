@@ -36,8 +36,7 @@
                 ]"/>
 
             <div class="grid grid-cols-2 gap-4 mt-5">
-                <allocation
-                    :current-balance="cashAccount.current_balance"
+                <allocations
                     :account="cashAccount"
                 />
                 <transactions-table
@@ -54,7 +53,7 @@
     import AppLayout from './../../Layouts/AppLayout'
     import CashAccountsAPI from '../../api/cashAccounts.js';
     import Stats from '../../Components/Accounts/Stats.vue';
-    import Allocation from '../../Components/Accounts/Allocation.vue';
+    import Allocations from '../../Components/Accounts/Allocations.vue';
     import Edit from '../../Components/Accounts/CashAccount/Edit.vue';
     import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
     import { EventBus } from '../../event-bus.js';
@@ -71,7 +70,7 @@
 
         components: {
             AppLayout,
-            Allocation,
+            Allocations,
             Stats,
             Edit,
             TransactionsTable

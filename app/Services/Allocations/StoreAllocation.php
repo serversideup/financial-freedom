@@ -2,6 +2,9 @@
 
 namespace App\Services\Allocations;
 
+use App\Models\Accounts\CashAccount;
+use App\Models\Accounts\CheckingAccount;
+use App\Models\Accounts\SavingsAccount;
 use App\Models\Allocations\Allocation;
 
 class StoreAllocation
@@ -14,7 +17,11 @@ class StoreAllocation
     private $colors = ['#f05252', '#0e9f6e', '#3f83f8', '#9061f9', '#e74694', '#ff5a1f'];
    
 
-    public function __construct( $user, $data, $account )
+    /**
+     * @todo If the account is null, we need to have verified that
+     * the data contains an account_type & account_id
+     */
+    public function __construct( $user, $data, $account = null )
     {
         $this->syncLocal( $user, $data, $account );
     }
@@ -42,6 +49,26 @@ class StoreAllocation
         $this->name = $data['name'];
         $this->description = $data['description'];
         $this->amount = $data['amount'];
-        $this->account = $account;
+
+        if( !$account ){
+            $this->account = $this->loadAccount( $data['account_id'], $data['account_type'] );
+        }else{
+            $this->account = $account;
+        }
+    }
+
+    private function loadAccount( $id, $type )
+    {
+        switch( $type ){
+            case 'checking':
+                return CheckingAccount::where('id', '=', $id)->first();
+            break;
+            case 'savings':
+                return SavingsAccount::where('id', '=', $id)->first();
+            break;
+            case 'cash':
+                return CashAccount::where('id', '=', $id)->first();
+            break;
+        }
     }
 }

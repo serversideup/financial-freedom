@@ -30,8 +30,7 @@
                     ]"/>
                 
                 <div class="grid grid-cols-2 gap-4 mt-5">
-                    <allocation
-                        :current-balance="checkingAccount.current_balance"
+                    <allocations
                         :account="checkingAccount"
                     />
                     <transactions-table
@@ -49,7 +48,7 @@
     import CheckingAccountsAPI from '../../api/checkingAccounts.js';
     import AppLayout from './../../Layouts/AppLayout'
     import Stats from '../../Components/Accounts/Stats.vue';
-    import Allocation from '../../Components/Accounts/Allocation.vue';
+    import Allocations from '../../Components/Accounts/Allocations.vue';
     import TransactionsTable from '../../Components/Transactions/TransactionsTable.vue';
     import Edit from '../../Components/Accounts/CheckingAccount/Edit.vue';
     import { EventBus } from '../../event-bus.js';
@@ -67,7 +66,7 @@
         components: {
             AppLayout,
             Stats,
-            Allocation,
+            Allocations,
             TransactionsTable,
             Edit
         },

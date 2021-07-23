@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Institutions\InstitutionsController;
 use App\Http\Controllers\API\Transactions\TransactionsController;
 use App\Http\Controllers\API\Accounts\AccountsController;
+use App\Http\Controllers\API\Allocations\AllocationsController;
 use App\Http\Controllers\API\Tags\TagsController;
 
 use App\Http\Controllers\API\CashAccounts\CashAccountsController;
@@ -60,7 +61,6 @@ Route::get('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 's
 Route::put('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'update']);
 
 Route::get('/v1/cash-accounts/{cashAccount}/allocations', [CashAccountsAllocationsController::class, 'index']);
-Route::post('/v1/cash-accounts/{cashAccount}/allocations', [CashAccountsAllocationsController::class, 'store']);
 
 Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransactionsController::class, 'index']);
 
@@ -71,7 +71,6 @@ Route::get('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsControlle
 Route::put('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'update']);
 
 Route::get('/v1/checking-accounts/{checkingAccount}/allocations', [CheckingAccountsAllocationsController::class, 'index']);
-Route::post('/v1/checking-accounts/{checkingAccount}/allocations', [CheckingAccountsAllocationsController::class, 'store']);
 
 Route::get('/v1/checking-accounts/{checkingAccount}/transactions', [CheckingAccountsTransactionsController::class, 'index']);
 
@@ -90,6 +89,14 @@ Route::get('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'show
 Route::put('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'update']);
 
 Route::get('/v1/credit-cards/{creditCard}/transactions', [CreditCardsTransactionsController::class, 'index']);
+
+/**
+ * Allocation Endpoints
+ */
+Route::get('/v1/allocations', [AllocationsController::class, 'index']);
+Route::post('/v1/allocations', [AllocationsController::class, 'store']);
+Route::delete('/v1/allocations/{allocation}', [AllocationsController::class, 'delete']);
+Route::put('/v1/allocations', [AllocationsController::class, 'update']);
 
 Route::get('/v1/transactions', [TransactionsController::class, 'index']);
 Route::post('/v1/transactions/import', [TransactionsController::class, 'import']);

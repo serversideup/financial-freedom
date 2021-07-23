@@ -4,6 +4,7 @@ namespace App\Services\Allocations;
 
 use App\Models\Accounts\CheckingAccount;
 use App\Models\Accounts\CashAccount;
+use App\Models\Accounts\SavingsAccount;
 
 class LoadAllocations
 {
@@ -27,15 +28,20 @@ class LoadAllocations
     private function loadAccount()
     {
         switch( $this->type ){
-            case 'checking-account':
+            case 'checking':
                 $this->account = CheckingAccount::where('id', '=', $this->id)
-                                                ->with('allocations')
-                                                ->first();
+                                    ->with('allocations')
+                                    ->first();
             break;
-            case 'cash-account':
+            case 'cash':
                 $this->account = CashAccount::where('id', '=', $this->id)
-                                            ->with('allocations')
-                                            ->first();
+                                    ->with('allocations')
+                                    ->first();
+            break;
+            case 'savings':
+                $this->account = SavingsAccount::where('id', '=', $this->id)
+                                    ->with('allocations')
+                                    ->first();
             break;
         }
     }

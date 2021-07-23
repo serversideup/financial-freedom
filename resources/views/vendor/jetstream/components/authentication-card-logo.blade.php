@@ -1,3 +1,3 @@
 <a href="/">
-    <img class="w-40 h-40" src="/img/logo_transparent.png"/>
+    <img class="w-80 mb-5" src="/img/login_logo.svg"/>
 </a>

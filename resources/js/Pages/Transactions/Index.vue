@@ -205,13 +205,15 @@
     import { EventBus } from '../../event-bus';
     import { mapState } from 'vuex';
     import moment from 'moment';
+    import TransactionsTable from '../../Components/Transactions/TransactionsTable';
 
     export default {
         components: {
             AppLayout,
             AddTransaction,
             TotalSpent,
-            TotalIncome
+            TotalIncome,
+            TransactionsTable
         },
 
         mixins: [

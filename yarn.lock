@@ -894,7 +894,7 @@
   dependencies:
     "@dinero.js/currencies" "2.0.0-alpha.8"
 
-"@dinero.js/currencies@2.0.0-alpha.8":
+"@dinero.js/currencies@2.0.0-alpha.8", "@dinero.js/currencies@^2.0.0-alpha.8":
   version "2.0.0-alpha.8"
   resolved "https://registry.yarnpkg.com/@dinero.js/currencies/-/currencies-2.0.0-alpha.8.tgz#aa02a04ce3685a9b06a7ce12f8c924726386c3fd"
   integrity sha512-zApiqtuuPwjiM9LJA5/kNcT48VSHRiz2/mktkXjIpfxrJKzthXybUAgEenExIH6dYhLDgVmsLQZtZFOsdYl0Ag==

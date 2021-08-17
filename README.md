@@ -12,7 +12,11 @@
 </p>
 
 # An Open Source Alternative to Mint.com & YNAB
-Your budgeting data should be owned and controlled by you -- no questions asked.
+Your budgeting data should be owned and controlled by you -- no questions asked. **Personal finance should be <u>personal</u>.**
+
+<p align="center">
+		<img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/preview.png" width="1200" alt="Financial Freedom Preview Screenshot">
+</p>
 
 # What does "Financial Freedom" give you?
 ### 💪 Freedom
@@ -40,11 +44,13 @@ If you want to see a feature added to Financial Freedom, we'd love to hear it! C
 If you experience a bug, let us know so we can fix it! [Report a bug →](https://github.com/serversideup/financial-freedom/issues/new?labels=Bug%3A+Needs+Confirmation+%F0%9F%A7%90&template=bug_report.md&title=)
 
 ### Code Contributions
-Code contributions are not only appreciated, but also encouraged. If you are curious about the internal structure of your app, head over to the [wiki](https://github.com/serversideup/stoic-money/wiki). We've done our best to document the internal structure of Stoic Money so your friction from checking out the repo to submitting code is as minimal and easy as possible!
+Code contributions are not only appreciated, but also encouraged. If you are curious about the internal structure of your app, head over to the [wiki](https://github.com/serversideup/financial-freedom/wiki). We've done our best to document the internal structure of Financial Freedom so your friction from checking out the repo to submitting code is as minimal and easy as possible!
 
 
-### Security Enhancements
-If you find a security vulnerability, please let us know as soon as possible. [View our Responsible Disclosure Policy →](https://www.notion.so/Responsible-Disclosure-Policy-421a6a3be1714d388ebbadba7eebbdc8)
+### Security Disclosures
+If you find a security vulnerability, please let us know as soon as possible.
+
+[View Our Responsible Disclosure Policy →](https://www.notion.so/Responsible-Disclosure-Policy-421a6a3be1714d388ebbadba7eebbdc8)
 
 ## Self Hosting
 _Coming Soon_

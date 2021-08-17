@@ -54,11 +54,17 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
+                                    <th v-if="columns.indexOf('select') > -1" class="px-6 py-3 bg-gray-50 text-left">
+                                        <input type="checkbox"/>
+                                    </th>
                                     <th v-if="columns.indexOf('amount') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Amount
                                     </th>
                                     <th v-if="columns.indexOf('date') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Date
+                                    </th>
+                                    <th v-if="columns.indexOf('account') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Account
                                     </th>
                                     <th v-if="columns.indexOf('name') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Name
@@ -66,6 +72,7 @@
                                     <th v-if="columns.indexOf('tags') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Tags
                                     </th>
+                                    <th v-if="columns.indexOf('edit') > -1" class="px-6 py-3 bg-gray-50"></th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -82,6 +89,9 @@
                                 <tr v-for="transaction in transactions"
                                     v-bind:key="'transaction-'+transaction.id"
                                     v-show="!loading && transactions.length > 0">
+                                    <td v-if="columns.indexOf('select') > -1" class="px-6 py-3">
+                                        <input type="checkbox" :value="transaction.id" v-model="selectedTransactions"/>
+                                    </td>
                                     <td v-if="columns.indexOf('amount') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-500">
                                         <div class="flex justify-between items-center">
                                             <span>
@@ -102,6 +112,9 @@
                                     </td>
                                     <td v-if="columns.indexOf('date') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                         {{ formatDate( transaction.date ) }}
+                                    </td>
+                                    <td v-if="columns.indexOf('account') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        {{ transaction.accountable.institution.name }}: {{ transaction.accountable.name }}
                                     </td>
                                     <td v-if="columns.indexOf('name') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                         {{ transaction.name }}
@@ -129,6 +142,9 @@
                                             </span>
                                         </div>
                                     </td>
+                                    <td v-if="columns.indexOf('edit') > -1" class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                        <inertia-link :href="'/transactions/'+transaction.id" class="text-lochmara-600 hover:text-lochmara-900">Edit</inertia-link>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -155,7 +171,9 @@ export default {
     props: {
         account: {
             type: Object,
-            default: {}
+            default: function() {
+                return {}
+            }
         },
         columns: {
             type: Array,
@@ -176,6 +194,7 @@ export default {
             loading: false,
             showFilters: false,
             transactions: [],
+            selectedTransactions: [],
             start_date: '',
             end_date: '',
             current_time: '',

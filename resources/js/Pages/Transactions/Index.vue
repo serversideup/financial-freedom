@@ -85,119 +85,19 @@
         </div>
         <div class="flex mt-5">
             <div class="flex flex-col w-full">
-                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead>
-                                    <tr>
-                                        <th class="px-6 py-3 bg-gray-50 text-left">
-                                            <input type="checkbox"/>
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Amount
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Date
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Account
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Description
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Tags
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50"></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-show="loading">
-                                        <td colspan="7" class="text-center font-sans p-10">
-                                            <img class="inline-block" src="/img/ui/loading.svg"/>
-                                        </td>
-                                    </tr>
-                                    <tr v-show="!loading && transactions.length == 0">
-                                        <td colspan="7" class="text-center font-sans p-10">
-                                            No transactions have been entered for the filters provided.
-                                        </td>
-                                    </tr>
-                                    <tr v-for="transaction in transactions"
-                                        v-bind:key="'transaction-'+transaction.id"
-                                        v-show="!loading && transactions.length > 0">
-                                        <td class="px-6 py-3">
-                                            <input type="checkbox" :value="transaction.id" v-model="selectedTransactions"/>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-500">
-                                            <div class="flex justify-between items-center">
-                                                <span>
-                                                    <span class="font-medium" v-if="transaction.direction == 'outflow'">-</span>{{ formatMoney( transaction.amount ) }}
-                                                    USD
-                                                </span>
-                                                <span v-if="transaction.direction == 'outflow'" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 capitalize">
-                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                    expense
-                                                    <span class="ml-1" v-if="transaction.receipt_url != null">🧾</span>
-                                                </span>
-                                                <span v-if="transaction.direction == 'inflow'" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
-                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                    income
-                                                </span>
+                <transactions-table
+                    :columns="['select', 'amount', 'date', 'account', 'name', 'tags', 'edit']"
+                    :buttons="['filter', 'add']">
 
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                            {{ formatDate( transaction.date ) }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                            {{ transaction.accountable.institution.name }}: {{ transaction.accountable.name }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                            {{ transaction.name }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                            <div v-if="!transaction.is_split">
-                                                <span v-for="(tag, key) in transaction.tags"
-                                                    v-bind:key="'transaction-'+transaction.id+'-tag-'+key"
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
-                                                    v-bind:class="[
-                                                        'bg-'+tag.color+'-100', 'text-'+tag.color+'-800'
-                                                    ]">
-                                                        {{ tag.name }}
-                                                </span>
-                                            </div>
 
-                                            <div v-if="transaction.is_split">
-                                                <span v-for="(tag, key) in getTransactionSplitTags( transaction )"
-                                                    v-bind:key="'transaction-'+transaction.id+'-tag-'+key"
-                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
-                                                    v-bind:class="[
-                                                        'bg-'+tag.color+'-100', 'text-'+tag.color+'-800'
-                                                    ]">
-                                                        {{ tag.name }}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                            <inertia-link :href="'/transactions/'+transaction.id" class="text-lochmara-600 hover:text-lochmara-900">Edit</inertia-link>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                </transactions-table>
             </div>
         </div>
-
-        <add-transaction/>
     </app-layout>
 </template>
 
 <script>
     import AppLayout from './../../Layouts/AppLayout'
-    import AddTransaction from '../../Components/Transactions/AddTransaction'
     import TotalSpent from './Index/TotalSpent';
     import TotalIncome from './Index/TotalIncome';
     import TransactionsAPI from '../../api/transactions.js';
@@ -210,7 +110,6 @@
     export default {
         components: {
             AppLayout,
-            AddTransaction,
             TotalSpent,
             TotalIncome,
             TransactionsTable

@@ -31,6 +31,7 @@
         "vuex": "^3.6.0"
     },
     "dependencies": {
-        "dayjs": "^1.10.6"
+        "dayjs": "^1.10.6",
+        "dinero.js": "^2.0.0-alpha.8"
     }
 }

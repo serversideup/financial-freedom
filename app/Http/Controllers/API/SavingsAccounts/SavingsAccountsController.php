@@ -29,7 +29,7 @@ class SavingsAccountsController extends Controller
         return response()->json( $showAccount->show() );
     }
 
-    public function update( UpdateSavingsAccountRequest $request, SavingsAcount $savingsAccount )
+    public function update( UpdateSavingsAccountRequest $request, SavingsAccount $savingsAccount )
     {
         $updateAccount = new UpdateAccount(
             $request->user(),

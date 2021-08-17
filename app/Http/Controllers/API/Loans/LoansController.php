@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Accounts\ShowAccount;
 use App\Models\Accounts\Loan;
 use App\Services\Accounts\UpdateAccount;
+use App\Http\Requests\Loans\UpdateLoanRequest;
 
 class LoansController extends Controller
 {
@@ -28,7 +29,7 @@ class LoansController extends Controller
         return response()->json( $showAccount->show() );
     }
 
-    public function update( \Illuminate\Http\Request $request, Loan $loan )
+    public function update( UpdateLoanRequest $request, Loan $loan )
     {
         $updateAccount = new UpdateAccount(
             $request->user(),

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\SavingsAccounts;
+namespace App\Http\Requests\Loans;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSavingsAccountRequest extends FormRequest
+class UpdateLoanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

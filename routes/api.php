@@ -41,8 +41,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/**
+ * Institutions Endpoints
+ */
 Route::get('/v1/institutions', [InstitutionsController::class, 'index']);
 
+/**
+ * Accounts Endpoints
+ */
 Route::get('/v1/accounts', [AccountsController::class, 'index']);
 Route::post('/v1/accounts', [AccountsController::class, 'store']);
 

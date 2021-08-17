@@ -17,6 +17,8 @@ class CheckingAccountsAllocationsController extends Controller
     {
         $this->middleware('auth:sanctum');
         $this->middleware('verified');
+        $this->middleware('can:show,checkingAccount')->only('index');
+        $this->middleware('can:update,checkingAccount')->only('store');
     }
 
     public function index( CheckingAccount $checkingAccount )

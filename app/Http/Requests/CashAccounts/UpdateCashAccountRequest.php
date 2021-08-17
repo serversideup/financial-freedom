@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\SavingsAccounts;
+namespace App\Http\Requests\CashAccounts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSavingsAccountRequest extends FormRequest
+class UpdateCashAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class UpdateSavingsAccountRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'number' => 'required|numeric',
             'description' => 'required',
             'current_balance' => 'required|numeric'
         ];

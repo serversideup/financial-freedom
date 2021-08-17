@@ -24,7 +24,15 @@ class StoreAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'type' => 'required',
+            'number' => 'required_unless:type,cash',
+            'description' => 'required',
+            'institution' => 'required_unless:type,cash',
+            'open_date' => 'required_if:type,loan',
+            'payment_amount' => 'required_if:type,loan|numeric',
+            'initial_balance' => 'required|numeric',
+            'interest_rate' => 'required_if:type,loan|numeric'
         ];
     }
 }

@@ -113,7 +113,6 @@ export default {
         },
 
         updateAccount(){
-            console.log( CreditCardsAPI );
             CreditCardsAPI.update( this.id, this.form )
                 .then( function(){
                     EventBus.$emit('notify', {

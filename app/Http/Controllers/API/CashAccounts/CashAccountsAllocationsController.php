@@ -16,6 +16,8 @@ class CashAccountsAllocationsController extends Controller
     {
         $this->middleware('auth:sanctum');
         $this->middleware('verified');
+        $this->middleware('can:show,cashAccount')->only('index');
+        $this->middleware('can:update,cashAccount')->only('store');
     }
 
     public function index( CashAccount $cashAccount )

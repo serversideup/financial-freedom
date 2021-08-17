@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Accounts\ShowAccount;
 use App\Models\Accounts\CreditCard;
 use App\Services\Accounts\UpdateAccount;
+use App\Http\Requests\CreditCards\UpdateCreditCardRequest;
 
 class CreditCardsController extends Controller
 {
@@ -28,7 +29,7 @@ class CreditCardsController extends Controller
         return response()->json( $showAccount->show() );
     }
 
-    public function update( \Illuminate\Http\Request $request, CreditCard $creditCard )
+    public function update( UpdateCreditCardRequest $request, CreditCard $creditCard )
     {
         $updateAccount = new UpdateAccount(
             $request->user(),

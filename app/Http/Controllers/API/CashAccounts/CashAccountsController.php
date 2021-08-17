@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Accounts\CashAccount;
 use App\Services\Accounts\ShowAccount;
 use App\Services\Accounts\UpdateAccount;
+use App\Http\Requests\CashAccounts\UpdateCashAccountRequest;
 
 class CashAccountsController extends Controller
 {
@@ -28,7 +29,7 @@ class CashAccountsController extends Controller
         return response()->json( $showAccount->show() );
     }
 
-    public function update( \Illuminate\Http\Request $request, CashAccount $cashAccount )
+    public function update( UpdateCashAccountRequest $request, CashAccount $cashAccount )
     {
         $updateAccount = new UpdateAccount(
             $request->user(),

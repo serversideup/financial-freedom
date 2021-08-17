@@ -80,7 +80,7 @@
         methods: {
             bindEvents(){
                 EventBus.$on('credit-card-updated', function(){
-                    this.creditCard();
+                    this.loadCreditCard();
                 }.bind(this) );
             },
 

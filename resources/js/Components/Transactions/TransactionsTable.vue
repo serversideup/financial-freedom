@@ -232,6 +232,14 @@ export default {
             }else{
                 document.removeEventListener('click', this.toggleShowFilters);
             }
+        },
+
+        // Allows other components to connect and compute based off of the view
+        transactions: {
+            deep: true,
+            handler(){
+                EventBus.$emit('current-transactions-updated', this.transactions );
+            }
         }
     },
 

@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        
+
         <h3 class="text-lg leading-4 font-medium text-gray-900 mt-5">
             {{ dateRange }}
         </h3>
@@ -61,9 +61,7 @@
     import AppLayout from './../../Layouts/AppLayout'
     import TotalSpent from './Index/TotalSpent';
     import TotalIncome from './Index/TotalIncome';
-    import TransactionsAPI from '../../api/transactions.js';
     import { FormatMoney } from '../../Mixins/formatMoney';
-    import { EventBus } from '../../event-bus';
     import { mapState } from 'vuex';
     import moment from 'moment';
     import TransactionsTable from '../../Components/Transactions/TransactionsTable';
@@ -103,111 +101,5 @@
                 }
             }
         },
-
-        mounted(){
-            this.initialize();
-            this.bindEvents();
-        },
-
-        methods: {
-            initialize(){
-                this.setCurrentMonth();
-                this.setStartDate();
-                this.setEndDate();
-                this.loadTransactions();
-            },
-
-            bindEvents(){
-                EventBus.$on('load-transactions', function(){
-
-                }.bind(this));
-            },
-
-            setCurrentMonth(){
-                this.currentMonth = moment();
-            },
-
-            setStartDate( date = null ){
-                if( date ){
-                    this.startDate = moment( date );
-                }else{
-                    this.startDate = moment( this.currentMonth, 'MMM YYYY' ).startOf('month');
-                }
-            },
-
-            setEndDate( date = null ){
-                if( date ){
-                    this.endDate = moment( date );
-                }else{
-                    this.endDate = moment( this.currentMonth, 'MMM YYYY' ).endOf('month');
-                }
-            },
-
-            promptAddTransaction(){
-                EventBus.$emit('prompt-add-transaction');
-            },
-
-            formatDate( date ){
-                return moment( date, 'YYYY-MM-DD' ).format('L');
-            },
-
-            viewPreviousMonth(){
-                let previousMonth = moment( this.currentMonth ).subtract(1, 'month');
-                this.$store.commit( 'transactions/setLoading', true );
-
-                TransactionsAPI.index( {
-                    start_date: moment( previousMonth, 'MMM YYYY' ).startOf('month').format('YYYY-MM-DD'),
-                    end_date: moment( previousMonth, 'MMM YYYY' ).endOf('month').format('YYYY-MM-DD')
-                }).then( function( response ){
-                    this.currentMonth = moment( previousMonth );
-                    this.startDate = moment( this.currentMonth, 'MMM YYYY').startOf('month').format('YYYY-MM-DD');
-                    this.endDate = moment( this.currentMonth, 'MMM YYYY').endOf('month').format('YYYY-MM-DD');
-
-                    this.$store.commit( 'transactions/setTransactions', response.data );
-                    this.$store.commit( 'transactions/setLoading', false );
-                }.bind(this));
-            },
-
-            viewNextMonth(){
-                let nextMonth = moment( this.currentMonth ).add(1, 'month');
-                this.$store.commit( 'transactions/setLoading', true );
-
-                TransactionsAPI.index( {
-                    start_date: moment( nextMonth, 'MMM YYYY' ).startOf('month').format('YYYY-MM-DD'),
-                    end_date: moment( nextMonth, 'MMM YYYY' ).endOf('month').format('YYYY-MM-DD')
-                }).then( function( response ){
-                    this.currentMonth = moment( nextMonth );
-                    this.startDate = moment( this.currentMonth, 'MMM YYYY').startOf('month').format('YYYY-MM-DD');
-                    this.endDate = moment( this.currentMonth, 'MMM YYYY').endOf('month').format('YYYY-MM-DD');
-                    
-                    this.$store.commit( 'transactions/setTransactions', response.data );
-                    this.$store.commit( 'transactions/setLoading', false );
-                }.bind(this));
-            },
-
-            loadTransactions(){
-                this.$store.commit( 'transactions/setLoading', true );
-
-                TransactionsAPI.index( {
-                    start_date: moment( this.currentMonth, 'MMM YYYY' ).startOf('month').format('YYYY-MM-DD'),
-                    end_date: moment( this.currentMonth, 'MMM YYYY' ).endOf('month').format('YYYY-MM-DD')
-                }).then( function( response ){
-                    this.$store.commit( 'transactions/setTransactions', response.data );
-                    this.$store.commit( 'transactions/setLoading', false );
-                }.bind(this));
-            },
-
-            getTransactionSplitTags( transaction ){
-                let tags = [];
-
-                transaction.splits.forEach( function( split ){
-                    split.tags.forEach( function( tag ){
-                        tags.push( tag );
-                    } );
-                } );
-
-                return tags;
-            }
-        }
     }
 </script>

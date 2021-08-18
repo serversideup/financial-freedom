@@ -48,7 +48,7 @@
             <div class="px-4 py-5 font-semibold font-sans text-astronaut-500 sm:px-6">
                 Transactions
             </div>
-            <div class="overflow-x-auto overflow-y-scroll h-96 sm:-mx-6 lg:-mx-8">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden">
                         <table class="min-w-full divide-y divide-gray-200">
@@ -166,6 +166,7 @@ import { EventBus } from '../../event-bus.js';
 import TransactionsAPI from '../../api/transactions.js';
 import AddTransaction from './AddTransaction.vue';
 import FilterPopup from './TransactionsTable/FilterPopup.vue';
+import { mapState } from 'vuex';
 
 export default {
     props: {
@@ -191,24 +192,22 @@ export default {
 
     data(){
         return {
-            loading: false,
-            showFilters: false,
-            transactions: [],
-            selectedTransactions: [],
-            start_date: '',
-            end_date: '',
-            current_time: '',
-            search: '',
-            order: {
-                column: 'date',
-                direction: 'desc'
-            },
-            filters: {
-                category: '',
-                tags: [],
-                direction: 'all'
-            }
+            showFilters: false
         }
+    },
+
+    computed: {
+        ...mapState('transactions/table', {
+            transactions: state => state.transactions,
+            selectedTransactions: state => state.selectedTransactions,
+            loading: state => state.loading,
+            startDate: state => state.startDate,
+            endDate: state => state.endDate,
+            currentTime: state => state.currentTime,
+            search: state => state.search,
+            order: state => state.order,
+            filters: state => state.filters
+        })
     },
 
     watch: {
@@ -342,7 +341,7 @@ export default {
 
             TransactionsAPI.index(params)
                 .then( function( response ){
-                    this.transactions = response.data;
+                    this.$store.commit('transactions/table/setTransactions', response.data);
                 }.bind(this));
         },
 

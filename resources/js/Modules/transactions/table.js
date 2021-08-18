@@ -31,6 +31,18 @@ export const table = {
 
         setLoading( state, loading ){
             state.loading = loading;
+        },
+
+        setStartDate( state, startDate ){
+            state.startDate = startDate;
+        },
+
+        setEndDate( state, endDate ){
+            state.endDate = endDate;
+        },
+
+        setCurrentTime( state, time ){
+            state.currentTime = time;
         }
     },
 
@@ -41,6 +53,18 @@ export const table = {
 
         getLoading( state ){
             return state.loading;
-        }
+        },
+
+        getStartDate( state ){
+            return state.startDate;
+        },
+
+        getEndDate( state ){
+            return state.endDate;
+        },
+
+        getCurrentTime( state ){
+            return state.currentTime;
+        }        
     }
 }

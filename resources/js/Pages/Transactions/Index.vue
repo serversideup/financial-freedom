@@ -27,7 +27,7 @@
                     :buttons="['filter', 'add']">
 
                     <template v-slot:buttons>
-                        <button type="button" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                        <button type="button" v-on:click="download()" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                             <!-- Heroicon name: download -->
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -78,19 +78,11 @@
             FormatMoney
         ],
 
-        data(){
-            return {
-                currentMonth: '',
-                startDate: null,
-                endDate: null,
-                selectedTransactions: []
-            }
-        },
-
         computed: {
-            ...mapState('transactions', {
+            ...mapState('transactions/table', {
                 transactions: state => state.transactions,
-                loading: state => state.loading
+                startDate: state => state.startDate,
+                endDate: state => state.endDate
             }),
 
             dateRange(){
@@ -101,5 +93,11 @@
                 }
             }
         },
+
+        methods: {
+            download(){
+                
+            }
+        }
     }
 </script>

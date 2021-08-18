@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex items-center justify-between">
-            <div class="mb-3 md:flex md:items-center md:justify-end">
+            <div class="mb-3 flex-shrink-0 md:flex md:items-center md:justify-end">
                 <div class="flex flex-col items-center">
                     <span class="relative z-0 inline-flex shadow-sm">
                         <button type="button" v-on:click="viewPreviousMonth()" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Previous">
@@ -11,7 +11,7 @@
                             </svg>
                         </button>
                         <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                            <span class="font-sans text-astronaut-500">{{ current_time ? current_time.format('MMM YYYY') : '' }}</span>
+                            <span class="font-sans text-astronaut-500">{{ currentTime ? currentTime.format('MMM YYYY') : '' }}</span>
                         </button>
                         <button type="button" v-on:click="viewNextMonth()" class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Next">
                             <!-- Heroicon name: chevron-right -->
@@ -22,6 +22,11 @@
                     </span>
                 </div>
             </div>
+
+            <div v-if="allowSearching" class="mb-3 w-full mx-5">
+                <input type="text" class="form-input w-full text-sm" placeholder="Search..."/>
+            </div>
+
             <div class="mb-3 md:flex md:items-center md:justify-end">
                 <slot name="buttons"></slot>
 
@@ -187,6 +192,12 @@ export default {
             default: function () {
                 return []
             }
+        },
+        allowSearching: {
+            type: Boolean,
+            default: function(){
+                return true;
+            }
         }
     },
 
@@ -278,36 +289,36 @@ export default {
         },
 
         viewPreviousMonth(){
-            this.current_time = this.current_time.clone().subtract('1', 'month');
+            this.$store.commit( 'transactions/table/setCurrentTime', this.currentTime.clone().subtract('1', 'month') );
             this.setStartDate();
             this.setEndDate();
             this.loadTransactions();
         },
 
         viewNextMonth(){
-            this.current_time = this.current_time.clone().add('1', 'month');
+            this.$store.commit( 'transactions/table/setCurrentTime', this.currentTime.clone().add('1', 'month') );
             this.setStartDate();
             this.setEndDate();
             this.loadTransactions();
         },
 
         setCurrentTime(){
-            this.current_time = moment();
+            this.$store.commit( 'transactions/table/setCurrentTime', moment() );
         },
 
         setStartDate( date = null ){
             if( date ){
-                this.start_date = moment( date );
+                this.$store.commit( 'transactions/table/setStartDate', moment( date ) );
             }else{
-                this.start_date = moment( this.current_time, 'MMM YYYY' ).startOf('month');
+                this.$store.commit( 'transactions/table/setStartDate', moment( this.currentTime, 'MMM YYYY' ).startOf('month') );
             }
         },
 
         setEndDate( date = null ){
             if( date ){
-                this.end_date = moment( date );
+                this.$store.commit( 'transactions/table/setEndDate', moment( date ) );
             }else{
-                this.end_date = moment( this.current_time, 'MMM YYYY' ).endOf('month');
+                this.$store.commit( 'transactions/table/setEndDate', moment( this.currentTime, 'MMM YYYY' ).endOf('month') );
             }
         },
 
@@ -336,8 +347,8 @@ export default {
             params.order_column = this.order.column;
             params.order_direction = this.order.direction;
 
-            params.start_date = moment( this.start_date ).format('YYYY-MM-DD');
-            params.end_date = moment( this.end_date ).format('YYYY-MM-DD');
+            params.start_date = moment( this.startDate ).format('YYYY-MM-DD');
+            params.end_date = moment( this.endDate ).format('YYYY-MM-DD');
 
             TransactionsAPI.index(params)
                 .then( function( response ){

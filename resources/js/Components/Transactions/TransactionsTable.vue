@@ -24,7 +24,7 @@
             </div>
 
             <div v-if="allowSearching" class="mb-3 w-full mx-5">
-                <input type="text" class="form-input w-full text-sm" placeholder="Search..."/>
+                <input type="text" @keyup="searchTransactions" class="form-input w-full text-sm" v-model="search" placeholder="Search..."/>
             </div>
 
             <div class="mb-3 md:flex md:items-center md:justify-end">
@@ -165,6 +165,7 @@
 
 <script>
 import moment from 'moment';
+const debounce = require('lodash.debounce');
 
 import { FormatMoney } from '../../Mixins/formatMoney';
 import { EventBus } from '../../event-bus.js';
@@ -215,10 +216,18 @@ export default {
             startDate: state => state.startDate,
             endDate: state => state.endDate,
             currentTime: state => state.currentTime,
-            search: state => state.search,
             order: state => state.order,
             filters: state => state.filters
-        })
+        }),
+
+        search: {
+            get () {
+                return this.$store.getters['transactions/table/getSearch'];
+            },
+            set (value) {
+                this.$store.commit('transactions/table/setSearch', value)
+            }
+        }
     },
 
     watch: {
@@ -271,6 +280,10 @@ export default {
     ],
 
     methods: {
+        searchTransactions: debounce(async function( e ){
+            this.loadTransactions();
+        }, 300 ),
+
         toggleShowFilters( e ){
             if( !document.getElementById('transactions-filter-popup').contains( e.target )
                 && !document.getElementById('transactions-show-filters').contains( e.target ) ){
@@ -343,6 +356,8 @@ export default {
             if( this.filters.direction != 'all' ){
                 params.direction = this.filters.direction;
             }
+
+            params.term = this.search;
 
             params.order_column = this.order.column;
             params.order_direction = this.order.direction;

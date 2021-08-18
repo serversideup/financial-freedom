@@ -43,6 +43,10 @@ export const table = {
 
         setCurrentTime( state, time ){
             state.currentTime = time;
+        },
+
+        setSearch( state, value ){
+            state.search = value;
         }
     },
 
@@ -65,6 +69,10 @@ export const table = {
 
         getCurrentTime( state ){
             return state.currentTime;
-        }        
+        },
+        
+        getSearch( state ){
+            return state.search;
+        }
     }
 }

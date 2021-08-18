@@ -16,7 +16,6 @@ class LoadTransactions{
     private $account;
     private $tags;
     private $direction;
-    private $term;
     private $query;
     private $startDate;
     private $endDate;
@@ -37,7 +36,6 @@ class LoadTransactions{
     public function load()
     {
         $this->initializeQuery();
-        $this->filterTerm();
         $this->filterUser();
         $this->filterDateRange();
         $this->filterAccount();
@@ -55,14 +53,6 @@ class LoadTransactions{
     private function initializeQuery()
     {
         $this->query = Transaction::query();
-    }
-
-    private function filterTerm()
-    {
-        $this->query->where( function( $query ){
-            $query->where('name', 'LIKE', '%'.$this->term.'%')
-                  ->orWhere('amount', 'LIKE', '%'.$this->term.'%');
-        });
     }
 
     private function filterUser()
@@ -135,10 +125,6 @@ class LoadTransactions{
         if( isset( $data['account'] ) && isset( $data['account_type'] ) ){
             $this->loadAccount( $data['account'], $data['account_type'] );
         }
-
-        $this->term = isset( $data['term'] )
-                        ? $data['term']
-                        : '';
 
         $this->direction = isset( $data['direction'] )
                             ? $data['direction']

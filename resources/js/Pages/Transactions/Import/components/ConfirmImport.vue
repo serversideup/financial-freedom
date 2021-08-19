@@ -125,6 +125,7 @@
 
         methods: {
             loadTransactions(){
+                // @todo check for duplicates
                 Papa.parse(this.transactions, {
                     header: true,
                     skipEmptyLines: true,

@@ -93,7 +93,7 @@
                                 </tr>
                                 <tr v-for="transaction in transactions"
                                     v-bind:key="'transaction-'+transaction.id"
-                                    v-show="!loading && transactions.length > 0">
+                                    v-show="!loading && transactions.length > 0 && filterTransaction( transaction )">
                                     <td v-if="columns.indexOf('select') > -1" class="px-6 py-3">
                                         <input type="checkbox" :value="transaction.id" v-model="selectedTransactions"/>
                                     </td>
@@ -279,6 +279,20 @@ export default {
     ],
 
     methods: {
+        filterTransaction( transaction ){
+            if( this.search == '' ){
+                return true;
+            }else{
+                if( transaction.name.toLowerCase().includes( this.search.toLowerCase() ) ){
+                    return true;
+                }else if( transaction.amount.includes( this.search ) ){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+
         toggleShowFilters( e ){
             if( !document.getElementById('transactions-filter-popup').contains( e.target )
                 && !document.getElementById('transactions-show-filters').contains( e.target ) ){

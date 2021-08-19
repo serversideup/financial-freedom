@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex items-center justify-between">
-            <div class="mb-3 md:flex md:items-center md:justify-end">
+            <div class="mb-3 flex-shrink-0 md:flex md:items-center md:justify-end">
                 <div class="flex flex-col items-center">
                     <span class="relative z-0 inline-flex shadow-sm">
                         <button type="button" v-on:click="viewPreviousMonth()" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Previous">
@@ -11,7 +11,7 @@
                             </svg>
                         </button>
                         <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                            <span class="font-sans text-astronaut-500">{{ current_time ? current_time.format('MMM YYYY') : '' }}</span>
+                            <span class="font-sans text-astronaut-500">{{ currentTime ? currentTime.format('MMM YYYY') : '' }}</span>
                         </button>
                         <button type="button" v-on:click="viewNextMonth()" class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Next">
                             <!-- Heroicon name: chevron-right -->
@@ -22,15 +22,20 @@
                     </span>
                 </div>
             </div>
+
+            <div v-if="allowSearching" class="mb-3 w-full mx-5">
+                <input type="text" class="form-input w-full text-sm" v-model="search" placeholder="Search..."/>
+            </div>
+
             <div class="mb-3 md:flex md:items-center md:justify-end">
                 <slot name="buttons"></slot>
 
-                <button v-if="buttons.indexOf('filter') > - 1" id="transactions-show-filters" @click="showFilters = true" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border text-astronaut-500 border-gray-300 bg-white text-sm leading-5 font-medium focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                <button v-if="buttons.indexOf('filter') > - 1" v-bind:class="{ 'rounded-l-md' : !this.$slots.buttons }" id="transactions-show-filters" @click="showFilters = true" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                     <!-- Heroicon name: filter -->
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                     </svg>
-                    <span class="ml-1 text-astronaut-500">Filter</span>
+                    <span class="ml-1">Filter</span>
 
                     <filter-popup :show="showFilters"/>
                 </button>
@@ -48,17 +53,23 @@
             <div class="px-4 py-5 font-semibold font-sans text-astronaut-500 sm:px-6">
                 Transactions
             </div>
-            <div class="overflow-x-auto overflow-y-scroll h-96 sm:-mx-6 lg:-mx-8">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
+                                    <th v-if="columns.indexOf('select') > -1" class="px-6 py-3 bg-gray-50 text-left">
+                                        <input type="checkbox"/>
+                                    </th>
                                     <th v-if="columns.indexOf('amount') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Amount
                                     </th>
                                     <th v-if="columns.indexOf('date') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Date
+                                    </th>
+                                    <th v-if="columns.indexOf('account') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Account
                                     </th>
                                     <th v-if="columns.indexOf('name') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Name
@@ -66,6 +77,7 @@
                                     <th v-if="columns.indexOf('tags') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Tags
                                     </th>
+                                    <th v-if="columns.indexOf('edit') > -1" class="px-6 py-3 bg-gray-50"></th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -81,7 +93,10 @@
                                 </tr>
                                 <tr v-for="transaction in transactions"
                                     v-bind:key="'transaction-'+transaction.id"
-                                    v-show="!loading && transactions.length > 0">
+                                    v-show="!loading && transactions.length > 0 && filterTransaction( transaction )">
+                                    <td v-if="columns.indexOf('select') > -1" class="px-6 py-3">
+                                        <input type="checkbox" :value="transaction.id" v-model="selectedTransactions"/>
+                                    </td>
                                     <td v-if="columns.indexOf('amount') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-500">
                                         <div class="flex justify-between items-center">
                                             <span>
@@ -102,6 +117,9 @@
                                     </td>
                                     <td v-if="columns.indexOf('date') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                         {{ formatDate( transaction.date ) }}
+                                    </td>
+                                    <td v-if="columns.indexOf('account') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        {{ transaction.accountable.institution.name }}: {{ transaction.accountable.name }}
                                     </td>
                                     <td v-if="columns.indexOf('name') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                         {{ transaction.name }}
@@ -129,6 +147,9 @@
                                             </span>
                                         </div>
                                     </td>
+                                    <td v-if="columns.indexOf('edit') > -1" class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                        <inertia-link :href="'/transactions/'+transaction.id" class="text-lochmara-600 hover:text-lochmara-900">Edit</inertia-link>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -150,12 +171,15 @@ import { EventBus } from '../../event-bus.js';
 import TransactionsAPI from '../../api/transactions.js';
 import AddTransaction from './AddTransaction.vue';
 import FilterPopup from './TransactionsTable/FilterPopup.vue';
+import { mapState } from 'vuex';
 
 export default {
     props: {
         account: {
             type: Object,
-            default: {}
+            default: function() {
+                return {}
+            }
         },
         columns: {
             type: Array,
@@ -168,26 +192,39 @@ export default {
             default: function () {
                 return []
             }
+        },
+        allowSearching: {
+            type: Boolean,
+            default: function(){
+                return false;
+            }
         }
     },
 
     data(){
         return {
-            loading: false,
-            showFilters: false,
-            transactions: [],
-            start_date: '',
-            end_date: '',
-            current_time: '',
-            search: '',
-            order: {
-                column: 'date',
-                direction: 'desc'
+            showFilters: false
+        }
+    },
+
+    computed: {
+        ...mapState('transactions/table', {
+            transactions: state => state.transactions,
+            selectedTransactions: state => state.selectedTransactions,
+            loading: state => state.loading,
+            startDate: state => state.startDate,
+            endDate: state => state.endDate,
+            currentTime: state => state.currentTime,
+            order: state => state.order,
+            filters: state => state.filters
+        }),
+
+        search: {
+            get () {
+                return this.$store.getters['transactions/table/getSearch'];
             },
-            filters: {
-                category: '',
-                tags: [],
-                direction: 'all'
+            set (value) {
+                this.$store.commit('transactions/table/setSearch', value)
             }
         }
     },
@@ -196,7 +233,7 @@ export default {
         order: {
             deep: true,
             handler(){
-
+                
             }
         },
 
@@ -212,6 +249,14 @@ export default {
                 document.addEventListener('click', this.toggleShowFilters);
             }else{
                 document.removeEventListener('click', this.toggleShowFilters);
+            }
+        },
+
+        // Allows other components to connect and compute based off of the view
+        transactions: {
+            deep: true,
+            handler(){
+                EventBus.$emit('current-transactions-updated', this.transactions );
             }
         }
     },
@@ -234,6 +279,20 @@ export default {
     ],
 
     methods: {
+        filterTransaction( transaction ){
+            if( this.search == '' ){
+                return true;
+            }else{
+                if( transaction.name.toLowerCase().includes( this.search.toLowerCase() ) ){
+                    return true;
+                }else if( transaction.amount.includes( this.search ) ){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+
         toggleShowFilters( e ){
             if( !document.getElementById('transactions-filter-popup').contains( e.target )
                 && !document.getElementById('transactions-show-filters').contains( e.target ) ){
@@ -252,36 +311,36 @@ export default {
         },
 
         viewPreviousMonth(){
-            this.current_time = this.current_time.clone().subtract('1', 'month');
+            this.$store.commit( 'transactions/table/setCurrentTime', this.currentTime.clone().subtract('1', 'month') );
             this.setStartDate();
             this.setEndDate();
             this.loadTransactions();
         },
 
         viewNextMonth(){
-            this.current_time = this.current_time.clone().add('1', 'month');
+            this.$store.commit( 'transactions/table/setCurrentTime', this.currentTime.clone().add('1', 'month') );
             this.setStartDate();
             this.setEndDate();
             this.loadTransactions();
         },
 
         setCurrentTime(){
-            this.current_time = moment();
+            this.$store.commit( 'transactions/table/setCurrentTime', moment() );
         },
 
         setStartDate( date = null ){
             if( date ){
-                this.start_date = moment( date );
+                this.$store.commit( 'transactions/table/setStartDate', moment( date ) );
             }else{
-                this.start_date = moment( this.current_time, 'MMM YYYY' ).startOf('month');
+                this.$store.commit( 'transactions/table/setStartDate', moment( this.currentTime, 'MMM YYYY' ).startOf('month') );
             }
         },
 
         setEndDate( date = null ){
             if( date ){
-                this.end_date = moment( date );
+                this.$store.commit( 'transactions/table/setEndDate', moment( date ) );
             }else{
-                this.end_date = moment( this.current_time, 'MMM YYYY' ).endOf('month');
+                this.$store.commit( 'transactions/table/setEndDate', moment( this.currentTime, 'MMM YYYY' ).endOf('month') );
             }
         },
 
@@ -310,12 +369,12 @@ export default {
             params.order_column = this.order.column;
             params.order_direction = this.order.direction;
 
-            params.start_date = moment( this.start_date ).format('YYYY-MM-DD');
-            params.end_date = moment( this.end_date ).format('YYYY-MM-DD');
+            params.start_date = moment( this.startDate ).format('YYYY-MM-DD');
+            params.end_date = moment( this.endDate ).format('YYYY-MM-DD');
 
             TransactionsAPI.index(params)
                 .then( function( response ){
-                    this.transactions = response.data;
+                    this.$store.commit('transactions/table/setTransactions', response.data);
                 }.bind(this));
         },
 

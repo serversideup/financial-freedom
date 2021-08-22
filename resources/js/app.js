@@ -16,12 +16,10 @@ Vue.use(Vuex);
 const app = document.getElementById('app');
 
 import { transactions } from './Modules/transactions/transactions.js';
-import { transactionsImport } from './Modules/transactions/transactionsImport.js';
 
 const store = new Vuex.Store({
     modules: {
-        transactions,
-        transactionsImport
+        transactions
     }
 })
 

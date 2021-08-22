@@ -28,16 +28,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 export default {
     computed: {
         account: {
             get() {
-                return this.$store.getters['transactionsImport/getAccount']
+                return this.$store.getters['transactions/importProcess/getAccount']
             },
             set( value ){
-                this.$store.commit( 'transactionsImport/setAccount', value );
+                this.$store.commit( 'transactions/importProcess/setAccount', value );
             }
         }
     },
@@ -45,9 +44,9 @@ export default {
     watch: {
         account(){
             if( this.account != '' ){
-                this.$store.commit('transactionsImport/setStep', 2 );
+                this.$store.commit('transactions/importProcess/setStep', 2 );
             }else{
-                this.$store.commit('transactionsImport/setStep', 1 );
+                this.$store.commit('transactions/importProcess/setStep', 1 );
             }
         }
     }

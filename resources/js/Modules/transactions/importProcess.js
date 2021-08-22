@@ -1,4 +1,4 @@
-export const transactionsImport = {
+export const importProcess = {
     namespaced: true,
 
     state: () => ({

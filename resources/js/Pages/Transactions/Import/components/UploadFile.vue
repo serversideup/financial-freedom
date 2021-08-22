@@ -32,15 +32,15 @@
 
     export default {
         computed: {
-            ...mapState('transactionsImport', {
+            ...mapState('transactions/importProcess', {
                 transactions: state => state.transactions
             })
         },
 
         methods: {
             handleFileUpload(){
-                this.$store.commit( 'transactionsImport/setTransactions', this.$refs.transactionsImportFile.files[0] );
-                this.$store.commit( 'transactionsImport/setStep', 3 );
+                this.$store.commit( 'transactions/importProcess/setTransactions', this.$refs.transactionsImportFile.files[0] );
+                this.$store.commit( 'transactions/importProcess/setStep', 3 );
             }
         }
     }

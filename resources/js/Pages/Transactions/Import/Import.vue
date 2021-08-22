@@ -39,7 +39,7 @@
         },
 
         computed: {
-            ...mapState('transactionsImport', {
+            ...mapState('transactions/importProcess', {
                 step: state => state.step
             })
         }

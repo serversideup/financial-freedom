@@ -11,21 +11,21 @@
             Check Potential Duplicate
         </template>
         <template v-slot:body>
-            <div class="flex flex-col" v-if="key != ''">
+            <div class="flex flex-col" v-if="key !== null">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
+                                <thead>
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Field
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Existing Transaction
+                                            Existing
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            New Transaction
+                                            New
                                         </th>
                                     </tr>
                                 </thead>
@@ -100,7 +100,7 @@ export default {
         return {
             show: false,
             transaction: {},
-            key: ''
+            key: null
         }
     },
 
@@ -131,10 +131,10 @@ export default {
         },
 
         cancel(){
+            this.key = null;
             this.show = false;
             this.transaction = {};
-            this.key = '';
-
+        
             EventBus.$emit('close-modal');
         }
     }

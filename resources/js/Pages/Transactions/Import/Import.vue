@@ -16,6 +16,8 @@
             <confirm-import v-show="step >= 3"/>
 
             <finish/>
+
+            <view-duplicate/>
         </div>
 
     </app-layout>
@@ -26,6 +28,7 @@
     import SelectAccount from './components/SelectAccount';
     import UploadFile from './components/UploadFile';
     import ConfirmImport from './components/ConfirmImport.vue';
+    import ViewDuplicate from './components/ViewDuplicate.vue';
     import Finish from './components/Finish.vue';
     import { mapState } from 'vuex';
 
@@ -35,11 +38,12 @@
             SelectAccount,
             UploadFile,
             ConfirmImport,
-            Finish
+            Finish,
+            ViewDuplicate
         },
 
         computed: {
-            ...mapState('transactionsImport', {
+            ...mapState('transactions/importProcess', {
                 step: state => state.step
             })
         }

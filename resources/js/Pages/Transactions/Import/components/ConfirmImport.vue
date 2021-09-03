@@ -38,7 +38,14 @@
                                     }"
                                     v-bind:key="'pending-transaction-'+key">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <input type="checkbox" v-model="pendingTransactions[key].import"/>
+                                            <div class="flex items-center justify-between h-10">
+                                                <input type="checkbox" v-model="pendingTransactions[key].import"/>
+                                                <span v-if="pendingTransactions[key].potential_duplicate != null" v-on:click="viewDuplicate( pendingTransactions[key], key )" class="ml-1 cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                    </svg>
+                                                </span>
+                                            </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             <input class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"  v-model="pendingTransactions[key].name"/>
@@ -87,7 +94,9 @@
 </template>
 
 <script>
+    import { EventBus } from '../../../../event-bus.js';
     import Papa from 'papaparse';
+    import moment from 'moment';
     import { mapState } from 'vuex';
     import { USBankChecking } from '../../../../Mixins/imports/usbank/checking.js';
 
@@ -98,7 +107,9 @@
         data(){
             return {
                 loading: false,
-                pendingTransactions: []
+                pendingTransactions: [],
+                startDate: moment(),
+                endDate: 0
             }
         },
 
@@ -107,7 +118,7 @@
         },
 
         computed: {
-            ...mapState('transactionsImport', {
+            ...mapState('transactions/importProcess', {
                 transactions: state => state.transactions,
                 account: state => state.account
             })
@@ -123,13 +134,21 @@
             }
         },
 
+        mounted(){
+            EventBus.$on('remove-transaction', function( key ){
+                this.pendingTransactions.splice( key, 1 );
+            }.bind(this));
+        },
+
         methods: {
             loadTransactions(){
+                // @todo check for duplicates
                 Papa.parse(this.transactions, {
                     header: true,
                     skipEmptyLines: true,
                     complete: function(results) {
                         this.formatTransactions( results.data );
+                        this.checkForDuplicates();
                     }.bind(this)
                 });
             },
@@ -147,6 +166,67 @@
                     .then(function( response ){
                         this.$inertia.visit('/transactions');
                     }.bind(this));
+            },
+
+            checkForDuplicates(){
+                this.findStartAndEndDates();
+                this.loadPotentialTransactions();
+                
+            },
+
+            findStartAndEndDates(){
+                for( let i = 0; i < this.pendingTransactions.length; i++ ){
+                    let transactionDate = moment( this.pendingTransactions[i].date );
+
+                    if( transactionDate.format('X') < moment( this.startDate ).format('X') ){
+                        this.startDate = moment( this.pendingTransactions[i].date );
+                    }
+
+                    if( transactionDate.format('X') > moment( this.endDate ).format('X') ){
+                        this.endDate = moment( this.pendingTransactions[i].date );
+                    }
+
+                }
+            },
+
+            loadPotentialTransactions(){
+                let params = {};
+
+                params.start_date = moment( this.startDate ).format('YYYY-MM-DD');
+                params.end_date = moment( this.endDate ).format('YYYY-MM-DD');
+
+                TransactionsAPI.index( params )
+                    .then( function( response ){
+                        this.compareTransactions( response.data );
+                    }.bind(this));
+            },
+
+            compareTransactions( existingTransactions ){
+                for( let i = 0; i < this.pendingTransactions.length; i++ ){
+                    for( let k = 0; k < existingTransactions.length; k++ ){
+                        if( this.validateUnique( this.pendingTransactions[i], existingTransactions[k] ) ){
+                            this.pendingTransactions[i].potential_duplicate = existingTransactions[k];
+                            break;
+                        }
+                    }
+                }
+            },
+
+            validateUnique( transaction, existingTransaction ){
+                if( ( moment( transaction.date ).format('YYYY-MM-DD') 
+                    == moment( existingTransaction.date ).format( 'YYYY-MM-DD') )
+                    && ( Math.abs( parseFloat( transaction.amount ) ) == existingTransaction.amount ) ){
+                        return true;
+                }else{
+                    return false;
+                }
+            },
+
+            viewDuplicate( transaction, key ){
+                EventBus.$emit( 'view-potential-duplicate', {
+                    transaction: transaction,
+                    key: key
+                 } );
             }
         }
     }

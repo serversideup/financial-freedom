@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Transactions\TransactionsController;
 use App\Http\Controllers\API\Accounts\AccountsController;
 use App\Http\Controllers\API\Allocations\AllocationsController;
 use App\Http\Controllers\API\Tags\TagsController;
+use App\Http\Controllers\API\Categories\CategoriesController;
 
 use App\Http\Controllers\API\CashAccounts\CashAccountsController;
 use App\Http\Controllers\API\CashAccounts\CashAccountsAllocationsController;
@@ -109,3 +110,5 @@ Route::post('/v1/transactions/import', [TransactionsController::class, 'import']
 
 Route::get('/v1/tags', [TagsController::class, 'index']);
 Route::put('/v1/tags/{tag}', [TagsController::class, 'update']);
+
+Route::put('/v1/categories/{category}', [CategoriesController::class, 'update']);

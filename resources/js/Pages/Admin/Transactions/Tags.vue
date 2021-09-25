@@ -7,20 +7,27 @@
                 <p class="font-sans text-gray-700 mb-5">Manage settings related to how transactions categorized, tagged and customized.</p>
 
                 <sub-navigation
-                    :active="'settings'"/>
+                    :active="'tags'"/>
+
+                <tags-table
+                    :tags="tags"/>
             </div>
         </div>
     </admin-layout>
 </template>
 
 <script>
-    import AdminLayout from './../../../Layouts/AdminLayout'
-    import SubNavigation from '../../../Components/Admin/Transactions/SubNavigation.vue';
+import AdminLayout from './../../../Layouts/AdminLayout'
+import TagsTable from '../../../Components/Admin/Transactions/TagsTable';
+import SubNavigation from '../../../Components/Admin/Transactions/SubNavigation';
 
-    export default {
-        components: {
-            AdminLayout,
-            SubNavigation
-        }
+export default {
+    props: ['tags'],
+
+    components: {
+        AdminLayout,
+        TagsTable,
+        SubNavigation
     }
+}
 </script>

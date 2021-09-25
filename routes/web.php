@@ -61,6 +61,8 @@ Route::get('/savings-accounts/{savingsAccount}', [SavingsAccountsController::cla
 Route::get('/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 
 Route::get('/admin/transactions', [AdminTransactionsController::class, 'show']);
+Route::get('/admin/transactions/categories', [AdminTransactionsController::class, 'categories']);
+Route::get('/admin/transactions/tags', [AdminTransactionsController::class, 'tags']);
 
 Route::get('/admin/institutions', [AdminInstitutionsController::class, 'show']);
 Route::get('/admin/institutions/create', [AdminInstitutionsController::class, 'create']);

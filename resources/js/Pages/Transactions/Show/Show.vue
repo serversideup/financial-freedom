@@ -49,7 +49,8 @@
         </div>
 
         <breakdown
-            :transaction="transaction"/>
+            :transaction="transaction"
+            :categories="categories"/>
         
         <splits-table
             :transaction="transaction"
@@ -74,7 +75,8 @@
 
     export default {
         props: [
-            'transaction'
+            'transaction',
+            'categories'
         ],
 
         mixins: [

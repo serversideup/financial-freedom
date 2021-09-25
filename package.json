@@ -14,7 +14,6 @@
         "axios": "^0.19",
         "chart.js": "^2.9.4",
         "cross-env": "^7.0",
-        "laravel-jetstream": "^0.0.3",
         "laravel-mix": "^5.0.1",
         "lodash.debounce": "^4.0.8",
         "moment": "^2.29.1",
@@ -24,6 +23,8 @@
         "tippy.js": "^6.2.7"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.10.1",
+        "@inertiajs/inertia-vue3": "^0.5.2",
         "dayjs": "^1.10.6",
         "vue": "^3.2.18"
     }

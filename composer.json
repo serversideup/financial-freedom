@@ -15,7 +15,7 @@
         "inertiajs/inertia-laravel": "^0.2.12",
         "laravel/framework": "^8.0",
         "laravel/horizon": "^5.7",
-        "laravel/jetstream": "^1.3",
+        "laravel/jetstream": "^2.0",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "meilisearch/meilisearch-laravel-scout": "^0.12.5"

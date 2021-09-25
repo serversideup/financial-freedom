@@ -29,6 +29,7 @@
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-vue3": "^0.5.2",
         "dayjs": "^1.10.6",
-        "vue": "^3.2.18"
+        "vue": "^3.2.18",
+        "vuex": "^4.0.2"
     }
 }

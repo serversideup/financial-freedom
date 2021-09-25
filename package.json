@@ -15,7 +15,7 @@
         "axios": "^0.19",
         "chart.js": "^2.9.4",
         "cross-env": "^7.0",
-        "laravel-mix": "^5.0.1",
+        "laravel-mix": "^6.0.6",
         "lodash.debounce": "^4.0.8",
         "moment": "^2.29.1",
         "papaparse": "^5.3.0",

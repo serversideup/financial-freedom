@@ -37,12 +37,10 @@ class TransactionsController extends Controller
 
     public function import()
     {
-        $accountLoader = new LoadAccounts( Auth::user(), ['credit-cards', 'checking'] );
-        $accounts = $accountLoader->load();
+        $accounts = ( new LoadAccounts( Auth::user(), ['credit-cards', 'checking'] ) )->load();
 
         return Inertia::render('Transactions/Import/Import', [
-            'checkingAccounts' => $accounts['checking_accounts'],
-            'creditCards' => $accounts['credit_cards']
+            'accounts' => $accounts
         ]);
     }
 

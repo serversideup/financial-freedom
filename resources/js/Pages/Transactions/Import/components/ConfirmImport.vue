@@ -1,107 +1,132 @@
 <template>
     <div>
-        <div class="flex flex-col mt-5 shadow">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-9 mt-5">
+                <div class="flex flex-col shadow">
+                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3">
 
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Description
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider max-w-md">
-                                        Tags
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Amount
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Direction
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Date
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="( pendingTransaction, key ) in pendingTransactions"
-                                    v-bind:class="{
-                                        'bg-white': key % 2 == 0,
-                                        'bg-gray-50': key % 2 == 1
-                                    }"
-                                    v-bind:key="'pending-transaction-'+key">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div class="flex items-center justify-between h-10">
-                                                <input type="checkbox" v-model="pendingTransactions[key].import"/>
-                                                <span v-if="pendingTransactions[key].potential_duplicate != null" v-on:click="viewDuplicate( pendingTransactions[key], key )" class="ml-1 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            <input class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"  v-model="pendingTransactions[key].name"/>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <input class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"  v-model="pendingTransactions[key].description"/>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 max-w-md">
-                                            <tags
-                                                :unique="'pending-transaction-'+key+'-tag'"
-                                                :existing="pendingTransactions[key].tags"/>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">
-                                            <span v-bind:class="{
-                                                    'text-red-800' : pendingTransaction.direction == 'outflow',
-                                                    'text-green-800' : pendingTransaction.direction == 'inflow'
-                                                }">
-                                                    {{ pendingTransaction.amount }}
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <select id="type" v-model="pendingTransactions[key].direction" v-on:change="invertAmount( key )" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                                                <option value=""></option>
-                                                <option value="inflow">Inflow</option>
-                                                <option value="outflow">Outflow</option>
-                                            </select>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ pendingTransaction.date }}
-                                        </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Name
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Description
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider max-w-md">
+                                                Category
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Amount
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Direction
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Date
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="( pendingTransaction, key ) in pendingTransactions"
+                                            v-bind:class="{
+                                                'bg-white': key % 2 == 0,
+                                                'bg-gray-50': key % 2 == 1
+                                            }"
+                                            v-bind:key="'pending-transaction-'+key">
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <div class="flex items-center justify-between h-10">
+                                                        <input type="checkbox" v-model="pendingTransactions[key].import"/>
+                                                        <span v-if="pendingTransactions[key].potential_duplicate != null" v-on:click="viewDuplicate( pendingTransactions[key], key )" class="ml-1 cursor-pointer">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    <input class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"  v-model="pendingTransactions[key].name"/>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <input class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"  v-model="pendingTransactions[key].description"/>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 max-w-md">
+                                                    <!-- <tags
+                                                        :unique="'pending-transaction-'+key+'-tag'"
+                                                        :existing="pendingTransactions[key].tags"/> -->
+                                                    Category
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">
+                                                    <span v-bind:class="{
+                                                            'text-red-800' : pendingTransaction.direction == 'outflow',
+                                                            'text-green-800' : pendingTransaction.direction == 'inflow'
+                                                        }">
+                                                            {{ pendingTransaction.amount }}
+                                                    </span>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <select id="type" v-model="pendingTransactions[key].direction" v-on:change="invertAmount( key )" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                                        <option value=""></option>
+                                                        <option value="inflow">Inflow</option>
+                                                        <option value="outflow">Outflow</option>
+                                                    </select>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    {{ pendingTransaction.date }}
+                                                </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="overflow-hidden mt-5 max-w-md mx-auto">
-            <div class="px-4 py-5 sm:p-6 flex items-center justify-center">
-                <button type="button" v-on:click="importTransactions()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Import
-                </button>
+            <div class="col-span-3 mt-5">
+                <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full" v-if="account.institution" :src="account.institution.logo" alt="" />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <a href="#" class="focus:outline-none">
+                            <span class="absolute inset-0" aria-hidden="true" />
+                            <p class="text-sm font-medium text-gray-900">
+                                {{ account.name }}
+                            </p>
+                            <p class="text-sm text-gray-500 truncate">
+                                {{ account.description }}
+                            </p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="overflow-hidden mt-5 max-w-md mx-auto">
+                    <div class="px-4 py-5 sm:p-6 flex items-center justify-center">
+                        <button type="button" v-on:click="importTransactions()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Import
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { EventBus } from '../../../../event-bus.js';
     import Papa from 'papaparse';
     import moment from 'moment';
+
+    import { EventBus } from '../../../../event-bus.js';
     import { mapState } from 'vuex';
     import { USBankChecking } from '../../../../Mixins/imports/usbank/checking.js';
-
+    
     import TransactionsAPI from '../../../../api/transactions.js';
-    import Tags from '../../../../Components/Transactions/Tags.vue';
+    // import Tags from '../../../../Components/Transactions/Tags.vue';
 
     export default {
         data(){
@@ -114,7 +139,7 @@
         },
 
         components: {
-            Tags
+            // Tags
         },
 
         computed: {
@@ -135,7 +160,7 @@
         },
 
         mounted(){
-            EventBus.$on('remove-transaction', function( key ){
+            EventBus.on('remove-transaction', function( key ){
                 this.pendingTransactions.splice( key, 1 );
             }.bind(this));
         },
@@ -223,7 +248,7 @@
             },
 
             viewDuplicate( transaction, key ){
-                EventBus.$emit( 'view-potential-duplicate', {
+                EventBus.emit( 'view-potential-duplicate', {
                     transaction: transaction,
                     key: key
                  } );

@@ -14,7 +14,7 @@
                         Name
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.name"/>
+                        <input type="text" class="rounded-md shadow-sm w-full border-gray-300" v-model="form.name"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -22,7 +22,7 @@
                         Date
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.date"/>
+                        <input type="text" class="rounded-md shadow-sm w-full border-gray-300" v-model="form.date"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,7 +30,7 @@
                         Description
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.description"/>
+                        <input type="text" class="rounded-md shadow-sm w-full border-gray-300" v-model="form.description"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -38,7 +38,8 @@
                         Category
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        
+                        <category-select
+                            :categories="categories"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -46,7 +47,7 @@
                         Tags
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <tags
+                        <!-- <tags
                             v-if="!transaction.is_split"
                             :unique="'transaction-tags'"
                             :existing="transaction.tags"
@@ -63,7 +64,7 @@
                                 </span>
                             </div>
                             <span class="text-xs italic">Transaction is split, tags are from splits.</span>
-                        </div>
+                        </div> -->
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -73,7 +74,7 @@
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" v-show="transaction.receipt_url == null && form.receipt == ''">
                         <div class="flex-shrink-0">
                             <input type="file" id="receipt" ref="receipt" v-on:change="handleReceiptUpload()"/>
-                            <a v-on:click="selectReceipt()" class="cursor-pointer font-medium text-lochmara-600 hover:text-lochmara-500">
+                            <a v-on:click="selectReceipt()" class="cursor-pointer font-medium text-blue-600 hover:text-blue-500">
                                 Upload Receipt
                             </a>
                         </div>
@@ -103,7 +104,7 @@
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                    <button type="button" v-on:click="saveChanges()" class="px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-lochmara-600 hover:bg-lochmara-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button type="button" v-on:click="saveChanges()" class="px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         Save Changes
                     </button>
                 </div>
@@ -114,13 +115,15 @@
 
 <script>
 import moment from 'moment';
-import Tags from '../../../../Components/Transactions/Tags.vue';
+// import Tags from '../../../../Components/Transactions/Tags.vue';
+import CategorySelect from '@/Components/Global/CategorySelect.vue';
 
 export default {
     props: ['transaction', 'categories'],
 
     components: {
-        Tags
+        // Tags,
+        CategorySelect
     },
 
     data(){

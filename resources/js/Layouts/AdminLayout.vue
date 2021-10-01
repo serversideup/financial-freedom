@@ -300,11 +300,6 @@
                     </div>
                     
                 </div>
-            
-
-                <!-- Modal Portal -->
-                <portal-target name="modal" multiple>
-                </portal-target>
             </main>
 
             <notification/>

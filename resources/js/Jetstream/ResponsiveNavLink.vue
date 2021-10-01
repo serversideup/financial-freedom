@@ -1,18 +1,20 @@
 <template>
     <div>
-        <button :class="classes" class="w-full text-left" v-if="as == 'button'">
+        <Link :href="href" :class="classes">
             <slot></slot>
-        </button>
-
-        <inertia-link :href="href" :class="classes" v-else>
-            <slot></slot>
-        </inertia-link>
+        </Link>
     </div>
 </template>
 
 <script>
+    import { Link } from '@inertiajs/inertia-vue3';
+
     export default {
         props: ['active', 'href', 'as'],
+
+        components: {
+            Link
+        },
 
         computed: {
             classes() {

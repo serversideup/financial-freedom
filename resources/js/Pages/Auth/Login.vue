@@ -15,12 +15,12 @@
         <form @submit.prevent="submit">
             <div>
                 <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+                <input id="email" type="email" class="rounded-md shadow-sm mt-1 block w-full" v-model="form.email" required autofocus />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+                <input id="password" class="rounded-md shadow-sm mt-1 block w-full" type="password" v-model="form.password" required autocomplete="current-password" />
             </div>
 
             <div class="block mt-4">
@@ -48,7 +48,6 @@
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
     import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
     import JetCheckbox from '@/Jetstream/Checkbox.vue'
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
@@ -60,7 +59,6 @@
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
             JetButton,
-            JetInput,
             JetCheckbox,
             JetLabel,
             JetValidationErrors,

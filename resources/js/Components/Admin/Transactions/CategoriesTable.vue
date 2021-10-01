@@ -23,7 +23,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <template v-for="( category, index ) in availableCategories">
+                                <!-- <template v-for="( category, index ) in availableCategories"> -->
                                     <tr :key="'category-'+category.id">
                                         <th scope="col" class="px-6 py-3 text-left whitespace-nowrap text-sm">
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
@@ -53,7 +53,7 @@
                                         </td>
                                     </tr>
                                 <!-- Add sub categories here -->
-                                </template>
+                                <!-- </template> -->
                             </tbody>
                         </table>
                     </div>

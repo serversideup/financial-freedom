@@ -52,7 +52,7 @@
             :transaction="transaction"
             :categories="categories"/>
         
-        <splits-table
+        <!-- <splits-table
             :transaction="transaction"
             v-show="transaction.direction == 'outflow'"/>
 
@@ -60,7 +60,7 @@
             :transaction="transaction"/>
 
         <items-table
-            :items="''"/>
+            :items="''"/> -->
         
     </app-layout>
 </template>

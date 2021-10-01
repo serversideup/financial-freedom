@@ -1138,6 +1138,13 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
   integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
 
+"@tailwindcss/forms@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.3.3.tgz#a29d22668804f3dae293dcadbef1aa6315c45b64"
+  integrity sha512-U8Fi/gq4mSuaLyLtFISwuDYzPB73YzgozjxOIHsK6NXgg/IWD1FLaHbFlWmurAMyy98O+ao74ksdQefsquBV1Q==
+  dependencies:
+    mini-svg-data-uri "^1.2.3"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -4192,6 +4199,11 @@ mini-css-extract-plugin@^1.6.0:
     schema-utils "^3.0.0"
     webpack-sources "^1.1.0"
 
+mini-svg-data-uri@^1.2.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.3.3.tgz#91d2c09f45e056e5e1043340b8b37ba7b50f4fac"
+  integrity sha512-+fA2oRcR1dJI/7ITmeQJDrYWks0wodlOz0pAEhKYJ2IVc1z0AnwJUsKY2fzFmPAM3Jo9J0rBx8JAA9QQSJ5PuA==
+
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
@@ -4213,6 +4225,11 @@ minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
 
 mkdirp@^0.5.5:
   version "0.5.5"

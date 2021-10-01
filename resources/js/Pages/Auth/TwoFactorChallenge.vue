@@ -21,7 +21,7 @@
         <form @submit.prevent="submit">
             <div v-if="! recovery">
                 <jet-label for="code" value="Code" />
-                <jet-input ref="code" id="code" type="text" inputmode="numeric" class="mt-1 block w-full" v-model="form.code" autofocus autocomplete="one-time-code" />
+                <input ref="code" id="code" type="text" inputmode="numeric" class="mt-1 block w-full form-input rounded-md shadow-sm" v-model="form.code" autofocus autocomplete="one-time-code" />
             </div>
 
             <div v-else>
@@ -54,7 +54,6 @@
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
     import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
 
@@ -64,7 +63,6 @@
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
             JetButton,
-            JetInput,
             JetLabel,
             JetValidationErrors,
         },

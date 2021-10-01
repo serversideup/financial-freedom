@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import { EventBus } from '../../event-bus.js';
+    import { EventBus } from '@/event-bus.js';
 
     export default {
         props: {
@@ -51,7 +51,7 @@
 
         methods: {
             close(){
-                EventBus.$emit('close-modal');
+                EventBus.emit('close-modal');
             }
         }
     }

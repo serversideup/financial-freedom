@@ -79,13 +79,13 @@
 
         methods: {
             bindEvents(){
-                EventBus.$on( 'savings-account-updated', function(){
+                EventBus.on( 'savings-account-updated', function(){
                     this.loadSavingsAccount();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit( 'prompt-edit-account', this.savingsAccount );
+                EventBus.emit( 'prompt-edit-account', this.savingsAccount );
             },
 
             loadSavingsAccount(){

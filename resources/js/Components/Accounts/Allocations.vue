@@ -80,15 +80,15 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('allocation-added', function(){
+            EventBus.on('allocation-added', function(){
                 this.loadAllocations();
             }.bind(this));
             
-            EventBus.$on('allocation-deleted', function(){
+            EventBus.on('allocation-deleted', function(){
                 this.loadAllocations();
             }.bind(this));
 
-            EventBus.$on('allocations-updated', function(){
+            EventBus.on('allocations-updated', function(){
                 this.loadAllocations();
             }.bind(this));
         },
@@ -191,11 +191,11 @@ export default {
         },
 
         promptAddAllocation(){
-            EventBus.$emit('prompt-add-allocation');
+            EventBus.emit('prompt-add-allocation');
         },
 
         promptEditAllocations(){
-            EventBus.$emit('prompt-edit-allocations');
+            EventBus.emit('prompt-edit-allocations');
         }
     }
 }

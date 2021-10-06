@@ -56,9 +56,9 @@ export default {
 
     methods: {
         bindEvents(){
-            // EventBus.$on('notify', function( data ){
-            //     this.handleNotification( data );
-            // }.bind(this));
+            EventBus.on('notify', function( data ){
+                this.handleNotification( data );
+            }.bind(this));
         },
 
         handleNotification( data ){

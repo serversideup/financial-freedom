@@ -130,11 +130,11 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('prompt-split-transaction', function(){
+            EventBus.on('prompt-split-transaction', function(){
                 this.show = true;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
             }.bind(this));
         },
@@ -142,7 +142,7 @@ export default {
         cancel(){
             this.show = false;
             this.resetForm();
-            EventBus.$emit('close-modal');
+            EventBus.emit('close-modal');
         },
 
         splitTransaction(){

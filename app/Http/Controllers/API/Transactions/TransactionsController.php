@@ -17,9 +17,7 @@ class TransactionsController extends Controller
 
     public function index()
     {
-        $transactionLoader = new LoadTransactions( Auth::user(), Request::all() );
-        $transactions = $transactionLoader->load();
-
+        $transactions = ( new LoadTransactions( Auth::user(), Request::all() ) )->load();
         return response()->json( $transactions );
     }
 

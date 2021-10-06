@@ -53,18 +53,18 @@
 </template>
 
 <script>
-    import AppLayout from './../../Layouts/AppLayout'
+    import AppLayout from '@/Layouts/AppLayout'
 
-    import CashAccountCard from '../../Components/Accounts/CashAccountCard.vue';
-    import LoanCard from '../../Components/Accounts/LoanCard.vue';
-    import CheckingAccountCard from '../../Components/Accounts/CheckingAccountCard';
-    import SavingsAccountCard from '../../Components/Accounts/SavingsAccountCard';
-    import CreditAccountCard from '../../Components/Accounts/CreditAccountCard';
-    import AddAccount from '../../Components/Accounts/AddAccount.vue';
-    import AccountsAPI from '../../api/accounts.js';
-    import InstitutionsAPI from '../../api/institutions.js';
+    import CashAccountCard from '@/Components/Accounts/CashAccountCard.vue';
+    import LoanCard from '@/Components/Accounts/LoanCard.vue';
+    import CheckingAccountCard from '@/Components/Accounts/CheckingAccountCard';
+    import SavingsAccountCard from '@/Components/Accounts/SavingsAccountCard';
+    import CreditAccountCard from '@/Components/Accounts/CreditAccountCard';
+    import AddAccount from '@/Components/Accounts/AddAccount.vue';
+    import AccountsAPI from '@/api/accounts.js';
+    import InstitutionsAPI from '@/api/institutions.js';
 
-    import { EventBus } from '../../event-bus.js';
+    import { EventBus } from '@/event-bus.js';
 
     export default {
         data(){
@@ -92,7 +92,7 @@
 
         methods: {
             bindEvents(){
-                EventBus.$on('reload-accounts', function(){
+                EventBus.on('reload-accounts', function(){
                     this.loadAccounts();
                 }.bind(this));
             },
@@ -112,7 +112,7 @@
             },
 
             promptAddAccount(){
-                EventBus.$emit('prompt-add-account');
+                EventBus.emit('prompt-add-account');
             }
         }
     }

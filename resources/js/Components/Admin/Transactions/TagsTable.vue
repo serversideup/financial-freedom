@@ -33,10 +33,10 @@
                                         </span>
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        <input type="text" class="form-input block w-full max-w-xs transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="availableTags[index].name"/>
+                                        <input type="text" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300" v-model="availableTags[index].name"/>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <select id="type" v-model="availableTags[index].color" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                        <select id="type" v-model="availableTags[index].color" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                             <option value=""></option>
                                             <option value="red">Red</option>
                                             <option value="green">Green</option>
@@ -83,7 +83,7 @@ export default {
                 name: this.availableTags[index].name,
                 color: this.availableTags[index].color
             }).then( function( response ){
-                EventBus.$emit('notifiy', {
+                EventBus.emit('notifiy', {
                     type: 'success',
                     title: 'Tag updated',
                     message: 'Your tag meta has been updated',

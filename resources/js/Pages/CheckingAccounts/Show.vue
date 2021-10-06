@@ -78,13 +78,13 @@
 
         methods: {
             bindEvents(){
-                EventBus.$on('checking-account-updated', function(){
+                EventBus.on('checking-account-updated', function(){
                     this.loadCheckingAccount();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit('prompt-edit-account', this.checkingAccount);
+                EventBus.emit('prompt-edit-account', this.checkingAccount);
             },
 
             loadCheckingAccount(){

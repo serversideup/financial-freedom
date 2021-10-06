@@ -81,7 +81,7 @@
 
         methods: {
             promptSplitTransaction(){
-                EventBus.$emit('prompt-split-transaction');
+                EventBus.emit('prompt-split-transaction');
             }
         },
 

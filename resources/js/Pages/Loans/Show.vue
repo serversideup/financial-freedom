@@ -79,13 +79,13 @@
 
         methods: {
             bindEvents(){
-                EventBus.$on('loan-updated', function(){
+                EventBus.on('loan-updated', function(){
                     this.loadLoan();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit('prompt-edit-account', this.loan);
+                EventBus.emit('prompt-edit-account', this.loan);
             },
 
             loadLoan(){

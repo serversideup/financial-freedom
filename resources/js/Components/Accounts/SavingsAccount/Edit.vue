@@ -96,7 +96,7 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('prompt-edit-account', function( data ){
+            EventBus.on('prompt-edit-account', function( data ){
                 this.show = true;
 
                 this.id = data.id;
@@ -106,7 +106,7 @@ export default {
                 this.form.current_balance = data.current_balance;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
                 this.resetForm();
             }.bind(this));
@@ -115,14 +115,14 @@ export default {
         updateAccount(){
             SavingsAccountAPI.update( this.id, this.form )
                 .then( function(){
-                    EventBus.$emit('notify', {
+                    EventBus.emit('notify', {
                         type: 'success',
                         title: 'Account Updated',
                         message: 'Your account has been successfully updated!',
                         action: 'close'
                     });
 
-                    EventBus.$emit('savings-account-updated');
+                    EventBus.emit('savings-account-updated');
 
                     this.show = false;
                     this.resetForm();

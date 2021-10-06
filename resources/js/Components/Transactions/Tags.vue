@@ -45,7 +45,7 @@ export default {
     },
 
     mounted () {
-        EventBus.$on('tags-changed', function (data) {
+        EventBus.on('tags-changed', function (data) {
             if (data.id == this.unique) {
                 this.tags = data.tags
             }

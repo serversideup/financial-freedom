@@ -15,7 +15,7 @@
                         Account Name
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.name" id="account-name" type="text" v-bind:class="{ 'border-red-500': !validations.name.valid }" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <input v-model="form.name" id="account-name" type="text" v-bind:class="{ 'border-red-500': !validations.name.valid }" class="rounded-md shadow-sm block w-full border-gray-300">
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.name.valid" v-text="validations.name.message"></span>
                 </div>
@@ -40,7 +40,7 @@
                         Number
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.number" v-bind:class="{ 'border-red-500': !validations.number.valid }" id="account-number" type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <input v-model="form.number" v-bind:class="{ 'border-red-500': !validations.number.valid }" id="account-number" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.number.valid" v-text="validations.number.message"></span>
                 </div>
@@ -73,7 +73,7 @@
                         Description
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.description" v-bind:class="{ 'border-red-500': !validations.description.valid }" id="description" type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <input v-model="form.description" v-bind:class="{ 'border-red-500': !validations.description.valid }" id="description" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.description.valid" v-text="validations.description.message"></span>
                 </div>
@@ -217,11 +217,11 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('prompt-add-account', function(){
+            EventBus.on('prompt-add-account', function(){
                 this.show = true;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
             }.bind(this));
         },
@@ -236,14 +236,14 @@ export default {
             if( this.validateNewAccount() ){
                 AccountsAPI.store( this.form )
                     .then( function( response ){
-                        EventBus.$emit('notify', {
+                        EventBus.emit('notify', {
                             type: 'success',
                             title: 'Account Added',
                             message: 'You can now add transactions, set goals, and budget for this account!',
                             action: 'close'
                         });
 
-                        EventBus.$emit('reload-accounts');
+                        EventBus.emit('reload-accounts');
 
                         this.resetForm();
                         this.resetValidations();

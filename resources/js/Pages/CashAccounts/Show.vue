@@ -83,13 +83,13 @@
 
         methods: {
             bindEvents(){
-                EventBus.$on('cash-account-updated', function(){
+                EventBus.on('cash-account-updated', function(){
                     this.loadCashAccount();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit('prompt-edit-account', this.cashAccount);
+                EventBus.emit('prompt-edit-account', this.cashAccount);
             },
 
             loadCashAccount(){

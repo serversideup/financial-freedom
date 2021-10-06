@@ -106,11 +106,11 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('prompt-edit-allocations', function(){
+            EventBus.on('prompt-edit-allocations', function(){
                 this.show = true;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
             }.bind(this));
         },
@@ -123,11 +123,11 @@ export default {
         update(){
             AllocationsAPI.update( this.form.allocations )
                 .then( function( response ){
-                    EventBus.$emit('allocations-updated');
+                    EventBus.emit('allocations-updated');
                     this.show = false;
                     this.resetForm();
 
-                    EventBus.$emit('notify', {
+                    EventBus.emit('notify', {
                         type: 'success',
                         title: 'Allocations Updated',
                         message: 'Your allocations now represent your account!',
@@ -143,7 +143,7 @@ export default {
         removeAllocation( id ){
             AllocationsAPI.delete( id )
                 .then( function( response ){
-                    EventBus.$emit('allocation-deleted');
+                    EventBus.emit('allocation-deleted');
                 }.bind(this));
         }
     }

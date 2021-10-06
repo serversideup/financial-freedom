@@ -44,6 +44,7 @@ class LoadTransactions{
         $this->filterUser();
         $this->addAccount();
         $this->addTags();
+        $this->addCategory();
         $this->addSplits();
         $this->orderBy();
         
@@ -106,6 +107,11 @@ class LoadTransactions{
     private function addTags()
     {
         $this->query->with('tags');
+    }
+
+    private function addCategory()
+    {
+        $this->query->with('category');
     }
 
     private function addSplits()

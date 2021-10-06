@@ -80,6 +80,9 @@
                                     <th v-if="columns.indexOf('tags') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Tags
                                     </th>
+                                    <th v-if="columns.indexOf('category') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Category
+                                    </th>
                                     <th v-if="columns.indexOf('edit') > -1" class="px-6 py-3 bg-gray-50"></th>
                                 </tr>
                             </thead>
@@ -142,6 +145,9 @@
                                             </span>
                                         </div>
                                     </td>
+                                    <td v-if="columns.indexOf('category') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        {{ transaction.category ? transaction.category.name : '' }}
+                                    </td>
                                     <td v-if="columns.indexOf('edit') > -1" class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                                         <Link :href="'/transactions/'+transaction.id" class="text-lochmara-600 hover:text-lochmara-900">Edit</Link>
                                     </td>
@@ -180,7 +186,7 @@ export default {
         columns: {
             type: Array,
             default: function () {
-                return ['amount', 'date', 'name', 'tags'] 
+                return ['amount', 'date', 'name', 'category'] 
             }
         },
         buttons: {

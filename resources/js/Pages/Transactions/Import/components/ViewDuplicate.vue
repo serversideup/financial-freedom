@@ -110,13 +110,13 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('view-potential-duplicate', function( data ){
+            EventBus.on('view-potential-duplicate', function( data ){
                 this.transaction = data.transaction;
                 this.key = data.key;
                 this.show = true;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
             }.bind(this));
         },
@@ -126,7 +126,7 @@ export default {
         },
 
         remove(){
-            EventBus.$emit('remove-transaction', this.key);
+            EventBus.emit('remove-transaction', this.key);
             this.cancel();
         },
 
@@ -135,7 +135,7 @@ export default {
             this.show = false;
             this.transaction = {};
         
-            EventBus.$emit('close-modal');
+            EventBus.emit('close-modal');
         }
     }
 }

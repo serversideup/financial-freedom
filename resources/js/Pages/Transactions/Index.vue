@@ -23,7 +23,7 @@
         <div class="flex mt-5">
             <div class="flex flex-col w-full">
                 <transactions-table
-                    :columns="['select', 'amount', 'date', 'account', 'name', 'tags', 'edit']"
+                    :columns="['select', 'amount', 'date', 'account', 'name', 'category', 'edit']"
                     :buttons="['filter', 'add']"
                     :allow-searching="true"
                     :categories="categories">

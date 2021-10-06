@@ -79,13 +79,13 @@
 
         methods: {
             bindEvents(){
-                EventBus.$on('credit-card-updated', function(){
+                EventBus.on('credit-card-updated', function(){
                     this.loadCreditCard();
                 }.bind(this) );
             },
 
             promptEdit(){
-                EventBus.$emit('prompt-edit-account', this.creditCard);
+                EventBus.emit('prompt-edit-account', this.creditCard);
             },
 
             loadCreditCard(){

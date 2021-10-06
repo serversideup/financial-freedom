@@ -71,14 +71,19 @@
                         <textarea id="description" v-model="form.description" rows="3" class="rounded-md shadow-sm block w-full border-gray-300"></textarea>
                     </div>
                 </div>
-                <div class="sm:col-span-6">
+                <div class="sm:col-span-3">
+                    <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
+                        Category
+                    </label>
+                    <category-select
+                        :categories="categories"/>
+                </div>
+                <div class="sm:col-span-3">
                     <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
                         Tags
                     </label>
-                    <!-- <tags
-                        :unique="'add-transaction-tag'"
-                        :existing="form.tags"/> -->
                 </div>
+                
             </form>
         </template>
         <template v-slot:footer>
@@ -99,20 +104,19 @@ import AppModal from '@/Components/Global/AppModal.vue';
 import AccountsAPI from '@/api/accounts.js';
 import CategorySelect from '@/Components/Global/CategorySelect.vue';
 import AccountSelect from '@/Components/Global/AccountSelect.vue';
-// import Tags from '../../Components/Transactions/Tags.vue';
+import TagsAPI from '@/api/tags.js';
 
 export default {
     components: {
         AppModal,
         CategorySelect,
         AccountSelect
-        // Tags
     },
 
     data(){
         return {
             accounts: [],
-
+            categories: [],
             show: false,
 
             form: {
@@ -122,6 +126,7 @@ export default {
                 direction: 'outflow',
                 name: '',
                 description: '',
+                category: '',
                 tags: []
             }
         }
@@ -164,8 +169,8 @@ export default {
         addTransaction(){
             this.$inertia.post('/transactions', this.form)
                 .then(function( response ){
-                    EventBus.$emit('load-transactions');
-                    EventBus.$emit('notify', {
+                    EventBus.emit('load-transactions');
+                    EventBus.emit('notify', {
                         type: 'success',
                         title: 'Transaction Added',
                         message: 'Your transaction was added successfully.',

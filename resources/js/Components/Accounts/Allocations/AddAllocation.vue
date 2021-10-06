@@ -92,11 +92,11 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('prompt-add-allocation', function(){
+            EventBus.on('prompt-add-allocation', function(){
                 this.show = true;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
             }.bind(this));
         },
@@ -104,7 +104,7 @@ export default {
         cancel(){
             this.show = false;
             this.resetForm();
-            EventBus.$emit('close-modal');
+            EventBus.emit('close-modal');
         },
 
         addAllocation(){
@@ -120,14 +120,14 @@ export default {
         },
 
         handleSuccessfulAllocation( name ){
-            EventBus.$emit('notify', {
+            EventBus.emit('notify', {
                 type: 'success',
                 title: 'Allocation Created',
                 message: 'Your "'+name+'" allocation has been created!',
                 action: 'close'
             });
 
-            EventBus.$emit('allocation-added');
+            EventBus.emit('allocation-added');
 
             this.show = false;
             this.resetForm();

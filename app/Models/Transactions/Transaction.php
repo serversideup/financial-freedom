@@ -30,6 +30,11 @@ class Transaction extends Model
                     ->withTimestamps();
     }
 
+    public function category()
+    {
+        return $this->hasOne('App\Models\Categories\Category', 'id', 'category_id');
+    }
+
     public function splits()
     {
         return $this->hasMany('App\Models\Transactions\Split', 'transaction_id', 'id');

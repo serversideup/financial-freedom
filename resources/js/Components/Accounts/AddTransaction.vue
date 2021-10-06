@@ -145,11 +145,11 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('prompt-add-transaction', function(){
+            EventBus.on('prompt-add-transaction', function(){
                 this.show = true;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
             }.bind(this));
         },
@@ -157,14 +157,14 @@ export default {
         cancel(){
             this.show = false;
             this.resetForm();
-            EventBus.$emit('close-modal');
+            EventBus.emit('close-modal');
         },
 
         addTransaction(){
             this.$inertia.post('/transactions', this.form)
                 .then(function( response ){
-                    EventBus.$emit('load-transactions');
-                    EventBus.$emit('notify', {
+                    EventBus.emit('load-transactions');
+                    EventBus.emit('notify', {
                         type: 'success',
                         title: 'Transaction Added',
                         message: 'Your transaction was added successfully.',

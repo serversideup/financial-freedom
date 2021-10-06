@@ -5,7 +5,7 @@
             <p class="text-lg font-medium text-blue-gray-900">Settings</p>
         </div>
         <div class="flex-1 min-h-0 overflow-y-auto">
-            <inertia-link v-for="item in subNavigation" 
+            <Link v-for="item in subNavigation" 
                 :key="item.name" 
                 :href="item.href" 
                 :class="[item.current ? 'bg-blue-50 bg-opacity-50' : 'hover:bg-blue-50 hover:bg-opacity-50', 'flex p-6 border-b border-blue-gray-200']" 
@@ -15,12 +15,14 @@
                         <p class="font-medium text-gray-900">{{ item.name }}</p>
                         <p class="mt-1 text-gray-500">{{ item.description }}</p>
                 </div>
-            </inertia-link>
+            </Link>
         </div>
     </nav>
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3';
+
 export default {
     data(){
         return {
@@ -41,6 +43,10 @@ export default {
                 }                
             ]
         }
+    },
+
+    components: {
+        Link
     }
 }
 </script>

@@ -13,6 +13,7 @@ export const USBankChecking = {
                         direction: pending[i].Transaction == 'DEBIT' ? 'outflow' : 'inflow',
                         date: pending[i].Date,
                         tags: [],
+                        category: '',
                         potential_duplicate: null
                     }
 

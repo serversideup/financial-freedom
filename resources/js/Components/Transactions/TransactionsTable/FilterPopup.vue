@@ -13,8 +13,13 @@
 
             <div class="sm:col-span-3 mt-1">
                 <label class="block text-sm font-medium text-left text-gray-700">Category</label>
-                <category-select
-                    :categories="categories"/>
+                <select id="category" v-model="category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                    <option value=""></option>
+                    <option v-for="category in $page.props.categories"
+                        :key="'category-'+category.id"
+                        v-bind:value="category.id"
+                        v-text="( category.parent_id != null ? ' - ' : '' )+category.name"/>
+                </select>
             </div>
             
 

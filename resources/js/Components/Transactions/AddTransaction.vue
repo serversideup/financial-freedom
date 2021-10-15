@@ -1,7 +1,7 @@
 <template>
     <app-modal :size="'medium'" :show="show">
         <template v-slot:image>
-            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-lochmara-100 sm:mx-0 sm:h-10 sm:w-10">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
                 <!-- Heroicon name: exclamation -->
                 <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -38,7 +38,7 @@
                             <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
                                 $
                             </span>
-                            <input type="text" name="amount" id="amount" v-model="form.amount" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300" />
+                            <input type="text" name="amount" id="amount" v-model="form.amount" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </span>
-                            <input type="text" name="date" id="date" v-model="form.date" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300" />
+                            <input type="text" name="date" id="date" v-model="form.date" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         Name
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.name" id="account-number" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                        <input v-model="form.name" id="account-number" type="text" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300">
                     </div>
                 </div>
                 <div class="sm:col-span-6">
@@ -75,8 +75,13 @@
                     <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
                         Category
                     </label>
-                    <category-select
-                        :categories="categories"/>
+                    <select id="category" v-model="form.category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <option value=""></option>
+                        <option v-for="category in $page.props.categories"
+                            :key="'category-'+category.id"
+                            v-bind:value="category.id"
+                            v-text="( category.parent_id != null ? ' - ' : '' )+category.name"/>
+                    </select>
                 </div>
                 <div class="sm:col-span-3">
                     <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
@@ -107,6 +112,10 @@ import AccountSelect from '@/Components/Global/AccountSelect.vue';
 import TagsAPI from '@/api/tags.js';
 
 export default {
+    props: [
+        'categories'
+    ],
+
     components: {
         AppModal,
         CategorySelect,
@@ -116,7 +125,6 @@ export default {
     data(){
         return {
             accounts: [],
-            categories: [],
             show: false,
 
             form: {

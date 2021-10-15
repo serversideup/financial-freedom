@@ -38,8 +38,13 @@
                         Category
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <category-select
-                            :categories="categories"/>
+                        <select id="category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <option value=""></option>
+                            <option v-for="category in $page.props.categories"
+                                :key="'category-'+category.id"
+                                v-bind:value="category.id"
+                                v-text="category.name"/>
+                        </select>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -95,7 +100,7 @@
                                     </span>
                                 </div>
                                 <div class="ml-4 flex-shrink-0">
-                                    <a :href="'/transactions/'+transaction.id+'/receipt'" target="_blank" v-on:click="viewReceipt()" class="font-medium text-lochmara-600 hover:text-lochmara-500">
+                                    <a :href="'/transactions/'+transaction.id+'/receipt'" target="_blank" v-on:click="viewReceipt()" class="font-medium text-blue-600 hover:text-blue-500">
                                         View
                                     </a>
                                 </div>
@@ -116,14 +121,12 @@
 <script>
 import moment from 'moment';
 // import Tags from '../../../../Components/Transactions/Tags.vue';
-import CategorySelect from '@/Components/Global/CategorySelect.vue';
 
 export default {
-    props: ['transaction', 'categories'],
+    props: ['transaction'],
 
     components: {
         // Tags,
-        CategorySelect
     },
 
     data(){
@@ -133,7 +136,8 @@ export default {
                 date: '',
                 description: '',
                 tags: [],
-                receipt: ''
+                receipt: '',
+                category: ''
             }
         }
     },
@@ -157,6 +161,7 @@ export default {
         this.form.name = this.transaction.name;
         this.form.date = this.transaction.date;
         this.form.description = this.transaction.description;
+        this.form.category = this.transaction.category_id;
     },
     
     methods: {
@@ -181,6 +186,7 @@ export default {
 
             formData.append( 'receipt', this.form.receipt );
             formData.append( 'tags', JSON.stringify( this.form.tags ) );
+            formData.append( 'category', this.form.category );
             formData.append( 'name', this.form.name );
             formData.append( 'date', this.form.date );
             formData.append( 'description', this.form.description );

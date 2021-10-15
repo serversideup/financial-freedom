@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <div class="sm:col-span-4">
-                    <button type="button" v-on:click="store()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-golden-grass-600 hover:bg-golden-grass-500 focus:outline-none focus:border-golden-grass-700 focus:shadow-outline-indigo active:bg-golden-grass-700 transition ease-in-out duration-150">
+                    <button type="button" v-on:click="store()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-golden-grass-600 hover:bg-golden-grass-500 focus:outline-none focus:border-golden-grass-700 focus:shadow-outline-blue active:bg-golden-grass-700 transition ease-in-out duration-150">
                         Add Account
                     </button>
                 </div>

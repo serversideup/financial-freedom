@@ -28,7 +28,7 @@
                                 Current Balance
                             </dt>
                             <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                                <div class="flex items-baseline text-2xl leading-8 font-semibold text-indigo-600">
+                                <div class="flex items-baseline text-2xl leading-8 font-semibold text-blue-600">
                                     $71,897.00
                                 </div>
                                 <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium leading-5 bg-green-100 text-green-800 md:mt-2 lg:mt-0">
@@ -51,7 +51,7 @@
                                 This Month
                             </dt>
                             <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                                <div class="flex items-baseline text-2xl leading-8 font-semibold text-indigo-600">
+                                <div class="flex items-baseline text-2xl leading-8 font-semibold text-blue-600">
                                     $350.00
                                 </div>
                                 <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium leading-5 bg-green-100 text-green-800 md:mt-2 lg:mt-0">
@@ -74,7 +74,7 @@
                                 Number of Transactions
                             </dt>
                             <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                                <div class="flex items-baseline text-2xl leading-8 font-semibold text-indigo-600">
+                                <div class="flex items-baseline text-2xl leading-8 font-semibold text-blue-600">
                                     23
                                 </div>
                                 <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800 md:mt-2 lg:mt-0">

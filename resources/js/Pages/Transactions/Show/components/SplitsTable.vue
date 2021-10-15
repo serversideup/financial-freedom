@@ -32,7 +32,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
                                             </svg>
                                             Splitting a transaction allows you to allocate your amount spent to your budget more precisely.
-                                            <button type="button" v-on:click="promptSplitTransaction()" class="mt-5 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-lochmara-600 hover:bg-lochmara-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            <button type="button" v-on:click="promptSplitTransaction()" class="mt-5 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                                 Split Transaction
                                             </button>
                                         </div>
@@ -58,7 +58,7 @@
 
                                 <tr v-show="transaction.splits.length > 0">
                                     <td colspan="4" class="text-right px-6 py-4">
-                                        <button type="button" v-on:click="promptSplitTransaction()" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-lochmara-600 hover:bg-lochmara-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <button type="button" v-on:click="promptSplitTransaction()" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                             Split Transaction
                                         </button>
                                     </td>

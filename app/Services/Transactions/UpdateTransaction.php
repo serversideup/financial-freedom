@@ -14,6 +14,7 @@ class UpdateTransaction
     private $date;
     private $description;
     private $receipt;
+    private $category;
     private $tags;
     
     public function __construct( $transactionID, $data )
@@ -30,6 +31,7 @@ class UpdateTransaction
         $this->transaction->name = $this->name;
         $this->transaction->date = $this->date;
         $this->transaction->description = $this->description;
+        $this->transaction->category_id = $this->category;
         
         $this->tagTransaction();
 
@@ -65,6 +67,7 @@ class UpdateTransaction
         $this->date = isset( $data['date'] ) ? $data['date'] : '';
         $this->description = isset( $data['description'] ) ? $data['description'] : '';
         $this->receipt = isset( $data['receipt'] ) ? $data['receipt'] : '';
+        $this->category = isset( $data['category'] ) ? $data['category'] : null;
         $this->tags = isset( $data['tags'] ) ? json_decode( $data['tags'] ) : null;
     }
 }

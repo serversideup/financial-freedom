@@ -149,7 +149,7 @@
                                         {{ transaction.category ? transaction.category.name : '' }}
                                     </td>
                                     <td v-if="columns.indexOf('edit') > -1" class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                        <Link :href="'/transactions/'+transaction.id" class="text-lochmara-600 hover:text-lochmara-900">Edit</Link>
+                                        <Link :href="'/transactions/'+transaction.id" class="text-blue-600 hover:text-blue-900">Edit</Link>
                                     </td>
                                 </tr>
                             </tbody>

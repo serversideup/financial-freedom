@@ -24,15 +24,8 @@ class TransactionsController extends Controller
     }
 
     public function index()
-    {
-        $categories = Category::with('subCategories')
-                              ->where('parent_id', '=', null)
-                              ->orderBy('name')
-                              ->get();
-                              
-        return Inertia::render('Transactions/Index', [
-            'categories' => $categories
-        ]);
+    {                              
+        return Inertia::render('Transactions/Index');
     }
 
     public function import()

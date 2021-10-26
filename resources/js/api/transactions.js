@@ -7,6 +7,10 @@ export default {
         });
     },
 
+    show( transaction ){
+        return axios.get('/api/v1/transactions/'+transaction);
+    },
+
     update( transaction, data ){
         return axios.post('/api/v1/transactions/'+transaction, data);
     },
@@ -16,6 +20,10 @@ export default {
             transactions: transactions,
             account: account
         });
+    },
+
+    split( transaction, split ){
+        return axios.post( '/api/v1/transactions/'+transaction+'/splits', split );
     },
 
     store( transaction ){

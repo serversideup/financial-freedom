@@ -40,6 +40,7 @@ class LoadTransactions{
         $this->filterDateRange();
         $this->filterAccount();
         $this->filterTags();
+        $this->filterCategory();
         $this->filterDirection();
         $this->filterUser();
         $this->addAccount();
@@ -88,6 +89,13 @@ class LoadTransactions{
         }
     }
 
+    private function filterCategory()
+    {
+        if( $this->category != 'all' ){
+            $this->query->where('category_id', '=', $this->category);
+        }
+    }
+
     private function filterDirection()
     {
         if( $this->direction != 'all' ){
@@ -117,7 +125,7 @@ class LoadTransactions{
     private function addSplits()
     {
         $this->query->with(['splits' => function( $query ){
-            $query->with('tags');
+            $query->with('category');
         }]);
     }
 
@@ -139,6 +147,10 @@ class LoadTransactions{
         $this->tags = isset( $data['tags'] )
                         ? explode(',', $data['tags'])
                         : [];
+
+        $this->category = isset( $data['category'] )
+                            ? $data['category']
+                            : 'all';
 
         $this->startDate = isset( $data['start_date'] )
                            ? date('Y-m-d', strtotime( $data['start_date'] ) ) 

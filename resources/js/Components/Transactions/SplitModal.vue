@@ -15,19 +15,14 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-6">
                 <div class="sm:col-span-3">
                     <div>
-                        <label for="amount" class="block text-sm font-medium leading-5 text-gray-700">Amount</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5">
-                                    $
-                                </span>
-                            </div>
-                            <input id="amount" v-model="form.amount" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
-                                    USD
-                                </span>
-                            </div>
+                        <label for="amount" class="block text-sm font-medium text-gray-700">
+                            Amount
+                        </label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                $
+                            </span>
+                            <input type="text" name="amount" id="amount" v-model="form.amount" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
                     </div>
                 </div>
@@ -39,31 +34,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="sm:col-span-6">
+                <div class="sm:col-span-3">
                     <label for="name" class="block text-sm font-medium leading-5 text-gray-700">
                         Name
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.name" id="account-number" type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <input v-model="form.name" type="text" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300">
                     </div>
                 </div>
-                <div class="sm:col-span-6">
+                <div class="sm:col-span-3">
                     <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
-                        Tags
+                        Category
                     </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <tags
-                            :unique="'transaction-split-tags'"
-                            :existing="form.tags"
-                            />
-                    </div>
+                    <select id="category" v-model="form.category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <option value=""></option>
+                        <option v-for="category in $page.props.categories"
+                            :key="'category-'+category.id"
+                            v-bind:value="category.id"
+                            v-text="( category.parent_id != null ? ' - ' : '' )+category.name"/>
+                    </select>
                 </div>
                 <div class="sm:col-span-6">
                     <label for="description" class="block text-sm font-medium leading-5 text-gray-700">
                         Description
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <textarea id="description" v-model="form.description" rows="3" class="form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+                        <textarea id="description" v-model="form.description" rows="3" class="rounded-md shadow-sm block w-full border-gray-300"></textarea>
                     </div>
                 </div>
             </div>
@@ -81,7 +77,7 @@
 
 <script>
 import AppModal from '../../Components/Global/AppModal.vue';
-import Tags from './Tags.vue';
+import TransactionsAPI from '@/api/transactions.js';
 import { EventBus } from '../../event-bus.js';
 import { FormatMoney } from '../../Mixins/formatMoney';
 
@@ -89,8 +85,7 @@ export default {
     props: ['transaction'],
 
     components: {
-        AppModal,
-        Tags
+        AppModal
     },
 
     mixins: [
@@ -105,7 +100,7 @@ export default {
                 amount: 0.00,
                 name: '',
                 description: '',
-                tags: []
+                category: ''
             }
         }
     },
@@ -146,10 +141,17 @@ export default {
         },
 
         splitTransaction(){
-            this.form.tags = JSON.stringify( this.form.tags );
-            
-            this.$inertia.post('/transactions/'+this.transaction.id+'/splits', this.form )
+            TransactionsAPI.split( this.transaction.id, this.form )
                 .then( function( response ){
+                    EventBus.emit('notify', {
+                        type: 'success',
+                        title: 'Transaction Split',
+                        message: 'Your transaction has been split',
+                        action: 'close'
+                    } );
+
+                    EventBus.emit('reload-transaction');
+
                     this.closeModal();
                 }.bind(this));
         },
@@ -159,7 +161,7 @@ export default {
             this.form.amount = 0.00;
             this.form.name = '';
             this.form.description = '';
-            this.form.tags = [];
+            this.form.category = '';
         }
     }
 }

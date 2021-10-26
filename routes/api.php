@@ -103,9 +103,11 @@ Route::put('/v1/allocations', [AllocationsController::class, 'update']);
  * Transaction Endpoints
  */
 Route::get('/v1/transactions', [TransactionsController::class, 'index']);
+Route::get('/v1/transactions/{transaction}', [TransactionsController::class, 'show']);
 Route::post('/v1/transactions/import', [TransactionsController::class, 'import']);
 Route::post('/v1/transactions', [TransactionsController::class, 'store']);
 Route::put('/v1/transactions/{transaction}', [TransactionsController::class, 'update']);
+Route::post('/v1/transactions/{transaction}/splits', [TransactionsController::class, 'split']);
 
 Route::get('/v1/tags', [TagsController::class, 'index']);
 Route::put('/v1/tags/{tag}', [TagsController::class, 'update']);

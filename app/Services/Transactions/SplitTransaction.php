@@ -4,8 +4,6 @@ namespace App\Services\Transactions;
 
 use App\Models\Transactions\Transaction;
 use App\Models\Transactions\Split;
-use App\Services\Tags\GetTag;
-use Auth;
 
 class SplitTransaction
 {
@@ -14,7 +12,7 @@ class SplitTransaction
     private $name;
     private $description;
     private $split;
-    private $tags;
+    private $category;
 
     public function __construct( $data, $transactionID )
     {
@@ -24,7 +22,6 @@ class SplitTransaction
     public function split()
     {
         $this->createSplit();
-        $this->tagSplit();
 
         return $this->split;
     }
@@ -37,24 +34,9 @@ class SplitTransaction
         $this->split->amount = $this->amount;
         $this->split->name = $this->name;
         $this->split->description = $this->description;
+        $this->split->category_id = $this->category;
 
         $this->split->save();
-    }
-
-    private function tagSplit()
-    {
-        if( $this->tags ){
-            $syncTags = [];
-
-            foreach( $this->tags as $submittedTag ){
-                $getTag = new GetTag( $submittedTag->name, Auth::user() );
-                $tag = $getTag->get();
-
-                array_push( $syncTags, $tag->id );
-            }
-
-            $this->split->tags()->sync( $syncTags );
-        }
     }
 
     private function syncLocal( $data, $transactionID )
@@ -65,5 +47,6 @@ class SplitTransaction
         $this->name = $data['name'];
         $this->description = $data['description'];
         $this->tags = isset( $data['tags'] ) ? json_decode( $data['tags'] ) : null;
+        $this->category = $data['category'];
     }
 }

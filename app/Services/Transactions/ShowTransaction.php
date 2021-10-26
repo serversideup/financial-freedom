@@ -48,7 +48,7 @@ class ShowTransaction
     private function addSplits()
     {
         $this->query->with(['splits' => function( $query ){
-            $query->with('tags');
+            $query->with('category');
         }]);
     }
 

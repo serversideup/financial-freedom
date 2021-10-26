@@ -60,7 +60,7 @@
                         Name
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.name" id="account-number" type="text" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300">
+                        <input v-model="form.name" type="text" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300">
                     </div>
                 </div>
                 <div class="sm:col-span-6">

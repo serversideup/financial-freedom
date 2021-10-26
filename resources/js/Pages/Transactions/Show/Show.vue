@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class="mx-auto max-w-screen-md mb-5">
+        <div class="mx-auto max-w-screen-md mb-5" v-if="transactionLoaded">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="flex items-center space-x-4">
                     <li>
@@ -34,7 +34,7 @@
             </nav>
         </div>
 
-        <div>
+        <div v-if="transactionLoaded">
             <div class="mt-2 md:flex md:items-center md:justify-between">
                 <div class="max-w-screen-md mx-auto w-full flex justify-between">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
@@ -50,14 +50,17 @@
 
         <breakdown
             :transaction="transaction"
-            :categories="categories"/>
+            :categories="categories"
+            v-if="transactionLoaded"/>
         
         <splits-table
             :transaction="transaction"
-            v-show="transaction.direction == 'outflow'"/>
+            v-show="transaction.direction == 'outflow'"
+            v-if="transactionLoaded"/>
 
         <split-modal
-            :transaction="transaction"/>
+            :transaction="transaction"
+            v-if="transactionLoaded"/>
 
         <!--<items-table
             :items="''"/> -->
@@ -72,12 +75,20 @@
     import SplitModal from '../../../Components/Transactions/SplitModal.vue';
     import AppLayout from './../../../Layouts/AppLayout'
     import { FormatMoney } from '../../../Mixins/formatMoney';
+    import { EventBus } from '@/event-bus.js';
+    import TransactionsAPI from '@/api/transactions.js';
 
     export default {
         props: [
-            'transaction',
             'categories'
         ],
+
+        data(){
+            return {
+                transaction: {},
+                transactionLoaded: false
+            }
+        },
 
         mixins: [
             FormatMoney
@@ -91,9 +102,25 @@
             SplitModal
         },
 
+        mounted(){
+            EventBus.on('reload-transaction', function(){
+                this.loadTransaction();
+            }.bind(this));
+
+            this.loadTransaction();
+        },
+
         methods: {
             formatDate( date ){
                 return moment( date, 'YYYY-MM-DD' ).format('L');
+            },
+
+            loadTransaction(){
+                TransactionsAPI.show( this.$page.props.transaction.id )
+                    .then( function( response ){
+                        this.transaction = response.data;
+                        this.transactionLoaded = true;
+                    }.bind(this));
             }
         }
     }

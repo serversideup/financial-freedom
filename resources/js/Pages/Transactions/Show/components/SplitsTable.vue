@@ -16,7 +16,7 @@
                                         Amount
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Tags
+                                        Category
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         
@@ -44,13 +44,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ split.name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatMoney( split.amount ) }}</td>
                                     <td>
-                                        <span v-for="(tag, key) in split.tags"
-                                            v-bind:key="'transaction-split-tag-'+key"
+                                        <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
                                             v-bind:class="[
-                                                'bg-'+tag.color+'-100', 'text-'+tag.color+'-800'
+                                                'bg-'+split.category.color+'-100', 'text-'+split.category.color+'-800'
                                             ]">
-                                            {{ tag.name }}
+                                                {{ split.category.name }}
                                         </span>
                                     </td>
                                     <td>Edit</td>

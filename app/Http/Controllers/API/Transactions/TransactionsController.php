@@ -8,6 +8,8 @@ use App\Services\Transactions\UpdateTransaction;
 use App\Services\Transactions\AddTransaction;
 use App\Services\Transactions\LoadTransactions;
 use App\Services\Transactions\ImportTransactions;
+use App\Services\Transactions\ShowTransaction;
+use App\Services\Transactions\SplitTransaction;
 
 use Auth;
 use Request;
@@ -23,6 +25,12 @@ class TransactionsController extends Controller
     {
         $transactions = ( new LoadTransactions( Auth::user(), Request::all() ) )->load();
         return response()->json( $transactions );
+    }
+
+    public function show( Transaction $transaction )
+    {
+        $transaction = ( new ShowTransaction( Auth::user(), $transaction->id ) )->show();
+        return response()->json( $transaction );
     }
 
     public function import()
@@ -41,6 +49,14 @@ class TransactionsController extends Controller
     {
         $updateTransaction = new UpdateTransaction( $transaction->id, Request::all() );
         $updateTransaction->update();
+
+        return response()->json(null, 204);
+    }
+
+    public function split( Transaction $transaction )
+    {
+        $splitTransaction = new SplitTransaction( Request::all(), $transaction->id );
+        $splitTransaction->split();
 
         return response()->json(null, 204);
     }

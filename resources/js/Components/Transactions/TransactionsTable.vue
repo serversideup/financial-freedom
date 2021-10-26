@@ -155,6 +155,17 @@
                                                     {{ transaction.category.name }}
                                             </span>
                                         </div>
+                                        <div v-if="transaction.is_split">
+                                            <span
+                                                v-for="split in transaction.splits"
+                                                v-bind:key="'transaction-split-'+split.id"
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
+                                                v-bind:class="[
+                                                    'bg-'+split.category.color+'-100', 'text-'+split.category.color+'-800'
+                                                ]">
+                                                    {{ split.category.name }}
+                                            </span>
+                                        </div>
                                     </td>
                                     <td v-if="columns.indexOf('edit') > -1" class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                                         <Link :href="'/transactions/'+transaction.id" class="text-blue-600 hover:text-blue-900">Edit</Link>

@@ -17,7 +17,7 @@
                         Name
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.name" id="account-number" type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <input v-model="form.name" id="account-number" type="text" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300">
                     </div>
                 </div>
                 <div class="sm:col-span-6">
@@ -25,24 +25,17 @@
                         Description
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <textarea id="description" v-model="form.description" rows="3" class="form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+                        <textarea id="description" v-model="form.description" rows="3" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"></textarea>
                     </div>
                 </div>
                 <div class="sm:col-span-6">
                     <div>
                         <label for="amount" class="block text-sm font-medium leading-5 text-gray-700">Amount</label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5">
-                                    $
-                                </span>
-                            </div>
-                            <input id="amount" v-model="form.amount" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
-                                    USD
-                                </span>
-                            </div>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                $
+                            </span>
+                            <input type="text" name="amount" id="amount" v-model="form.amount" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
                     </div>
                 </div>

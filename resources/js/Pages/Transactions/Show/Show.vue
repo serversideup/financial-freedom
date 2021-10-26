@@ -52,14 +52,14 @@
             :transaction="transaction"
             :categories="categories"/>
         
-        <!-- <splits-table
+        <splits-table
             :transaction="transaction"
             v-show="transaction.direction == 'outflow'"/>
 
         <split-modal
             :transaction="transaction"/>
 
-        <items-table
+        <!--<items-table
             :items="''"/> -->
         
     </app-layout>

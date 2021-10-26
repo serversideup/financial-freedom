@@ -58,7 +58,6 @@ Route::post('/v1/accounts', [AccountsController::class, 'store']);
  */
 Route::get('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::put('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'update']);
-
 Route::get('/v1/savings-accounts/{savingsAccount}/transactions', [SavingsAccountsTransactionsController::class, 'index']);
 
 /**
@@ -66,9 +65,7 @@ Route::get('/v1/savings-accounts/{savingsAccount}/transactions', [SavingsAccount
  */
 Route::get('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'show']);
 Route::put('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'update']);
-
 Route::get('/v1/cash-accounts/{cashAccount}/allocations', [CashAccountsAllocationsController::class, 'index']);
-
 Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransactionsController::class, 'index']);
 
 /**
@@ -76,9 +73,7 @@ Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransact
  */
 Route::get('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 Route::put('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'update']);
-
 Route::get('/v1/checking-accounts/{checkingAccount}/allocations', [CheckingAccountsAllocationsController::class, 'index']);
-
 Route::get('/v1/checking-accounts/{checkingAccount}/transactions', [CheckingAccountsTransactionsController::class, 'index']);
 
 /**
@@ -94,7 +89,6 @@ Route::get('/v1/loans/{loan}/transactions', [LoansTransactionsController::class,
  */
 Route::get('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'show']);
 Route::put('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'update']);
-
 Route::get('/v1/credit-cards/{creditCard}/transactions', [CreditCardsTransactionsController::class, 'index']);
 
 /**
@@ -105,8 +99,13 @@ Route::post('/v1/allocations', [AllocationsController::class, 'store']);
 Route::delete('/v1/allocations/{allocation}', [AllocationsController::class, 'delete']);
 Route::put('/v1/allocations', [AllocationsController::class, 'update']);
 
+/**
+ * Transaction Endpoints
+ */
 Route::get('/v1/transactions', [TransactionsController::class, 'index']);
 Route::post('/v1/transactions/import', [TransactionsController::class, 'import']);
+Route::post('/v1/transactions', [TransactionsController::class, 'store']);
+Route::put('/v1/transactions/{transaction}', [TransactionsController::class, 'update']);
 
 Route::get('/v1/tags', [TagsController::class, 'index']);
 Route::put('/v1/tags/{tag}', [TagsController::class, 'update']);

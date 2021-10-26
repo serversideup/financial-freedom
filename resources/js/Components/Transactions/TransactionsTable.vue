@@ -105,10 +105,10 @@
                                     </td>
                                     <td v-if="columns.indexOf('amount') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-500">
                                         <div class="flex justify-between items-center">
-                                            <span v-if="transaction.direction == 'outflow'" class="text-red-900">
+                                            <span v-if="transaction.direction == 'outflow'" class="text-red-500">
                                                 -{{ formatMoney( transaction.amount ) }}
                                             </span>
-                                            <span v-if="transaction.direction == 'inflow'" class="text-green-900">
+                                            <span v-if="transaction.direction == 'inflow'" class="text-green-500">
                                                 {{ formatMoney( transaction.amount ) }}
                                             </span>
                                         </div>

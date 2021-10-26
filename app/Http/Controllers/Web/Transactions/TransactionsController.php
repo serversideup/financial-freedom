@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Web\Transactions;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transactions\Transaction;
-use App\Models\Categories\Category;
+
 use App\Services\Transactions\AddTransaction;
 use App\Services\Transactions\ShowTransaction;
-use App\Services\Transactions\UpdateTransaction;
 use App\Services\Accounts\LoadAccounts;
+
 use Inertia\Inertia;
 use Auth;
 use Request;
@@ -42,14 +42,8 @@ class TransactionsController extends Controller
         $showTransaction = new ShowTransaction( Auth::user(), $transaction->id );
         $transaction = $showTransaction->show();
 
-        $categories = Category::with('subCategories')
-                              ->where('parent_id', '=', null)
-                              ->orderBy('name')
-                              ->get();
-
         return Inertia::render('Transactions/Show/Show', [
-            'transaction' => $transaction,
-            'categories' => $categories
+            'transaction' => $transaction
         ]);
     }
 
@@ -59,13 +53,5 @@ class TransactionsController extends Controller
         $addTransaction->store();
 
         return redirect('/transactions');
-    }
-
-    public function update( Transaction $transaction )
-    {
-        $updateTransaction = new UpdateTransaction( $transaction->id, Request::all() );
-        $updateTransaction->update();
-
-        return redirect('/transactions/'.$transaction->id);
     }
 }

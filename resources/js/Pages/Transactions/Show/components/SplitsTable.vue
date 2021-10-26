@@ -73,8 +73,8 @@
 </template>
 
 <script>
-    import { EventBus } from '../../../../event-bus.js';
-    import { FormatMoney } from '../../../../Mixins/formatMoney.js';
+    import { EventBus } from '@/event-bus.js';
+    import { FormatMoney } from '@/Mixins/formatMoney.js';
 
     export default {
         props: ['transaction'],

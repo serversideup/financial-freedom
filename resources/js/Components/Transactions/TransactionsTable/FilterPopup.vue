@@ -38,14 +38,12 @@
 <script>
 import { EventBus } from '../../../event-bus.js';
 import Tags from '../Tags.vue';
-import CategorySelect from '@/Components/Global/CategorySelect.vue';
 
 export default {
     props: ['show', 'categories'],
 
     components: {
-        Tags,
-        CategorySelect
+        Tags
     },
 
     data(){

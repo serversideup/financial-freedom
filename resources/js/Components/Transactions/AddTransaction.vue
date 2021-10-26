@@ -107,7 +107,6 @@ import { EventBus } from '@/event-bus.js';
 
 import AppModal from '@/Components/Global/AppModal.vue';
 import AccountsAPI from '@/api/accounts.js';
-import CategorySelect from '@/Components/Global/CategorySelect.vue';
 import AccountSelect from '@/Components/Global/AccountSelect.vue';
 import TagsAPI from '@/api/tags.js';
 
@@ -118,7 +117,6 @@ export default {
 
     components: {
         AppModal,
-        CategorySelect,
         AccountSelect
     },
 

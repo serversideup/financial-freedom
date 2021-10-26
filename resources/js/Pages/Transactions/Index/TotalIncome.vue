@@ -27,7 +27,7 @@
         ],
 
         computed: {
-            ...mapState('transactions', {
+            ...mapState('transactions/table', {
                 transactions: state => state.transactions
             })
         },

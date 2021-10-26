@@ -22,7 +22,7 @@ export const importProcess = {
 
         setTransactions( state, transactions ){
             state.transactions = transactions;
-        },
+        }
     },
 
     getters: {

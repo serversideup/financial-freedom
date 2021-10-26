@@ -38,12 +38,12 @@
                         Category
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <select id="category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <select id="category" v-model="form.category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                             <option value=""></option>
                             <option v-for="category in $page.props.categories"
                                 :key="'category-'+category.id"
                                 v-bind:value="category.id"
-                                v-text="category.name"/>
+                                v-text="( category.parent_id != null ? ' - ' : '' )+category.name"/>
                         </select>
                     </dd>
                 </div>
@@ -120,6 +120,9 @@
 
 <script>
 import moment from 'moment';
+import { EventBus } from '@/event-bus.js';
+import TransactionsAPI from '@/api/transactions.js';
+
 // import Tags from '../../../../Components/Transactions/Tags.vue';
 
 export default {
@@ -192,7 +195,15 @@ export default {
             formData.append( 'description', this.form.description );
             formData.append( '_method', 'PUT' );
 
-            this.$inertia.post('/transactions/'+this.transaction.id, formData);
+            TransactionsAPI.update( this.transaction.id, formData )
+                .then( function( response ){
+                    EventBus.emit('notify', {
+                        type: 'success',
+                        title: 'Transaction Updated',
+                        message: 'Your transaction has been updated',
+                        action: 'close'
+                    } );
+                });
         }
     }
 }

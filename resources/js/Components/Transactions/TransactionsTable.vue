@@ -146,7 +146,15 @@
                                         </div>
                                     </td>
                                     <td v-if="columns.indexOf('category') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                                        {{ transaction.category ? transaction.category.name : '' }}
+                                        <div v-if="!transaction.is_split">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
+                                                v-bind:class="[
+                                                    'bg-'+transaction.category.color+'-100', 'text-'+transaction.category.color+'-800'
+                                                ]">
+                                                    {{ transaction.category.name }}
+                                            </span>
+                                        </div>
                                     </td>
                                     <td v-if="columns.indexOf('edit') > -1" class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                                         <Link :href="'/transactions/'+transaction.id" class="text-blue-600 hover:text-blue-900">Edit</Link>

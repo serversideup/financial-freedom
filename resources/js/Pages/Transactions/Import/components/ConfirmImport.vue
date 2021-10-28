@@ -102,6 +102,7 @@
 /**
  * @todo Make individual row
  * @todo allow for individual entry on transaction
+ * @todo allow for automatica account deductions
  
  */
     import Papa from 'papaparse';

@@ -1,7 +1,7 @@
 <template>
     <app-modal :size="'medium'" :show="show">
         <template v-slot:image>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-lochmara-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
         </template>
@@ -55,10 +55,10 @@
             </form>
         </template>
         <template v-slot:footer>
-            <button @click="cancel()" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lochmara-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+            <button @click="cancel()" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                 Cancel
             </button>
-            <button @click="updateAccount()" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-lochmara-600 text-base font-medium text-white hover:bg-lochmara-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+            <button @click="updateAccount()" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
                 Update
             </button>
         </template>
@@ -96,7 +96,7 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('prompt-edit-account', function( data ){
+            EventBus.on('prompt-edit-account', function( data ){
                 this.show = true;
 
                 this.id = data.id;
@@ -106,7 +106,7 @@ export default {
                 this.form.current_balance = data.current_balance;
             }.bind(this));
 
-            EventBus.$on('close-modal', function(){
+            EventBus.on('close-modal', function(){
                 this.show = false;
                 this.resetForm();
             }.bind(this));
@@ -115,14 +115,14 @@ export default {
         updateAccount(){
             LoansAPI.update( this.id, this.form )
                 .then( function(){
-                    EventBus.$emit('notify', {
+                    EventBus.emit('notify', {
                         type: 'success',
                         title: 'Account Updated',
                         message: 'Your account has been successfully updated!',
                         action: 'close'
                     });
 
-                    EventBus.$emit('loan-updated');
+                    EventBus.emit('loan-updated');
 
                     this.show = false;
                     this.resetForm();

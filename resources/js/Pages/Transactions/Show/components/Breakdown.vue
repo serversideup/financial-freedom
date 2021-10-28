@@ -14,7 +14,7 @@
                         Name
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.name"/>
+                        <input type="text" class="rounded-md shadow-sm w-full border-gray-300" v-model="form.name"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -22,7 +22,7 @@
                         Date
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.date"/>
+                        <input type="text" class="rounded-md shadow-sm w-full border-gray-300" v-model="form.date"/>
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,10 +30,24 @@
                         Description
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input type="text" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5" v-model="form.description"/>
+                        <input type="text" class="rounded-md shadow-sm w-full border-gray-300" v-model="form.description"/>
                     </dd>
                 </div>
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div v-if="!transaction.is_split" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Category
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <select id="category" v-model="form.category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <option value=""></option>
+                            <option v-for="category in $page.props.categories"
+                                :key="'category-'+category.id"
+                                v-bind:value="category.id"
+                                v-text="( category.parent_id != null ? ' - ' : '' )+category.name"/>
+                        </select>
+                    </dd>
+                </div>
+                <!-- <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Tags
                     </dt>
@@ -57,7 +71,7 @@
                             <span class="text-xs italic">Transaction is split, tags are from splits.</span>
                         </div>
                     </dd>
-                </div>
+                </div> -->
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Receipt
@@ -65,7 +79,7 @@
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" v-show="transaction.receipt_url == null && form.receipt == ''">
                         <div class="flex-shrink-0">
                             <input type="file" id="receipt" ref="receipt" v-on:change="handleReceiptUpload()"/>
-                            <a v-on:click="selectReceipt()" class="cursor-pointer font-medium text-lochmara-600 hover:text-lochmara-500">
+                            <a v-on:click="selectReceipt()" class="cursor-pointer font-medium text-blue-600 hover:text-blue-500">
                                 Upload Receipt
                             </a>
                         </div>
@@ -86,7 +100,7 @@
                                     </span>
                                 </div>
                                 <div class="ml-4 flex-shrink-0">
-                                    <a :href="'/transactions/'+transaction.id+'/receipt'" target="_blank" v-on:click="viewReceipt()" class="font-medium text-lochmara-600 hover:text-lochmara-500">
+                                    <a :href="'/transactions/'+transaction.id+'/receipt'" target="_blank" v-on:click="viewReceipt()" class="font-medium text-blue-600 hover:text-blue-500">
                                         View
                                     </a>
                                 </div>
@@ -95,7 +109,7 @@
                     </dd>
                 </div>
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
-                    <button type="button" v-on:click="saveChanges()" class="px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-lochmara-600 hover:bg-lochmara-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button type="button" v-on:click="saveChanges()" class="px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         Save Changes
                     </button>
                 </div>
@@ -106,13 +120,16 @@
 
 <script>
 import moment from 'moment';
-import Tags from '../../../../Components/Transactions/Tags.vue';
+import { EventBus } from '@/event-bus.js';
+import TransactionsAPI from '@/api/transactions.js';
+
+// import Tags from '../../../../Components/Transactions/Tags.vue';
 
 export default {
-    props: ['transaction', 'csrf'],
+    props: ['transaction'],
 
     components: {
-        Tags
+        // Tags,
     },
 
     data(){
@@ -122,7 +139,8 @@ export default {
                 date: '',
                 description: '',
                 tags: [],
-                receipt: ''
+                receipt: '',
+                category: ''
             }
         }
     },
@@ -146,6 +164,7 @@ export default {
         this.form.name = this.transaction.name;
         this.form.date = this.transaction.date;
         this.form.description = this.transaction.description;
+        this.form.category = this.transaction.category_id;
     },
     
     methods: {
@@ -170,12 +189,21 @@ export default {
 
             formData.append( 'receipt', this.form.receipt );
             formData.append( 'tags', JSON.stringify( this.form.tags ) );
+            formData.append( 'category', this.form.category );
             formData.append( 'name', this.form.name );
             formData.append( 'date', this.form.date );
             formData.append( 'description', this.form.description );
             formData.append( '_method', 'PUT' );
 
-            this.$inertia.post('/transactions/'+this.transaction.id, formData);
+            TransactionsAPI.update( this.transaction.id, formData )
+                .then( function( response ){
+                    EventBus.emit('notify', {
+                        type: 'success',
+                        title: 'Transaction Updated',
+                        message: 'Your transaction has been updated',
+                        action: 'close'
+                    } );
+                });
         }
     }
 }

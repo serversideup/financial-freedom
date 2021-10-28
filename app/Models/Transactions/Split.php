@@ -20,4 +20,9 @@ class Split extends Model
     {
         return $this->belongsTo('App\Models\Transactions\Transaction', 'transaction_id', 'id');
     }
+
+    public function category()
+    {
+        return $this->hasOne('App\Models\Categories\Category', 'id', 'category_id');
+    }
 }

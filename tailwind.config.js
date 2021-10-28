@@ -39,19 +39,6 @@ module.exports = {
                     900: '#3F310C',
                 }, 
             
-                'lochmara': {
-                    50: '#F6F8FC',
-                    100: '#ECF2F9',
-                    200: '#D0DEF1',
-                    300: '#B3CBE9',
-                    400: '#7BA3D8',
-                    500: '#427CC7',
-                    600: '#3B70B3',
-                    700: '#284A77',
-                    800: '#1E385A',
-                    900: '#14253C',
-                }, 
-            
                 'himalaya': {
                     50: '#F7F7F4',
                     100: '#F0EFE8',
@@ -81,5 +68,7 @@ module.exports = {
         opacity: ['responsive', 'hover', 'focus', 'disabled'],
     },
 
-    plugins: [require('@tailwindcss/ui')],
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
 };

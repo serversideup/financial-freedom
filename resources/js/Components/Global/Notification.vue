@@ -21,7 +21,7 @@
                                 <p class="mt-1 text-sm text-gray-500" v-text="message"></p>
                             </div>
                             <div class="ml-4 flex-shrink-0 flex">
-                                <button v-on:click="runAction()" class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button v-on:click="runAction()" class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                     <span class="sr-only">Close</span>
                                     <!-- Heroicon name: solid/x -->
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -56,7 +56,7 @@ export default {
 
     methods: {
         bindEvents(){
-            EventBus.$on('notify', function( data ){
+            EventBus.on('notify', function( data ){
                 this.handleNotification( data );
             }.bind(this));
         },

@@ -54,12 +54,12 @@
                                 <div class="mt-8 border-t border-gray-200 pt-5">
                                     <div class="flex justify-end">
                                         <span class="inline-flex rounded-md shadow-sm">
-                                            <inertia-link href="/admin/institutions/" class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                                            <Link href="/admin/institutions/" class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
                                                 Cancel
-                                            </inertia-link>
+                                            </Link>
                                         </span>
                                         <span class="ml-3 inline-flex rounded-md shadow-sm">
-                                            <button type="button" v-on:click="update()" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                            <button type="button" v-on:click="update()" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
                                                 Update
                                             </button>
                                         </span>
@@ -76,6 +76,7 @@
 
 <script>
     import AppLayout from './../../../Layouts/AppLayout'
+    import { Link } from '@inertiajs/inertia-vue3';
 
     export default {
         props: [
@@ -102,7 +103,8 @@
         },
 
         components: {
-            AppLayout
+            AppLayout,
+            Link
         },
 
         methods: {

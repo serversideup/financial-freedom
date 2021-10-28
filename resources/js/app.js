@@ -1,35 +1,51 @@
-require('./bootstrap');
+window._ = require('lodash');
 
-import Vue from 'vue';
-import Vuex from 'vuex'
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
 
-import { InertiaApp } from '@inertiajs/inertia-vue';
-import { InertiaForm } from 'laravel-jetstream';
-import PortalVue from 'portal-vue';
+window.axios = require('axios');
 
-Vue.use(InertiaApp);
-Vue.use(InertiaForm);
-Vue.use(PortalVue);
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-Vue.use(Vuex);
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
 
-const app = document.getElementById('app');
+// import Echo from 'laravel-echo';
+
+// window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     forceTLS: true
+// });
+
+import { createApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { createStore } from 'vuex';
 
 import { transactions } from './Modules/transactions/transactions.js';
 
-const store = new Vuex.Store({
+const store = createStore({
     modules: {
         transactions
     }
-})
+});
 
-new Vue({
-    store,
-    render: (h) =>
-        h(InertiaApp, {
-            props: {
-                initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: (name) => require(`./Pages/${name}`).default,
-            },
-        }),
-}).$mount(app);
+createInertiaApp({
+    resolve: name => require(`./Pages/${name}`),
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+        .use(plugin)
+        .use(store)
+        .mixin({ methods: { route: window.route } })
+        .mount(el)
+    },
+})

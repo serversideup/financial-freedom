@@ -113,7 +113,7 @@
                         <nav class="flex-1 bg-white space-y-1">
                             <jet-nav-link href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
                                 <!-- Heroicon name: home -->
-                                <svg class="h-5 w-5 text-astronaut-500 group-hover:text-astronaut-500 group-focus:text-astronaut-600 transition ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-5 w-5 text-astronaut-400 group-hover:text-astronaut-500 group-focus:text-astronaut-500 transition ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                 </svg>
                                 Dashboard
@@ -197,7 +197,7 @@
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                                     </svg>
                                 </div>
-                                <input id="search_field" class="block w-full h-full pl-8 pr-3 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 sm:text-sm" placeholder="Search" type="search">
+                                <input id="search_field" class="block border-0 w-full h-full pl-8 pr-3 py-2 rounded-md text-gray-900 placeholder-gray-500 outline-none focus:ring-0 focus:placeholder-gray-400 focus:shadow-none sm:text-sm" placeholder="Search" type="search">
                             </div>
                         </form>
                     </div>
@@ -212,7 +212,7 @@
                        <jet-dropdown align="right" width="48">
                             <template #trigger>
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                    <img class="h-8 w-8 rounded-full object-cover" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
+                                    <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                                 </button>
                             </template>
 
@@ -226,11 +226,11 @@
                                     Profile
                                 </jet-dropdown-link>
 
-                                <jet-dropdown-link href="/user/api-tokens" v-if="$page.jetstream.hasApiFeatures">
+                                <jet-dropdown-link href="/user/api-tokens" v-if="$page.props.jetstream.hasApiFeatures">
                                     API Tokens
                                 </jet-dropdown-link>
 
-                                <div v-if="$page.user.permission == 'admin'">
+                                <div v-if="$page.props.user.permission == 'admin'">
                                     <div class="border-t border-gray-200"></div>
 
                                     <div class="block px-4 py-2 text-xs text-gray-400">
@@ -245,17 +245,17 @@
                                 <div class="border-t border-gray-100"></div>
 
                                 <!-- Team Management -->
-                                <template v-if="$page.jetstream.hasTeamFeatures">
+                                <template v-if="$page.props.jetstream.hasTeamFeatures">
                                     <div class="block px-4 py-2 text-xs text-gray-400">
                                         Manage Team
                                     </div>
 
                                     <!-- Team Settings -->
-                                    <jet-dropdown-link :href="'/teams/' + $page.user.current_team.id">
+                                    <jet-dropdown-link :href="'/teams/' + $page.props.user.current_team.id">
                                         Team Settings
                                     </jet-dropdown-link>
 
-                                    <jet-dropdown-link href="/teams/create" v-if="$page.jetstream.canCreateTeams">
+                                    <jet-dropdown-link href="/teams/create" v-if="$page.props.jetstream.canCreateTeams">
                                         Create New Team
                                     </jet-dropdown-link>
 
@@ -266,11 +266,11 @@
                                         Switch Teams
                                     </div>
 
-                                    <template v-for="team in $page.user.all_teams">
+                                    <template v-for="team in $page.props.user.all_teams">
                                         <form @submit.prevent="switchToTeam(team)">
                                             <jet-dropdown-link as="button">
                                                 <div class="flex items-center">
-                                                    <svg v-if="team.id == $page.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                    <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                                     <div>{{ team.name }}</div>
                                                 </div>
                                             </jet-dropdown-link>
@@ -299,10 +299,6 @@
                         <main>
                             <slot></slot>
                         </main>
-
-                        <!-- Modal Portal -->
-                        <portal-target name="modal" multiple>
-                        </portal-target>
                     </div>
                 </div>
             </main>
@@ -313,13 +309,13 @@
 </template>
 
 <script>
-    import JetApplicationLogo from './../Jetstream/ApplicationLogo'
-    import JetApplicationMark from './../Jetstream/ApplicationMark'
-    import JetDropdown from './../Jetstream/Dropdown'
-    import JetDropdownLink from './../Jetstream/DropdownLink'
-    import JetNavLink from './../Jetstream/NavLink'
-    import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
-    import Notification from '../Components/Global/Notification';
+    import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
+    import JetApplicationMark from '@/Jetstream/ApplicationMark'
+    import JetDropdown from '@/Jetstream/Dropdown'
+    import JetDropdownLink from '@/Jetstream/DropdownLink'
+    import JetNavLink from '@/Jetstream/NavLink'
+    import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
+    import Notification from '@/Components/Global/Notification';
 
     export default {
         components: {

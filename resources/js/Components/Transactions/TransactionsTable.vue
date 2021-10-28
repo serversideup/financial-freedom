@@ -4,7 +4,7 @@
             <div class="mb-3 flex-shrink-0 md:flex md:items-center md:justify-end">
                 <div class="flex flex-col items-center">
                     <span class="relative z-0 inline-flex shadow-sm">
-                        <button type="button" v-on:click="viewPreviousMonth()" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Previous">
+                        <button type="button" v-on:click="viewPreviousMonth()" class="relative inline-flex items-center px-2 py-3 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Previous">
                             <!-- Heroicon name: chevron-left -->
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -13,7 +13,7 @@
                         <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                             <span class="font-sans text-astronaut-500">{{ currentTime ? currentTime.format('MMM YYYY') : '' }}</span>
                         </button>
-                        <button type="button" v-on:click="viewNextMonth()" class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Next">
+                        <button type="button" v-on:click="viewNextMonth()" class="-ml-px relative inline-flex items-center px-2 py-3 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Next">
                             <!-- Heroicon name: chevron-right -->
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -24,23 +24,26 @@
             </div>
 
             <div v-if="allowSearching" class="mb-3 w-full mx-5">
-                <input type="text" class="form-input w-full text-sm" v-model="search" placeholder="Search..."/>
+                <input type="text" class="rounded-md shadow-sm block w-full border-gray-300" v-model="search" placeholder="Search..."/>
             </div>
 
             <div class="mb-3 md:flex md:items-center md:justify-end">
                 <slot name="buttons"></slot>
 
-                <button v-if="buttons.indexOf('filter') > - 1" v-bind:class="{ 'rounded-l-md' : !this.$slots.buttons }" id="transactions-show-filters" @click="showFilters = true" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                <button v-if="buttons.indexOf('filter') > - 1" v-bind:class="{ 'rounded-l-md' : !this.$slots.buttons }" id="transactions-show-filters" @click="showFilters = true" type="button" class="-ml-px relative inline-flex items-center px-4 py-3 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                     <!-- Heroicon name: filter -->
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                     </svg>
                     <span class="ml-1">Filter</span>
 
-                    <filter-popup :show="showFilters"/>
+                    <filter-popup 
+                        :show="showFilters"
+                        :categories="categories"
+                        />
                 </button>
 
-                <button v-if="buttons.indexOf('add') > -1" v-on:click="promptAddTransaction()" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                <button v-if="buttons.indexOf('add') > -1" v-on:click="promptAddTransaction()" type="button" class="-ml-px relative inline-flex items-center px-4 py-3 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
@@ -77,6 +80,9 @@
                                     <th v-if="columns.indexOf('tags') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                         Tags
                                     </th>
+                                    <th v-if="columns.indexOf('category') > -1" class="px-6 py-3 cursor-pointer bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Category
+                                    </th>
                                     <th v-if="columns.indexOf('edit') > -1" class="px-6 py-3 bg-gray-50"></th>
                                 </tr>
                             </thead>
@@ -99,20 +105,12 @@
                                     </td>
                                     <td v-if="columns.indexOf('amount') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-500">
                                         <div class="flex justify-between items-center">
-                                            <span>
-                                                <span class="font-medium" v-if="transaction.direction == 'outflow'">-</span>{{ formatMoney( transaction.amount ) }}
-                                                USD
+                                            <span v-if="transaction.direction == 'outflow'" class="text-red-500">
+                                                -{{ formatMoney( transaction.amount ) }}
                                             </span>
-                                            <span v-if="transaction.direction == 'outflow'" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 capitalize">
-                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                expense
-                                                <span class="ml-1" v-if="transaction.receipt_url != null">🧾</span>
+                                            <span v-if="transaction.direction == 'inflow'" class="text-green-500">
+                                                {{ formatMoney( transaction.amount ) }}
                                             </span>
-                                            <span v-if="transaction.direction == 'inflow'" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
-                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                income
-                                            </span>
-
                                         </div>
                                     </td>
                                     <td v-if="columns.indexOf('date') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
@@ -147,8 +145,30 @@
                                             </span>
                                         </div>
                                     </td>
+                                    <td v-if="columns.indexOf('category') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        <div v-if="!transaction.is_split">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
+                                                v-bind:class="[
+                                                    'bg-'+transaction.category.color+'-100', 'text-'+transaction.category.color+'-800'
+                                                ]">
+                                                    {{ transaction.category.name }}
+                                            </span>
+                                        </div>
+                                        <div v-if="transaction.is_split">
+                                            <span
+                                                v-for="split in transaction.splits"
+                                                v-bind:key="'transaction-split-'+split.id"
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-1"
+                                                v-bind:class="[
+                                                    'bg-'+split.category.color+'-100', 'text-'+split.category.color+'-800'
+                                                ]">
+                                                    {{ split.category.name }}
+                                            </span>
+                                        </div>
+                                    </td>
                                     <td v-if="columns.indexOf('edit') > -1" class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                        <inertia-link :href="'/transactions/'+transaction.id" class="text-lochmara-600 hover:text-lochmara-900">Edit</inertia-link>
+                                        <Link :href="'/transactions/'+transaction.id" class="text-blue-600 hover:text-blue-900">Edit</Link>
                                     </td>
                                 </tr>
                             </tbody>
@@ -159,19 +179,20 @@
         </div>
         
         <add-transaction
-            :account="account"/>
+            :account="account"
+            :categories="categories"/>
     </div>
 </template>
 
 <script>
 import moment from 'moment';
-
-import { FormatMoney } from '../../Mixins/formatMoney';
-import { EventBus } from '../../event-bus.js';
-import TransactionsAPI from '../../api/transactions.js';
+import { FormatMoney } from '@/Mixins/formatMoney';
+import { EventBus } from '@/event-bus.js';
+import { mapState } from 'vuex';
+import { Link } from '@inertiajs/inertia-vue3';
+import TransactionsAPI from '@/api/transactions.js';
 import AddTransaction from './AddTransaction.vue';
 import FilterPopup from './TransactionsTable/FilterPopup.vue';
-import { mapState } from 'vuex';
 
 export default {
     props: {
@@ -184,7 +205,7 @@ export default {
         columns: {
             type: Array,
             default: function () {
-                return ['amount', 'date', 'name', 'tags'] 
+                return ['amount', 'date', 'name', 'category'] 
             }
         },
         buttons: {
@@ -197,6 +218,12 @@ export default {
             type: Boolean,
             default: function(){
                 return false;
+            }
+        },
+        categories: {
+            type: Array,
+            default: function() {
+                return []
             }
         }
     },
@@ -256,14 +283,15 @@ export default {
         transactions: {
             deep: true,
             handler(){
-                EventBus.$emit('current-transactions-updated', this.transactions );
+                EventBus.emit('current-transactions-updated', this.transactions );
             }
         }
     },
 
     components: {
         AddTransaction,
-        FilterPopup
+        FilterPopup,
+        Link
     },
 
     mounted(){
@@ -301,7 +329,7 @@ export default {
         },
 
         bindEvents(){
-            EventBus.$on('transaction-filters-updated', function( data ){
+            EventBus.on('transaction-filters-updated', function( data ){
                 this.filters.direction = data.direction;
                 this.filters.tags = data.tags;
                 this.filters.category = data.category;
@@ -383,7 +411,7 @@ export default {
         },
 
         promptAddTransaction(){
-            EventBus.$emit('prompt-add-transaction');
+            EventBus.emit('prompt-add-transaction');
         },
 
         promptFilterTransactions(){

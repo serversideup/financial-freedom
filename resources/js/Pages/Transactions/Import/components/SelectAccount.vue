@@ -1,35 +1,30 @@
 <template>
-    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-10 max-w-md mx-auto">
-        <div class="px-4 py-5 sm:p-6">
-            <div class="sm:col-span-3">
-                <label for="account-type" class="block text-sm font-medium leading-5 text-gray-700">
-                    Import Transactions for Account
-                </label>
-                <div class="mt-1 rounded-md shadow-sm">
-                    <select id="account" v-model="account" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                        <option value=""></option>
-                        <optgroup label="Credit Cards" v-if="$page.creditCards.length > 0 ">
-                            <option v-for="account in $page.creditCards"
-                                v-bind:key="'credit-card-'+account.id"
-                                v-bind:value="account"
-                                v-text="account.institution.name+': '+account.name"></option>
-                        </optgroup>
-                        <optgroup label="Checking Accounts" v-if="$page.checkingAccounts.length > 0">
-                            <option v-for="account in $page.checkingAccounts"
-                                v-bind:key="'checking-account-'+account.id"
-                                v-bind:value="account"
-                                v-text="account.institution.name+': '+account.name"></option>
-                        </optgroup>
-                    </select>
-                </div>
+    <div class="grid grid-cols-12 gap-4">
+        <div class="sm:col-span-6 mt-5">
+            <label for="account-type" class="block text-sm font-medium leading-5 text-gray-700">
+                Select Account
+            </label>
+            <div class="mt-1 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                <account-select 
+                    v-model="account"
+                    :accounts="accounts"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import AccountSelect from '@/Components/Global/AccountSelect';
 
 export default {
+    props: [
+        'accounts'
+    ],
+
+    components: {
+        AccountSelect
+    },
+
     computed: {
         account: {
             get() {

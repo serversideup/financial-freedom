@@ -164,7 +164,7 @@ export default {
         },
 
         fireUpdate () {
-            EventBus.$emit('tags-changed', {
+            EventBus.emit('tags-changed', {
                 id: this.unique,
                 tags: this.selected
             });

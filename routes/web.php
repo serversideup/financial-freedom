@@ -10,7 +10,6 @@ use App\Http\Controllers\Web\Cash\CashAccountsController;
 use App\Http\Controllers\Web\CreditCards\CreditCardsController;
 
 use App\Http\Controllers\Web\Transactions\TransactionsController;
-use App\Http\Controllers\Web\Transactions\TransactionsSplitsController;
 use App\Http\Controllers\Web\Transactions\TransactionsReceiptController;
 
 use App\Http\Controllers\Admin\Reports\AdminReportsController;
@@ -46,8 +45,6 @@ Route::get('/transactions/{transaction}/receipt', [TransactionsReceiptController
  * @TODO: Convert to API only Endpoints
  */
 Route::post('/transactions', [TransactionsController::class, 'store']);
-Route::put('/transactions/{transaction}', [TransactionsController::class, 'update']);
-Route::post('/transactions/{transaction}/splits', [TransactionsSplitsController::class, 'store']);
 
 
 Route::get('/accounts', [AccountsController::class, 'index']);
@@ -61,6 +58,8 @@ Route::get('/savings-accounts/{savingsAccount}', [SavingsAccountsController::cla
 Route::get('/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 
 Route::get('/admin/transactions', [AdminTransactionsController::class, 'show']);
+Route::get('/admin/transactions/categories', [AdminTransactionsController::class, 'categories']);
+Route::get('/admin/transactions/tags', [AdminTransactionsController::class, 'tags']);
 
 Route::get('/admin/institutions', [AdminInstitutionsController::class, 'show']);
 Route::get('/admin/institutions/create', [AdminInstitutionsController::class, 'create']);

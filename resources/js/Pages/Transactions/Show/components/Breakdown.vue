@@ -33,7 +33,7 @@
                         <input type="text" class="rounded-md shadow-sm w-full border-gray-300" v-model="form.description"/>
                     </dd>
                 </div>
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div v-if="!transaction.is_split" class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Category
                     </dt>
@@ -47,12 +47,12 @@
                         </select>
                     </dd>
                 </div>
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <!-- <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Tags
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <!-- <tags
+                        <tags
                             v-if="!transaction.is_split"
                             :unique="'transaction-tags'"
                             :existing="transaction.tags"
@@ -69,9 +69,9 @@
                                 </span>
                             </div>
                             <span class="text-xs italic">Transaction is split, tags are from splits.</span>
-                        </div> -->
+                        </div>
                     </dd>
-                </div>
+                </div> -->
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Receipt

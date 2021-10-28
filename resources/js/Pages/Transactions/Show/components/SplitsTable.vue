@@ -52,7 +52,13 @@
                                                 {{ split.category.name }}
                                         </span>
                                     </td>
-                                    <td>Edit</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <button type="button" class="text-red-500" v-on:click="removeSplit( split.id )">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </button>
+                                    </td>
                                 </tr>
 
                                 <tr v-show="transaction.splits.length > 0">
@@ -74,18 +80,33 @@
 <script>
     import { EventBus } from '@/event-bus.js';
     import { FormatMoney } from '@/Mixins/formatMoney.js';
+    import TransactionsAPI from '@/api/transactions.js';
 
     export default {
         props: ['transaction'],
 
+        mixins: [
+            FormatMoney
+        ],
+
         methods: {
             promptSplitTransaction(){
                 EventBus.emit('prompt-split-transaction');
+            },
+
+            removeSplit( splitID ){
+                TransactionsAPI.removeSplit( this.transaction.id, splitID )
+                    .then( function( response ){
+                        EventBus.emit('notify', {
+                            type: 'success',
+                            title: 'Transaction Split Deleted',
+                            message: 'Your transaction split has been deleted',
+                            action: 'close'
+                        } );
+
+                        EventBus.emit('reload-transaction');
+                    }.bind(this));
             }
         },
-
-        mixins: [
-            FormatMoney
-        ]
     }
 </script>

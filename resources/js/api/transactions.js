@@ -26,6 +26,10 @@ export default {
         return axios.post( '/api/v1/transactions/'+transaction+'/splits', split );
     },
 
+    removeSplit( transaction, split ){
+        return axios.delete('/api/v1/transactions/'+transaction+'/splits/'+split);
+    },
+
     store( transaction ){
         return axios.post('/api/v1/transactions', transaction );
     }

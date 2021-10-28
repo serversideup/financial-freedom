@@ -108,6 +108,7 @@ Route::post('/v1/transactions/import', [TransactionsController::class, 'import']
 Route::post('/v1/transactions', [TransactionsController::class, 'store']);
 Route::put('/v1/transactions/{transaction}', [TransactionsController::class, 'update']);
 Route::post('/v1/transactions/{transaction}/splits', [TransactionsController::class, 'split']);
+Route::delete('/v1/transactions/{transaction}/splits/{split}', [TransactionsController::class, 'deleteSplit']);
 
 Route::get('/v1/tags', [TagsController::class, 'index']);
 Route::put('/v1/tags/{tag}', [TagsController::class, 'update']);

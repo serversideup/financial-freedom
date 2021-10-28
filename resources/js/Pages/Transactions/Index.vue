@@ -60,14 +60,15 @@
 </template>
 
 <script>
+    import { FormatMoney } from '../../Mixins/formatMoney';
+    import { mapState } from 'vuex';
+    import { Link } from '@inertiajs/inertia-vue3';
     import AppLayout from './../../Layouts/AppLayout'
     import TotalSpent from './Index/TotalSpent';
     import TotalIncome from './Index/TotalIncome';
-    import { FormatMoney } from '../../Mixins/formatMoney';
-    import { mapState } from 'vuex';
     import moment from 'moment';
     import TransactionsTable from '../../Components/Transactions/TransactionsTable';
-    import { Link } from '@inertiajs/inertia-vue3';
+    
 
     export default {
         props: ['categories'],

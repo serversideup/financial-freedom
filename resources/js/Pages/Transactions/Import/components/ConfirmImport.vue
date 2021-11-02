@@ -37,7 +37,10 @@
             </div>
 
             <div class="col-span-4 mt-5">
-                <div class="overflow-hidden mt-5 flex items-center justify-center">
+                <div class="overflow-hidden mt-1 flex flex-col items-center justify-center">
+                    <div class="w-full flex items-center justify-center mb-1">
+                        <input type="checkbox" value="yes" v-model="accountBalanceSync" class="mr-1"/> Sync account balance on import
+                    </div>
                     <button type="button" v-on:click="importTransactions()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         Import
                     </button>
@@ -79,14 +82,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr colspan="8" v-if="loading">
+                                        <tr colspan="8" v-if="loading" class="p-6 text-center">
                                             Loading...
                                         </tr>
                                         <import-row
                                             v-for="(transaction, key) in pendingTransactions"
                                             v-bind:key="'transaction-'+key"
                                             :index="key"
-                                            :transaction="transaction"/>
+                                            :transaction="transaction"
+                                            :sync-balances="accountBalanceSync"/>
                                     </tbody>
                                 </table>
                             </div>
@@ -99,12 +103,6 @@
 </template>
 
 <script>
-/**
- * @todo Make individual row
- * @todo allow for individual entry on transaction
- * @todo allow for automatica account deductions
- 
- */
     import Papa from 'papaparse';
     import moment from 'moment';
 
@@ -122,7 +120,8 @@
                 loading: false,
                 pendingTransactions: [],
                 startDate: moment(),
-                endDate: 0
+                endDate: 0,
+                accountBalanceSync: false
             }
         },
 

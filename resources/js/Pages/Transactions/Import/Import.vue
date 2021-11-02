@@ -23,9 +23,7 @@
             <confirm-import 
                 v-show="step == 3"/>
 
-            <!-- <finish/>
-
-            <view-duplicate/> -->
+            <view-duplicate/>
         </div>
 
     </app-layout>
@@ -38,9 +36,7 @@
     import SelectAccount from './components/SelectAccount';
     import UploadFile from './components/UploadFile';
     import ConfirmImport from './components/ConfirmImport.vue';
-    // import ViewDuplicate from './components/ViewDuplicate.vue';
-    // import Finish from './components/Finish.vue';
-    
+    import ViewDuplicate from './components/ViewDuplicate.vue';
 
     export default {
         props: [
@@ -53,8 +49,7 @@
             SelectAccount,
             UploadFile,
             ConfirmImport,
-            // Finish,
-            // ViewDuplicate
+            ViewDuplicate
         },
 
         computed: {

@@ -5,6 +5,7 @@ namespace App\Services\Transactions;
 use App\Models\Transactions\Transaction;
 use App\Models\Accounts\CheckingAccount;
 use App\Models\Accounts\CreditCard;
+use App\Models\Accounts\SavingsAccount;
 use App\Services\Tags\GetTag;
 
 class AddTransaction
@@ -17,6 +18,7 @@ class AddTransaction
     private $name;
     private $date;
     private $description;
+    private $updateBalance;
 
     public function __construct( $user, $data )
     {
@@ -47,6 +49,7 @@ class AddTransaction
         $transaction->save();
 
         $this->tagTransaction( $transaction );
+        $this->updateAccountBalance();
 
         return $transaction;
     }
@@ -82,6 +85,8 @@ class AddTransaction
         }else{
             $this->tags = null;
         }
+
+        $this->updateBalance = isset( $data['update_balance'] ) ? $data['update_balance'] : 'no';
     }
 
     private function loadAccount( $account )
@@ -92,6 +97,9 @@ class AddTransaction
             break;
             case 'credit-card':
                 $this->loadCreditCardAccount( $account['id'] );
+            break;
+            case 'savings':
+                $this->loadSavingsAccount( $account['id'] );
             break;
         }
     }
@@ -104,5 +112,23 @@ class AddTransaction
     private function loadCreditCardAccount( $id )
     {
         $this->account = CreditCard::where('id', '=', $id)->first();
+    }
+
+    private function loadSavingsAccount( $id )
+    {
+        $this->account = SavingsAccount::where('id', '=', $id)->first();
+    }
+
+    private function updateAccountBalance()
+    {
+        if( $this->updateBalance ){
+            if( $this->direction == 'outflow' ){
+                $this->account->current_balance = $this->account->current_balance - $this->amount;
+            }else{
+                $this->account->current_balance = $this->account->current_balance + $this->amount;
+            }
+
+            $this->account->save();
+        }
     }
 }

@@ -20,11 +20,11 @@
                     <span class="text-red-500 text-sm" v-show="!validations.name.valid" v-text="validations.name.message"></span>
                 </div>
                 <div class="sm:col-span-3">
-                    <label for="type" class="block text-sm font-medium leading-5 text-gray-700">
+                    <label for="type" class="block text-sm font-medium text-left text-gray-700">
                         Type
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <select id="type" v-model="form.type" v-bind:class="{ 'border-red-500': !validations.type.valid }" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <select id="type" v-model="form.type" v-bind:class="{ 'border-red-500': !validations.type.valid }" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                             <option value=""></option>
                             <option value="cash">Cash</option>
                             <option value="checking-account">Checking Account</option>
@@ -49,7 +49,7 @@
                         Institution
                     </label>
                     <div class="mt-1 rounded-md shadow-sm">
-                        <select id="institution" v-model="form.institution" v-bind:class="{ 'border-red-500': !validations.institution.valid }" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <select id="institution" v-model="form.institution" v-bind:class="{ 'border-red-500': !validations.institution.valid }" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                             <option value=""></option>
                             <option v-for="(institution, key) in institutions"
                                 v-bind:key="'institution-'+key"
@@ -79,54 +79,41 @@
                 </div>
                 <div class="sm:col-span-3">
                     <div>
-                        <label for="initial-balance" class="block text-sm font-medium leading-5 text-gray-700">Initial Balance</label>
-                        <div class="mt-1 relative rounded-md shadow-sm" v-bind:class="{ 'border-red-500': !validations.initial_balance.valid, 'border': !validations.initial_balance.valid }">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5">
-                                    $
-                                </span>
-                            </div>
-                            <input id="initial-balance" v-model="form.initial_balance" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
-                                    USD
-                                </span>
-                            </div>
+                        <label for="amount" class="block text-sm font-medium text-gray-700">
+                            Initial Balance
+                        </label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                $
+                            </span>
+                            <input type="text" name="initial-balance" id="initial-balance" v-model="form.initial_balance" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
-                        <span class="text-red-500 text-sm" v-show="!validations.initial_balance.valid" v-text="validations.initial_balance.message"></span>
                     </div>
                 </div>
                 <div class="sm:col-span-3" v-show="form.type == 'loan' || form.type == 'credit-card'">
                     <div>
-                        <label for="interest-rate" class="block text-sm font-medium leading-5 text-gray-700">Interest Rate</label>
-                        <div class="mt-1 relative rounded-md shadow-sm" v-bind:class="{ 'border-red-500': !validations.interest_rate, 'border': !validations.interest_rate }">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5">
-                                    %
-                                </span>
-                            </div>
-                            <input id="interest-rate" v-model="form.interest_rate" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
+                        <label for="interest-rate" class="block text-sm font-medium text-gray-700">
+                            Interest Rate
+                        </label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                $
+                            </span>
+                            <input type="text" name="interest-rate" id="interest-rate" v-model="form.amount" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
-                        <span class="text-red-500 text-sm" v-show="!validations.interest_rate.valid" v-text="validations.interest_rate.message"></span>
                     </div>
                 </div>
                 <div class="sm:col-span-3" v-show="form.type == 'loan'">
                     <div>
-                        <label for="payment-amount" class="block text-sm font-medium leading-5 text-gray-700">Payment Amount</label>
-                        <div class="mt-1 relative rounded-md shadow-sm" v-bind:class="{ 'border-red-500': !validations.payment_amount.valid, 'border': !validations.payment_amount.valid }">>
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5">
-                                    $
-                                </span>
-                            </div>
-                            <input id="payment-amount" v-model="form.payment_amount" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00" aria-describedby="price-currency">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <span class="text-gray-500 sm:text-sm sm:leading-5" id="price-currency">
-                                    USD
-                                </span>
-                            </div>
+                        <label for="payment-amount" class="block text-sm font-medium text-gray-700">
+                            Payment Amount
+                        </label>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                $
+                            </span>
+                            <input type="text" name="payment-amount" id="payment-amount" v-model="form.payment_amount" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
-                        <span class="text-red-500 text-sm" v-show="!validations.payment_amount.valid" v-text="validations.payment_amount.message"></span>
                     </div>
                 </div>
             </form>

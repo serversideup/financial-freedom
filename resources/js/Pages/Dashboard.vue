@@ -5,8 +5,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-3 gap-4 w-full">
                     <income-vs-expense/>
-                    <tag-breakdown/>
-                    <span>z</span>
+                    <category-breakdown/>
                 </div>
             </div>
         </div>
@@ -17,13 +16,13 @@
     import AppLayout from './../Layouts/AppLayout'
     
     import IncomeVsExpense from '../Components/Widgets/IncomeVsExpense.vue';
-    import TagBreakdown from '../Components/Widgets/TagBreakdown.vue';
+    import CategoryBreakdown from '../Components/Widgets/CategoryBreakdown.vue';
 
     export default {
         components: {
             AppLayout,
             IncomeVsExpense,
-            TagBreakdown
+            CategoryBreakdown
         },
     }
 </script>

@@ -69,7 +69,8 @@ import TransactionsAPI from '@/api/transactions.js';
 export default {
     props: [
         'index',
-        'transaction'
+        'transaction',
+        'syncBalances'
     ],
 
     computed: {
@@ -93,7 +94,8 @@ export default {
                 name: this.transaction.name,
                 description: this.transaction.description,
                 tags: [],
-                category: this.transaction.category
+                category: this.transaction.category,
+                update_balance: this.syncBalances
             }).then( function( response ){
                 EventBus.emit( 'transaction-persisted', this.index );
             }.bind(this));

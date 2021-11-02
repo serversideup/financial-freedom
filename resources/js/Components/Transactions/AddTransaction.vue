@@ -85,10 +85,15 @@
                 </div>
                 <div class="sm:col-span-3">
                     <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
-                        Tags
+                        Update Account Balance
                     </label>
+                    <select id="update-account-balance" v-model="form.update_balance" name="update-account-balance" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <option value=""></option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <span v-if="Object.keys( form.account ).length > 0" v-text="'New balance: $'+newAccountBalance" class="text-sm italic text-gray-500"></span>
                 </div>
-                
             </form>
         </template>
         <template v-slot:footer>
@@ -108,7 +113,7 @@ import { EventBus } from '@/event-bus.js';
 import AppModal from '@/Components/Global/AppModal.vue';
 import AccountsAPI from '@/api/accounts.js';
 import AccountSelect from '@/Components/Global/AccountSelect.vue';
-import TagsAPI from '@/api/tags.js';
+import TransactionsAPI from '@/api/transactions.js';
 
 export default {
     props: [
@@ -133,7 +138,8 @@ export default {
                 name: '',
                 description: '',
                 category: '',
-                tags: []
+                tags: [],
+                update_balance: "yes"
             }
         }
     },
@@ -146,6 +152,19 @@ export default {
     beforeDestroy(){
         EventBus.off('prompt-add-transaction');
         EventBus.off('close-modal');
+    },
+
+    computed: {
+        newAccountBalance(){
+            let amount = parseFloat( this.form.amount );
+            let currentBalance = parseFloat( this.form.account.current_balance );
+
+            if( this.form.direction == 'outflow' ){
+                return parseFloat( currentBalance ) - parseFloat( amount );
+            }else{
+                return parseFloat( currentBalance ) + parseFloat( amount );
+            }
+        }
     },
 
     methods: {
@@ -173,8 +192,8 @@ export default {
         },
 
         addTransaction(){
-            this.$inertia.post('/transactions', this.form)
-                .then(function( response ){
+            TransactionsAPI.store( this.form )
+                .then( function( response ){
                     EventBus.emit('load-transactions');
                     EventBus.emit('notify', {
                         type: 'success',
@@ -194,6 +213,7 @@ export default {
             this.form.name = '';
             this.form.description = '';
             this.form.tags = [];
+            this.form.update_balance = "yes";
         }
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\Search\SearchController;
 use App\Http\Controllers\API\Institutions\InstitutionsController;
 use App\Http\Controllers\API\Transactions\TransactionsController;
 use App\Http\Controllers\API\Accounts\AccountsController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\API\CreditCards\CreditCardsTransactionsController;
 use App\Http\Controllers\API\Loans\LoansController;
 use App\Http\Controllers\API\Loans\LoansTransactionsController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,6 +43,11 @@ use App\Http\Controllers\API\Loans\LoansTransactionsController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/**
+ * Search Endpoints
+ */
+Route::post('/v1/search', [SearchController::class, 'index']);
 
 /**
  * Institutions Endpoints

@@ -12,14 +12,17 @@
                type="search"
                @keyup="search"/>
 
-        <div class="absolute max-w-lg bg-white shadow-md w-full rounded-b-lg flex flex-col max-h-80 overflow-y-scroll">
-            <div v-if="results.transactions.length > 0"
-                 class="flex flex-col w-full">
-                    <span class="p-2 text-gray-500 text-xs uppercase bg-gray-50 border-t border-b border-gray-200">Transactions</span>
-                    <transaction-result v-for="(transaction, index) in results.transactions"
-                        :key="'transaction-search-result-'+index"
-                        :transaction="transaction"/>
+        <div class="absolute max-w-lg bg-white shadow-md w-full rounded-b-lg" v-show="term.length >= 3">
+            <h4 class="text-gray-900 font-sans text-lg p-4">Results</h4>
+            <div class="flex flex-col max-h-80 overflow-y-scroll">
+                <div v-if="results.transactions.length > 0"
+                    class="flex flex-col w-full">
+                        <span class="p-2 text-gray-500 text-xs uppercase bg-gray-50 border-t border-b border-gray-200">Transactions</span>
+                        <transaction-result v-for="(transaction, index) in results.transactions"
+                            :key="'transaction-search-result-'+index"
+                            :transaction="transaction"/>
 
+                </div>
             </div>
         </div>
     </div>

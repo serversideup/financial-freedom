@@ -8,7 +8,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import { FormatMoney } from '@/Mixins/formatMoney';
 import TransactionsAPI from '@/api/transactions.js';
@@ -46,3 +45,4 @@ export default {
     }
 }
 </script>
+

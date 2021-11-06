@@ -23,6 +23,41 @@
                             :transaction="transaction"/>
 
                 </div>
+                <div v-if="results.checking_accounts.length > 0"
+                    class="flex flex-col w-full">
+                        <span class="p-2 text-gray-500 text-xs uppercase bg-gray-50 border-t border-b border-gray-200">Checking Accounts</span>
+                        <checking-account-result v-for="(checkingAccount, index) in results.checking_accounts"
+                            :key="'checking-account-search-result-'+index"
+                            :checking-account="checkingAccount"/>
+                </div>
+                <div v-if="results.savings_accounts.length > 0"
+                    class="flex flex-col w-full">
+                        <span class="p-2 text-gray-500 text-xs uppercase bg-gray-50 border-t border-b border-gray-200">Savings Accounts</span>
+                        <savings-account-result v-for="(savingsAccount, index) in results.savings_accounts"
+                            :key="'savings-account-search-result-'+index"
+                            :savings-account="savingsAccount"/>
+                </div>
+                <div v-if="results.cash_accounts.length > 0"
+                    class="flex flex-col w-full">
+                        <span class="p-2 text-gray-500 text-xs uppercase bg-gray-50 border-t border-b border-gray-200">Cash Accounts</span>
+                        <cash-account-result v-for="(cashAccount, index) in results.cash_accounts"
+                            :key="'cash-account-search-result-'+index"
+                            :cash-account="cashAccount"/>
+                </div>
+                <div v-if="results.credit_cards.length > 0"
+                    class="flex flex-col w-full">
+                        <span class="p-2 text-gray-500 text-xs uppercase bg-gray-50 border-t border-b border-gray-200">Credit Cards</span>
+                        <credit-card-result v-for="(creditCard, index) in results.credit_cards"
+                            :key="'credit-card-search-result-'+index"
+                            :credit-card="creditCard"/>
+                </div>
+                <div v-if="results.loans.length > 0"
+                    class="flex flex-col w-full">
+                        <span class="p-2 text-gray-500 text-xs uppercase bg-gray-50 border-t border-b border-gray-200">Loans</span>
+                        <loan-result v-for="(loan, index) in results.loans"
+                            :key="'loan-search-result-'+index"
+                            :loan="loan"/>
+                </div>
             </div>
         </div>
     </div>
@@ -32,6 +67,11 @@
 const debounce = require('lodash.debounce')
 import SearchAPI from '@/api/search.js';
 import TransactionResult from './Search/TransactionResult.vue';
+import CashAccountResult from './Search/CashAccountResult.vue';
+import CheckingAccountResult from './Search/CheckingAccountResult.vue';
+import CreditCardResult from './Search/CreditCardResult.vue';
+import LoanResult from './Search/LoanResult.vue';
+import SavingsAccountResult from './Search/SavingsAccountResult.vue';
 
 export default {
     data(){
@@ -39,17 +79,22 @@ export default {
             term: '',
             results: {
                 transactions: [],
-                cashAccounts: [],
-                creditCards: [],
+                cash_accounts: [],
+                credit_cards: [],
                 loans: [],
-                checkingAccounts: [],
-                savingsAccounts: []
+                checking_accounts: [],
+                savings_accounts: []
             }
         }
     },
 
     components: {
-        TransactionResult
+        TransactionResult,
+        CashAccountResult,
+        CheckingAccountResult,
+        CreditCardResult,
+        LoanResult,
+        SavingsAccountResult
     },
 
     methods: {

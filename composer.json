@@ -12,13 +12,15 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "http-interop/http-factory-guzzle": "^1.2",
         "inertiajs/inertia-laravel": "^0.4.4",
         "laravel/framework": "^8.0",
         "laravel/horizon": "^5.7",
         "laravel/jetstream": "^2.0",
         "laravel/sanctum": "^2.6",
+        "laravel/scout": "^9.3.1",
         "laravel/tinker": "^2.0",
-        "meilisearch/meilisearch-laravel-scout": "^0.12.5",
+        "meilisearch/meilisearch-php": "^0.19.2",
         "tightenco/ziggy": "^1.4"
     },
     "require-dev": {

@@ -8,3 +8,41 @@
         </div>
     </div>
 </template>
+<script>
+import { FormatMoney } from '@/Mixins/formatMoney';
+import TransactionsAPI from '@/api/transactions.js';
+
+export default {
+    data(){
+        return {
+            breakdown: [],
+            transactions: []
+        }
+    },
+
+    mixins: [
+        FormatMoney
+    ],
+
+    mounted(){
+        this.loadTransactions();
+    },
+
+    methods: {
+        loadTransactions(){
+            TransactionsAPI.index( {
+                start_date: moment().startOf('month').format( 'YYYY-MM-DD' ),
+                end_date: moment().endOf('month').format('YYYY-MM-DD')
+            } ).then( function( response ){
+                this.transactions = response.data;
+                this.computeCategoryBreakdown();
+            }.bind(this) );
+        },
+
+        computeCategoryBreakdown(){
+            
+        }
+    }
+}
+</script>
+

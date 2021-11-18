@@ -23,6 +23,12 @@ Hi! We're [Dan](https://twitter.com/danpastori) and [Jay](https://twitter.com/ja
 * 🐥 [Twitter](https://twitter.com/serversideup) - you can also follow [Dan](https://twitter.com/danpastori) and [Jay](https://twitter.com/jaydrogers)
 * ❤️ [Sponsor Us](https://github.com/sponsors/serversideup) - please consider sponsoring us so we can create more helpful resources
 
+### Our Sponsors
+All of our software is free an open to the world. None of this can be brought to you without the financial backing of our sponsors.
+<p align="center">
+		<a href="https://github.com/sponsors/serversideup"><img src="https://serversideup.net/wp-content/themes/serversideup/images/sponsor-empty-state.png" alt="Sponsors"></a>
+</p>
+
 # What's Financial Freedom?
 Financial Freedom is an Open Source Alternative to Mint.com & YNAB. Your budgeting data should be owned and controlled by you -- no questions asked. **Personal finance should be <u>personal</u>.**
 

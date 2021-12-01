@@ -17,8 +17,6 @@ services:
       - "storage_logs:/var/www/html/storage/logs"
     environment:
       PHP_POOL_NAME: "${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}"
-      NEW_RELIC_LICENSE_KEY: "${NEW_RELIC_LICENSE}"
-      NEW_RELIC_APP_NAME: "${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}"
     deploy:
       replicas: 1
       update_config:

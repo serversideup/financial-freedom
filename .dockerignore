@@ -1,0 +1,4 @@
+# Ignore anything GIT related
+.git*
+/_volumes
+Dockerfile-dev

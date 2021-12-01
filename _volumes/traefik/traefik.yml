@@ -1,0 +1,31 @@
+# Do not panic if using a self-signed cert
+serversTransport:
+  insecureSkipVerify: true
+
+### Providers
+providers:
+  docker:
+    network: web-dev
+    exposedbydefault: false
+  file:
+      filename: /traefik-certs.yml
+      watch: true
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+
+  websecure:
+    address: ":443"
+
+accessLog: {}
+log:
+  level: ERROR
+
+api:
+  dashboard: true
+  insecure: true

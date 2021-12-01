@@ -1,4 +1,24 @@
 version: '3.7'
 services:
+
+  traefik:
+    # Use the latest Traefik image
+    image: traefik:v2.4
+
   php:
     image: serversideup/php:8.0-fpm-nginx
+    working_dir: /var/www/html
+
+  meilisearch:
+    image: getmeili/meilisearch
+    environment:
+      MEILI_NO_ANALYTICS: "true"
+
+  mariadb:
+    image: mariadb:10.5
+  
+  node:
+    image: node:lts
+  
+  redis:
+    image: redis:6

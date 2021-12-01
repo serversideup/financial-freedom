@@ -1,13 +1,56 @@
 version: '3.7'
 services:
-  php:
-    volumes:
-      - .:/var/www/html/
+
+  traefik:
     networks:
-      - web-public
-    ####################################
-    # Local development config
-    ####################################
+      - web-dev
+    ports:
+      # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
+      - target: 80
+        published: 80
+        mode: host
+      # Listen on port 443, default for HTTPS
+      - target: 443
+        published: 443
+        mode: host
+      - target: 8080
+        published: 8080
+        mode: host
+    volumes:
+      # Add Docker as a mounted volume, so that Traefik can read the labels of other services
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./_volumes/traefik/traefik.yml:/traefik.yml:ro
+      - ./_volumes/traefik/traefik-certs.yml:/traefik-certs.yml
+      - ./_volumes/traefik/certificates/:/certificates
+  
+  mariadb:
+    hostname: "financial-freedom_mariadb"
+    networks:
+      - web-dev
+    environment:
+        MYSQL_ROOT_PASSWORD: "rootpassword"
+        MARIADB_DATABASE: "financial_freedom"
+        MARIADB_USER: "financial_freedom_database_user"
+        MARIADB_PASSWORD: "financial_freedom_database_password"
+    volumes:
+      # Add volume for all database files
+      - ./_volumes/mysql/database_data/:/var/lib/mysql
+      # Add volume for custom configurations
+      - ./_volumes/mysql/conf.d/:/etc/mysql/conf.d
+      - ./_volumes/mysql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+    ports:
+      - target: 3306
+        published: 3306
+        mode: host
+
+  php:
+    networks:
+        - web-dev
+    volumes:
+      - .:/var/www/html/:cached
+    depends_on:
+      - "mariadb"
+      - "traefik"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.financial-freedom.rule=Host(`financial-freedom.dev.test`)"
@@ -17,30 +60,32 @@ services:
       - "traefik.http.services.financial-freedom.loadbalancer.server.scheme=https"
 
   node:
-    image: node:lts
+    networks:
+      - web-dev
     volumes:
-      - .:/usr/src/app/
+      - .:/usr/src/app/:cached
     working_dir: /usr/src/app/
-    networks: 
-      - web-public
   
   meilisearch:
-    hostname: "financial-freedom_meilisearch"
-    image: getmeili/meilisearch
-    volumes: 
-      - ./volumes/meilisearch/data.ms:/data.ms
     networks:
-      - web-public
+        - web-dev
+    hostname: "financial-freedom_meilisearch"
+    volumes: 
+      - ./_volumes/meilisearch/data.ms:/data.ms:cached
+    depends_on:
+      - "mariadb"
+      - "php"
 
   redis:
     hostname: "financial-freedom_redis"
-    image: redis:6
-    command: "redis-server --appendonly yes --requirepass redispassword"
-    volumes:
-     - ./volumes/redis/data:/data
     networks:
-     - web-public
+      - web-dev
+    volumes:
+     - ./_volumes/redis/data:/data:cached
+    depends_on:
+      - "mariadb"
+      - "php"
+    command: "redis-server --appendonly yes --requirepass redispassword"
 
 networks:
-  web-public:
-    external: true
+  web-dev:

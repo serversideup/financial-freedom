@@ -1,0 +1,11 @@
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certificates/local-dev-opensource.pem
+        keyFile: /certificates/local-dev-opensource-key.pem
+  certificates:
+    - certFile: /certificates/local-dev-opensource.pem
+      keyFile: /certificates/local-dev-opensource-key.pem
+      stores:
+        - default

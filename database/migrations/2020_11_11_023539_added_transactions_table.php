@@ -18,8 +18,8 @@ class AddedTransactionsTable extends Migration
             $table->string('unique_id')->unique();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('account_id');
-            $table->string('account_type');
+            $table->bigInteger('accountable_id');
+            $table->string('accountable_type');
             $table->decimal('amount', 10, 2);
             $table->string('direction');
             $table->integer('reconciled');

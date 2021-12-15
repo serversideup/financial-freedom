@@ -8,6 +8,8 @@
 </p>
 <p align="center">
 	<a href="https://github.com/serversideup/financial-freedom/blob/master/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/financial-freedom" alt="License"></a>
+	<a href="https://community.serversideup.net"><img alt="Discourse users" src="https://img.shields.io/discourse/users?color=blue&server=https%3A%2F%2Fcommunity.serversideup.net"></a>
+  <a href="https://serversideup.net/discord"><img alt="Discord" src="https://img.shields.io/discord/910287105714954251?color=blueviolet"></a>
 	<a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
 </p>
 

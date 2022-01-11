@@ -15,4 +15,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-volumes/*
+
+# Ignore the _volumes folder, except certain Traefik configs
+/_volumes/*
+!/_volumes/traefik

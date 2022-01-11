@@ -18,7 +18,7 @@ class StoicMoneyUpdateApp extends Command
      *
      * @var string
      */
-    protected $description = 'Updates Stoic Money by running migrations, seeders, etc.';
+    protected $description = 'Updates Financial Freedom by running migrations, seeders, etc.';
 
     /**
      * Create a new command instance.

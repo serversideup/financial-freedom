@@ -6,7 +6,7 @@
 
         <link rel="stylesheet" href="/css/app.css" type="text/css"/>
 
-        <title>Stoic Money</title>
+        <title>Financial Freedom</title>
     </head>
     <body class="antialiased">
         <div class="relative bg-white">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="flex flex-col mx-auto max-w-screen-md p-10 bg-white rounded-lg">
-                <h1 class="font-sans font-black text-4xl mt-5">Stoic Money</h1>
+                <h1 class="font-sans font-black text-4xl mt-5">Financial Freedom</h1>
                 <h2 class="font-sans font-bold text-base text-gray-400">Visualize your money, <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">design your budgets</span>, <span class="italic text-black">own your data</span>.</h2>
             </div>
             <div class="max-w-screen-xl mx-auto px-4 sm:px-6">

@@ -1,13 +1,12 @@
 version: '3.7'
 services:
+
   php:
     networks:
       - web-ci
     volumes:
       - .:/var/www/html/
   mariadb:
-    # Use the latest MariaDB image
-    image: mariadb:10.5
     networks:
       - web-ci
     environment:

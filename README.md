@@ -8,11 +8,31 @@
 </p>
 <p align="center">
 	<a href="https://github.com/serversideup/financial-freedom/blob/master/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/financial-freedom" alt="License"></a>
+	<a href="https://community.serversideup.net"><img alt="Discourse users" src="https://img.shields.io/discourse/users?color=blue&server=https%3A%2F%2Fcommunity.serversideup.net"></a>
+  <a href="https://serversideup.net/discord"><img alt="Discord" src="https://img.shields.io/discord/910287105714954251?color=blueviolet"></a>
 	<a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
 </p>
 
-# An Open Source Alternative to Mint.com & YNAB
-Your budgeting data should be owned and controlled by you -- no questions asked. **Personal finance should be <u>personal</u>.**
+Hi! We're [Dan](https://twitter.com/danpastori) and [Jay](https://twitter.com/jaydrogers). We're a two person team with a passion for open source products. We created [Server Side Up](https://serversideup.net) to help share what we learn.
+
+### Find us at:
+
+* 📖 [Blog](https://serversideup.net) - get the latest guides and free courses on all things web/mobile development.
+* 🙋 [Community](https://community.serversideup.net) - get friendly help from our community members.
+* 🤵‍♂️ [Get Professional Help](https://serversideup.net/get-help) - get guaranteed responses within next business day.
+* 💻 [GitHub](https://github.com/serversideup) - check out our other open source projects
+* 📫 [Newsletter](https://serversideup.net/subscribe) - skip the algorithms and get quality content right to your inbox
+* 🐥 [Twitter](https://twitter.com/serversideup) - you can also follow [Dan](https://twitter.com/danpastori) and [Jay](https://twitter.com/jaydrogers)
+* ❤️ [Sponsor Us](https://github.com/sponsors/serversideup) - please consider sponsoring us so we can create more helpful resources
+
+### Our Sponsors
+All of our software is free an open to the world. None of this can be brought to you without the financial backing of our sponsors.
+<p align="center">
+		<a href="https://github.com/sponsors/serversideup"><img src="https://serversideup.net/wp-content/themes/serversideup/images/sponsor-empty-state.png" alt="Sponsors"></a>
+</p>
+
+# What's Financial Freedom?
+Financial Freedom is an Open Source Alternative to Mint.com & YNAB. Your budgeting data should be owned and controlled by you -- no questions asked. **Personal finance should be <u>personal</u>.**
 
 <p align="center">
 		<img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/preview.png" width="1200" alt="Financial Freedom Preview Screenshot">

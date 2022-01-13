@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2dd8cfd7361f21613562487d4baabab8",
+    "content-hash": "e98b45edd7a301e083880a80491f7eaf",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9364,6 +9364,51 @@
             "time": "2020-09-28T06:39:44+00:00"
         },
         {
+            "name": "serversideup/spin",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/serversideup/spin.git",
+                "reference": "c40d9a4ad4bfe91d597b1c9d72384e94e00264db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/serversideup/spin/zipball/c40d9a4ad4bfe91d597b1c9d72384e94e00264db",
+                "reference": "c40d9a4ad4bfe91d597b1c9d72384e94e00264db",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/spin"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Pastori",
+                    "homepage": "https://twitter.com/danpastori"
+                },
+                {
+                    "name": "Jay Rogers",
+                    "homepage": "https://twitter.com/jaydrogers"
+                }
+            ],
+            "description": "Replicate your production environment locally using Docker. Just run \"spin up\". It's really that easy.",
+            "support": {
+                "issues": "https://github.com/serversideup/spin/issues",
+                "source": "https://github.com/serversideup/spin/tree/v0.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/serversideup",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-13T22:57:27+00:00"
+        },
+        {
             "name": "theseer/tokenizer",
             "version": "1.2.1",
             "source": {
@@ -9423,5 +9468,5 @@
         "php": "^7.1.3||^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

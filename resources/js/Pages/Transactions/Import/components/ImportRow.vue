@@ -19,6 +19,7 @@
                     <option value=""></option>
                     <option value="inflow">Inflow</option>
                     <option value="outflow">Outflow</option>
+                    <option value="transfer">Transfer</option>
                 </select>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 max-w-xs">
@@ -42,7 +43,8 @@
             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">
                 <span v-bind:class="{
                         'text-red-500' : transaction.direction == 'outflow',
-                        'text-green-500' : transaction.direction == 'inflow'
+                        'text-green-500' : transaction.direction == 'inflow',
+                        'text-gray-500' : transaction.direction == 'transfer'
                     }">
                         {{ transaction.amount }}
                 </span>

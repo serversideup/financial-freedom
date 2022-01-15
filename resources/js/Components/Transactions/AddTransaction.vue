@@ -27,6 +27,7 @@
                         <option value="all">All</option>
                         <option value="outflow">Outflow</option>
                         <option value="inflow">Inflow</option>
+                        <option value="transfer">Transfer</option>
                     </select>
                 </div>
                 <div class="sm:col-span-3">
@@ -161,7 +162,7 @@ export default {
 
             if( this.form.direction == 'outflow' ){
                 return parseFloat( currentBalance ) - parseFloat( amount );
-            }else{
+            }else if( this.form.direction == 'inflow' ){
                 return parseFloat( currentBalance ) + parseFloat( amount );
             }
         }

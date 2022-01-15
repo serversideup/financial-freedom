@@ -29,6 +29,7 @@
                         <select id="direction" v-model="form.direction" class="form-select block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
                             <option value="outflow">Outflow</option>
                             <option value="inflow">Inflow</option>
+                            <option value="transfer">Transfer</option>
                         </select>
                     </div>
                 </div>

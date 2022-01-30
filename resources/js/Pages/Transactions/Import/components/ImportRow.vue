@@ -15,6 +15,15 @@
                 </div>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
+                <span v-bind:class="{
+                        'text-red-500' : transaction.direction == 'outflow',
+                        'text-green-500' : transaction.direction == 'inflow',
+                        'text-gray-500' : transaction.direction == 'transfer'
+                    }"
+                    v-if="transaction.imported"
+                    v-text="transaction.direction">
+                
+                </span>
                 <select v-if="!transaction.imported" id="type" v-model="transaction.direction" v-on:change="invertAmount( key )" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                     <option value=""></option>
                     <option value="inflow">Inflow</option>
@@ -22,14 +31,8 @@
                     <option value="transfer">Transfer</option>
                 </select>
             </td>
-            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 max-w-xs">
-                <select v-if="!transaction.imported" id="category" v-model="transaction.category" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                    <option value=""></option>
-                    <option v-for="category in $page.props.categories"
-                        :key="'category-'+category.id"
-                        v-bind:value="category.id"
-                        v-text="( category.parent_id != null ? ' - ' : '' )+category.name"/>
-                </select>
+            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 w-52">
+                <category-select v-model="transaction.category" v-if="!transaction.imported"/>
                 <span v-if="transaction.imported" v-text="findCategoryName( transaction.category )"></span>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -66,14 +69,20 @@
 <script>
 import { EventBus } from '@/event-bus.js';
 import { mapState } from 'vuex';
+import CategorySelect from '@/Components/Transactions/CategorySelect.vue';
 import TransactionsAPI from '@/api/transactions.js';
 
 export default {
     props: [
         'index',
         'transaction',
-        'syncBalances'
+        'syncBalances',
+        'categories'
     ],
+
+    components: {
+        CategorySelect
+    },
 
     computed: {
         ...mapState('transactions/importProcess', {

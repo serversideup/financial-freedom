@@ -90,6 +90,7 @@
                                             v-bind:key="'transaction-'+key"
                                             :index="key"
                                             :transaction="transaction"
+                                            :categories="categories"
                                             :sync-balances="accountBalanceSync"/>
                                     </tbody>
                                 </table>
@@ -115,6 +116,8 @@
     import ImportRow from './ImportRow.vue';
 
     export default {
+        props: ['categories'],
+
         data(){
             return {
                 loading: false,

@@ -44,6 +44,12 @@
                 :account="account"
                 :type="'Credit Card'"
                 />
+            <gift-card-card 
+                v-for="(account, index) in accounts.gift_cards"
+                v-bind:key="'account-gift-card-'+index"
+                :account="account"
+                :type="'Gift Card'"
+                />
         </div>
 
         <add-account
@@ -60,6 +66,7 @@
     import CheckingAccountCard from '@/Components/Accounts/CheckingAccountCard';
     import SavingsAccountCard from '@/Components/Accounts/SavingsAccountCard';
     import CreditAccountCard from '@/Components/Accounts/CreditAccountCard';
+    import GiftCardCard from '@/Components/Accounts/GiftCardCard.vue';
     import AddAccount from '@/Components/Accounts/AddAccount.vue';
     import AccountsAPI from '@/api/accounts.js';
     import InstitutionsAPI from '@/api/institutions.js';
@@ -81,6 +88,7 @@
             CheckingAccountCard,
             SavingsAccountCard,
             CreditAccountCard,
+            GiftCardCard,
             AddAccount
         },
 

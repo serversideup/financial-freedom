@@ -10,15 +10,6 @@
         </template>
         <template v-slot:body>
             <form class="grid grid-cols-1 gap-4 sm:grid-cols-6">
-                <div class="sm:col-span-6">
-                    <label for="account-name" class="block text-sm font-medium leading-5 text-gray-700">
-                        Account Name
-                    </label>
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input v-model="form.name" id="account-name" type="text" v-bind:class="{ 'border-red-500': !validations.name.valid }" class="rounded-md shadow-sm block w-full border-gray-300">
-                    </div>
-                    <span class="text-red-500 text-sm" v-show="!validations.name.valid" v-text="validations.name.message"></span>
-                </div>
                 <div class="sm:col-span-3">
                     <label for="type" class="block text-sm font-medium text-left text-gray-700">
                         Type
@@ -31,11 +22,33 @@
                             <option value="savings-account">Savings Account</option>
                             <option value="loan">Loan</option>
                             <option value="credit-card">Credit Card</option>
+                            <option value="gift-card">Gift Card</option>
                         </select>
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.type.valid" v-text="validations.type.message"></span>
                 </div>
-                <div class="sm:col-span-3" v-show="form.type != 'cash'">
+
+                <div class="sm:col-span-6" v-show="showCompany">
+                    <label for="gift-card-company" class="block text-sm font-medium leading-5 text-gray-700">
+                        Company
+                    </label>
+                    <div class="mt-1 rounded-md shadow-sm">
+                        <input v-model="form.company" id="gift-card-company" type="text" v-bind:class="{ 'border-red-500': !validations.company.valid }" class="rounded-md shadow-sm block w-full border-gray-300">
+                    </div>
+                    <span class="text-red-500 text-sm" v-show="!validations.company.valid" v-text="validations.company.message"></span>
+                </div>
+
+                <div class="sm:col-span-6" v-show="showAccountName">
+                    <label for="account-name" class="block text-sm font-medium leading-5 text-gray-700">
+                        Account Name
+                    </label>
+                    <div class="mt-1 rounded-md shadow-sm">
+                        <input v-model="form.name" id="account-name" type="text" v-bind:class="{ 'border-red-500': !validations.name.valid }" class="rounded-md shadow-sm block w-full border-gray-300">
+                    </div>
+                    <span class="text-red-500 text-sm" v-show="!validations.name.valid" v-text="validations.name.message"></span>
+                </div>
+                
+                <div class="sm:col-span-3" v-show="showNumber">
                     <label for="account-number" class="block text-sm font-medium leading-5 text-gray-700">
                         Number
                     </label>
@@ -44,7 +57,8 @@
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.number.valid" v-text="validations.number.message"></span>
                 </div>
-                <div class="sm:col-span-3" v-show="form.type != 'cash'">
+
+                <div class="sm:col-span-3" v-show="showInstitution">
                     <label for="institution" class="block text-sm font-medium leading-5 text-gray-700">
                         Institution
                     </label>
@@ -59,7 +73,8 @@
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.institution.valid" v-text="validations.institution.message"></span>
                 </div>
-                <div class="sm:col-span-3" v-show="form.type == 'loan'">
+
+                <div class="sm:col-span-3" v-show="showOpenDate">
                     <label for="open-date" class="block text-sm font-medium leading-5 text-gray-700">
                         Open Date
                     </label>
@@ -68,7 +83,8 @@
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.open_date.valid" v-text="validations.open_date.message"></span>
                 </div>
-                <div class="sm:col-span-3">
+
+                <div class="sm:col-span-3" v-show="showDescription">
                     <label for="description" class="block text-sm font-medium leading-5 text-gray-700">
                         Description
                     </label>
@@ -77,7 +93,8 @@
                     </div>
                     <span class="text-red-500 text-sm" v-show="!validations.description.valid" v-text="validations.description.message"></span>
                 </div>
-                <div class="sm:col-span-3">
+
+                <div class="sm:col-span-3" v-show="showInitialBalance">
                     <div>
                         <label for="amount" class="block text-sm font-medium text-gray-700">
                             Initial Balance
@@ -90,20 +107,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="sm:col-span-3" v-show="form.type == 'loan' || form.type == 'credit-card'">
+
+                <div class="sm:col-span-3" v-show="showInterestRate">
                     <div>
                         <label for="interest-rate" class="block text-sm font-medium text-gray-700">
                             Interest Rate
                         </label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                                $
+                                %
                             </span>
                             <input type="text" name="interest-rate" id="interest-rate" v-model="form.amount" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                         </div>
                     </div>
                 </div>
-                <div class="sm:col-span-3" v-show="form.type == 'loan'">
+
+                <div class="sm:col-span-3" v-show="showPaymentAmount">
                     <div>
                         <label for="payment-amount" class="block text-sm font-medium text-gray-700">
                             Payment Amount
@@ -116,6 +135,55 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="sm:col-span-3" v-show="showLocation">
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700">
+                            Location
+                        </label>
+                        <div class="mt-1 rounded-md shadow-sm">
+                            <input v-model="form.location" v-bind:class="{ 'border-red-500': !validations.location.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                        </div>
+                        <span class="text-red-500 text-sm" v-show="!validations.location.valid" v-text="validations.location.message"></span>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3" v-show="showExpiration">
+                    <div>
+                        <label for="expiration" class="block text-sm font-medium text-gray-700">
+                            Expiration
+                        </label>
+                        <div class="mt-1 rounded-md shadow-sm">
+                            <input v-model="form.expiration" v-bind:class="{ 'border-red-500': !validations.expiration.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                        </div>
+                        <span class="text-red-500 text-sm" v-show="!validations.expiration.valid" v-text="validations.expiration.message"></span>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3" v-show="showUrl">
+                    <div>
+                        <label for="url" class="block text-sm font-medium text-gray-700">
+                            URL
+                        </label>
+                        <div class="mt-1 rounded-md shadow-sm">
+                            <input v-model="form.url" v-bind:class="{ 'border-red-500': !validations.url.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                        </div>
+                        <span class="text-red-500 text-sm" v-show="!validations.url.valid" v-text="validations.url.message"></span>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3" v-show="showCode">
+                    <div>
+                        <label for="code" class="block text-sm font-medium text-gray-700">
+                            Code
+                        </label>
+                        <div class="mt-1 rounded-md shadow-sm">
+                            <input v-model="form.code" v-bind:class="{ 'border-red-500': !validations.code.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                        </div>
+                        <span class="text-red-500 text-sm" v-show="!validations.code.valid" v-text="validations.code.message"></span>
+                    </div>
+                </div>
+
             </form>
         </template>
         <template v-slot:footer>
@@ -147,6 +215,7 @@ export default {
 
             form: {
                 name: '',
+                company: '',
                 type: '',
                 number: '',
                 description: '',
@@ -154,13 +223,21 @@ export default {
                 open_date: '',
                 payment_amount: 0.00,
                 initial_balance: 0.00,
-                interest_rate: 0.000
+                interest_rate: 0.000,
+                location: '',
+                expiration: '',
+                url: '',
+                code: '',
             },
 
             validations: {
                 name: {
                     valid: true,
                     message: 'Enter a name for this account'
+                },
+                company: {
+                    valid: true,
+                    message: 'Enter a company for this gift card'
                 },
                 type: {
                     valid: true,
@@ -193,8 +270,78 @@ export default {
                 interest_rate: {
                     valid: true,
                     message: 'Enter the interest rate for your loan'
+                },
+                location: {
+                    valid: true,
+                    message: 'Enter the location of the gift card (i.e. Filing cabinet near desk)'
+                },
+                expiration: {
+                    valid: true,
+                    message: 'Enter the gift card\'s expiration date' 
+                },
+                url: {
+                    valid: true,
+                    message: 'Enter the URL of the giftcard'
+                },
+                code: {
+                    valid: true,
+                    message: 'Enter the code for the gift card'
                 }
             }
+        }
+    },
+
+    computed: {
+        showCompany(){
+            return this.form.type != '' && this.form.type == 'gift-card';
+        },
+
+        showAccountName(){
+            return this.form.type != '' && this.form.type != 'gift-card';
+        },
+
+        showNumber(){
+            return this.form.type != '' && this.form.type != 'cash' && this.form.type != 'gift-card';
+        },
+
+        showInstitution(){
+            return this.form.type != '' && this.form.type != 'cash' && this.form.type != 'gift-card';
+        },
+
+        showOpenDate(){
+            return this.form.type != '' && this.form.type == 'loan';
+        },
+
+        showDescription(){
+            return this.form.type != '' && this.form.type != 'gift-card';
+        },
+
+        showInitialBalance(){
+            return this.form.type != '';
+        },
+
+        showInterestRate(){
+            return this.form.type != '' && ( this.form.type == 'loan' || this.form.type == 'credit-card');
+        },
+
+        showPaymentAmount(){
+            return this.form.type != '' && this.form.type == 'loan';
+        },
+
+        showLocation(){
+            return this.form.type != '' && this.form.type == 'gift-card';
+        },
+
+        showExpiration(){
+            return this.form.type != '' && this.form.type == 'gift-card';
+        },
+
+        showUrl(){
+            return this.form.type != '' && this.form.type == 'gift-card';
+        },
+
+        showCode(){
+            return this.form.type != '' && this.form.type == 'gift-card';
         }
     },
 

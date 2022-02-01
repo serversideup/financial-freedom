@@ -24,11 +24,9 @@ class StoreAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required_unless:type,gift-card',
             'type' => 'required',
-            'number' => 'required_unless:type,cash',
-            'description' => 'required',
-            'institution' => 'required_unless:type,cash',
+            'description' => 'required_unless:type,gift-card',
             'open_date' => 'required_if:type,loan',
             'payment_amount' => 'required_if:type,loan|numeric',
             'initial_balance' => 'required|numeric',

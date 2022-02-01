@@ -7,6 +7,7 @@ use App\Models\Accounts\CreditCard;
 use App\Models\Accounts\Loan;
 use App\Models\Accounts\SavingsAccount;
 use App\Models\Accounts\CheckingAccount;
+use App\Models\Accounts\GiftCard;
 
 class LoadAccounts
 {
@@ -19,6 +20,7 @@ class LoadAccounts
     private $loans;
     private $savingsAccounts;
     private $checkingAccounts;
+    private $giftCards;
 
     public function __construct( $user, $types = [] )
     {
@@ -34,13 +36,15 @@ class LoadAccounts
         $this->loadLoans();
         $this->loadSavingsAccounts();
         $this->loadCheckingAccounts();
+        $this->loadGiftCards();
 
         return [
             'cash_accounts' => $this->cashAccounts,
             'credit_cards' => $this->creditCards,
             'loans' => $this->loans,
             'savings_accounts' => $this->savingsAccounts,
-            'checking_accounts' => $this->checkingAccounts
+            'checking_accounts' => $this->checkingAccounts,
+            'gift_cards' => $this->giftCards
         ];
     }
 
@@ -85,6 +89,14 @@ class LoadAccounts
             $this->checkingAccounts = CheckingAccount::where('user_id', '=', $this->user->id)
                                                      ->with('institution')
                                                      ->get();
+        }
+    }
+
+    private function loadGiftCards()
+    {
+        if( empty( $this->types ) || in_array( 'gift-card', $this->types ) ){
+            $this->giftCards = GiftCard::where('user_id', '=', $this->user->id)
+                                        ->get();
         }
     }
 }

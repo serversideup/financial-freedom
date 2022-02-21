@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use App\Models\Accounts\CheckingAccount;
 
-
 class CheckingAccountsController extends Controller
 {
     public function __construct()

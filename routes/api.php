@@ -25,6 +25,8 @@ use App\Http\Controllers\API\CheckingAccounts\CheckingAccountsTransactionsContro
 use App\Http\Controllers\API\CreditCards\CreditCardsController;
 use App\Http\Controllers\API\CreditCards\CreditCardsTransactionsController;
 
+use App\Http\Controllers\API\GiftCards\GiftCardController;
+
 use App\Http\Controllers\API\Loans\LoansController;
 use App\Http\Controllers\API\Loans\LoansTransactionsController;
 
@@ -97,6 +99,11 @@ Route::get('/v1/loans/{loan}/transactions', [LoansTransactionsController::class,
 Route::get('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'show']);
 Route::put('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'update']);
 Route::get('/v1/credit-cards/{creditCard}/transactions', [CreditCardsTransactionsController::class, 'index']);
+
+/**
+ * Gift Card Endpoints
+ */
+Route::get('/v1/gift-cards/{giftCard}', [GiftCardController::class, 'show']);
 
 /**
  * Allocation Endpoints

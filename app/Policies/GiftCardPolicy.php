@@ -31,4 +31,13 @@ class GiftCardPolicy
             return false;
         }
     }
+
+    public function update( User $user, GiftCard $giftCard )
+    {
+        if( $user->id == $giftCard->user_id ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

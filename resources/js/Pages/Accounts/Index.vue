@@ -51,6 +51,8 @@
                 :type="'Gift Card'"
                 />
         </div>
+        
+        <a href="https://clearbit.com" target="_blank" class="text-xs mt-10 text-gray-900">Logos provided by Clearbit</a>
 
         <add-account
             :institutions="institutions"/>

@@ -17,6 +17,8 @@ class GiftCardsController extends Controller
 
     public function show( GiftCard $giftCard )
     {
-        
+        return Inertia::render('GiftCards/Show', [
+            'id' => $giftCard->id
+        ]);
     }
 }

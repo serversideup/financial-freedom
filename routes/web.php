@@ -53,9 +53,12 @@ Route::post('/accounts', [AccountsController::class, 'store']);
 
 Route::get('/cash-accounts/{cashAccount}',[CashAccountsController::class, 'show'] );
 Route::get('/credit-cards/{creditCard}', [CreditCardsController::class, 'show'] );
+
 Route::get('/loans/{loan}', [LoansController::class, 'show']);
+
 Route::get('/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::get('/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
+
 Route::get('/gift-cards/{giftCard}', [GiftCardsController::class, 'show']);
 
 Route::get('/admin/transactions', [AdminTransactionsController::class, 'show']);

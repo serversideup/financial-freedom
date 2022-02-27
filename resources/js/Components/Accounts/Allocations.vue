@@ -18,27 +18,26 @@
                 </button>
             </span>
         </div>
-        <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
-            <div class="px-4 py-5 font-semibold font-sans text-astronaut-500 sm:px-6">
-                Current Allocation
-            </div>
-            <div class="py-5 h-96">
-                <canvas id="current-allocation"></canvas>
-            </div>
-        </div>
+        <allocation-chart 
+            v-show="view == 'chart'"/>
 
-        <add-allocation :available="unallocatedAmount" :account="account"/>
-        <edit-allocations :allocations="allocations" :account="account"/>
+        <edit-allocations 
+            v-show="view == 'edit'"
+            :available="unallocatedAmount"
+            :account="account"/>
+
+        <add-allocation 
+            :available="unallocatedAmount" 
+            :account="account"/>
     </div>
 </template>
 
 <script>
 import AddAllocation from './Allocations/AddAllocation.vue';
 import EditAllocations from './Allocations/EditAllocations.vue';
-import AllocationsAPI from '../../api/allocations.js';
-import Chart from 'chart.js';
-import { FormatMoney } from '../../Mixins/formatMoney.js';
-import { EventBus } from '../../event-bus.js';
+import { FormatMoney } from '@/Mixins/formatMoney.js';
+import { EventBus } from '@/event-bus.js';
+import AllocationsAPI from '@/api/allocations.js';
 
 export default {
     props: ['account'],
@@ -47,7 +46,8 @@ export default {
         return {
             chartData: [],
             chart: '',
-            allocations: []
+            allocations: [],
+            view: 'chart'
         }
     },
 

@@ -74,7 +74,10 @@ Route::get('/v1/savings-accounts/{savingsAccount}/transactions', [SavingsAccount
  */
 Route::get('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'show']);
 Route::put('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'update']);
+Route::post('/v1/cash-accounts', [CashAccountsController::class, 'store']);
+
 Route::get('/v1/cash-accounts/{cashAccount}/allocations', [CashAccountsAllocationsController::class, 'index']);
+
 Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransactionsController::class, 'index']);
 
 /**

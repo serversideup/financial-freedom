@@ -7,6 +7,8 @@ use App\Models\Accounts\CashAccount;
 use App\Services\Accounts\ShowAccount;
 use App\Services\Accounts\UpdateAccount;
 use App\Http\Requests\CashAccounts\UpdateCashAccountRequest;
+use App\Services\CashAccounts\CreateCashAccount;
+use Illuminate\Http\Request;
 
 class CashAccountsController extends Controller
 {
@@ -39,5 +41,13 @@ class CashAccountsController extends Controller
         $updateAccount->update( $cashAccount->id, 'cash-account' );
 
         return response()->json('', 204);
+    }
+
+    public function store( Request $request )
+    {
+        ( new CreateCashAccount(
+            $request->user(),
+            $request->all()
+        ) )->create();
     }
 }

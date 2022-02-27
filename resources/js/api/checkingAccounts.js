@@ -9,6 +9,10 @@ export default {
         return axios.put('/api/v1/checking-accounts/'+id, data);
     },
 
+    store( data ){
+        return axios.post('/api/v1/checking-accounts', data);
+    },
+
     getAllocations( id ){
         return axios.get('/api/v1/checking-accounts/'+id+'/allocations');
     },

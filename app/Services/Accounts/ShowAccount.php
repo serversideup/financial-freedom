@@ -7,6 +7,7 @@ use App\Models\Accounts\CheckingAccount;
 use App\Models\Accounts\CreditCard;
 use App\Models\Accounts\Loan;
 use App\Models\Accounts\SavingsAccount;
+use App\Models\Accounts\GiftCard;
 
 class ShowAccount
 {
@@ -50,6 +51,9 @@ class ShowAccount
             break;
             case 'credit-card':
                 $this->query = CreditCard::query();
+            break;
+            case 'gift-card':
+                $this->query = GiftCard::query();
             break;
         }
     }

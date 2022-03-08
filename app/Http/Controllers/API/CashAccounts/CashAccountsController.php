@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API\CashAccounts;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CashAccounts\CreateCashAccountRequest;
+use App\Http\Requests\CashAccounts\UpdateCashAccountRequest;
 use App\Models\Accounts\CashAccount;
 use App\Services\Accounts\ShowAccount;
 use App\Services\Accounts\UpdateAccount;
-use App\Http\Requests\CashAccounts\UpdateCashAccountRequest;
+use App\Services\CashAccounts\CreateCashAccount;
 
 class CashAccountsController extends Controller
 {
@@ -39,5 +41,15 @@ class CashAccountsController extends Controller
         $updateAccount->update( $cashAccount->id, 'cash-account' );
 
         return response()->json('', 204);
+    }
+
+    public function store( CreateCashAccountRequest $request )
+    {
+        ( new CreateCashAccount(
+            $request->user(),
+            $request->all()
+        ) )->create();
+
+        return response()->json( null, 201 );
     }
 }

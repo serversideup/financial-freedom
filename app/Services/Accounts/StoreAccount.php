@@ -6,7 +6,9 @@ use App\Models\Accounts\CashAccount;
 use App\Models\Accounts\CheckingAccount;
 use App\Models\Accounts\Loan;
 use App\Models\Accounts\CreditCard;
+use App\Models\Accounts\GiftCard;
 use App\Models\Accounts\SavingsAccount;
+use Illuminate\Support\Facades\Crypt;
 
 class StoreAccount
 {
@@ -20,6 +22,11 @@ class StoreAccount
     private $paymentAmount;
     private $initialBalance;
     private $interestRate;
+    private $company;
+    private $location;
+    private $expiration;
+    private $url;
+    private $code;
 
     public function __construct( $user, $data )
     {
@@ -44,6 +51,9 @@ class StoreAccount
             break;
             case 'credit-card':
                 $this->storeCreditCard();
+            break;
+            case 'gift-card':
+                $this->storeGiftCard();
             break;
         }
     }
@@ -120,6 +130,22 @@ class StoreAccount
         $savingsAccount->save();
     }
 
+    private function storeGiftCard()
+    {
+        $giftCard = new GiftCard();
+
+        $giftCard->user_id = $this->user->id;
+        $giftCard->company = $this->company;
+        $giftCard->balance = $this->initialBalance;
+        $giftCard->location = $this->location;
+        $giftCard->expiration = $this->expiration;
+        $giftCard->url = $this->url;
+        $giftCard->code = Crypt::encryptString( $this->code );
+
+        $giftCard->save();
+
+    }
+
     private function hydrateLocal( $data )
     {
         $this->name = $data['name'];
@@ -131,5 +157,10 @@ class StoreAccount
         $this->paymentAmount = $data['payment_amount'];
         $this->initialBalance = $data['initial_balance'];
         $this->interestRate = $data['interest_rate'];
+        $this->company = $data['company'];
+        $this->location = $data['location'];
+        $this->expiration = $data['expiration'];
+        $this->url = $data['url'];
+        $this->code = $data['code'];
     }
 }

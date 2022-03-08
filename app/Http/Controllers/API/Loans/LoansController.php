@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API\Loans;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Loans\CreateLoanRequest;
 use App\Services\Accounts\ShowAccount;
 use App\Models\Accounts\Loan;
 use App\Services\Accounts\UpdateAccount;
 use App\Http\Requests\Loans\UpdateLoanRequest;
+use App\Services\Loans\CreateLoan;
 
 class LoansController extends Controller
 {
@@ -27,6 +29,16 @@ class LoansController extends Controller
         );
 
         return response()->json( $showAccount->show() );
+    }
+
+    public function store( CreateLoanRequest $request )
+    {
+        ( new CreateLoan( 
+            $request->user(),
+            $request->all()
+        ) )->create();
+
+        return response()->json( null, 201 );
     }
 
     public function update( UpdateLoanRequest $request, Loan $loan )

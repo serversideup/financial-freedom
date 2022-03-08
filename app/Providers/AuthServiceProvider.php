@@ -23,6 +23,9 @@ use App\Policies\CreditCardPolicy;
 use App\Models\Accounts\Loan;
 use App\Policies\LoanPolicy;
 
+use App\Models\Accounts\GiftCard;
+use App\Policies\GiftCardPolicy;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -39,7 +42,8 @@ class AuthServiceProvider extends ServiceProvider
         Transaction::class => TransactionPolicy::class,
         CashAccount::class => CashAccountPolicy::class,
         Loan::class => LoanPolicy::class,
-        CreditCard::class => CreditCardPolicy::class
+        CreditCard::class => CreditCardPolicy::class,
+        GiftCard::class => GiftCardPolicy::class
     ];
 
     /**

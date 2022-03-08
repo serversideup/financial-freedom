@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API\CreditCards;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreditCards\StoreCreditCardRequest;
 use App\Services\Accounts\ShowAccount;
 use App\Models\Accounts\CreditCard;
 use App\Services\Accounts\UpdateAccount;
 use App\Http\Requests\CreditCards\UpdateCreditCardRequest;
+use App\Services\CreditCards\CreateCreditCard;
 
 class CreditCardsController extends Controller
 {
@@ -27,6 +29,16 @@ class CreditCardsController extends Controller
         );
 
         return response()->json( $showAccount->show() );
+    }
+
+    public function store( StoreCreditCardRequest $request )
+    {
+        ( new CreateCreditCard( 
+            $request->user(),
+            $request->all()
+        ) )->create();
+
+        return response()->json( null, 201 );
     }
 
     public function update( UpdateCreditCardRequest $request, CreditCard $creditCard )

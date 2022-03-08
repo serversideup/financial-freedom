@@ -104,6 +104,7 @@ Route::get('/v1/loans/{loan}/transactions', [LoansTransactionsController::class,
  */
 Route::get('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'show']);
 Route::put('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'update']);
+Route::post('/v1/credit-cards', [CreditCardsController::class, 'store']);
 Route::get('/v1/credit-cards/{creditCard}/transactions', [CreditCardsTransactionsController::class, 'index']);
 
 /**

@@ -25,6 +25,8 @@ use App\Http\Controllers\API\CheckingAccounts\CheckingAccountsTransactionsContro
 use App\Http\Controllers\API\CreditCards\CreditCardsController;
 use App\Http\Controllers\API\CreditCards\CreditCardsTransactionsController;
 
+use App\Http\Controllers\API\GiftCards\GiftCardController;
+
 use App\Http\Controllers\API\Loans\LoansController;
 use App\Http\Controllers\API\Loans\LoansTransactionsController;
 
@@ -65,6 +67,7 @@ Route::post('/v1/accounts', [AccountsController::class, 'store']);
  */
 Route::get('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::put('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'update']);
+Route::post('/v1/savings-accounts', [SavingsAccountsController::class, 'store']);
 Route::get('/v1/savings-accounts/{savingsAccount}/transactions', [SavingsAccountsTransactionsController::class, 'index']);
 
 /**
@@ -72,7 +75,10 @@ Route::get('/v1/savings-accounts/{savingsAccount}/transactions', [SavingsAccount
  */
 Route::get('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'show']);
 Route::put('/v1/cash-accounts/{cashAccount}', [CashAccountsController::class, 'update']);
+Route::post('/v1/cash-accounts', [CashAccountsController::class, 'store']);
+
 Route::get('/v1/cash-accounts/{cashAccount}/allocations', [CashAccountsAllocationsController::class, 'index']);
+
 Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransactionsController::class, 'index']);
 
 /**
@@ -80,6 +86,7 @@ Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransact
  */
 Route::get('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 Route::put('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'update']);
+Route::post('/v1/checking-accounts', [CheckingAccountsController::class, 'store']);
 Route::get('/v1/checking-accounts/{checkingAccount}/allocations', [CheckingAccountsAllocationsController::class, 'index']);
 Route::get('/v1/checking-accounts/{checkingAccount}/transactions', [CheckingAccountsTransactionsController::class, 'index']);
 
@@ -88,6 +95,7 @@ Route::get('/v1/checking-accounts/{checkingAccount}/transactions', [CheckingAcco
  */
 Route::get('/v1/loans/{loan}', [LoansController::class, 'show']);
 Route::put('/v1/loans/{loan}', [LoansController::class, 'update']);
+Route::post('/v1/loans', [LoansController::class, 'store']);
 
 Route::get('/v1/loans/{loan}/transactions', [LoansTransactionsController::class, 'index']);
 
@@ -96,7 +104,14 @@ Route::get('/v1/loans/{loan}/transactions', [LoansTransactionsController::class,
  */
 Route::get('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'show']);
 Route::put('/v1/credit-cards/{creditCard}', [CreditCardsController::class, 'update']);
+Route::post('/v1/credit-cards', [CreditCardsController::class, 'store']);
 Route::get('/v1/credit-cards/{creditCard}/transactions', [CreditCardsTransactionsController::class, 'index']);
+
+/**
+ * Gift Card Endpoints
+ */
+Route::get('/v1/gift-cards/{giftCard}', [GiftCardController::class, 'show']);
+Route::post('/v1/gift-cards', [GiftCardController::class, 'store']);
 
 /**
  * Allocation Endpoints

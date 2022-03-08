@@ -9,6 +9,10 @@ export default {
         return axios.put('/api/v1/savings-accounts/'+id, data);
     },
 
+    store( data ){
+        return axios.post('/api/v1/savings-accounts', data );
+    },
+
     transactions( id, params ){
         return axios.get('/api/v1/savings-accounts/'+id+'/transactions', {
             params: params

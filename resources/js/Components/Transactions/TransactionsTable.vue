@@ -111,6 +111,9 @@
                                             <span v-if="transaction.direction == 'inflow'" class="text-green-500">
                                                 {{ formatMoney( transaction.amount ) }}
                                             </span>
+                                            <span v-if="transaction.direction == 'transfer'" class="text-gray-500 italic">
+                                                {{ formatMoney( transaction.amount ) }}
+                                            </span>
                                         </div>
                                     </td>
                                     <td v-if="columns.indexOf('date') > -1" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">

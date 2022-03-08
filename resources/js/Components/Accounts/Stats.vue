@@ -98,7 +98,7 @@ export default {
             this.monthlyTransactions.forEach( function( transaction ){
                 if( transaction.direction == 'outflow' ){
                     amount = parseFloat( amount ) - parseFloat( transaction.amount );
-                }else{
+                }else if( transaction.direction == 'inflow' ){
                     amount = parseFloat( amount ) + parseFloat( transaction.amount );
                 }
             } );

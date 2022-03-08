@@ -8,6 +8,7 @@
                     <option value="all">All</option>
                     <option value="outflow">Outflow</option>
                     <option value="inflow">Inflow</option>
+                    <option value="transfer">Transfer</option>
                 </select>
             </div>
 

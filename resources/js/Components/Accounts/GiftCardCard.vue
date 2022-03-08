@@ -1,0 +1,50 @@
+<template>
+    <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="p-5">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <img :src="'https://logo.clearbit.com/'+account.company.toLowerCase()+'.com'" class="rounded-full h-8 w-8"/>
+                </div>
+                <div class="ml-5 w-0 flex-1">
+                    <dl>
+                        <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+                            Gift Card
+                        </dt>
+                        <dd class="italic text-xs text-gray-500 truncate">
+                            {{ account.company }}
+                        </dd>
+                        <dd>
+                            <div class="text-lg leading-7 font-medium text-gray-900">
+                                {{ formatMoney( account.balance ) }}
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-50 px-5 py-3">
+            <div class="text-sm leading-5">
+                <Link :href="'/gift-cards/'+account.id" class="font-medium text-blue-600 hover:text-blue-900 transition ease-in-out duration-150">
+                    View account
+                </Link>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { FormatMoney } from '../../Mixins/formatMoney.js';
+import { Link } from '@inertiajs/inertia-vue3';
+
+export default {
+    props: ['account'],
+
+    mixins: [
+        FormatMoney
+    ],
+
+    components: {
+        Link
+    }
+}
+</script>

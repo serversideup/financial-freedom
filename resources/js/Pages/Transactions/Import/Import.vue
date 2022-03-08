@@ -40,7 +40,7 @@
 
     export default {
         props: [
-            'accounts'
+            'accounts',
         ],
 
         components: {

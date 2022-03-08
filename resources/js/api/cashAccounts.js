@@ -9,6 +9,10 @@ export default {
         return axios.put( '/api/v1/cash-accounts/'+id, data );
     },
 
+    store( data ){
+        return axios.post( '/api/v1/cash-accounts', data );
+    },
+
     getAllocations( id ){
         return axios.get( '/api/v1/cash-accounts/'+id+'/allocations' );
     },

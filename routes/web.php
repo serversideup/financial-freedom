@@ -8,7 +8,7 @@ use App\Http\Controllers\Web\SavingsAccounts\SavingsAccountsController;
 use App\Http\Controllers\Web\Loans\LoansController;
 use App\Http\Controllers\Web\Cash\CashAccountsController;
 use App\Http\Controllers\Web\CreditCards\CreditCardsController;
-
+use App\Http\Controllers\Web\GiftCards\GiftCardsController;
 use App\Http\Controllers\Web\Transactions\TransactionsController;
 use App\Http\Controllers\Web\Transactions\TransactionsReceiptController;
 
@@ -53,9 +53,13 @@ Route::post('/accounts', [AccountsController::class, 'store']);
 
 Route::get('/cash-accounts/{cashAccount}',[CashAccountsController::class, 'show'] );
 Route::get('/credit-cards/{creditCard}', [CreditCardsController::class, 'show'] );
+
 Route::get('/loans/{loan}', [LoansController::class, 'show']);
+
 Route::get('/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::get('/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
+
+Route::get('/gift-cards/{giftCard}', [GiftCardsController::class, 'show']);
 
 Route::get('/admin/transactions', [AdminTransactionsController::class, 'show']);
 Route::get('/admin/transactions/categories', [AdminTransactionsController::class, 'categories']);

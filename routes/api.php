@@ -94,6 +94,7 @@ Route::get('/v1/checking-accounts/{checkingAccount}/transactions', [CheckingAcco
  */
 Route::get('/v1/loans/{loan}', [LoansController::class, 'show']);
 Route::put('/v1/loans/{loan}', [LoansController::class, 'update']);
+Route::post('/v1/loans', [LoansController::class, 'store']);
 
 Route::get('/v1/loans/{loan}/transactions', [LoansTransactionsController::class, 'index']);
 

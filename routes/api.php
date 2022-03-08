@@ -85,6 +85,7 @@ Route::get('/v1/cash-accounts/{cashAccount}/transactions', [CashAccountsTransact
  */
 Route::get('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'show']);
 Route::put('/v1/checking-accounts/{checkingAccount}', [CheckingAccountsController::class, 'update']);
+Route::post('/v1/checking-accounts', [CheckingAccountsController::class, 'store']);
 Route::get('/v1/checking-accounts/{checkingAccount}/allocations', [CheckingAccountsAllocationsController::class, 'index']);
 Route::get('/v1/checking-accounts/{checkingAccount}/transactions', [CheckingAccountsTransactionsController::class, 'index']);
 

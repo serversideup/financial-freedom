@@ -94,11 +94,13 @@ export default {
 
             EventBus.on('close-modal', function(){
                 this.show = false;
+                this.type = '';
             }.bind(this));
         },
 
         cancel(){
             this.show = false;
+            this.type = '';
             EventBus.emit('reset-form');
             EventBus.emit('reset-validations');
         },

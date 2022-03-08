@@ -22,7 +22,7 @@ class CreateCashAccount
         $cashAccount->user_id = $this->user->id;
         $cashAccount->name = $this->data['name'];
         $cashAccount->description = $this->data['description'];
-        $cashAccount->current_balance = $this->data['initial_balance'];
+        $cashAccount->current_balance = $this->data['current_balance'];
 
         $cashAccount->save();
 

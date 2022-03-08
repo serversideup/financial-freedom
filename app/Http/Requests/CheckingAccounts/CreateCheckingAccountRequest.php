@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\CashAccounts;
+namespace App\Http\Requests\CheckingAccounts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCashAccountRequest extends FormRequest
+class CreateCheckingAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,10 @@ class CreateCashAccountRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'required',
-            'current_balance' => 'required|numeric'
+            'number' => 'required',
+            'current_balance' => 'required',
+            'institution' => 'required',
+            'description' => 'required'
         ];
     }
 }

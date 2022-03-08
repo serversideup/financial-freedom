@@ -23,15 +23,15 @@
         <div class="sm:col-span-6">
             <div>
                 <label for="amount" class="block text-sm font-medium text-gray-700">
-                    Initial Balance
+                    Current Balance
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                     <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
                         $
                     </span>
-                    <input type="text" name="initial-balance" id="initial-balance" v-model="form.initial_balance" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
+                    <input type="text" name="current-balance" id="current-balance" v-model="form.current_balance" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                 </div>
-                <span class="text-red-500 text-sm" v-show="!validations.initial_balance.valid" v-text="validations.initial_balance.message"></span>
+                <span class="text-red-500 text-sm" v-show="!validations.current_balance.valid" v-text="validations.current_balance.message"></span>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@ export default {
             form: {
                 name: '',
                 description: '',
-                initial_balance: ''
+                current_balance: ''
             },
 
             validations: {
@@ -59,9 +59,9 @@ export default {
                     valid: true,
                     message: 'Enter a quick description of your account'
                 },
-                initial_balance: {
+                current_balance: {
                     valid: true,
-                    message: 'Enter the initial balance of your account'
+                    message: 'Enter the current balance of your account'
                 },
             }
         }
@@ -93,7 +93,6 @@ export default {
                         this.hideModal();
                     }.bind(this))
                     .catch( function( error ){
-                        console.log( error );
                         this.setServerSideValidations( error.response.data.errors );
                     }.bind(this) );
             }
@@ -116,11 +115,11 @@ export default {
                 this.validations.description.valid = true;
             }
 
-            if( this.form.initial_balance == '' || isNaN( this.form.initial_balance ) ){
+            if( this.form.current_balance == '' || isNaN( this.form.current_balance ) ){
                 validAccount = false;
-                this.validations.initial_balance.valid = false;
+                this.validations.current_balance.valid = false;
             }else{
-                this.validations.initial_balance.valid = true;
+                this.validations.current_balance.valid = true;
             }
 
             return validAccount;
@@ -142,13 +141,13 @@ export default {
         resetForm(){
             this.form.name = '';
             this.form.description = '';
-            this.form.initial_balance = '';
+            this.form.current_balance = '';
         },
 
         resetValidations(){
             this.validations.name.valid = true;
             this.validations.description.valid = true;
-            this.validations.initial_balance.valid = true;
+            this.validations.current_balance.valid = true;
         },
 
         hideModal(){

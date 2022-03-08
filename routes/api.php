@@ -111,6 +111,7 @@ Route::get('/v1/credit-cards/{creditCard}/transactions', [CreditCardsTransaction
  * Gift Card Endpoints
  */
 Route::get('/v1/gift-cards/{giftCard}', [GiftCardController::class, 'show']);
+Route::post('/v1/gift-cards', [GiftCardController::class, 'store']);
 
 /**
  * Allocation Endpoints

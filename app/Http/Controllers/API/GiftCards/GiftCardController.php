@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API\GiftCards;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GiftCards\CreateGiftCardRequest;
 use App\Services\Accounts\ShowAccount;
 use App\Models\Accounts\GiftCard;
 use App\Services\Accounts\UpdateAccount;
+use App\Services\GiftCards\CreateGiftCard;
 use Illuminate\Http\Request;
 
 class GiftCardController extends Controller
@@ -27,6 +29,16 @@ class GiftCardController extends Controller
         );
 
         return response()->json( $showAccount->show() );
+    }
+
+    public function store( CreateGiftCardRequest $request )
+    {
+        ( new CreateGiftCard(
+            $request->user(),
+            $request->all()
+        ) )->create();
+
+        return response()->json( null, 201 );
     }
 
     public function update()

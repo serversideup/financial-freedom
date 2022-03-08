@@ -15,9 +15,8 @@
                     Location
                 </label>
                 <div class="mt-1 rounded-md shadow-sm">
-                    <input v-model="form.location" v-bind:class="{ 'border-red-500': !validations.location.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                    <input v-model="form.location" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
                 </div>
-                <span class="text-red-500 text-sm" v-show="!validations.location.valid" v-text="validations.location.message"></span>
             </div>
         </div>
         <div class="sm:col-span-3">
@@ -31,6 +30,7 @@
                     </span>
                     <input type="text" name="balance" id="balance" v-model="form.balance" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" />
                 </div>
+                <span class="text-red-500 text-sm" v-show="!validations.balance.valid" v-text="validations.balance.message"></span>
             </div>
         </div>
         <div class="sm:col-span-3">
@@ -39,9 +39,8 @@
                     Expiration
                 </label>
                 <div class="mt-1 rounded-md shadow-sm">
-                    <input v-model="form.expiration" v-bind:class="{ 'border-red-500': !validations.expiration.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                    <input v-model="form.expiration" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
                 </div>
-                <span class="text-red-500 text-sm" v-show="!validations.expiration.valid" v-text="validations.expiration.message"></span>
             </div>
         </div>
         <div class="sm:col-span-3">
@@ -50,9 +49,8 @@
                     URL
                 </label>
                 <div class="mt-1 rounded-md shadow-sm">
-                    <input v-model="form.url" v-bind:class="{ 'border-red-500': !validations.url.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                    <input v-model="form.url" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
                 </div>
-                <span class="text-red-500 text-sm" v-show="!validations.url.valid" v-text="validations.url.message"></span>
             </div>
         </div>
         <div class="sm:col-span-3">
@@ -61,15 +59,17 @@
                     Code
                 </label>
                 <div class="mt-1 rounded-md shadow-sm">
-                    <input v-model="form.code" v-bind:class="{ 'border-red-500': !validations.code.valid }" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
+                    <input v-model="form.code" type="text" class="rounded-md shadow-sm block w-full border-gray-300">
                 </div>
-                <span class="text-red-500 text-sm" v-show="!validations.code.valid" v-text="validations.code.message"></span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { EventBus } from '@/event-bus.js';
+import GiftCardAPI from '@/api/giftCards.js';
+
 export default {
     data(){
         return {
@@ -90,34 +90,98 @@ export default {
                 balance: {
                     valid: true,
                     message: 'Enter the initial balance of your gift card'
-                },
-                location: {
-                    valid: true,
-                    message: 'Enter the location of the gift card (i.e. Filing cabinet near desk)'
-                },
-                expiration: {
-                    valid: true,
-                    message: 'Enter the gift card\'s expiration date' 
-                },
-                url: {
-                    valid: true,
-                    message: 'Enter the URL of the giftcard'
-                },
-                code: {
-                    valid: true,
-                    message: 'Enter the code for the gift card'
                 }
             }
         }
     },
 
+    mounted(){
+        EventBus.on('add-gift-card', function(){
+            this.add();
+        }.bind(this));
+
+        EventBus.on('reset-form', function(){
+            this.resetForm();
+        }.bind(this));
+
+        EventBus.on('reset-validations', function(){
+            this.resetValidations();
+        }.bind(this));
+    },
+
     methods: {
         add(){
-
+            if( this.validate() ){
+                GiftCardAPI.store( this.form )
+                    .then( function( message ){
+                        this.notify();
+                        this.reloadAccounts();
+                        this.resetForm();
+                        this.resetValidations();
+                        this.hideModal();
+                    }.bind(this))
+                    .catch( function( error ){
+                        this.setServerSideValidations( error.response.data.errors );
+                    }.bind(this));
+            }
         },
 
         validate(){
+            let validAccount = true;
             
+            if( this.form.company == '' ){
+                validAccount = false;
+                this.validations.company.valid = false;
+            }else{
+                this.validations.company.valid = true;
+            }
+
+            if( this.form.balance == '' ){
+                validAccount = false;
+                this.validations.balance.valid = false;
+            }else{
+                this.validations.balance.valid = true;
+            }
+
+            return validAccount;
+        },
+
+        notify(){
+            EventBus.emit('notify', {
+                type: 'success',
+                title: 'Account Added',
+                message: 'You can now add transactions, set goals, and budget for this account!',
+                action: 'close'
+            });
+        },
+
+         reloadAccounts(){
+            EventBus.emit('reload-accounts');
+        },
+
+        resetForm(){
+            this.form.company = '';
+            this.form.balance = '';
+            this.form.location = '';
+            this.form.expiration = '';
+            this.form.url = '';
+            this.form.code = '';
+        },
+
+        resetValidations(){
+            this.validations.company.valid = true;
+            this.validations.balance.valid = true;
+        },
+
+        hideModal(){
+            EventBus.emit('close-modal');
+        },
+
+        setServerSideValidations( errors ){
+            for (const [key, value] of Object.entries(errors)) {
+                this.validations[ key ].valid = false;
+                this.validations[ key ].message = value[0];
+            }
         }
     }
 }

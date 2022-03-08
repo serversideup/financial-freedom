@@ -67,6 +67,7 @@ Route::post('/v1/accounts', [AccountsController::class, 'store']);
  */
 Route::get('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'show']);
 Route::put('/v1/savings-accounts/{savingsAccount}', [SavingsAccountsController::class, 'update']);
+Route::post('/v1/savings-accounts', [SavingsAccountsController::class, 'store']);
 Route::get('/v1/savings-accounts/{savingsAccount}/transactions', [SavingsAccountsTransactionsController::class, 'index']);
 
 /**

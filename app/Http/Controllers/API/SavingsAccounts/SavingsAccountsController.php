@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API\SavingsAccounts;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SavingsAccounts\CreateSavingsAccountRequest;
 use App\Http\Requests\SavingsAccounts\UpdateSavingsAccountRequest;
 use App\Models\Accounts\SavingsAccount;
 use App\Services\Accounts\ShowAccount;
 use App\Services\Accounts\UpdateAccount;
+use App\Services\SavingsAccounts\CreateSavingsAccount;
 
 class SavingsAccountsController extends Controller
 {
@@ -27,6 +29,16 @@ class SavingsAccountsController extends Controller
         );
 
         return response()->json( $showAccount->show() );
+    }
+
+    public function store( CreateSavingsAccountRequest $request )
+    {
+        ( new CreateSavingsAccount( 
+            $request->user(),
+            $request->all()
+        ) )->create();
+
+        return response()->json( null, 201 );
     }
 
     public function update( UpdateSavingsAccountRequest $request, SavingsAccount $savingsAccount )

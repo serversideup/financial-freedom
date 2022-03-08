@@ -42,7 +42,7 @@
             <button @click="cancel" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                 Cancel
             </button>
-            <button @click="addAccount()" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+            <button v-show="type != ''" @click="addAccount()" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
                 Add
             </button>
         </template>
@@ -53,7 +53,6 @@
 <script>
 import AppModal from '../Global/AppModal.vue';
 import { EventBus } from '../../event-bus.js';
-import AccountsAPI from '../../api/accounts.js';
 
 import NewCashAccount from './CashAccount/NewCashAccount.vue';
 import NewCheckingAccount from './CheckingAccount/NewCheckingAccount.vue';
@@ -100,41 +99,12 @@ export default {
 
         cancel(){
             this.show = false;
-            this.resetForm();
-            this.resetValidations();
+            EventBus.emit('reset-form');
+            EventBus.emit('reset-validations');
         },
 
         addAccount(){
-            if( this.validateNewAccount() ){
-                AccountsAPI.store( this.form )
-                    .then( function( response ){
-                        EventBus.emit('notify', {
-                            type: 'success',
-                            title: 'Account Added',
-                            message: 'You can now add transactions, set goals, and budget for this account!',
-                            action: 'close'
-                        });
-
-                        EventBus.emit('reload-accounts');
-
-                        this.resetForm();
-                        this.resetValidations();
-                    }.bind(this) )
-                    .catch( function( error ){
-                        this.setServerSideValidations( error.response.data.errors );
-                    }.bind(this) );
-            }
-        },
-
-        validateNewAccount(){
-            return true;
-        },
-
-        setServerSideValidations( errors ){
-            for (const [key, value] of Object.entries(errors)) {
-                this.validations[ key ].valid = false;
-                this.validations[ key ].message = value[0];
-            }
+            EventBus.emit('add-'+this.type);
         }
     }
 }

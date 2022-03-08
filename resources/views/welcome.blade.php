@@ -51,9 +51,9 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col mx-auto max-w-screen-md p-10 bg-white rounded-lg">
+            <div class="flex flex-col mx-auto max-w-screen-md p-10 bg-white rounded-lg text-center">
                 <h1 class="font-sans font-black text-4xl mt-5">Financial Freedom</h1>
-                <h2 class="font-sans font-bold text-base text-gray-400">Visualize your money, <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">design your budgets</span>, <span class="italic text-black">own your data</span>.</h2>
+                <h2 class="font-sans font-bold text-base text-gray-400">Visualize your money, <span class="font-sans font-bold text-base text-blue-600">design your budgets</span>, <span class="italic text-black">own your data</span>.</h2>
             </div>
             <div class="max-w-screen-xl mx-auto px-4 sm:px-6">
         <img class="relative rounded-lg shadow-lg" src="https://tailwindui.com/img/component-images/top-nav-with-multi-column-layout-screenshot.png" alt="App screenshot">

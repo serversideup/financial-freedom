@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\GiftCards\CreateGiftCardRequest;
 use App\Services\Accounts\ShowAccount;
 use App\Models\Accounts\GiftCard;
-use App\Services\Accounts\UpdateAccount;
 use App\Services\GiftCards\CreateGiftCard;
 use Illuminate\Http\Request;
 

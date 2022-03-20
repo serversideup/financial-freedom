@@ -14,6 +14,20 @@
                 </dl>
             </div>
         </div>
+        <div v-if="showAmountSpendable" class="border-t border-gray-200 md:border-0 md:border-l">
+            <div class="px-4 py-5 sm:p-6">
+                <dl>
+                    <dt class="text-base leading-6 font-normal text-gray-900">
+                        Amount Left to Spend
+                    </dt>
+                    <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
+                        <div class="flex items-baseline text-2xl leading-8 font-semibold text-astronaut-600">
+                            {{ formatMoney( unAllocatedAmount ) }}
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
         <div v-if="showAmountChanged" class="border-t border-gray-200 md:border-0 md:border-l">
             <div class="px-4 py-5 sm:p-6">
                 <dl>
@@ -74,8 +88,9 @@
 </template>
 
 <script>
-import TransactionsAPI from '../../api/transactions.js';
-import { FormatMoney } from '../../Mixins/formatMoney.js';
+import TransactionsAPI from '@/api/transactions.js';
+import AllocationsAPI from '@/api/allocations.js';
+import { FormatMoney } from '@/Mixins/formatMoney.js';
 import moment from 'moment';
 
 export default {
@@ -83,7 +98,8 @@ export default {
 
     data(){
         return {
-            monthlyTransactions: []
+            monthlyTransactions: [],
+            allocations: []
         }
     },
 
@@ -106,6 +122,17 @@ export default {
             return amount;
         },
 
+        unAllocatedAmount(){
+            let totalAllocated = 0.00;
+            
+            this.allocations.forEach( function( allocation ){
+                totalAllocated += parseFloat( allocation.amount )
+            });
+
+            return parseFloat( this.account.current_balance )
+                    - parseFloat( totalAllocated );
+        },
+
         numberOfTransactions(){
             return this.monthlyTransactions.length;
         },
@@ -114,6 +141,12 @@ export default {
             let types = ['cash', 'checking', 'credit-card', 'savings', 'loan'];
 
             return this.fields.includes('current_balance') && types.includes( this.type );
+        },
+
+        showAmountSpendable(){
+            let types = ['checking'];
+
+            return this.fields.includes('amount_spendable') && types.includes( this.type );
         },
 
         showAmountChanged(){
@@ -143,6 +176,7 @@ export default {
 
     mounted(){
         this.loadStats();
+        this.loadAllocations();
     },
 
     methods: {
@@ -161,7 +195,20 @@ export default {
                     this.monthlyTransactions = response.data;
                 }.bind(this));
             }
-        }
+        },
+
+        loadAllocations(){
+            if( this.showAmountSpendable ){
+                this.allocations = [];
+
+                AllocationsAPI.index({
+                    account_type: this.account.account_type,
+                    account_id: this.account.id
+                }).then( function( response ){
+                    this.allocations = response.data;
+                }.bind(this));       
+            }     
+        },
     }
 }
 </script>

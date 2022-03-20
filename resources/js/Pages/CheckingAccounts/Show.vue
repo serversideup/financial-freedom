@@ -25,7 +25,7 @@
                     :type="'checking'"
                     :fields="[
                         'current_balance',
-                        'amount_changed',
+                        'amount_spendable',
                         'transactions_changed'
                     ]"/>
                 

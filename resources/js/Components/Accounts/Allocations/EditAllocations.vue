@@ -47,7 +47,7 @@
                                             </button>
                                         </td>
                                 </tr>
-                                <tr>
+                                <tr v-show="form.allocations.length == 0">
                                     <td colspan="4" class="text-center p-5">
                                         No Allocations! 
                                     </td>

@@ -109,7 +109,7 @@
 
     import { EventBus } from '@/event-bus.js';
     import { mapState } from 'vuex';
-    import { USBankChecking } from '@/Mixins/imports/usbank/checking.js';
+    import { FormatCSVImport } from '@/Mixins/formatCSVImport.js';
     
     import TransactionsAPI from '@/api/transactions.js';
     // import Tags from '../../../../Components/Transactions/Tags.vue';
@@ -140,7 +140,7 @@
         },
 
         mixins: [
-            USBankChecking
+            FormatCSVImport
         ],
 
         watch: {
@@ -166,7 +166,7 @@
                     header: true,
                     skipEmptyLines: true,
                     complete: function(results) {
-                        this.formatTransactions( results.data );
+                        this.formatCSVImport( this.account, results.data );
                         this.checkForDuplicates();
                         this.loading = false;
                     }.bind(this)

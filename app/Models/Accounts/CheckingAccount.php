@@ -34,6 +34,11 @@ class CheckingAccount extends Model
         return $this->morphMany('App\Models\Allocations\Allocation', 'accountable');
     }
 
+    public function importMapping()
+    {
+        return $this->hasOne( 'App\Models\Institutions\ImportMapping', 'id', 'institution_import_map_id' );
+    }
+
     public function getAccountTypeAttribute()
     {
         return 'checking';

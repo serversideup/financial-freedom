@@ -17,33 +17,44 @@
             </div>
         </div>
         <div class="mt-5 grid grid-cols-3 gap-4">
-            <cash-account-card
-                v-for="(account, index) in accounts.cash_accounts"
-                v-bind:key="'account-cash-'+index"
-                :account="account"
-                />
-            <loan-card
-                v-for="(account, index) in accounts.loans"
-                v-bind:key="'account-loan-'+index"
-                :account="account"
-                />
+            <h2 class="col-span-3 text-gray-900 text-xl font-bold">Checking Accounts</h2>
             <checking-account-card
                 v-for="(account, index) in accounts.checking_accounts"
                 v-bind:key="'account-checking-account-'+index"
                 :account="account"
                 />
+
+            <h2 class="col-span-3 text-gray-900 text-xl font-bold">Savings Accounts</h2>
             <savings-account-card
                 v-for="(account, index) in accounts.savings_accounts"
                 v-bind:key="'account-savings-account-'+index"
                 :account="account"
                 :type="'Savings'"
                 />
+
+            <h2 class="col-span-3 text-gray-900 text-xl font-bold">Credit Accounts</h2>
             <credit-account-card
                 v-for="(account, index) in accounts.credit_cards"
                 v-bind:key="'account-credit-card-'+index"
                 :account="account"
                 :type="'Credit Card'"
                 />
+
+            <h2 class="col-span-3 text-gray-900 text-xl font-bold">Loans</h2>
+            <loan-card
+                v-for="(account, index) in accounts.loans"
+                v-bind:key="'account-loan-'+index"
+                :account="account"
+                />
+
+            <h2 class="col-span-3 text-gray-900 text-xl font-bold">Cash Acconts</h2>
+            <cash-account-card
+                v-for="(account, index) in accounts.cash_accounts"
+                v-bind:key="'account-cash-'+index"
+                :account="account"
+                />
+            
+            <h2 class="col-span-3 text-gray-900 text-xl font-bold">Gift Cards</h2>        
             <gift-card-card 
                 v-for="(account, index) in accounts.gift_cards"
                 v-bind:key="'account-gift-card-'+index"

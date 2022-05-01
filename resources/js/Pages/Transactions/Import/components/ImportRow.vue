@@ -32,16 +32,12 @@
                 </select>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 w-52">
-                <category-select v-model="transaction.category" v-if="!transaction.imported"/>
+                <category-select-new v-model="transaction.category" v-if="!transaction.imported"/>
                 <span v-if="transaction.imported" v-text="findCategoryName( transaction.category )"></span>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 <input v-if="!transaction.imported" @keypress.enter="saveTransaction()" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" v-model="transaction.name"/>
                 <span v-if="transaction.imported" v-text="transaction.name"/>
-            </td>
-            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
-                <input v-if="!transaction.imported" @keypress.enter="saveTransaction()" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" v-model="transaction.description"/>
-                <span v-if="transaction.imported" v-text="transaction.description"/>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 font-bold">
                 <span v-bind:class="{
@@ -69,19 +65,18 @@
 <script>
 import { EventBus } from '@/event-bus.js';
 import { mapState } from 'vuex';
-import CategorySelect from '@/Components/Transactions/CategorySelect.vue';
+import CategorySelectNew from '@/Components/Transactions/CategorySelectNew.vue';
 import TransactionsAPI from '@/api/transactions.js';
 
 export default {
     props: [
         'index',
         'transaction',
-        'syncBalances',
-        'categories'
+        'syncBalances'
     ],
 
     components: {
-        CategorySelect
+        CategorySelectNew
     },
 
     computed: {
@@ -103,7 +98,6 @@ export default {
                 amount: Math.abs( this.transaction.amount ),
                 direction: this.transaction.direction,
                 name: this.transaction.name,
-                description: this.transaction.description,
                 tags: [],
                 category: this.transaction.category,
                 update_balance: this.syncBalances

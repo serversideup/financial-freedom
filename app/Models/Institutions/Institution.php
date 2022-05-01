@@ -14,9 +14,4 @@ class Institution extends Model
     public $incrementing = true;
 
     protected $table = 'institutions';
-
-    public function importMapping()
-    {
-        return $this->hasOne('App\Models\Institutions\ImportMapping', 'institution_id', 'id');
-    }
 }

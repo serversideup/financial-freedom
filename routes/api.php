@@ -29,7 +29,7 @@ use App\Http\Controllers\API\GiftCards\GiftCardController;
 
 use App\Http\Controllers\API\Loans\LoansController;
 use App\Http\Controllers\API\Loans\LoansTransactionsController;
-
+use App\Http\Controllers\API\Rules\RulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,5 +134,9 @@ Route::delete('/v1/transactions/{transaction}/splits/{split}', [TransactionsCont
 
 Route::get('/v1/tags', [TagsController::class, 'index']);
 Route::put('/v1/tags/{tag}', [TagsController::class, 'update']);
+
+Route::get('/v1/rules', [RulesController::class, 'index']);
+Route::put('/v1/rules/{rule}', [RulesController::class, 'update']);
+Route::post('/v1/rules', [RulesController::class, 'store']);
 
 Route::put('/v1/categories/{category}', [CategoriesController::class, 'update']);

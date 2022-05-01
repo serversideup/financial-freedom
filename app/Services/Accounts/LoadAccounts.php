@@ -88,6 +88,7 @@ class LoadAccounts
         if( empty( $this->types ) || in_array('checking', $this->types ) ){
             $this->checkingAccounts = CheckingAccount::where('user_id', '=', $this->user->id)
                                                      ->with('institution')
+                                                    // ->with('institution.importMapping')
                                                      ->get();
         }
     }

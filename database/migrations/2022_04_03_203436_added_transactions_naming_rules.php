@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('institutions_import_mappings', function( Blueprint $table ){
+        Schema::create('transactions_naming_rules', function( Blueprint $table ){
             $table->bigIncrements('id');
-            $table->integer('institution_id')->unsigned()->nullable();
-            $table->foreign('institution_id')->references('id')->on('institutions');
-            $table->string('account_type');
-            $table->jsonb('column_map')->nullable();
-            $table->jsonb('transaction_rules')->nullable();
+            $table->string('find');
+            $table->string('replace');
+            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('institutions_import_mappings');
+        Schema::dropIfExists('transactions_naming_rules');
     }
 };

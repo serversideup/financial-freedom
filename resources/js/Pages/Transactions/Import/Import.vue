@@ -21,7 +21,8 @@
                 v-if="step == 2"/>
 
             <confirm-import 
-                v-show="step == 3"/>
+                v-show="step == 3"
+                :rules="rules"/>
 
             <view-duplicate/>
         </div>
@@ -41,6 +42,7 @@
     export default {
         props: [
             'accounts',
+            'rules'
         ],
 
         components: {

@@ -26,7 +26,7 @@
                                     </label>
                                     <div class="mt-1 sm:mt-0 sm:col-span-2">
                                         <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">
-                                            <input v-model="form.institution_name" id="institution_name" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                            <input v-model="form.institution_name" id="institution_name" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300">
                                         </div>
                                     </div>
                                 </div>
@@ -67,6 +67,31 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="mt-5 space-y-6 divide-y divide-gray-200">
+                            <div>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                    CSV Header Mappings
+                                </h3>
+                                <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+                                    Manage mappings for importing from a CSV
+                                </p>
+                            </div>
+                            <div class="mt-6 sm:mt-5">
+                                
+                                
+                                <div class="mt-8 border-t border-gray-200 pt-5">
+                                    <div class="flex justify-end">
+
+                                        <span class="ml-3 inline-flex rounded-md shadow-sm">
+                                            <button type="button" v-on:click="update()" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+                                                Update
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
         			</div>
       			</div>
 			</main>
@@ -92,7 +117,13 @@
                 form: {
                     institution_name: '',
                     logo: ''
-                }
+                },
+
+                headerMappings: {
+
+                },
+
+                transactionNames: []
             }
         },
 
@@ -138,6 +169,14 @@
                         reader.readAsDataURL( this.form.logo[0] );
                     }
                 }
+            },
+
+            updateHeaderMappings(){
+
+            },
+
+            updateTransactionNameRules(){
+
             }
         }
     }

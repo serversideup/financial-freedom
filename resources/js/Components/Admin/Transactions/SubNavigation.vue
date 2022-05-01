@@ -30,6 +30,7 @@ export default {
                 { name: 'Settings', href: '/admin/transactions', current: this.active == 'settings' ? true : false },
                 { name: 'Categories', href: '/admin/transactions/categories', current: this.active == 'categories' ? true : false },
                 { name: 'Tags', href: '/admin/transactions/tags', current: this.active == 'tags' ? true : false },
+                { name: 'Rules', href: '/admin/transactions/rules', current: this.active == 'rules' ? true : false }
             ]
         }
     },

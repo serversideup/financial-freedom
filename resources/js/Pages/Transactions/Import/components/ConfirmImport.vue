@@ -68,9 +68,6 @@
                                                 Name
                                             </th>
                                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Description
-                                            </th>
-                                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Amount
                                             </th>
                                             <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -116,7 +113,7 @@
     import ImportRow from './ImportRow.vue';
 
     export default {
-        props: ['categories'],
+        props: ['categories', 'rules'],
 
         data(){
             return {
@@ -166,7 +163,7 @@
                     header: true,
                     skipEmptyLines: true,
                     complete: function(results) {
-                        this.formatCSVImport( this.account, results.data );
+                        this.formatCSVImport( results.data );
                         this.checkForDuplicates();
                         this.loading = false;
                     }.bind(this)

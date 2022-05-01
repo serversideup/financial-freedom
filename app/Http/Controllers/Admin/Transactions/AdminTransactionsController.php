@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use App\Models\Tags\Tag;
 use App\Models\Categories\Category;
+use App\Models\Transactions\NamingRule;
 use Auth;
 
 class AdminTransactionsController extends Controller
@@ -42,5 +43,10 @@ class AdminTransactionsController extends Controller
         return Inertia::render('Admin/Transactions/Tags', [
             'tags' => $tags
         ]);
+    }
+
+    public function rules()
+    {
+        return Inertia::render('Admin/Transactions/Rules');
     }
 }

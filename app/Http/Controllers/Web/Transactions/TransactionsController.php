@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Transactions;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transactions\NamingRule;
 use App\Models\Transactions\Transaction;
 
 use App\Services\Transactions\AddTransaction;
@@ -31,9 +32,11 @@ class TransactionsController extends Controller
     public function import()
     {
         $accounts = ( new LoadAccounts( Auth::user(), ['credit-cards', 'checking'] ) )->load();
+        $rules = NamingRule::with('category')->get();
 
         return Inertia::render('Transactions/Import/Import', [
-            'accounts' => $accounts
+            'accounts' => $accounts, 
+            'rules' => $rules
         ]);
     }
 

@@ -23,13 +23,13 @@
         "postcss": "^8.4.5",
         "postcss-import": "^12.0.1",
         "resolve-url-loader": "^3.1.0",
-        "tailwindcss": "^3.0.16",
+        "tailwindcss": "^3.0.23",
         "tippy.js": "^6.2.7",
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
-        "@headlessui/vue": "^1.4.1",
-        "@heroicons/vue": "^1.0.4",
+        "@headlessui/vue": "^1.5.0",
+        "@heroicons/vue": "^1.0.6",
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-vue3": "^0.5.2",
         "dayjs": "^1.10.6",

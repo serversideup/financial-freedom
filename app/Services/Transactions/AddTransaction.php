@@ -38,7 +38,7 @@ class AddTransaction
         $transaction->user_id = $this->user->id;
         $transaction->accountable_id = $this->account->id;
         $transaction->accountable_type = get_class( $this->account );
-        $transaction->category_id = $this->category;
+        $transaction->category_id = $this->category['id'];
         $transaction->amount = $this->amount;
         $transaction->date = $this->date;
         $transaction->name = $this->name;
@@ -77,7 +77,7 @@ class AddTransaction
         $this->direction = $data['direction'];
         $this->name = $data['name'];
         $this->date = date( 'Y-m-d', strtotime( $data['date'] ) );
-        $this->description = $data['description'];
+        $this->description = isset( $data['description'] ) ? $data['descriptions'] : '';
         $this->category = $data['category'];
 
         if( isset( $data['tags'] ) ){

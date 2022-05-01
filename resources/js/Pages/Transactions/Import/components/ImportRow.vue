@@ -14,7 +14,7 @@
                     </span>
                 </div>
             </td>
-            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">
                 <span v-bind:class="{
                         'text-red-500' : transaction.direction == 'outflow',
                         'text-green-500' : transaction.direction == 'inflow',
@@ -33,7 +33,9 @@
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 w-52">
                 <category-select-new v-model="transaction.category" v-if="!transaction.imported"/>
-                <span v-if="transaction.imported" v-text="findCategoryName( transaction.category )"></span>
+                <span v-if="transaction.imported">
+                    <span v-if="transaction.category.parent_name != ''" class="text-gray-400" v-text="transaction.category.parent_name + ' > '"></span> {{ transaction.category.name }}
+                </span>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 <input v-if="!transaction.imported" @keypress.enter="saveTransaction()" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300" v-model="transaction.name"/>
@@ -119,18 +121,6 @@ export default {
                 transaction: transaction,
                 key: key
             } );
-        },
-
-        findCategoryName( id ){
-            let name = '';
-
-            this.$page.props.categories.forEach(function( category ){
-                if( category.id == id ){
-                    name = category.name;
-                }
-            });
-
-            return name;
         }
     }
 }

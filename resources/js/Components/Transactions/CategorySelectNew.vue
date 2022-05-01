@@ -38,7 +38,7 @@
                                     <span
                                         class="block truncate"
                                         :class="{ 'font-medium': selected, 'font-normal': !selected }">
-                                            {{ category.name }}
+                                            <span v-if="category.parent_name != ''" class="text-gray-400" v-text="category.parent_name +' > '"></span> {{ category.name }}
                                     </span>
                                     <span
                                         v-if="selected"

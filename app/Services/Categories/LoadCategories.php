@@ -60,7 +60,10 @@ class LoadCategories
                 array_push( $categories, $tempCategory );
 
                 foreach( $category->subCategories as $subCategory ){
-                    array_push( $categories, $subCategory->toArray() );
+                    $categoryArray = $subCategory->toArray();
+                    unset( $categoryArray['parent_category'] );
+
+                    array_push( $categories, $categoryArray );
                 }
             }
         }

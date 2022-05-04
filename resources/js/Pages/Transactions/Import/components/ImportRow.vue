@@ -32,7 +32,7 @@
                 </select>
             </td>
             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500 w-52">
-                <category-select-new v-model="transaction.category" v-if="!transaction.imported"/>
+                <category-select v-model="transaction.category" v-if="!transaction.imported"/>
                 <span v-if="transaction.imported">
                     <span v-if="transaction.category.parent_name != ''" class="text-gray-400" v-text="transaction.category.parent_name + ' > '"></span> {{ transaction.category.name }}
                 </span>
@@ -67,7 +67,7 @@
 <script>
 import { EventBus } from '@/event-bus.js';
 import { mapState } from 'vuex';
-import CategorySelectNew from '@/Components/Transactions/CategorySelectNew.vue';
+import CategorySelect from '@/Components/Categories/CategorySelect.vue';
 import TransactionsAPI from '@/api/transactions.js';
 
 export default {
@@ -78,7 +78,7 @@ export default {
     ],
 
     components: {
-        CategorySelectNew
+        CategorySelect
     },
 
     computed: {

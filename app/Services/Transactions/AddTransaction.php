@@ -77,7 +77,7 @@ class AddTransaction
         $this->direction = $data['direction'];
         $this->name = $data['name'];
         $this->date = date( 'Y-m-d', strtotime( $data['date'] ) );
-        $this->description = isset( $data['description'] ) ? $data['descriptions'] : '';
+        $this->description = isset( $data['description'] ) ? $data['description'] : '';
         $this->category = $data['category'];
 
         if( isset( $data['tags'] ) ){

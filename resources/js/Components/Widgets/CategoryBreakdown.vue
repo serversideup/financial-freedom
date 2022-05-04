@@ -40,7 +40,7 @@ export default {
         },
 
         computeCategoryBreakdown(){
-            
+            console.log( this.transactions );
         }
     }
 }

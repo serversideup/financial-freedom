@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Web\Accounts\AccountsController;
+use App\Http\Controllers\Web\Budgets\BudgetsController;
 use App\Http\Controllers\Web\CheckingAccounts\CheckingAccountsController;
 use App\Http\Controllers\Web\SavingsAccounts\SavingsAccountsController;
 use App\Http\Controllers\Web\Loans\LoansController;
@@ -50,6 +51,8 @@ Route::post('/transactions', [TransactionsController::class, 'store']);
 Route::get('/accounts', [AccountsController::class, 'index']);
 Route::get('/accounts/{account}/edit', [AccountsController::class, 'edit']);
 Route::post('/accounts', [AccountsController::class, 'store']);
+
+Route::get('/budgets', [BudgetsController::class, 'index']);
 
 Route::get('/cash-accounts/{cashAccount}',[CashAccountsController::class, 'show'] );
 Route::get('/credit-cards/{creditCard}', [CreditCardsController::class, 'show'] );

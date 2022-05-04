@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Institutions\InstitutionsController;
 use App\Http\Controllers\API\Transactions\TransactionsController;
 use App\Http\Controllers\API\Accounts\AccountsController;
 use App\Http\Controllers\API\Allocations\AllocationsController;
+use App\Http\Controllers\API\Budgets\BudgetsController;
 use App\Http\Controllers\API\Tags\TagsController;
 use App\Http\Controllers\API\Categories\CategoriesController;
 
@@ -138,5 +139,13 @@ Route::put('/v1/tags/{tag}', [TagsController::class, 'update']);
 Route::get('/v1/rules', [RulesController::class, 'index']);
 Route::put('/v1/rules/{rule}', [RulesController::class, 'update']);
 Route::post('/v1/rules', [RulesController::class, 'store']);
+
+/**
+ * Budgets Endpoints
+ */
+Route::get('/v1/budgets', [BudgetsController::class, 'index']);
+Route::get('/v1/budgets/{budget}', [BudgetsController::class, 'show']);
+Route::put('/v1/budgets/{budget}', [BudgetsController::class, 'update']);
+Route::post('/v1/budgets', [BudgetsController::class, 'store']);
 
 Route::put('/v1/categories/{category}', [CategoriesController::class, 'update']);

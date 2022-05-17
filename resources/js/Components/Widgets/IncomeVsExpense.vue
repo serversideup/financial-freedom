@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 col-span-2">
+    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 col-span-8">
         <div class="px-4 py-5 font-semibold font-sans text-astronaut-500 sm:px-6">
             Income vs Expense: {{ startDate }} - {{ endDate }}
         </div>

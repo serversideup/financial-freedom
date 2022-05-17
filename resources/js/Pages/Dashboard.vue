@@ -3,9 +3,10 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="grid grid-cols-3 gap-4 w-full">
+                <div class="grid grid-cols-12 gap-4 w-full">
                     <income-vs-expense/>
                     <category-breakdown/>
+                    <budgets-status/>
                 </div>
             </div>
         </div>
@@ -17,12 +18,14 @@
     
     import IncomeVsExpense from '../Components/Widgets/IncomeVsExpense.vue';
     import CategoryBreakdown from '../Components/Widgets/CategoryBreakdown.vue';
+    import BudgetsStatus from '@/Components/Widgets/BudgetsStatus.vue';
 
     export default {
         components: {
             AppLayout,
             IncomeVsExpense,
-            CategoryBreakdown
+            CategoryBreakdown,
+            BudgetsStatus
         },
     }
 </script>

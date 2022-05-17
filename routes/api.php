@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Transactions\TransactionsController;
 use App\Http\Controllers\API\Accounts\AccountsController;
 use App\Http\Controllers\API\Allocations\AllocationsController;
 use App\Http\Controllers\API\Budgets\BudgetsController;
+use App\Http\Controllers\API\BudgetsPeriods\BudgetsPeriodsController;
 use App\Http\Controllers\API\Tags\TagsController;
 use App\Http\Controllers\API\Categories\CategoriesController;
 
@@ -147,5 +148,11 @@ Route::get('/v1/budgets', [BudgetsController::class, 'index']);
 Route::get('/v1/budgets/{budget}', [BudgetsController::class, 'show']);
 Route::put('/v1/budgets/{budget}', [BudgetsController::class, 'update']);
 Route::post('/v1/budgets', [BudgetsController::class, 'store']);
+
+/**
+ * Budgets Periods Endpoints
+ */
+Route::get('/v1/budgets-periods', [BudgetsPeriodsController::class, 'index']);
+Route::post('/v1/budgets-periods', [BudgetsPeriodsController::class, 'store']);
 
 Route::put('/v1/categories/{category}', [CategoriesController::class, 'update']);

@@ -6,6 +6,7 @@ use App\Models\Transactions\Transaction;
 use App\Models\Accounts\CheckingAccount;
 use App\Models\Accounts\CreditCard;
 use App\Models\Accounts\SavingsAccount;
+use App\Services\BudgetsPeriods\ApplyTransaction;
 use App\Services\Tags\GetTag;
 
 class AddTransaction
@@ -50,6 +51,7 @@ class AddTransaction
 
         $this->tagTransaction( $transaction );
         $this->updateAccountBalance();
+        $this->applyToCurrentBudgetPeriod( $transaction );
 
         return $transaction;
     }
@@ -131,4 +133,10 @@ class AddTransaction
             $this->account->save();
         }
     }
+
+    private function applyToCurrentBudgetPeriod( $transaction )
+    {
+        ( new ApplyTransaction( $transaction ) )->apply();
+    }
+    
 }

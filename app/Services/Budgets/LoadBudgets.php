@@ -16,6 +16,7 @@ class LoadBudgets
     {
         $budgets = Budget::where( 'user_id', '=', Auth::user()->id )
                          ->with('category')
+                         ->with('category.parentCategory')
                          ->get();
                          
         return $budgets;

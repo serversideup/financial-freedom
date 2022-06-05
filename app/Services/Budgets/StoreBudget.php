@@ -4,6 +4,8 @@ namespace App\Services\Budgets;
 
 use App\Models\Budgets\Budget;
 use App\Models\Budgets\BudgetPeriod;
+use App\Models\Transactions\Transaction;
+use App\Services\BudgetsPeriods\ApplyTransaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
@@ -11,6 +13,7 @@ class StoreBudget
 {
     private $data;
     private $budget;
+    private $budgetPeriod;
 
     public function __construct( $data )
     {
@@ -46,15 +49,31 @@ class StoreBudget
         $startOfMonth = $now->startOfMonth()->format('Y-m-d');
         $endOfMonth = $now->endOfMonth()->format('Y-m-d');
 
-        $budgetPeriod = new BudgetPeriod();
+        $this->budgetPeriod = new BudgetPeriod();
 
-        $budgetPeriod->user_id = Auth::user()->id;
-        $budgetPeriod->name = $this->budget->name;
-        $budgetPeriod->category_id = $this->budget->category_id;
-        $budgetPeriod->start_date = $startOfMonth;
-        $budgetPeriod->end_date = $endOfMonth;
-        $budgetPeriod->amount = $this->budget->amount;
+        $this->budgetPeriod->user_id = Auth::user()->id;
+        $this->budgetPeriod->name = $this->budget->name;
+        $this->budgetPeriod->category_id = $this->budget->category_id;
+        $this->budgetPeriod->start_date = $startOfMonth;
+        $this->budgetPeriod->end_date = $endOfMonth;
+        $this->budgetPeriod->amount = $this->budget->amount;
 
-        $budgetPeriod->save();
+        $this->budgetPeriod->save();
+
+        $this->applyTransactions();
+    }
+
+    private function applyTransactions()
+    {
+        $existingTransactions = Transaction::where( 'user_id', '=', Auth::user()->id )
+                                           ->whereDate( 'date', '<=', $this->budgetPeriod->end_date )
+                                           ->whereDate( 'date', '>=', $this->budgetPeriod->start_date )
+                                           ->where( 'category_id', '=', $this->budgetPeriod->category_id )
+                                           ->get();
+
+        foreach( $existingTransactions as $transaction ){
+            $applyTransaction = new ApplyTransaction( $transaction );
+            $applyTransaction->apply();
+        }
     }
 }

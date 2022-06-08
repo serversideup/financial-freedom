@@ -20,7 +20,13 @@
                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ budgetPeriod.category.name }}</td>
                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ formatMoney( budgetPeriod.amount ) }}</td>
                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ findCurrentAmount( budgetPeriod ) }}</td>
-                        <td class="whitespace-nowrap py-4 px-3 text-sm">{{ findRemainingAmount( budgetPeriod ) }}</td>
+                        <td class="whitespace-nowrap py-4 px-3 text-sm">
+                            <span class="px-2 py-1 rounded-full" v-bind:class="{
+                                'text-green-800 bg-green-100': findRemainingAmount( budgetPeriod ) > 0,
+                                'text-red-800 bg-red-100': findRemainingAmount( budgetPeriod ) < 0
+                                }">{{ formatMoney( findRemainingAmount( budgetPeriod ) ) }}
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -79,6 +85,7 @@ function findRemainingAmount( budgetPeriod ){
     budgetPeriod.transactions.forEach( (transaction) => {
         currentSpent += parseFloat( transaction.amount );
     });
-    return formatMoney( budgetPeriod.amount - currentSpent );
+
+    return budgetPeriod.amount - currentSpent;
 }
 </script>

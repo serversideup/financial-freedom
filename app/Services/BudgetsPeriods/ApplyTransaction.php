@@ -4,7 +4,6 @@ namespace App\Services\BudgetsPeriods;
 
 use App\Models\Budgets\BudgetPeriod;
 use App\Models\Budgets\BudgetPeriodTransaction;
-use Illuminate\Support\Carbon;
 
 class ApplyTransaction
 {
@@ -24,11 +23,9 @@ class ApplyTransaction
 
     private function findBudgetPeriod()
     {
-        $now = Carbon::now();
-
         $this->budgetPeriod = BudgetPeriod::where('user_id', '=', $this->transaction->user_id)
-                                    ->whereDate( 'start_date', '<=', $now->format('Y-m-d') )
-                                    ->whereDate( 'end_date', '>=', $now->format('Y-m-d') )
+                                    ->whereDate( 'start_date', '<=', $this->transaction->date )
+                                    ->whereDate( 'end_date', '>=', $this->transaction->date )
                                     ->where('category_id', '=', $this->transaction->category_id)
                                     ->first();
     }

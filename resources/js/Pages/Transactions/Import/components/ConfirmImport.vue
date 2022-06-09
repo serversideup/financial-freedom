@@ -36,10 +36,18 @@
                 </div>
             </div>
 
-            <div class="col-span-4 mt-5">
+            <div class="col-span-2 mt-5">
+                <div class="overflow-hidden mt-1 flex flex-col items-center justify-center">
+                    <button type="button" v-on:click="addTransactionRule()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Add Rule
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-span-2 mt-5">
                 <div class="overflow-hidden mt-1 flex flex-col items-center justify-center">
                     <div class="w-full flex items-center justify-center mb-1">
-                        <input type="checkbox" value="yes" v-model="accountBalanceSync" class="mr-1"/> Sync account balance on import
+                        <input type="checkbox" value="yes" v-model="accountBalanceSync" class="mr-1"/> Sync account balance
                     </div>
                     <button type="button" v-on:click="importTransactions()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         Import
@@ -154,6 +162,10 @@
             EventBus.on('transaction-persisted', function( key ){
                 this.pendingTransactions[key].imported = true;
             }.bind(this) );
+
+            EventBus.on('new-rule-added', function( rule ){
+                this.applyNewRule( rule );
+            }.bind(this));
         },
 
         methods: {
@@ -227,6 +239,20 @@
                 }else{
                     return false;
                 }
+            },
+
+            addTransactionRule(){
+                console.log('asdf');
+                EventBus.emit('prompt-add-rule');
+            },
+
+            applyNewRule( rule ){
+                this.pendingTransactions.forEach( function( transaction, index ){
+                    if( transaction.name.search( rule.find ) > -1 ){
+                        transaction.name = rule.replace;
+                        transaction.category = rule.category ? rule.category : '';
+                    }
+                });
             }
         }
     }

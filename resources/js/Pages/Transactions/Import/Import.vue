@@ -25,6 +25,8 @@
                 :rules="rules"/>
 
             <view-duplicate/>
+
+            <add-rule-modal/>
         </div>
 
     </app-layout>
@@ -38,6 +40,7 @@
     import UploadFile from './components/UploadFile';
     import ConfirmImport from './components/ConfirmImport.vue';
     import ViewDuplicate from './components/ViewDuplicate.vue';
+    import AddRuleModal from '@/Components/Transactions/AddRuleModal.vue';
 
     export default {
         props: [
@@ -51,7 +54,8 @@
             SelectAccount,
             UploadFile,
             ConfirmImport,
-            ViewDuplicate
+            ViewDuplicate,
+            AddRuleModal
         },
 
         computed: {

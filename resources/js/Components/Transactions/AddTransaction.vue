@@ -112,10 +112,6 @@ import TransactionsAPI from '@/api/transactions.js';
 import CategorySelect from '@/Components/Categories/CategorySelect.vue';
 
 export default {
-    props: [
-        'categories'
-    ],
-
     components: {
         AppModal,
         AccountSelect,

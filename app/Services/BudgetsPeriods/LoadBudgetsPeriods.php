@@ -21,6 +21,7 @@ class LoadBudgetsPeriods
                                     ->whereDate( 'start_date', '<=', $now->format('Y-m-d') )
                                     ->whereDate( 'end_date', '>=', $now->format('Y-m-d') )
                                     ->with( 'transactions' )
+                                    ->with( 'transactions.splits' )
                                     ->with( 'category' )
                                     ->get();
                          

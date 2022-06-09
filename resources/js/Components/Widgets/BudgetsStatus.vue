@@ -23,7 +23,8 @@
                         <td class="whitespace-nowrap py-4 px-3 text-sm">
                             <span class="px-2 py-1 rounded-full" v-bind:class="{
                                 'text-green-800 bg-green-100': findRemainingAmount( budgetPeriod ) > 0,
-                                'text-red-800 bg-red-100': findRemainingAmount( budgetPeriod ) < 0
+                                'text-red-800 bg-red-100': findRemainingAmount( budgetPeriod ) < 0,
+                                'text-gray-900 bg-gray-100': findRemainingAmount( budgetPeriod ) == 0
                                 }">{{ formatMoney( findRemainingAmount( budgetPeriod ) ) }}
                             </span>
                         </td>
@@ -73,7 +74,15 @@ function findCurrentAmount( budgetPeriod ){
     let currentSpent = 0.00;
     
     budgetPeriod.transactions.forEach( (transaction) => {
-        currentSpent += parseFloat( transaction.amount );
+        if( transaction.splits.length > 0 ){
+            transaction.splits.forEach( (split) => {
+                if( split.category_id == budgetPeriod.category_id ){
+                    currentSpent += parseFloat( split.amount );
+                }
+            } );
+        }else{
+            currentSpent += parseFloat( transaction.amount );
+        }
     });
 
     return formatMoney( currentSpent );
@@ -83,8 +92,18 @@ function findRemainingAmount( budgetPeriod ){
     let currentSpent = 0.00;
     
     budgetPeriod.transactions.forEach( (transaction) => {
-        currentSpent += parseFloat( transaction.amount );
+        if( transaction.splits.length > 0 ){
+            transaction.splits.forEach( (split) => {
+                if( split.category_id == budgetPeriod.category_id ){
+                    currentSpent += parseFloat( split.amount );
+                }
+            } );
+        }else{
+            currentSpent += parseFloat( transaction.amount );
+        }
+        
     });
+
 
     return budgetPeriod.amount - currentSpent;
 }

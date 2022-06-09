@@ -32,7 +32,9 @@ class RulesController extends Controller
 
         $namingRule->save();
 
-        return response()->json( null, 201 );
+        $namingRule->load('category');
+
+        return response()->json( $namingRule, 201 );
     }
 
     public function update( Request $request, NamingRule $rule )

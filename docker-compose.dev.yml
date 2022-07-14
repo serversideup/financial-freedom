@@ -71,7 +71,7 @@ services:
         - web-dev
     hostname: "financial-freedom_meilisearch"
     volumes: 
-      - ./_volumes/meilisearch/data.ms:/data.ms:cached
+      - ./_volumes/meilisearch/meilisearch_data:/meili_data:cached
     depends_on:
       - "mariadb"
       - "php"

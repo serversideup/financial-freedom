@@ -10,7 +10,7 @@ services:
     working_dir: /var/www/html
 
   meilisearch:
-    image: getmeili/meilisearch:v0.25.2
+    image: getmeili/meilisearch:v0.27.2
     depends_on:
       - "redis"
     environment:

@@ -27,8 +27,15 @@ Hi! We're [Dan](https://twitter.com/danpastori) and [Jay](https://twitter.com/ja
 
 ### Our Sponsors
 All of our software is free an open to the world. None of this can be brought to you without the financial backing of our sponsors.
+
+#### 🏆 Gold Sponsor
+<a href="https://snapshooter.com/?via=serversideup&amp;utm_campaign=serversideup&amp;utm_source=serversideup&amp;utm_medium=banner" rel="sponsored" target="_blank">
+  <img width="250" src="https://521public.s3.amazonaws.com/serversideup/sponsors/snapshooter.svg" alt="SnapShooter Backups">
+</a>
+
+#### Individual Supporters
 <p align="center">
-		<a href="https://github.com/sponsors/serversideup"><img src="https://serversideup.net/wp-content/themes/serversideup/images/sponsor-empty-state.png" alt="Sponsors"></a>
+		<a href="https://github.com/sponsors/serversideup"><img src="https://521public.s3.amazonaws.com/serversideup/sponsors/sponsor-empty-state.png" alt="Sponsors"></a>
 </p>
 
 # What's Financial Freedom?

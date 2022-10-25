@@ -1,0 +1,12 @@
+name: Docker Publish (Production Images)
+on:
+  push:
+
+jobs:
+  docker-publish:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: docker-build-action
+        uses: serversideup/github-action-docker-build@v0.0.1-alpha
+        with:
+          tags: serversideup/financial-freedom:latest

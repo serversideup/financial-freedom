@@ -13,6 +13,6 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: docker-build-action
-        uses: serversideup/github-action-docker-build
+        uses: serversideup/github-action-docker-build@latest
         with:
           tags: serversideup/financial-freedom:latest

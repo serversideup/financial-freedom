@@ -16,3 +16,4 @@ jobs:
         uses: serversideup/github-action-docker-build@v0.0.3-alpha
         with:
           tags: serversideup/financial-freedom:latest
+          platforms: "linux/amd64,linux/arm/v7,linux/arm64/v8"

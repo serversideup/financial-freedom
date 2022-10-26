@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: docker-build-action
-        uses: serversideup/github-action-docker-build@v1
+        uses: serversideup/github-action-docker-build@v1.1.0
         with:
           tags: serversideup/financial-freedom:latest
           registry-username: ${{ secrets.DOCKER_HUB_USERNAME }}

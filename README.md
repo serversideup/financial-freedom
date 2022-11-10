@@ -28,15 +28,10 @@ Hi! We're [Dan](https://twitter.com/danpastori) and [Jay](https://twitter.com/ja
 ### Our Sponsors
 All of our software is free an open to the world. None of this can be brought to you without the financial backing of our sponsors.
 
-#### 🏆 Gold Sponsor
-<a href="https://snapshooter.com/?via=serversideup&amp;utm_campaign=serversideup&amp;utm_source=serversideup&amp;utm_medium=banner" rel="sponsored" target="_blank">
-  <img width="250" src="https://521public.s3.amazonaws.com/serversideup/sponsors/snapshooter.svg" alt="SnapShooter Backups">
-</a>
+<p align="center"><a href="https://github.com/sponsors/serversideup"><img src="https://521public.s3.amazonaws.com/serversideup/sponsors/sponsor-box.png" alt="Sponsors"></a></p>
 
 #### Individual Supporters
-<p align="center">
-		<a href="https://github.com/sponsors/serversideup"><img src="https://521public.s3.amazonaws.com/serversideup/sponsors/sponsor-empty-state.png" alt="Sponsors"></a>
-</p>
+<!-- supporters --><a href="https://github.com/deligoez"><img src="https://github.com/deligoez.png" width="40px" alt="deligoez" /></a>&nbsp;&nbsp;<a href="https://github.com/alexjustesen"><img src="https://github.com/alexjustesen.png" width="40px" alt="alexjustesen" /></a>&nbsp;&nbsp;<!-- supporters -->
 
 # What's Financial Freedom?
 Financial Freedom is an Open Source Alternative to Mint.com & YNAB. Your budgeting data should be owned and controlled by you -- no questions asked. **Personal finance should be <u>personal</u>.**

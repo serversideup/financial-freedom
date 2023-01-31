@@ -51,7 +51,7 @@ Everything about this application is open and free. Review the source code yours
 * ✅ Transaction tagging, splitting, line item management
 * ✅ Integration with Plaid.com (coming soon)
 * ✅ Simple and powerful budgeting and notification system (coming soon)
-* ✅ Goal setting and timeline of achievemnts (coming soon)
+* ✅ Goal setting and timeline of achievements (coming soon)
 
 
 ## Contributing and Questions

@@ -1,16 +1,16 @@
 import { defineConfig, splitVendorChunkPlugin, loadEnv, Plugin } from 'vite';
 // import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
-import { createHtmlPlugin } from "vite-plugin-html";
-import { esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
+import { createHtmlPlugin } from 'vite-plugin-html';
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import eslint from 'vite-plugin-eslint';
 import laravel from 'laravel-vite-plugin';
-import legacy from "@vitejs/plugin-legacy";
-import manifestSRI from "vite-plugin-manifest-sri";
+import legacy from '@vitejs/plugin-legacy';
+import manifestSRI from 'vite-plugin-manifest-sri';
 import path from 'path';
 import StylelintPlugin from 'vite-plugin-stylelint';
-import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
-import viteImagemin from "vite-plugin-imagemin";
-import { ViteMinifyPlugin } from "vite-plugin-minify";
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import viteImagemin from 'vite-plugin-imagemin';
+import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import vue from '@vitejs/plugin-vue';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 
@@ -25,13 +25,13 @@ export default ({ mode }) => {
     },
     build: {
       ssr: false,
-      minify: "esnext",
+      minify: 'esnext',
       reportCompressedSize: true,
       chunkSizeWarningLimit: 1600,
       manifest: true,
-      sourcemap: process.env.VITE_APP_ENV == "local" ? true : false,
+      sourcemap: process.env.VITE_APP_ENV == 'local' ? true : false,
       rollupOptions: {
-        external: ["Vue"],
+        external: ['Vue'],
         output: {
           manualChunks(id, { getModuleInfo }) {
             const match = /.*\.strings\.(\w+)\.js/.exec(id);
@@ -42,10 +42,8 @@ export default ({ mode }) => {
               // prevents infinite loops in case of circular dependencies
               const idsToHandle = new Set(getModuleInfo(id).dynamicImporters);
               for (const moduleId of idsToHandle) {
-                const { isEntry, dynamicImporters, importers } =
-                  getModuleInfo(moduleId);
-                if (isEntry || dynamicImporters.length > 0)
-                  dependentEntryPoints.push(moduleId);
+                const { isEntry, dynamicImporters, importers } = getModuleInfo(moduleId);
+                if (isEntry || dynamicImporters.length > 0) dependentEntryPoints.push(moduleId);
                 // The Set iterator is intelligent enough to iterate over elements that
                 // are added during iteration
                 for (const importerId of importers) idsToHandle.add(importerId);
@@ -53,7 +51,7 @@ export default ({ mode }) => {
               // If there is a unique entry, we put it into a chunk based on the entry name
               if (dependentEntryPoints.length === 1) {
                 return `${
-                  dependentEntryPoints[0].split("/").slice(-1)[0].split(".")[0]
+                  dependentEntryPoints[0].split('/').slice(-1)[0].split('.')[0]
                 }.strings.${language}`;
               }
               // For multiple entries, we put it into a "shared" chunk
@@ -63,7 +61,7 @@ export default ({ mode }) => {
             }
           },
           globals: {
-            vue: "Vue",
+            vue: 'Vue',
           },
         },
       },
@@ -78,7 +76,7 @@ export default ({ mode }) => {
       basicSsl(),
       createHtmlPlugin({
         minify: true,
-        entry: "resources/js/app.js",
+        entry: 'resources/js/app.js',
       }),
       laravel({
         input: ['resources/js/app.js', 'resources/css/app.css'],
@@ -99,7 +97,7 @@ export default ({ mode }) => {
         failOnError: true,
       }),
       legacy({
-        targets: ["defaults", "not IE 11"],
+        targets: ['defaults', 'not IE 11'],
         polyfills: true,
       }),
       manifestSRI(),
@@ -134,10 +132,10 @@ export default ({ mode }) => {
         svgo: {
           plugins: [
             {
-              name: "removeViewBox",
+              name: 'removeViewBox',
             },
             {
-              name: "removeEmptyAttrs",
+              name: 'removeEmptyAttrs',
               active: false,
             },
           ],

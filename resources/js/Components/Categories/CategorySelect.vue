@@ -108,7 +108,8 @@ export default {
             category.name
               .toLowerCase()
               .replace(/\s+/g, '')
-              .includes(this.query.toLowerCase().replace(/\s+/g, '')),);
+              .includes(this.query.toLowerCase().replace(/\s+/g, '')),
+          );
     },
   },
 };

@@ -1,6 +1,5 @@
 version: '3.7'
 services:
-
   traefik:
     networks:
       - web-dev
@@ -22,16 +21,16 @@ services:
       - ./_volumes/traefik/traefik.yml:/traefik.yml:ro
       - ./_volumes/traefik/traefik-certs.yml:/traefik-certs.yml
       - ./_volumes/traefik/certificates/:/certificates
-  
+
   mariadb:
-    hostname: "financial-freedom_mariadb"
+    hostname: 'financial-freedom_mariadb'
     networks:
       - web-dev
     environment:
-        MYSQL_ROOT_PASSWORD: "rootpassword"
-        MARIADB_DATABASE: "financial_freedom"
-        MARIADB_USER: "financial_freedom_database_user"
-        MARIADB_PASSWORD: "financial_freedom_database_password"
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+      MARIADB_DATABASE: 'financial_freedom'
+      MARIADB_USER: 'financial_freedom_database_user'
+      MARIADB_PASSWORD: 'financial_freedom_database_password'
     volumes:
       # Add volume for all database files
       - ./_volumes/mysql/database_data/:/var/lib/mysql
@@ -45,21 +44,21 @@ services:
 
   php:
     networks:
-        - web-dev
+      - web-dev
     volumes:
       - .:/var/www/html/:cached
     environment:
       AUTORUN_ENABLED: false
     depends_on:
-      - "mariadb"
-      - "traefik"
+      - 'mariadb'
+      - 'traefik'
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.financial-freedom.rule=Host(`financial-freedom.dev.test`)"
-      - "traefik.http.routers.financial-freedom.entrypoints=websecure"
-      - "traefik.http.routers.financial-freedom.tls=true"
-      - "traefik.http.services.financial-freedom.loadbalancer.server.port=443"
-      - "traefik.http.services.financial-freedom.loadbalancer.server.scheme=https"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.financial-freedom.rule=Host(`financial-freedom.dev.test`)'
+      - 'traefik.http.routers.financial-freedom.entrypoints=websecure'
+      - 'traefik.http.routers.financial-freedom.tls=true'
+      - 'traefik.http.services.financial-freedom.loadbalancer.server.port=443'
+      - 'traefik.http.services.financial-freedom.loadbalancer.server.scheme=https'
 
   node:
     networks:
@@ -67,27 +66,27 @@ services:
     volumes:
       - .:/usr/src/app/:cached
     working_dir: /usr/src/app/
-  
+
   meilisearch:
     networks:
-        - web-dev
-    hostname: "financial-freedom_meilisearch"
-    volumes: 
+      - web-dev
+    hostname: 'financial-freedom_meilisearch'
+    volumes:
       - ./_volumes/meilisearch/meilisearch_data:/meili_data:cached
     depends_on:
-      - "mariadb"
-      - "php"
+      - 'mariadb'
+      - 'php'
 
   redis:
-    hostname: "financial-freedom_redis"
+    hostname: 'financial-freedom_redis'
     networks:
       - web-dev
     volumes:
-     - ./_volumes/redis/data:/data:cached
+      - ./_volumes/redis/data:/data:cached
     depends_on:
-      - "mariadb"
-      - "php"
-    command: "redis-server --appendonly yes --requirepass redispassword"
+      - 'mariadb'
+      - 'php'
+    command: 'redis-server --appendonly yes --requirepass redispassword'
 
 networks:
   web-dev:

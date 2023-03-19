@@ -8,11 +8,11 @@ providers:
     network: web-dev
     exposedbydefault: false
   file:
-      filename: /traefik-certs.yml
-      watch: true
+    filename: /traefik-certs.yml
+    watch: true
 entryPoints:
   web:
-    address: ":80"
+    address: ':80'
     http:
       redirections:
         entrypoint:
@@ -20,7 +20,7 @@ entryPoints:
           scheme: https
 
   websecure:
-    address: ":443"
+    address: ':443'
 
 accessLog: {}
 log:

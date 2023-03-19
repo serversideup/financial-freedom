@@ -1,41 +1,39 @@
 export const importProcess = {
-    namespaced: true,
+  namespaced: true,
 
-    state: () => ({
-        step: 1,
-        account: '',
-        transactions: [],
-    }),
+  state: () => ({
+    step: 1,
+    account: '',
+    transactions: [],
+  }),
 
-    actions: {
-        
+  actions: {},
+
+  mutations: {
+    setAccount(state, account) {
+      state.account = account;
     },
 
-    mutations: {
-        setAccount( state, account ){
-            state.account = account;
-        },
-
-        setStep( state, step ){
-            state.step = step;
-        },
-
-        setTransactions( state, transactions ){
-            state.transactions = transactions;
-        }
+    setStep(state, step) {
+      state.step = step;
     },
 
-    getters: {
-        getAccount( state ){
-            return state.account;
-        },
+    setTransactions(state, transactions) {
+      state.transactions = transactions;
+    },
+  },
 
-        getStep( state ){
-            return state.step;
-        },
+  getters: {
+    getAccount(state) {
+      return state.account;
+    },
 
-        getTransactions( state ){
-            return state.transactions;
-        }
-    }
-}
+    getStep(state) {
+      return state.step;
+    },
+
+    getTransactions(state) {
+      return state.transactions;
+    },
+  },
+};

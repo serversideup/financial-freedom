@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('checking_accounts', function( $table ){
             $table->bigInteger('institution_import_map_id')->unsigned()->nullable()->after('institution_id');
-            $table->foreign('institution_import_map_id')->references('id')->on('institutions_import_mappings');
+            // $table->foreign('institution_import_map_id')->references('id')->on('institutions_import_mappings');
         });
     }
 

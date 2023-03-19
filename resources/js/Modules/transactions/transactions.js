@@ -2,10 +2,10 @@ import { table } from './table.js';
 import { importProcess } from './importProcess.js';
 
 export const transactions = {
-    namespaced: true,
+  namespaced: true,
 
-    modules: {
-        table,
-        importProcess
-    }
-}
+  modules: {
+    table,
+    importProcess,
+  },
+};

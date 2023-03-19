@@ -1,15 +1,3 @@
-window._ = require('lodash');
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = require('axios');
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -27,25 +15,37 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { createApp, h } from 'vue';
+import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { createStore } from 'vuex';
 
 import { transactions } from './Modules/transactions/transactions.js';
 
+window._ = require('lodash');
+
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
+
+window.axios = require('axios');
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 const store = createStore({
-    modules: {
-        transactions
-    }
+  modules: {
+    transactions,
+  },
 });
 
 createInertiaApp({
-    resolve: name => require(`./Pages/${name}`),
-    setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-        .use(plugin)
-        .use(store)
-        .mixin({ methods: { route: window.route } })
-        .mount(el)
-    },
-})
+  resolve: (name) => require(`./Pages/${name}`),
+  setup({ el, App, props, plugin }) {
+    createApp({ render: () => h(App, props) })
+      .use(plugin)
+      .use(store)
+      .mixin({ methods: { route: window.route } })
+      .mount(el);
+  },
+});

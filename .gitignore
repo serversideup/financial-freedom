@@ -1,20 +1,51 @@
+### OSX Vendor Configs ###
+.DS_Store
+*._DS_Store
+._.DS_Store
+*._
+._*
+._.*
+
+### Windows Vendor Configs ###
+Thumbs.db
+
+### Editor Configs ###
+*.sublime-workspace
+.idea/*
+/.idea/*
+.phpintel/*
+/.phpintel/*
+/.vscode
+/.notes/*
+/.fleet
+
+### Assets ###
+/.phpunit.cache
 /node_modules
+/public/build
 /public/hot
 /public/storage
-/public/css/app.css
-/public/js/app.js
-/public/js/bug-snatch.js
-/public/js/bug-snatch.js.map
+/public/css/*
+/public/js/*
 /storage/*.key
 /vendor
 .env
 .env.backup
+.env.production
 .phpunit.result.cache
 .nova
 Homestead.json
 Homestead.yaml
+auth.json
 npm-debug.log
 yarn-error.log
+/storage/debugbar
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+docker-compose.override.yml
+composer.lock
 
 # Ignore the _volumes folder, except certain Traefik configs
 /_volumes/*

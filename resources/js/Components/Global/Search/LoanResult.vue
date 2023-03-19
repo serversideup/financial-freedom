@@ -1,13 +1,12 @@
 <template>
-    <Link 
-        :href="'/loans/'+loan.id"
-        class="flex items-center text-gray-500 text-sm p-2 hover:bg-gray-50">
-            <span class="text-red-500 w-24">
-                -{{ formatMoney( loan.current_balance ) }}
-            </span>
+  <Link
+    :href="'/loans/' + loan.id"
+    class="flex items-center p-2 text-sm text-gray-500 hover:bg-gray-50"
+  >
+    <span class="w-24 text-red-500"> -{{ formatMoney(loan.current_balance) }} </span>
 
-            <span class="pr-2">{{ loan.name }}</span>
-    </Link>
+    <span class="pr-2">{{ loan.name }}</span>
+  </Link>
 </template>
 
 <script>
@@ -15,14 +14,11 @@ import { Link } from '@inertiajs/inertia-vue3';
 import { FormatMoney } from '@/Mixins/formatMoney';
 
 export default {
-    props: ['loan'],
+  components: {
+    Link,
+  },
 
-    components: {
-        Link
-    },
-
-    mixins: [
-        FormatMoney
-    ],
-}
+  mixins: [FormatMoney],
+  props: ['loan'],
+};
 </script>

@@ -8,7 +8,7 @@ use App\Models\Accounts\CheckingAccount;
 use Carbon\Carbon;
 
 class UserTransactionSeeder extends Seeder
-{   
+{
     /**
      * ID of the demo account user
      */
@@ -253,7 +253,7 @@ class UserTransactionSeeder extends Seeder
             $transaction->category_id = $this->categoryIncome['id'];
             $transaction->amount = $this->generateAmount( $this->categoryIncome );
             $transaction->date = $this->generateDate();
-            
+
             $meta = $this->randomMeta( $this->categoryIncome );
 
             $transaction->name = $meta['name'];
@@ -277,7 +277,7 @@ class UserTransactionSeeder extends Seeder
             $transaction->category_id = $this->categoryHousing['id'];
             $transaction->amount = $this->generateAmount( $this->categoryHousing );
             $transaction->date = $this->generateDate();
-            
+
             $meta = $this->randomMeta( $this->categoryHousing );
 
             $transaction->name = $meta['name'];
@@ -301,7 +301,7 @@ class UserTransactionSeeder extends Seeder
             $transaction->category_id = $this->categoryTransportation['id'];
             $transaction->amount = $this->generateAmount( $this->categoryTransportation );
             $transaction->date = $this->generateDate();
-            
+
             $meta = $this->randomMeta( $this->categoryTransportation );
 
             $transaction->name = $meta['name'];
@@ -325,7 +325,7 @@ class UserTransactionSeeder extends Seeder
             $transaction->category_id = $this->categoryDiningOut['id'];
             $transaction->amount = $this->generateAmount( $this->categoryDiningOut );
             $transaction->date = $this->generateDate();
-            
+
             $meta = $this->randomMeta( $this->categoryDiningOut );
 
             $transaction->name = $meta['name'];
@@ -349,7 +349,7 @@ class UserTransactionSeeder extends Seeder
             $transaction->category_id = $this->categoryGroceries['id'];
             $transaction->amount = $this->generateAmount( $this->categoryGroceries );
             $transaction->date = $this->generateDate();
-            
+
             $meta = $this->randomMeta( $this->categoryGroceries );
 
             $transaction->name = $meta['name'];
@@ -373,7 +373,7 @@ class UserTransactionSeeder extends Seeder
             $transaction->category_id = $this->categoryEntertainment['id'];
             $transaction->amount = $this->generateAmount( $this->categoryEntertainment );
             $transaction->date = $this->generateDate();
-            
+
             $meta = $this->randomMeta( $this->categoryEntertainment );
 
             $transaction->name = $meta['name'];
@@ -397,7 +397,7 @@ class UserTransactionSeeder extends Seeder
             $transaction->category_id = $this->categorySavings['id'];
             $transaction->amount = $this->generateAmount( $this->categorySavings );
             $transaction->date = $this->generateDate();
-            
+
             $meta = $this->randomMeta( $this->categorySavings );
 
             $transaction->name = $meta['name'];
@@ -411,7 +411,7 @@ class UserTransactionSeeder extends Seeder
 
     private function generateAmount( $category )
     {
-        return number_format( 
+        return number_format(
             ( mt_rand( $category['minAmount'] * 10, $category['maxAmount'] * 10 ) / 10 ),
             2,
             '.',
@@ -422,10 +422,10 @@ class UserTransactionSeeder extends Seeder
     private function generateDate()
     {
         $date = Carbon::createFromFormat('Y-m-d', $this->year.'-'.$this->month.'-01');
-        
+
         $min = 1;
         $max = $date->daysInMonth;
-   
+
         return $this->year.'-'.$this->month.'-'.str_pad( rand($min, $max), 2, '0', STR_PAD_LEFT );
     }
 

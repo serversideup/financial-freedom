@@ -1,5 +1,5 @@
 <p align="center">
-		<img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/GithubHeader.png" width="1200" alt="Financial Freedom Logo and Slogan">
+    <img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/GithubHeader.png" width="1200" alt="Financial Freedom Logo and Slogan">
 </p>
 <p align="center">
   <a title="Documentation" href="https://github.com/serversideup/financial-freedom/wiki"><strong>Documentation</strong></a>
@@ -7,10 +7,10 @@
   <a title="Support Us" href="https://github.com/sponsors/serversideup"><strong>👉 Help make this app better</strong></a>
 </p>
 <p align="center">
-	<a href="https://github.com/serversideup/financial-freedom/blob/master/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/financial-freedom" alt="License"></a>
-	<a href="https://community.serversideup.net"><img alt="Discourse users" src="https://img.shields.io/discourse/users?color=blue&server=https%3A%2F%2Fcommunity.serversideup.net"></a>
-  <a href="https://serversideup.net/discord"><img alt="Discord" src="https://img.shields.io/discord/910287105714954251?color=blueviolet"></a>
-	<a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
+    <a href="https://github.com/serversideup/financial-freedom/blob/master/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/financial-freedom" alt="License"></a>
+    <a href="https://community.serversideup.net"><img alt="Discourse users" src="https://img.shields.io/discourse/users?color=blue&server=https%3A%2F%2Fcommunity.serversideup.net"></a>
+    <a href="https://serversideup.net/discord"><img alt="Discord" src="https://img.shields.io/discord/910287105714954251?color=blueviolet"></a>
+    <a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
 </p>
 
 Hi! We're [Dan](https://twitter.com/danpastori) and [Jay](https://twitter.com/jaydrogers). We're a two person team with a passion for open source products. We created [Server Side Up](https://serversideup.net) to help share what we learn.
@@ -37,7 +37,7 @@ All of our software is free an open to the world. None of this can be brought to
 Financial Freedom is an Open Source Alternative to Mint.com & YNAB. Your budgeting data should be owned and controlled by you -- no questions asked. **Personal finance should be <u>personal</u>.**
 
 <p align="center">
-		<img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/preview.png" width="1200" alt="Financial Freedom Preview Screenshot">
+        <img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/preview.png" width="1200" alt="Financial Freedom Preview Screenshot">
 </p>
 
 # What does "Financial Freedom" give you?

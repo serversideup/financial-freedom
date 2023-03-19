@@ -1,0 +1,12 @@
+preset: laravel
+
+enabled:
+  - align_double_arrow
+
+disabled:
+  - unused_use
+
+finder:
+  not-name:
+    - index.php
+    - server.php

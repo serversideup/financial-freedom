@@ -1,36 +1,36 @@
 import axios from 'axios';
 
 export default {
-    index( params ){
-        return axios.get('/api/v1/transactions', {
-            params: params 
-        });
-    },
+  index(params) {
+    return axios.get('/api/v1/transactions', {
+      params,
+    });
+  },
 
-    show( transaction ){
-        return axios.get('/api/v1/transactions/'+transaction);
-    },
+  show(transaction) {
+    return axios.get(`/api/v1/transactions/${transaction}`);
+  },
 
-    update( transaction, data ){
-        return axios.post('/api/v1/transactions/'+transaction, data);
-    },
+  update(transaction, data) {
+    return axios.post(`/api/v1/transactions/${transaction}`, data);
+  },
 
-    import( account, transactions ){
-        return axios.post('/api/v1/transactions/import', {
-            transactions: transactions,
-            account: account
-        });
-    },
+  import(account, transactions) {
+    return axios.post('/api/v1/transactions/import', {
+      transactions,
+      account,
+    });
+  },
 
-    split( transaction, split ){
-        return axios.post( '/api/v1/transactions/'+transaction+'/splits', split );
-    },
+  split(transaction, split) {
+    return axios.post(`/api/v1/transactions/${transaction}/splits`, split);
+  },
 
-    removeSplit( transaction, split ){
-        return axios.delete('/api/v1/transactions/'+transaction+'/splits/'+split);
-    },
+  removeSplit(transaction, split) {
+    return axios.delete(`/api/v1/transactions/${transaction}/splits/${split}`);
+  },
 
-    store( transaction ){
-        return axios.post('/api/v1/transactions', transaction );
-    }
-}
+  store(transaction) {
+    return axios.post('/api/v1/transactions', transaction);
+  },
+};

@@ -18,9 +18,9 @@ services:
 
   mariadb:
     image: mariadb:10.5
-  
+
   node:
     image: node:lts
-  
+
   redis:
     image: redis:6

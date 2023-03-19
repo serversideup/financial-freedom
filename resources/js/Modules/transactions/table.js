@@ -1,78 +1,76 @@
 export const table = {
-    namespaced: true,
+  namespaced: true,
 
-    state: () => ({
-        transactions: [],
-        selectedTransactions: [],
-        loading: false,
-        startDate: '',
-        endDate: '',
-        currentTime: '',
-        search: '',
-        order: {
-            column: 'date',
-            direction: 'desc'
-        },
-        filters: {
-            category: '',
-            tags: [],
-            direction: 'all'
-        }
-    }),
+  state: () => ({
+    transactions: [],
+    selectedTransactions: [],
+    loading: false,
+    startDate: '',
+    endDate: '',
+    currentTime: '',
+    search: '',
+    order: {
+      column: 'date',
+      direction: 'desc',
+    },
+    filters: {
+      category: '',
+      tags: [],
+      direction: 'all',
+    },
+  }),
 
-    actions: {
-        
+  actions: {},
+
+  mutations: {
+    setTransactions(state, transactions) {
+      state.transactions = transactions;
     },
 
-    mutations: {
-        setTransactions( state, transactions ){
-            state.transactions = transactions;
-        },
-
-        setLoading( state, loading ){
-            state.loading = loading;
-        },
-
-        setStartDate( state, startDate ){
-            state.startDate = startDate;
-        },
-
-        setEndDate( state, endDate ){
-            state.endDate = endDate;
-        },
-
-        setCurrentTime( state, time ){
-            state.currentTime = time;
-        },
-
-        setSearch( state, value ){
-            state.search = value;
-        }
+    setLoading(state, loading) {
+      state.loading = loading;
     },
 
-    getters: {
-        getTransactions( state ){
-            return state.transactions;
-        },
+    setStartDate(state, startDate) {
+      state.startDate = startDate;
+    },
 
-        getLoading( state ){
-            return state.loading;
-        },
+    setEndDate(state, endDate) {
+      state.endDate = endDate;
+    },
 
-        getStartDate( state ){
-            return state.startDate;
-        },
+    setCurrentTime(state, time) {
+      state.currentTime = time;
+    },
 
-        getEndDate( state ){
-            return state.endDate;
-        },
+    setSearch(state, value) {
+      state.search = value;
+    },
+  },
 
-        getCurrentTime( state ){
-            return state.currentTime;
-        },
-        
-        getSearch( state ){
-            return state.search;
-        }
-    }
-}
+  getters: {
+    getTransactions(state) {
+      return state.transactions;
+    },
+
+    getLoading(state) {
+      return state.loading;
+    },
+
+    getStartDate(state) {
+      return state.startDate;
+    },
+
+    getEndDate(state) {
+      return state.endDate;
+    },
+
+    getCurrentTime(state) {
+      return state.currentTime;
+    },
+
+    getSearch(state) {
+      return state.search;
+    },
+  },
+};

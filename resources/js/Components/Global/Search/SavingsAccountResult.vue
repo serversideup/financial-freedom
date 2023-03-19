@@ -1,13 +1,14 @@
 <template>
-    <Link 
-        :href="'/savings-accounts/'+savingsAccount.id"
-        class="flex items-center text-gray-500 text-sm p-2 hover:bg-gray-50">
-            <span class="text-green-500 w-24">
-                {{ formatMoney( savingsAccount.current_balance ) }}
-            </span>
+  <Link
+    :href="'/savings-accounts/' + savingsAccount.id"
+    class="flex items-center p-2 text-sm text-gray-500 hover:bg-gray-50"
+  >
+    <span class="w-24 text-green-500">
+      {{ formatMoney(savingsAccount.current_balance) }}
+    </span>
 
-            <span class="pr-2">{{ savingsAccount.name }}</span>
-    </Link>
+    <span class="pr-2">{{ savingsAccount.name }}</span>
+  </Link>
 </template>
 
 <script>
@@ -15,14 +16,11 @@ import { Link } from '@inertiajs/inertia-vue3';
 import { FormatMoney } from '@/Mixins/formatMoney';
 
 export default {
-    props: ['savingsAccount'],
+  components: {
+    Link,
+  },
 
-    components: {
-        Link
-    },
-
-    mixins: [
-        FormatMoney
-    ],
-}
+  mixins: [FormatMoney],
+  props: ['savingsAccount'],
+};
 </script>

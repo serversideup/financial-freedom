@@ -19,7 +19,7 @@ This started as a fun side project that took off faster than we expected. We're 
 - **[Watch our progress](https://github.com/orgs/serversideup/projects/6/views/2)**: Watch us in realtime with GitHub projects.
 - **[Join our Discord](https://serversideup.net/discord)**: We're actively discussing the product and how to make it better.
 - **[Star us on GitHub](https://github.com/serversideup/financial-freedom/stargazers)**: Give us confidence that we're solving a problem that you care about.
-- **[Follow Twitter](https://twitter.com/serversideup)**: We post frequent updates. Check our personal accounts too [Dan](https://twitter.com/danpastori) & [Jay](https://twitter.com/jaydrogers).
+- **[Follow Twitter](https://twitter.com/serversideup)**: We post frequent updates. Check our personal accounts too ([Dan](https://twitter.com/danpastori) & [Jay](https://twitter.com/jaydrogers))
 - **[Sponsor Us](https://github.com/sponsors/serversideup)**: We're a two person, bootstrapped team. Help us replace client projects with more time for open source projects.
 
 <details open>

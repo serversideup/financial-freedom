@@ -9,6 +9,6 @@ on:
 
 jobs:
   publish-production-site:
+  environment: 'site-production'
     uses: ./.github/workflows/service_deploy-static-site.yml
-    environment: site-production
     secrets: inherit

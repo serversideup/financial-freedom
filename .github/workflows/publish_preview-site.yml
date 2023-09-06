@@ -11,4 +11,4 @@ jobs:
     uses: ./.github/workflows/service_deploy-static-site.yml
     secrets: inherit
     with:
-      environment-name: site-preview
+      environment-name: 'site-financial-freedom (Preview)'

@@ -12,4 +12,4 @@ jobs:
     secrets: inherit
     uses: ./.github/workflows/service_deploy-static-site.yml
     with:
-      environment-name: site-production
+      environment-name: 'site-financial-freedom (Production)'

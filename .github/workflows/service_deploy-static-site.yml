@@ -38,6 +38,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: financial-freedom
+          projectName: site-financial-freedom
           directory: docs/.output/public
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,15 @@
+name: Site Deployment - Production 🚀
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - docs/**
+
+jobs:
+  publish-production-site: 
+    secrets: inherit
+    uses: ./.github/workflows/service_deploy-static-site.yml
+    with:
+      environment-name: 'site-financial-freedom (Production)'

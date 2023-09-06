@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="82px" height="75px" viewBox="0 0 82 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>AmplitudeJS</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="92.2656011%" cy="-110.465385%" fx="92.2656011%" fy="-110.465385%" r="24.7119394%" gradientTransform="translate(0.922656,-1.104654),scale(0.914634,1.000000),translate(-0.922656,1.104654)" id="radialGradient-1">
+            <stop stop-color="#3CD3AD" offset="0%"></stop>
+            <stop stop-color="#4CB8C4" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="01.00:-Homepage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="00_HD:-Home" transform="translate(-832.000000, -376.000000)" fill="url(#radialGradient-1)" fill-rule="nonzero">
+            <g id="Featured-Subjects" transform="translate(128.000000, 290.000000)">
+                <g id="Subject" transform="translate(602.000000, 61.000000)">
+                    <path d="M140.766313,25 L102,99.8789201 L104.699864,99.8789201 L164.686676,69.6832853 L181.301079,100 L184,100 L143.466177,25 L140.766313,25 Z M133.830276,58.8146872 L141.262688,58.8146872 L141.262688,51.3048673 L143.012268,51.3048673 L143.012268,58.8146872 L150.44468,58.8146872 L150.44468,60.5832178 L143.012268,60.5832178 L143.012268,68.0920844 L141.262688,68.0920844 L141.262688,60.5832178 L133.830276,60.5832178 L133.830276,58.8146872 Z" id="AmplitudeJS"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -27,9 +27,9 @@ This started as a fun side project that took off faster than we expected. We're 
  Features
 </summary> <br />
 
-|<picture><img width="100%" alt="Works with Any Bank" src="./.github/images/any-bank.png"></picture>|<img width="100%" alt="Private Synchronization" src="./.github/images/private-sync.png">|<img width="100%" alt="Self-host Anywhere" src="./.github/images/self-host.png">|
+|<picture><img width="100%" alt="Works with Any Bank" src="./.github/images/any-bank.png"></picture>|<picture><img width="100%" alt="Private Synchronization" src="./.github/images/private-sync.png"></picture>|<picture><img width="100%" alt="Self-host Anywhere" src="./.github/images/self-host.png"></picture>|
 |:---:|:---:|:---:|
-|<img width="100%" alt="Tagging and Splitting" src="./.github/images/tagging.png">|<img width="100%" alt="Cash Flow and Budgets" src="./.github/images/cashflow.png">|<img width="100%" alt="Global Currency Support" src="./.github/images/global.png">|
+|<picture><img width="100%" alt="Tagging and Splitting" src="./.github/images/tagging.png"></picture>|<picture><img width="100%" alt="Cash Flow and Budgets" src="./.github/images/cashflow.png"></picture>|<picture><img width="100%" alt="Global Currency Support" src="./.github/images/global.png"></picture>|
 
 </details>
 

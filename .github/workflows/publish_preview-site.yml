@@ -1,0 +1,13 @@
+name: Site Deployment - Preview 👨‍🔬
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - docs/**
+
+jobs:
+  publish-preview-site:
+    uses: ./.github/workflows/service_deploy-static-site.yml
+    environment: site-preview
+    secrets: inherit

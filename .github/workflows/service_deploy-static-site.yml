@@ -1,0 +1,37 @@
+on:
+  workflow_call:
+
+jobs:
+ deploy-static-site:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        deployments: write
+      steps:
+        - uses: actions/checkout@v3
+
+        - name: Set env file
+          run: |
+            if [[ -z "$BASE_64_SECRET" ]]; then
+              echo '🚨🚨🚨 ENV File not set 🚨🚨🚨'  1>&2
+              exit 1
+            fi
+            echo $BASE_64_SECRET | base64 -d > .env
+          working-directory: ./docs
+          env:
+            BASE_64_SECRET: ${{ secrets.ENV_FILE_BASE64 }}
+
+        - run: | 
+                yarn install --frozen-lockfile
+                yarn build
+                npx nuxi generate
+          working-directory: ./docs
+
+        - name: Publish to Cloudflare Pages
+          uses: cloudflare/pages-action@v1
+          with:
+            apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+            accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+            projectName: docker-php
+            directory: docs/.output/public
+            gitHubToken: ${{ secrets.GITHUB_TOKEN }}

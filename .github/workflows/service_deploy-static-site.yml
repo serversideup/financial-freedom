@@ -1,5 +1,9 @@
 on:
   workflow_call:
+    inputs:
+      environment-name:
+        required: true
+        type: string
 
 jobs:
   deploy-static-site:
@@ -8,19 +12,8 @@ jobs:
       contents: read
       deployments: write
     environment: 
-      name: ${{ steps.set-env.outputs.name }}
-      url: ${{ steps.set-env.outputs.url }}
+      name: ${{ inputs.environment-name }}
     steps:
-      - id: set-env 
-        run: |
-          if [ "$GITHUB_REF" == "refs/heads/main" ]; then
-            echo "::set-output name=name::site-production"
-            echo "::set-output name=url::https://example.com"
-          else
-            echo "::set-output name=name::site-preview"
-            echo "::set-output name=url::https://preview.example.com"
-          fi
-
       - uses: actions/checkout@v3
 
       - name: Set env file

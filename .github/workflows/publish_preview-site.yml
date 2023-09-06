@@ -8,6 +8,6 @@ on:
 
 jobs:
   publish-preview-site:
-  environment: 'site-preview'
+    environment: 'site-preview'
     uses: ./.github/workflows/service_deploy-static-site.yml
     secrets: inherit

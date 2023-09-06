@@ -3,12 +3,12 @@ name: Site Deployment - Production 🚀
 on:
   push:
     branches:
-          - main
+      - main
     paths:
       - docs/**
 
 jobs:
-  publish-production-site:
-  environment: 'site-production'
+  publish-production-site: 
+    environment: 'site-production'
     uses: ./.github/workflows/service_deploy-static-site.yml
     secrets: inherit

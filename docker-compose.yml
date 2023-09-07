@@ -2,10 +2,12 @@ version: '3.8'
 services:
 
   traefik:
-    image: traefik:v2.9
+    image: traefik:v2.10
 
   php:
-    image: serversideup/php:beta-8.2-fpm-nginx
+    build:
+      context: .
+      target: base
     working_dir: /var/www/html
     depends_on:
       - traefik

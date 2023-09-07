@@ -1,4 +1,4 @@
-FROM serversideup/php:beta-8.2-fpm-nginx as base
+FROM serversideup/php:beta-8.1-fpm-nginx as base
 LABEL maintainer="Server Side Up <@serversideup>"
 
 # Copy the application with the correct permissions

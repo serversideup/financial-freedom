@@ -70,7 +70,11 @@ spin exec php php artisan migrate
 The server expects a URL of "https://financialfreedom.dev.test". For that to resolve, you can set your local machine hosts file.
 
 ```
+# For accessing the Financial Freedom locally
 127.0.0.1 financialfreedom.dev.test
+
+# For accessing Mailpit locally
+127.0.0.1 mailpit.dev.test
 ```
 
 ### If you're making changes to the front-end

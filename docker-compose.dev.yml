@@ -1,93 +1,94 @@
-version: '3.7'
+version: '3.8'
 services:
 
   traefik:
+    restart: "no"
     networks:
-      - web-dev
+      development:
+        aliases:
+          - financialfreedom.dev.test
     ports:
-      # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
-      - target: 80
-        published: 80
-        mode: host
-      # Listen on port 443, default for HTTPS
-      - target: 443
-        published: 443
-        mode: host
-      - target: 8080
-        published: 8080
-        mode: host
+      - 80:80
+      - 443:443
+      - 8080:8080
     volumes:
       # Add Docker as a mounted volume, so that Traefik can read the labels of other services
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./_volumes/traefik/traefik.yml:/traefik.yml:ro
-      - ./_volumes/traefik/traefik-certs.yml:/traefik-certs.yml
-      - ./_volumes/traefik/certificates/:/certificates
+      - ./.infrastructure/conf/traefik/dev/traefik.yml:/traefik.yml:ro
+      - ./.infrastructure/conf/traefik/dev/traefik-certs.yml:/traefik-certs.yml
+      - ./.infrastructure/conf/traefik/dev/certificates/:/certificates
   
   mariadb:
-    hostname: "financial-freedom_mariadb"
     networks:
-      - web-dev
-    environment:
-        MYSQL_ROOT_PASSWORD: "rootpassword"
-        MARIADB_DATABASE: "financial_freedom"
-        MARIADB_USER: "financial_freedom_database_user"
-        MARIADB_PASSWORD: "financial_freedom_database_password"
+      - development
     volumes:
-      # Add volume for all database files
-      - ./_volumes/mysql/database_data/:/var/lib/mysql
-      # Add volume for custom configurations
-      - ./_volumes/mysql/conf.d/:/etc/mysql/conf.d
-      - ./_volumes/mysql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+      - ./.infrastructure/volume_data/mariadb/database_data/:/var/lib/mysql
+    environment:
+        MARIADB_ROOT_PASSWORD: "rootpassword"
+        MARIADB_DATABASE: "laravel"
+        MARIADB_USER: "dbuser"
+        MARIADB_PASSWORD: "dbpassword"
     ports:
-      - target: 3306
-        published: 3306
-        mode: host
+      - 3306:3306
 
   php:
-    networks:
-        - web-dev
     volumes:
-      - .:/var/www/html/:cached
-    environment:
-      AUTORUN_ENABLED: false
-    depends_on:
-      - "mariadb"
-      - "traefik"
+      - .:/var/www/html/
+    networks:
+      - development
+    # # 🔥 Uncomment for debugging
+    # environment:
+    #   DEBUG_OUTPUT: "true"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.financial-freedom.rule=Host(`financial-freedom.dev.test`)"
-      - "traefik.http.routers.financial-freedom.entrypoints=websecure"
-      - "traefik.http.routers.financial-freedom.tls=true"
-      - "traefik.http.services.financial-freedom.loadbalancer.server.port=443"
-      - "traefik.http.services.financial-freedom.loadbalancer.server.scheme=https"
+      - "traefik.http.routers.laravel.rule=HostRegexp(`financialfreedom.dev.test`)"
+      - "traefik.http.routers.laravel.entrypoints=websecure"
+      - "traefik.http.routers.laravel.tls=true"
+      - "traefik.http.services.laravel.loadbalancer.server.port=80"
+      - "traefik.http.services.laravel.loadbalancer.server.scheme=http"
 
   node:
+    image: node:18
     networks:
-      - web-dev
+      - development
     volumes:
       - .:/usr/src/app/:cached
     working_dir: /usr/src/app/
   
   meilisearch:
+    environment: 
+      MEILI_MASTER_KEY: "developmentMasterKey"
     networks:
-        - web-dev
-    hostname: "financial-freedom_meilisearch"
+        - development
     volumes: 
-      - ./_volumes/meilisearch/meilisearch_data:/meili_data:cached
+      - ./.infrastructure/volume_data/meilisearch/meilisearch_data:/meili_data:cached
     depends_on:
       - "mariadb"
       - "php"
 
   redis:
-    hostname: "financial-freedom_redis"
     networks:
-      - web-dev
+      - development
     volumes:
-     - ./_volumes/redis/data:/data:cached
+     - ./.infrastructure/volume_data/redis/data:/data:cached
     depends_on:
       - "mariadb"
       - "php"
     command: "redis-server --appendonly yes --requirepass redispassword"
 
+  mailpit:
+    image: axllent/mailpit
+    networks:
+      - development
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mailhog.rule=Host(`mailpit.dev.test`)"
+      - "traefik.http.routers.mailpit.entrypoints=websecure"
+      - "traefik.http.routers.mailpit.tls=true"
+      - "traefik.http.services.mailpit.loadbalancer.server.port=8025"
+      - "traefik.http.services.mailpit.loadbalancer.server.scheme=http"
+    depends_on:
+      - traefik
+
 networks:
-  web-dev:
+  development:

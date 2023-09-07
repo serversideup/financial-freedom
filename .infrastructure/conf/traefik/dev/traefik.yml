@@ -5,7 +5,7 @@ serversTransport:
 ### Providers
 providers:
   docker:
-    network: web-dev
+    network: development
     exposedbydefault: false
   file:
       filename: /traefik-certs.yml
@@ -29,3 +29,4 @@ log:
 api:
   dashboard: true
   insecure: true
+  

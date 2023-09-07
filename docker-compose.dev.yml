@@ -48,6 +48,8 @@ services:
         - web-dev
     volumes:
       - .:/var/www/html/:cached
+    environment:
+      AUTORUN_ENABLED: false
     depends_on:
       - "mariadb"
       - "traefik"

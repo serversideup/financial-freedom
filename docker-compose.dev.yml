@@ -80,15 +80,15 @@ services:
     image: axllent/mailpit
     networks:
       - development
+    depends_on:
+      - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mailhog.rule=Host(`mailpit.dev.test`)"
+      - "traefik.http.routers.mailpit.rule=HostRegexp(`mailpit.dev.test`)"
       - "traefik.http.routers.mailpit.entrypoints=websecure"
       - "traefik.http.routers.mailpit.tls=true"
       - "traefik.http.services.mailpit.loadbalancer.server.port=8025"
       - "traefik.http.services.mailpit.loadbalancer.server.scheme=http"
-    depends_on:
-      - traefik
 
 networks:
   development:

@@ -22,7 +22,7 @@ If you do not add `spin` as an alias, you will need to type this every time you 
 bash vendor/bin/spin
 ```
 
-If you don't want to do that, you can [install `spin` on your system[(https://serversideup.net/open-source/spin/)], or add this alias:
+If you don't want to do that, you can [install `spin` on your system](https://serversideup.net/open-source/spin/), or add this alias:
 ```sh
 alias spin='[ -f node_modules/.bin/spin ] && bash node_modules/.bin/spin || bash vendor/bin/spin'
 ```

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('institutions_import_mappings');
+        // Schema::dropIfExists('institutions_import_mappings');
     }
 
     /**

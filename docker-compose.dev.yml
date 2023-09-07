@@ -48,7 +48,7 @@ services:
       - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
 
   node:
-    image: node:18
+    image: node:16
     networks:
       - development
     volumes:

@@ -1,26 +1,27 @@
-version: '3.7'
+version: '3.8'
 services:
 
   traefik:
-    # Use the latest Traefik image
-    image: traefik:v2.4
+    image: traefik:v2.10
 
   php:
-    image: serversideup/php:8.1-fpm-nginx
+    build:
+      context: .
+      target: base
     working_dir: /var/www/html
+    depends_on:
+      - traefik
+      - mariadb
 
   meilisearch:
-    image: getmeili/meilisearch:v0.27.2
+    image: getmeili/meilisearch:v1.3.3
     depends_on:
       - "redis"
     environment:
       MEILI_NO_ANALYTICS: "true"
 
   mariadb:
-    image: mariadb:10.5
-  
-  node:
-    image: node:lts
+    image: mariadb:10.11
   
   redis:
-    image: redis:6
+    image: redis:7.2

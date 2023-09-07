@@ -38,7 +38,7 @@ cp .env.example .env
 
 ### Install composer dependencies
 ```sh
-docker compose -f docker-compose.yml -f docker-compose.dev.yml run --no-deps --rm -e "S6_LOGGING=1" php composer install
+docker compose -f docker-compose.yml -f docker-compose.dev.yml run --no-deps --rm -e "S6_LOGGING=1" -e "AUTORUN_ENABLED=false" php composer install
 ```
 (We need to run this big, ugly, and long command first because it will install `spin` for us when it pulls down the composer dependencies. From here on out, we will be using `spin` [and assuming you aliased the command]).
 
@@ -67,10 +67,14 @@ spin exec php php artisan migrate
 ```
 
 ### Configure hosts file
-The server expects a URL of "https://financial-freedom.dev.test". For that to resolve, you can set your local machine hosts file.
+The server expects a URL of "https://financialfreedom.dev.test". For that to resolve, you can set your local machine hosts file.
 
 ```
-127.0.0.1 financial-freedom.dev.test
+# For accessing the Financial Freedom locally
+127.0.0.1 financialfreedom.dev.test
+
+# For accessing Mailpit locally
+127.0.0.1 mailpit.dev.test
 ```
 
 ### If you're making changes to the front-end
@@ -81,4 +85,4 @@ spin run node yarn dev
 ```
 
 ### Accessing the application
-Once you have the application online, you can register an account at https://financial-freedom.dev.test/register
+Once you have the application online, you can register an account at https://financialfreedom.dev.test/register

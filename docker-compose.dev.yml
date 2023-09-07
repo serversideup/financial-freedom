@@ -25,9 +25,9 @@ services:
       - ./.infrastructure/volume_data/mariadb/database_data/:/var/lib/mysql
     environment:
         MARIADB_ROOT_PASSWORD: "rootpassword"
-        MARIADB_DATABASE: "laravel"
-        MARIADB_USER: "dbuser"
-        MARIADB_PASSWORD: "dbpassword"
+        MARIADB_DATABASE: "financialfreedom"
+        MARIADB_USER: "financialfreedom_dbuser"
+        MARIADB_PASSWORD: "financialfreedom_dbpassword"
     ports:
       - 3306:3306
 
@@ -41,11 +41,11 @@ services:
     #   DEBUG_OUTPUT: "true"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.laravel.rule=HostRegexp(`financialfreedom.dev.test`)"
-      - "traefik.http.routers.laravel.entrypoints=websecure"
-      - "traefik.http.routers.laravel.tls=true"
-      - "traefik.http.services.laravel.loadbalancer.server.port=80"
-      - "traefik.http.services.laravel.loadbalancer.server.scheme=http"
+      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"
+      - "traefik.http.routers.financialfreedom.entrypoints=websecure"
+      - "traefik.http.routers.financialfreedom.tls=true"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=443"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
 
   node:
     image: node:18

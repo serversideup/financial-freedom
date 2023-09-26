@@ -1,0 +1,8 @@
+{
+    "name": "Financial Freedom",
+    "dockerComposeFile": [
+        "docker-compose.yml",
+        "docker-compose.dev.yml"
+    ],
+
+}

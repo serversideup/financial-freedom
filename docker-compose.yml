@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+
+  traefik:
+    image: traefik:v2.10
+
+  php:
+    build:
+      context: .
+      target: base
+    working_dir: /var/www/html
+    depends_on:
+      - traefik
+      - mariadb
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.3.3
+    depends_on:
+      - "redis"
+    environment:
+      MEILI_NO_ANALYTICS: "true"
+
+  mariadb:
+    image: mariadb:10.11
+  
+  redis:
+    image: redis:7.2

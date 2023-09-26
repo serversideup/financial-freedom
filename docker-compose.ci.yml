@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  
+  mariadb:
+    networks:
+      - ci
+    environment:
+        MARIADB_ROOT_PASSWORD: "rootpassword"
+        MARIADB_DATABASE: "financialfreedom_testing"
+        MARIADB_USER: "dbuser"
+        MARIADB_PASSWORD: "dbpassword"
+
+  php:
+    networks:
+      - ci
+    volumes:
+      - .:/var/www/html/
+    working_dir: /var/www/html/
+    depends_on:
+      - mariadb
+
+  mailpit:
+    image: axllent/mailpit
+    networks:
+      - ci
+
+networks:
+  ci:

@@ -8,6 +8,8 @@ Since everything is so new, please explain your intentions on our community befo
 We encourage you to replicate this on your machine and tinker around with it. Here is how you can run it.
 
 **Important notes:**
+* We user Docker to run our entire stack. No local services are required.
+* Be sure if you have MAMP, XAMPP, or any other local services running, that you shut them down first. They will conflict with the ports we use.
 * We use [Docker Overrides](https://docs.docker.com/compose/extends/), which allow us to apply overrides on a per environment basis
 * We have a tool called [Spin](https://serversideup.net/open-source/spin/) which greatly improves the development experience
 * `spin` is automatically installed via Composer for this project
@@ -37,11 +39,11 @@ cp .env.example .env
 ```
 
 ### Install composer dependencies
-```sh
-docker compose -f docker-compose.yml -f docker-compose.dev.yml run --no-deps --rm -e "S6_LOGGING=1" -e "AUTORUN_ENABLED=false" php composer install
-```
-(We need to run this big, ugly, and long command first because it will install `spin` for us when it pulls down the composer dependencies. From here on out, we will be using `spin` [and assuming you aliased the command]).
+Assuming you aliased `spin` as defined above, run the following commands. If you didn't, you will need to use `bash vendor/bin/spin` instead of `spin`.
 
+```sh
+spin run php composer install
+```
 ### Install Node dependencies
 This might take a while because how slow mounted volumes are with Docker
 ```sh

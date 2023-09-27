@@ -44,8 +44,8 @@ services:
       - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"
       - "traefik.http.routers.financialfreedom.entrypoints=websecure"
       - "traefik.http.routers.financialfreedom.tls=true"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.port=443"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=80"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=http"
 
   node:
     image: node:16

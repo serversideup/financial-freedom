@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+
+  traefik:
+    networks:
+      development:
+        aliases:
+          - ${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
+    ports:
+      - 80:80
+      - 443:443
+      - 8443:8443
+      - 8080:8080
+
+  php:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`)"
+      - "traefik.http.routers.financialfreedom.entrypoints=websecure"
+      - "traefik.http.routers.financialfreedom.tls=true"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=80"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=http"
+
+  node:
+    command: yarn install
+
+  mailpit:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mailpit.rule=HostRegexp(`${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`)"
+      - "traefik.http.routers.mailpit.entrypoints=mailpit"
+      - "traefik.http.routers.mailpit.tls=true"
+      - "traefik.http.services.mailpit.loadbalancer.server.port=8025"
+      - "traefik.http.services.mailpit.loadbalancer.server.scheme=http"
+
+networks:
+  development:

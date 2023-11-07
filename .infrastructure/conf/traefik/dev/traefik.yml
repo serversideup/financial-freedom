@@ -22,6 +22,9 @@ entryPoints:
   websecure:
     address: ":443"
 
+  mailpit:
+    address: ":8443"
+
 accessLog: {}
 log:
   level: ERROR

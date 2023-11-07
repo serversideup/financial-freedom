@@ -2,7 +2,8 @@
     "name": "Financial Freedom",
     "dockerComposeFile": [
         "../docker-compose.yml",
-        "../docker-compose.dev.yml"
+        "../docker-compose.dev.yml",
+        "../docker-compose.codespaces.yml"
     ],
     "service": "php",
     "workspaceFolder": "/var/www/html",

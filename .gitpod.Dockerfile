@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full:latest
+FROM gitpod/workspace-base:latest
 
 ENV SPIN_ENV="dev,gitpod"
 

@@ -1,0 +1,34 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Build & Start
+    before: |
+          (
+            if [ ! -f .env ]; then
+                cp .env.example .env
+            fi
+          )
+    init: |
+          (
+            docker compose -f docker-compose.yml -f docker-compose.dev.yml run php composer install
+            spin run node yarn install
+            spin run php php artisan key:generate
+          )
+    command: spin up
+  
+
+ports:
+  - port: 80
+  - port: 443
+    onOpen: notify
+    name: HTTPS
+    description: Web server port
+  - port: 8443
+    name: Mailtrap
+    description: Access trapped SMTP emails.
+  - port: 8080
+    name: Traefik
+    description: Traefik Dashboard
+  - port: 3306
+    name: MySQL

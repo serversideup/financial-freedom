@@ -34,6 +34,7 @@ services:
   php:
     volumes:
       - .:/var/www/html/
+    user: "${SPIN_USER_ID}:${SPIN_GROUP_ID}"
     networks:
       - development
     # # 🔥 Uncomment for debugging

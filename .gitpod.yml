@@ -11,6 +11,8 @@ tasks:
           )
     init: |
           (
+            export SPIN_USER_ID=$(id -u)
+            export SPIN_GROUP_ID=$(id -g)
             docker compose -f docker-compose.yml -f docker-compose.dev.yml run php composer install
             spin run node yarn install
             spin run php php artisan key:generate

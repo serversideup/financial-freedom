@@ -15,7 +15,7 @@ services:
   php:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`)"
+      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`${CODESPACE_NAME}-443.preview.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`)"
       - "traefik.http.routers.financialfreedom.entrypoints=websecure"
       - "traefik.http.routers.financialfreedom.tls=true"
       - "traefik.http.services.financialfreedom.loadbalancer.server.port=80"
@@ -27,7 +27,7 @@ services:
   mailpit:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mailpit.rule=HostRegexp(`${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`)"
+      - "traefik.http.routers.mailpit.rule=HostRegexp(`${CODESPACE_NAME}-8443.preview.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`)"
       - "traefik.http.routers.mailpit.entrypoints=mailpit"
       - "traefik.http.routers.mailpit.tls=true"
       - "traefik.http.services.mailpit.loadbalancer.server.port=8025"

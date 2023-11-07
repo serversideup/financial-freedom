@@ -8,8 +8,5 @@
     "service": "php",
     "workspaceFolder": "/var/www/html",
     "forwardPorts": [80, 443, 8080, 3306],
-    "postCreateCommand": [
-        "cp .env.example .env",
-        "php composer install --optimize-autoloader --no-interaction --no-progress --no-ansi",
-    ]
+    "postCreateCommand": "cp .env.example .env && php composer install --optimize-autoloader --no-interaction --no-progress --no-ansi",
 }

@@ -8,6 +8,7 @@
     "workspaceFolder": "/var/www/html",
     "forwardPorts": [80, 443, 8080, 3306],
     "postCreateCommand": [
+        "cp .env.example .env",
         "docker compose -f docker-compose.yml -f docker-compose.dev.yml run -T php composer install --optimize-autoloader --no-interaction --no-progress --no-ansi",
         "docker compose -f docker-compose.yml -f docker-compose.dev.yml run -T node yarn install"
     ]

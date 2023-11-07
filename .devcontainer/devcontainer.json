@@ -7,6 +7,20 @@
     ],
     "service": "php",
     "workspaceFolder": "/var/www/html",
-    "forwardPorts": [80, 443, 8080, 3306],
+    "forwardPorts": [80, 443, 8443, 8080, 3306],
     "postCreateCommand": "cp .env.example .env && php composer install --optimize-autoloader --no-interaction --no-progress --no-ansi",
+    "portsAttributes": {
+		"80": {
+			"label": "HTTP"
+		},
+		"443": {
+			"label": "HTTPS"
+		},
+		"3306": {
+			"label": "MariaDB"
+		},
+		"8080": {
+			"label": "Traefik Dashboard"
+		}
+	}
 }

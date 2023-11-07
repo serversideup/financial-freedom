@@ -38,7 +38,7 @@ services:
       - development
     # # 🔥 Uncomment for debugging
     # environment:
-    #   DEBUG_OUTPUT: "true"
+    #   LOG_LEVEL: "debug"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"

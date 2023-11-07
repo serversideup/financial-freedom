@@ -1,4 +1,4 @@
-FROM php:8.2-apache as base
+FROM serversideup/php:8.2.12-unit-bookworm as base
 LABEL maintainer="Server Side Up <@serversideup>"
 
 # Copy the application with the correct permissions

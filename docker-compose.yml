@@ -10,7 +10,6 @@ services:
       target: development
       args:
         USER_ID: ${SPIN_USER_ID}
-        GROUP_ID: ${SPIN_GROUP_ID}
     working_dir: /var/www/html
     depends_on:
       - traefik

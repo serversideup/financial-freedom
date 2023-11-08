@@ -22,7 +22,7 @@ tasks:
             spin run php php artisan migrate
             gp sync-done build
           )
-    command: spin up
+    command: spin up --build
     openMode: split-right
 
   - name: Node Watch

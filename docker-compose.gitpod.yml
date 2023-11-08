@@ -7,14 +7,12 @@ services:
         aliases:
           - ${GITPOD_WORKSPACE_URL}
     ports:
-      - 80:80
-      - 443:443
       - 8080:8080
 
   php:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`443-debug-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}`)"
+      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}`)"
       - "traefik.http.routers.financialfreedom.entrypoints=websecure"
       - "traefik.http.routers.financialfreedom.tls=true"
       - "traefik.http.services.financialfreedom.loadbalancer.server.port=80"

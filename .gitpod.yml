@@ -13,15 +13,25 @@ tasks:
           (
             export SPIN_USER_ID=$(id -u)
             export SPIN_GROUP_ID=$(id -g)
-            docker compose -f docker-compose.yml -f docker-compose.dev.yml run php composer install
+            docker compose -f docker-compose.yml -f docker-compose.dev.yml run --user $SPIN_USER_ID php composer install
             spin run node yarn install
             spin run php php artisan key:generate
           )
     command: spin up
+    openMode: split-left
+  
+  - name: Terminal & Welcome
+    init: |
+        clear
+        echo "👋 Welcome $GITPOD_GIT_USER_NAME!"
+        echo "🚀 Your development environment is available at:"
+        gp url 443
+    openMode: split-right
   
 
 ports:
   - port: 80
+    onOpen: ignore
   - port: 443
     onOpen: notify
     name: HTTPS
@@ -29,8 +39,11 @@ ports:
   - port: 8443
     name: Mailtrap
     description: Access trapped SMTP emails.
+    onOpen: ignore
   - port: 8080
     name: Traefik
     description: Traefik Dashboard
+    onOpen: ignore
   - port: 3306
     name: MySQL
+    onOpen: ignore

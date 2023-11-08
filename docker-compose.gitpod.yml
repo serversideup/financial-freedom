@@ -5,9 +5,7 @@ services:
     networks:
       development:
         aliases:
-          - ${GITPOD_WORKSPACE_URL}
-    ports:
-      - 8080:8080
+          - 443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}
 
   php:
     labels:

@@ -7,6 +7,7 @@ services:
   php:
     build:
       context: .
+      dockerfile: Dockerfile.php
       target: development
       args:
         USER_ID: ${SPIN_USER_ID}

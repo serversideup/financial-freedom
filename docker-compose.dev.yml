@@ -49,6 +49,11 @@ services:
 
   node:
     image: node:20
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        USER_ID: ${SPIN_USER_ID}
     networks:
       - development
     volumes:

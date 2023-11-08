@@ -38,7 +38,7 @@ tasks:
   - name: Terminal & Welcome
     init: |
         clear
-        echo "⚡️ Wating for services to start..."
+        echo "⚡️ Waiting for services to start..."
         gp sync-await node
         clear
         echo "👋 Welcome $GITPOD_GIT_USER_NAME!"

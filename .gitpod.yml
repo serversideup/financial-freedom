@@ -20,14 +20,14 @@ tasks:
             gp sync-done build
           )
     command: spin up
-    openMode: split-left
+    openMode: split-right
 
   - name: Node Watch
     init: |
         gp sync-await build
         gp sync-done node
     command: spin run node yarn dev
-    openMode: tab-after
+    openMode: split-right
   
   - name: Terminal & Welcome
     init: |

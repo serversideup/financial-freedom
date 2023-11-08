@@ -16,6 +16,7 @@ tasks:
             docker compose -f docker-compose.yml -f docker-compose.dev.yml run --user $SPIN_USER_ID php composer install
             spin run node yarn install
             spin run php php artisan key:generate
+            spin exec php php artisan migrate
           )
     command: spin up
     openMode: split-left

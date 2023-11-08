@@ -17,12 +17,21 @@ tasks:
             spin run node yarn install
             spin run php php artisan key:generate
             spin run php php artisan migrate
+            gp sync-done build
           )
     command: spin up
     openMode: split-left
+
+  - name: Node Watch
+    init: |
+        gp sync-await build
+        gp sync-done node
+    command: spin run node yarn dev
   
   - name: Terminal & Welcome
     init: |
+        echo "⚡️ Wating for services to start..."
+        gp sync-await node
         clear
         echo "👋 Welcome $GITPOD_GIT_USER_NAME!"
         echo "🚀 Your development environment is available at:"

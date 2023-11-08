@@ -27,7 +27,10 @@ tasks:
 
   - name: Node Watch
     init: |
+        clear
+        echo "⚡️ Wating for build to complete..."
         gp sync-await build
+        source ~/.bashrc
         gp sync-done node
     command: spin run node yarn watch
     openMode: split-right

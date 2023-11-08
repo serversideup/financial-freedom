@@ -28,23 +28,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // });
 
 import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
-import { createStore } from 'vuex';
+import { createInertiaApp } from '@inertiajs/vue3'
+// import { createStore } from 'vuex';
 
-import { transactions } from './Modules/transactions/transactions.js';
+// import { transactions } from './Modules/transactions/transactions.js';
 
-const store = createStore({
-    modules: {
-        transactions
-    }
-});
+// const store = createStore({
+//     modules: {
+//         transactions
+//     }
+// });
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
         .use(plugin)
-        .use(store)
+        // .use(store)
         .mixin({ methods: { route: window.route } })
         .mount(el)
     },

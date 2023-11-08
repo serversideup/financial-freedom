@@ -26,7 +26,7 @@ tasks:
     init: |
         gp sync-await build
         gp sync-done node
-    command: spin run node yarn dev
+    command: spin run node yarn watch
     openMode: split-right
   
   - name: Terminal & Welcome

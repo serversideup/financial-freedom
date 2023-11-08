@@ -19,18 +19,18 @@ tasks:
             spin run --user $SPIN_USER_ID php composer install
             spin run node yarn install
             spin run php php artisan key:generate
-            spin run php php artisan migrate
             gp sync-done build
           )
     command: spin up --build
     openMode: split-right
 
-  - name: Node Watch
+  - name: Node Watch & Migrations.
     init: |
         clear
         echo "⚡️ Waiting for build to complete..."
         gp sync-await build
         source ~/.bashrc
+        spin exec php php artisan migrate
         gp sync-done node
     command: spin run node yarn watch
     openMode: split-right

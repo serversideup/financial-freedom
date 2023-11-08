@@ -48,7 +48,6 @@ services:
       - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=http"
 
   node:
-    image: node:20
     build:
       context: .
       dockerfile: Dockerfile.node

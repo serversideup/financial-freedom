@@ -13,7 +13,7 @@ tasks:
           (
             export SPIN_USER_ID=$(id -u)
             export SPIN_GROUP_ID=$(id -g)
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/serversideup/spin/main/tools/install.sh)" "" --beta
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/serversideup/spin/release/2.0/tools/install.sh)" "" --beta
             echo 'export PATH="$HOME/.spin/bin:$PATH"' >> ~/.bashrc
             source ~/.bashrc
             spin run --user $SPIN_USER_ID php composer install

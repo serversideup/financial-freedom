@@ -8,6 +8,8 @@ services:
         aliases:
           - financialfreedom.dev.test
     ports:
+      - 80:80
+      - 443:443
       - 8080:8080
     volumes:
       # Add Docker as a mounted volume, so that Traefik can read the labels of other services
@@ -37,9 +39,6 @@ services:
     # # 🔥 Uncomment for debugging
     # environment:
     #   LOG_LEVEL: "debug"
-    ports:
-      - 80:80
-      - 443:443
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"

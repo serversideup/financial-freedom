@@ -11,8 +11,10 @@ tasks:
           )
     init: |
           (
+            SPIN_USER_ID=$(id -u)
+            SPIN_GROUP_ID=$(id -g)
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/serversideup/spin/release/2.0/tools/install.sh)" "" --beta
-            spin run --user $SPIN_USER_ID php composer install
+            spin run --user "$SPIN_USER_ID:$SPIN_GROUP_ID" php composer install
             spin run node yarn install
             spin run php php artisan key:generate
           )

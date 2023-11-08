@@ -31,6 +31,7 @@ tasks:
   
   - name: Terminal & Welcome
     init: |
+        clear
         echo "⚡️ Wating for services to start..."
         gp sync-await node
         clear

@@ -28,7 +28,7 @@ tasks:
   - name: Node Watch
     init: |
         clear
-        echo "⚡️ Wating for build to complete..."
+        echo "⚡️ Waiting for build to complete..."
         gp sync-await build
         source ~/.bashrc
         gp sync-done node

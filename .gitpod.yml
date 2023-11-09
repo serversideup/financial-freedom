@@ -52,7 +52,7 @@ ports:
     onOpen: notify
     name: HTTPS
     description: Web server port
-  - port: 8443
+  - port: 8025
     name: Mailtrap
     description: Access trapped SMTP emails.
     onOpen: ignore

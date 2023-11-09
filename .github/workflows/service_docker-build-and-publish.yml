@@ -56,7 +56,7 @@ jobs:
         run: exit 1
 
       - name: docker-build-action
-        uses: serversideup/github-action-docker-build@v3
+        uses: serversideup/github-action-docker-build@v4
         with:
           tags: "${{ inputs.docker-tags }}"
           dockerfile: "${{ inputs.dockerfile }}"

@@ -1,4 +1,3 @@
-name: Node Build
 on:
   workflow_call:
 
@@ -6,7 +5,7 @@ env:
   DOCKER_COMPOSE_CMD: docker compose -f docker-compose.yml -f docker-compose.ci.yml
 
 jobs:
-  php-unit:
+  node-build:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4

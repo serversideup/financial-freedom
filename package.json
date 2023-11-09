@@ -11,30 +11,22 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",
-        "@vue/compiler-sfc": "^3.2.18",
         "autoprefixer": "^10.4.2",
         "axios": "^0.19",
-        "chart.js": "^2.9.4",
         "cross-env": "^7.0",
         "laravel-mix": "^6.0.6",
-        "lodash.debounce": "^4.0.8",
-        "moment": "^2.29.1",
         "papaparse": "^5.3.0",
         "postcss": "^8.4.5",
         "postcss-import": "^12.0.1",
         "resolve-url-loader": "^3.1.0",
         "tailwindcss": "^3.0.23",
-        "tippy.js": "^6.2.7",
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
         "@headlessui/vue": "^1.5.0",
         "@heroicons/vue": "^1.0.6",
-        "@inertiajs/inertia": "^0.10.1",
-        "@inertiajs/inertia-vue3": "^0.5.2",
-        "dayjs": "^1.10.6",
+        "@inertiajs/vue3": "^1.0.14",
         "mitt": "^3.0.0",
-        "vue": "^3.2.18",
-        "vuex": "^4.0.2"
+        "vue": "^3.3.8"
     }
 }

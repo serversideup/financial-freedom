@@ -1,0 +1,6 @@
+FROM node:20
+ARG USER_ID
+
+RUN usermod -u $USER_ID node
+
+USER node

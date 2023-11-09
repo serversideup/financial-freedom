@@ -6,6 +6,9 @@
 	<a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
 	<a href="https://serversideup.net/discord"><img alt="Discord" src="https://img.shields.io/discord/910287105714954251?color=blueviolet"></a>
 </p>
+<p align="center">
+	<a href="https://gitpod.io/#https://github.com/serversideup/financial-freedom/"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod"></a>
+</p>
 
 ## Introduction
 `Financial Freedom` is an open source alternative to Mint, YNAB, and more. With open source at its core, you have the freedom to review exactly what's happening with your data and participate in the improvement of the product.

@@ -2,12 +2,14 @@
 Thanks for checking out Financial Freedom! There are a lot of things in motion right now, and we plan to make it easier for contributions soon.
 
 # Submitting a PR
-Since everything is so new, please explain your intentions on our community before going through the effort of making a PR: https://community.serversideup.net/t/requesting-features-for-financial-freedom/460
+Since everything is so new, please explain your intentions on our community before going through the effort of making a PR: https://github.com/serversideup/financial-freedom/discussions/63
 
 # Running locally in your development
 We encourage you to replicate this on your machine and tinker around with it. Here is how you can run it.
 
 **Important notes:**
+* We user Docker to run our entire stack. No local services are required.
+* Be sure if you have MAMP, XAMPP, or any other local services running, that you shut them down first. They will conflict with the ports we use.
 * We use [Docker Overrides](https://docs.docker.com/compose/extends/), which allow us to apply overrides on a per environment basis
 * We have a tool called [Spin](https://serversideup.net/open-source/spin/) which greatly improves the development experience
 * `spin` is automatically installed via Composer for this project
@@ -22,7 +24,7 @@ If you do not add `spin` as an alias, you will need to type this every time you 
 bash vendor/bin/spin
 ```
 
-If you don't want to do that, you can [install `spin` on your system[(https://serversideup.net/open-source/spin/)], or add this alias:
+If you don't want to do that, you can [install `spin` on your system](https://serversideup.net/open-source/spin/), or add this alias:
 ```sh
 alias spin='[ -f node_modules/.bin/spin ] && bash node_modules/.bin/spin || bash vendor/bin/spin'
 ```
@@ -37,11 +39,11 @@ cp .env.example .env
 ```
 
 ### Install composer dependencies
-```sh
-docker compose -f docker-compose.yml -f docker-compose.dev.yml run --no-deps --rm -e "S6_LOGGING=1" php composer install
-```
-(We need to run this big, ugly, and long command first because it will install `spin` for us when it pulls down the composer dependencies. From here on out, we will be using `spin` [and assuming you aliased the command]).
+Assuming you aliased `spin` as defined above, run the following commands. If you didn't, you will need to use `bash vendor/bin/spin` instead of `spin`.
 
+```sh
+spin run php composer install
+```
 ### Install Node dependencies
 This might take a while because how slow mounted volumes are with Docker
 ```sh
@@ -67,10 +69,14 @@ spin exec php php artisan migrate
 ```
 
 ### Configure hosts file
-The server expects a URL of "https://financial-freedom.dev.test". For that to resolve, you can set your local machine hosts file.
+The server expects a URL of "https://financialfreedom.dev.test". For that to resolve, you can set your local machine hosts file.
 
 ```
-127.0.0.1 financial-freedom.dev.test
+# For accessing the Financial Freedom locally
+127.0.0.1 financialfreedom.dev.test
+
+# For accessing Mailpit locally
+127.0.0.1 mailpit.dev.test
 ```
 
 ### If you're making changes to the front-end
@@ -81,4 +87,4 @@ spin run node yarn dev
 ```
 
 ### Accessing the application
-Once you have the application online, you can register an account at https://financial-freedom.dev.test/register
+Once you have the application online, you can register an account at https://financialfreedom.dev.test/register

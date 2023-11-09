@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+
+  traefik:
+    networks:
+      development:
+        aliases:
+          - 443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}
+
+  php:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.financialfreedom.rule=Host(`443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}`)"
+      - "traefik.http.routers.financialfreedom.entrypoints=websecure"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=80"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=http"
+
+  mailpit:
+    ports:
+      - 8025:8025
+    labels:
+      - "traefik.enable=false"
+
+networks:
+  development:

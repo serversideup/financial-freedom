@@ -7,7 +7,7 @@
 	<a href="https://serversideup.net/discord"><img alt="Discord" src="https://img.shields.io/discord/910287105714954251?color=blueviolet"></a>
 </p>
 <p align="center">
-	<a href="https://gitpod.io/#https://github.com/serversideup/financial-freedom/tree/feature/codespaces"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod"></a>
+	<a href="https://gitpod.io/#https://github.com/serversideup/financial-freedom/"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod"></a>
 </p>
 
 ## Introduction

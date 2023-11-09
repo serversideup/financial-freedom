@@ -39,13 +39,7 @@ services:
     # # 🔥 Uncomment for debugging
     # environment:
     #   LOG_LEVEL: "debug"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"
-      - "traefik.http.routers.financialfreedom.entrypoints=websecure"
-      - "traefik.http.routers.financialfreedom.tls=true"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.port=80"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=http"
+
 
   node:
     build:
@@ -88,7 +82,7 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mailpit.rule=HostRegexp(`mailpit.dev.test`)"
+      - "traefik.http.routers.mailpit.rule=Host(`mailpit.dev.test`)"
       - "traefik.http.routers.mailpit.entrypoints=websecure"
       - "traefik.http.routers.mailpit.tls=true"
       - "traefik.http.services.mailpit.loadbalancer.server.port=8025"

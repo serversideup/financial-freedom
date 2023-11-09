@@ -10,7 +10,7 @@ on:
     - cron: '0 8 * * 1'
 
 jobs:
-  build-beta-images:
+  build-edge-images:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
       docker-tags: "serversideup/financial-freedom:edge"

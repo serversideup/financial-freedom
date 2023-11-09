@@ -12,12 +12,36 @@ on:
         default: './Dockerfile'
 
 jobs:
+  php-build-and-test:
+    uses: ./.github/workflows/service_tests-phpunit.yml
+
+  node-build:
+    uses: ./.github/workflows/service_node-install.yml
+
   docker-publish:
     runs-on: ubuntu-22.04
+    needs:
+      - php-build-and-test
+      - node-build
     steps:
+      - name: Restore composer cache
+        id: composer-vendor-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: ./vendor
+          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
+          fail-on-cache-miss: true
+
+      - name: Restore node_modules cache
+        id: node-modules-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: ./node_modules/
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          fail-on-cache-miss: true
 
       - name: docker-build-action
-        uses: serversideup/github-action-docker-build@main
+        uses: serversideup/github-action-docker-build@v2
         with:
           tags: "${{ inputs.docker-tags }}"
           dockerfile: "${{ inputs.dockerfile }}"

@@ -1,0 +1,75 @@
+on:
+  workflow_call:
+
+env:
+  DOCKER_COMPOSE_CMD: docker compose -f docker-compose.yml -f docker-compose.ci.yml
+
+jobs:
+  php-unit:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore composer cache (if available)
+        id: composer-vendor-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: ./vendor
+          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
+
+      - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
+        name: List the composer packages
+        continue-on-error: true
+        run: |
+          $DOCKER_COMPOSE_CMD \
+          run \
+          php \
+          composer show --locked
+          
+      - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
+        name: Install Composer dependencies
+        run: |
+          $DOCKER_COMPOSE_CMD \
+          run \
+          php \
+          composer install --optimize-autoloader --no-interaction --no-progress --no-ansi
+      
+      # - name: Bring up containers with Docker Compose
+      #   run: |
+      #     $DOCKER_COMPOSE_CMD \
+      #     up -d -V --remove-orphans
+      
+      # - name: Wait for services to come up...
+      #   run: sleep 5
+
+      # - name: Run Laravel migrations on testing database
+      #   run: |
+      #     $DOCKER_COMPOSE_CMD \
+      #     exec -T -w /var/www/html \
+      #     php \
+      #     php artisan --env=testing migrate --force
+
+      # - name: Run PHP Unit Test
+      #   run: |
+      #     $DOCKER_COMPOSE_CMD \
+      #     run \
+      #     php \
+      #     php ./vendor/bin/phpunit --log-junit report.xml
+
+      - name: Upload composer cache
+        uses: actions/cache/save@v3
+        with:
+          path: ./vendor/
+          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
+
+      - name: Upload artifacts on failure
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: PHP Report & Logs
+          path: |
+            ./storage/logs/
+            report.xml
+      
+      # - name: Bring down containers
+      #   run: $DOCKER_COMPOSE_CMD down -v --remove-orphans

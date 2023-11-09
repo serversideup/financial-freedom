@@ -23,6 +23,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.node
+      target: base
     networks:
       - ci
     volumes:

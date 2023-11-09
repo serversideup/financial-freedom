@@ -10,6 +10,9 @@ on:
       dockerfile:
         type: string
         default: './Dockerfile'
+      target:
+        type: string
+        default: 'deploy'
 
 jobs:
   php-build-and-test:
@@ -41,10 +44,11 @@ jobs:
           fail-on-cache-miss: true
 
       - name: docker-build-action
-        uses: serversideup/github-action-docker-build@v2
+        uses: serversideup/github-action-docker-build@v3
         with:
           tags: "${{ inputs.docker-tags }}"
           dockerfile: "${{ inputs.dockerfile }}"
           registry-username: ${{ secrets.DOCKER_HUB_USERNAME }}
           registry-token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           platforms: "${{ inputs.platforms }}"
+          target: "${{ inputs.target }}"

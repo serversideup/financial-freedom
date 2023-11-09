@@ -13,13 +13,9 @@ jobs:
       - name: Restore composer cache (if available)
         id: composer-vendor-restore
         uses: actions/cache/restore@v3
-        env:
-          cache-name: composer-vendor
         with:
-          path: ./vendor/
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-
+          path: vendor/
+          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
 
       - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
         name: List the composer packages
@@ -62,13 +58,9 @@ jobs:
 
       - name: Upload composer cache
         uses: actions/cache@v3
-        env:
-          cache-name: composer-vendor
         with:
           path: ./vendor/
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-
+          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
 
       - name: Upload artifacts on failure
         uses: actions/upload-artifact@v3

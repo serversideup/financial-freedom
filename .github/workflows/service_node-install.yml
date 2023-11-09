@@ -13,13 +13,9 @@ jobs:
       - name: Restore node_modules cache (if available)
         id: node-modules-restore
         uses: actions/cache/restore@v3
-        env:
-          cache-name: node-modules
         with:
-          path: ./node_modules/
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-
+          path: node_modules/
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
          
       - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
         name: Run "yarn install"
@@ -38,10 +34,6 @@ jobs:
 
       - name: Upload node_modules cache
         uses: actions/cache@v3
-        env:
-          cache-name: node-modules
         with:
           path: ./node_modules/
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}

@@ -7,15 +7,19 @@ on:
       docker-tags:
         required: true
         type: string
+      dockerfile:
+        type: string
+        default: 'Dockerfile'
 
 jobs:
   docker-publish:
     runs-on: ubuntu-22.04
     steps:
       - name: docker-build-action
-        uses: serversideup/github-action-docker-build@v1
+        uses: serversideup/github-action-docker-build@main
         with:
           tags: "${{ inputs.docker-tags }}"
+          dockerfile: "${{ inputs.dockerfile }}"
           registry-username: ${{ secrets.DOCKER_HUB_USERNAME }}
           registry-token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           platforms: "${{ inputs.platforms }}"

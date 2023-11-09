@@ -15,4 +15,5 @@ jobs:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
       docker-tags: "serversideup/financial-freedom:beta"
+      dockerfile: "Dockerfile.php"
     secrets: inherit

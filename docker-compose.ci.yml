@@ -19,6 +19,16 @@ services:
     depends_on:
       - mariadb
 
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    networks:
+      - ci
+    volumes:
+      - .:/usr/src/app/:cached
+    working_dir: /usr/src/app/
+
   mailpit:
     image: axllent/mailpit
     networks:

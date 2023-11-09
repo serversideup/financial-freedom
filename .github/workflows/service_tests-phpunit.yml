@@ -13,9 +13,13 @@ jobs:
       - name: Restore composer cache (if available)
         id: composer-vendor-restore
         uses: actions/cache/restore@v3
+        env:
+          cache-name: composer-vendor
         with:
-          path: ./vendor
-          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
+          path: ./vendor/
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
 
       - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
         name: List the composer packages
@@ -57,10 +61,14 @@ jobs:
       #     php ./vendor/bin/phpunit --log-junit report.xml
 
       - name: Upload composer cache
-        uses: actions/cache/save@v3
+        uses: actions/cache@v3
+        env:
+          cache-name: composer-vendor
         with:
           path: ./vendor/
-          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: Upload artifacts on failure
         uses: actions/upload-artifact@v3

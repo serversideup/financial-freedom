@@ -33,6 +33,7 @@ jobs:
 
       - name: Restore composer cache
         id: composer-vendor-restore
+        continue-on-error: false
         uses: actions/cache/restore@v3
         with:
           path: ./vendor
@@ -41,6 +42,7 @@ jobs:
 
       - name: Restore node_modules cache
         id: node-modules-restore
+        continue-on-error: false
         uses: actions/cache/restore@v3
         with:
           path: ./node_modules/

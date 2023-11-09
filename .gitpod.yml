@@ -1,0 +1,65 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Build & Start
+    before: |
+          (
+            if [ ! -f .env ]; then
+                cp .env.example .env
+            fi
+          )
+    init: |
+          (
+            SPIN_USER_ID=$(id -u)
+            SPIN_GROUP_ID=$(id -g)
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/serversideup/spin/release/2.0/tools/install.sh)" "" --beta
+            spin run --user "$SPIN_USER_ID:$SPIN_GROUP_ID" php composer install
+            spin run node yarn install
+            spin run php php artisan key:generate
+          )
+    command: spin up --build
+    openMode: split-right
+
+  - name: Node Watch & Migrations.
+    init: |
+        clear
+        echo "⚡️ Waiting for build to complete..."
+        gp ports await 3306
+        echo "⚡️ Waiting for database to provision..."
+        sleep 5
+        spin exec php php artisan migrate
+        gp sync-done node
+    command: spin run node yarn watch
+    openMode: split-right
+  
+  - name: Terminal & Welcome
+    init: |
+        clear
+        echo "⚡️ Waiting for services to start..."
+        gp sync-await node
+        clear
+        echo "👋 Welcome $GITPOD_GIT_USER_NAME!"
+        echo "🚀 Your development environment is available at:"
+        gp url 443
+    openMode: split-right
+  
+
+ports:
+  - port: 80
+    onOpen: ignore
+  - port: 443
+    onOpen: notify
+    name: HTTPS
+    description: Web server port
+  - port: 8025
+    name: Mailtrap
+    description: Access trapped SMTP emails.
+    onOpen: ignore
+  - port: 8080
+    name: Traefik
+    description: Traefik Dashboard
+    onOpen: ignore
+  - port: 3306
+    name: MySQL
+    onOpen: ignore

@@ -38,17 +38,15 @@ services:
       - development
     # # 🔥 Uncomment for debugging
     # environment:
-    #   DEBUG_OUTPUT: "true"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"
-      - "traefik.http.routers.financialfreedom.entrypoints=websecure"
-      - "traefik.http.routers.financialfreedom.tls=true"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.port=443"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
+    #   LOG_LEVEL: "debug"
+
 
   node:
-    image: node:16
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        USER_ID: ${SPIN_USER_ID}
     networks:
       - development
     volumes:
@@ -84,7 +82,7 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mailpit.rule=HostRegexp(`mailpit.dev.test`)"
+      - "traefik.http.routers.mailpit.rule=Host(`mailpit.dev.test`)"
       - "traefik.http.routers.mailpit.entrypoints=websecure"
       - "traefik.http.routers.mailpit.tls=true"
       - "traefik.http.services.mailpit.loadbalancer.server.port=8025"

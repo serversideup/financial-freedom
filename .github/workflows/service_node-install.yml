@@ -36,5 +36,5 @@ jobs:
         name: Upload node_modules cache
         uses: actions/cache/save@v3
         with:
-          path: ./node_modules/
+          path: node_modules/
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}

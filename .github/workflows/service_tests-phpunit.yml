@@ -60,7 +60,7 @@ jobs:
         name: Upload composer cache
         uses: actions/cache/save@v3
         with:
-          path: ./vendor/
+          path: vendor/
           key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
 
       - name: Upload artifacts on failure

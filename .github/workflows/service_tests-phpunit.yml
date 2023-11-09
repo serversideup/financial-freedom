@@ -56,8 +56,9 @@ jobs:
       #     php \
       #     php ./vendor/bin/phpunit --log-junit report.xml
 
-      - name: Upload composer cache
-        uses: actions/cache@v3
+      - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
+        name: Upload composer cache
+        uses: actions/cache/save@v3
         with:
           path: ./vendor/
           key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}

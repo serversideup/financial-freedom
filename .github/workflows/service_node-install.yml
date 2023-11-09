@@ -32,8 +32,9 @@ jobs:
           node \
           yarn production
 
-      - name: Upload node_modules cache
-        uses: actions/cache@v3
+      - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
+        name: Upload node_modules cache
+        uses: actions/cache/save@v3
         with:
           path: ./node_modules/
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}

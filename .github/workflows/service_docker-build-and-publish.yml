@@ -32,18 +32,28 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Restore composer cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
+        id: composer-cache-restore
         with:
           path: vendor/
           fail-on-cache-miss: true
           key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
 
+      - name: Check composer cache
+        if: steps.composer-cache-restore.outputs.cache-hit != 'true'
+        run: exit 1
+
       - name: Restore node_modules cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
+        id: node-cache-restore
         with:
           path: node_modules/
           fail-on-cache-miss: true
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+      
+      - name: Check node_modules cache
+        if: steps.node-cache-restore.outputs.cache-hit != 'true'
+        run: exit 1
 
       - name: docker-build-action
         uses: serversideup/github-action-docker-build@v3

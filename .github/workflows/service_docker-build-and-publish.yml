@@ -9,7 +9,7 @@ on:
         type: string
       dockerfile:
         type: string
-        default: 'Dockerfile'
+        default: './Dockerfile'
 
 jobs:
   docker-publish:

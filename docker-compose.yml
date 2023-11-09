@@ -8,9 +8,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.php
-      target: development
-      args:
-        USER_ID: ${SPIN_USER_ID}
     working_dir: /var/www/html
     depends_on:
       - traefik

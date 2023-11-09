@@ -1,5 +1,4 @@
 name: Site Deployment - Production 🚀
-
 on:
   push:
     branches:

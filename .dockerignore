@@ -1,4 +1,7 @@
 # Ignore anything GIT related
 .git*
-/_volumes
-Dockerfile-dev
+/.infrastructure/
+Dockerfile*
+docker-compose*
+docs/
+.gitpod*

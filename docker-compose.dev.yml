@@ -32,6 +32,10 @@ services:
       - 3306:3306
 
   php:
+    build:
+      target: development
+      args:
+        USER_ID: ${SPIN_USER_ID}
     volumes:
       - .:/var/www/html/
     networks:
@@ -39,7 +43,6 @@ services:
     # # 🔥 Uncomment for debugging
     # environment:
     #   LOG_LEVEL: "debug"
-
 
   node:
     build:

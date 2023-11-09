@@ -2,7 +2,6 @@ on:
   workflow_call:
     inputs:
       platforms:
-        required: true
         type: string
         default: 'linux/amd64,linux/arm/v7,linux/arm64/v8'
       docker-tags:

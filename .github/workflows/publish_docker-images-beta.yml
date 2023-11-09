@@ -1,5 +1,4 @@
 name: Docker Publish (Beta Image)
-
 on:
   workflow_dispatch:
   push:

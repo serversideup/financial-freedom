@@ -1,3 +1,4 @@
+name: Node Build
 on:
   workflow_call:
 

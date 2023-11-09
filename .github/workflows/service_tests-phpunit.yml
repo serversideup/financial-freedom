@@ -1,3 +1,4 @@
+name: Composer Build & PHP Unit
 on:
   workflow_call:
 

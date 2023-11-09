@@ -1,4 +1,4 @@
-name: Docker Publish (Beta Image)
+name: Docker Publish (Edge Image)
 on:
   workflow_dispatch:
   push:
@@ -13,6 +13,6 @@ jobs:
   build-beta-images:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
-      docker-tags: "serversideup/financial-freedom:beta"
+      docker-tags: "serversideup/financial-freedom:edge"
       dockerfile: "./Dockerfile.php"
     secrets: inherit

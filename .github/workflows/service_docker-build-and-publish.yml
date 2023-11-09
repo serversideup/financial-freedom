@@ -27,6 +27,10 @@ jobs:
       - php-build-and-test
       - node-build
     steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Restore composer cache
         id: composer-vendor-restore
         uses: actions/cache/restore@v3

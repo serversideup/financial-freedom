@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 56-create-a-docker-hub-image-for-easy-deployments
+      - main
     paths-ignore:
         - 'docs/**'
   schedule:

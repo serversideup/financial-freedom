@@ -9506,12 +9506,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/serversideup/spin.git",
-                "reference": "84a43a72c159229b1fdb4b7c753ccc114945c5df"
+                "reference": "d92abd8a0fcd07548e59fb4fbe6ee5f47f7c9f4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serversideup/spin/zipball/84a43a72c159229b1fdb4b7c753ccc114945c5df",
-                "reference": "84a43a72c159229b1fdb4b7c753ccc114945c5df",
+                "url": "https://api.github.com/repos/serversideup/spin/zipball/d92abd8a0fcd07548e59fb4fbe6ee5f47f7c9f4a",
+                "reference": "d92abd8a0fcd07548e59fb4fbe6ee5f47f7c9f4a",
                 "shasum": ""
             },
             "bin": [
@@ -9543,7 +9543,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-08T01:54:30+00:00"
+            "time": "2023-11-08T22:29:18+00:00"
         },
         {
             "name": "spatie/backtrace",

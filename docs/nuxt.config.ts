@@ -6,7 +6,6 @@ export default defineNuxtConfig({
         '@nuxtjs/algolia',
         '@nuxtjs/color-mode',
         '@nuxt/content',
-        '@nuxt/image-edge',
         '@nuxtjs/plausible',
         '@nuxtjs/tailwindcss',
         '@vueuse/nuxt'

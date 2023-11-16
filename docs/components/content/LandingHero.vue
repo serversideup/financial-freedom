@@ -1,7 +1,7 @@
 <template>
     <div class="w-full flex flex-col items-center justify-center pt-36 px-4 md:px-0 md:pt-36 lg:pt-48 mx-auto z-50 h-full bg-[url(images/ui/light-accent.png)] bg-no-repeat bg-right-bottom">
         <h2 class="md:text-center text-[#CECFD2] font-sans text-sm md:text-base font-semibold">Stay on budget and build wealth without sacrificing your privacy.</h2>
-        <h1 class="md:text-center font-sans text-4xl md:text-5xl lg:text-7xl max-w-3xl font-semibold leading-tight mt-3 text-[#F5F5F6]">Test-An open source alternative to Mint, YNAB, and more.</h1>
+        <h1 class="md:text-center font-sans text-4xl md:text-5xl lg:text-7xl max-w-3xl font-semibold leading-tight mt-3 text-[#F5F5F6]">An open source alternative to Mint, YNAB, and more.</h1>
         <h3 class="mt-4 md:mt-6 font-sans md:text-center text-[#94969C] text-xl max-w-2xl mx-auto font-normal">Keep investors and their buyers out of your financial data. Own 100% of your data and start building financial wealth.</h3>
 
         <div class="mt-8 md:mt-12 flex w-full flex-col-reverse md:flex-row items-center justify-center">

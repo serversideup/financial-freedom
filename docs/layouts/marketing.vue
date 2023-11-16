@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col min-h-screen bg-[#0040C1]">
+    <div class="w-full flex flex-col min-h-screen bg-[#0C111D] bg-[url(images/ui/background-pattern.svg)] bg-no-repeat scroll-smooth">
         <Head>
             <Link rel="preconnect" href="https://fonts.googleapis.com"/>
             <Link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -33,7 +33,12 @@ useHead({
     bodyAttrs: {
         class: 'antialiased'
     },
-    title: 'Financial Freedom - An open source alternative to Mint, YNAB, and more. Stay on budget and build wealth without sacrificing your privacy.'
+    title: 'Financial Freedom - An open source alternative to Mint, YNAB, and more. Stay on budget and build wealth without sacrificing your privacy.',
+    script: [
+        {
+            src: 'https://f.convertkit.com/ckjs/ck.5.js'
+        }
+    ]
 })
 
 const route = useRoute();

@@ -1,9 +1,9 @@
 <template>
-    <footer class="bg-[#161B26] w-full py-24 flex flex-col items-center justify-center">
+    <footer class="bg-[#161B26] w-full py-16 md:py-24 flex flex-col items-center justify-center px-4 md:px-8">
         <h2 class="font-sans text-4xl font-semibold text-[#F5F5F6] mb-5">Help the community grow.</h2>
         <div class="text-[#94969C] font-sans text-xl font-normal">Get involved to help people take control of their personal finances.</div>
         
-        <div class="grid grid-cols-3 gap-[10px] py-16 mx-auto w-full max-w-[940px]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-[10px] py-16 mx-auto w-full max-w-[940px]">
             <NuxtLink to="https://twitter.com/serversideup" target="_blank" class="p-[10px] flex flex-col">
                 <div class="flex w-8 h-8 mb-1 items-center justify-center">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

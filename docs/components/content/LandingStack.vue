@@ -1,14 +1,14 @@
 <template>
-    <div class="w-full max-w-7xl flex flex-col py-24 px-8">
+    <div class="w-full max-w-7xl mx-auto flex flex-col py-16 md:py-24 px-4 md:px-8">
         <div class="flex items-center justify-center">
             <span class="rounded-full border border-[#0040C1] bg-[#026] px-3 py-1 font-sans text-sm font-medium text-[#84ADFF]">
                 Our Stack
             </span>
         </div>
-        <h2 class="mt-4 text-center font-sans text-4xl font-semibold text-[#F5F5F6]">Built with Self-hosters in mind</h2>
-        <span class="mt-5 text-[#94969C] text-center font-sans text-xl font-normal">We've built this liberation on the best open source technologies available.</span>
+        <h2 class="mt-4 text-center font-sans text-3xl md:text-4xl font-semibold text-[#F5F5F6]">Built with Self-hosters in mind</h2>
+        <span class="mt-5 text-[#94969C] text-center font-sans text-base md:text-xl font-normal">We've built this liberation on the best open source technologies available.</span>
 
-        <div class="grid grid-cols-3 gap-x-8 gap-y-16 mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10 md:gap-y-16 mt-16">
             <div class="flex flex-col items-center justify-center">
                 <div class="flex items-center justify-center p-2 rounded-xl bg-white border border-[#1F242F] shadow-sm">
                     <img src="/images/logos/laravel.svg"/>

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full min-h-screen bg-[#0040C1]">
+    <div class="w-full min-h-screen bg-[#0C111D]">
         <Head>
             <Link rel="preconnect" href="https://fonts.googleapis.com"/>
             <Link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -15,7 +15,7 @@
 
         <GlobalServerSideUp/>
 
-        <MarketingHeader/>
+        <MarketingHeader :docs="true"/>
 
         <div class="lg:flex lg:w-screen lg:h-[calc(100vh-126px)]">
             <div style="scrollbar-width: none" class="contents lg:overflow-y-scroll lg:pointer-events-none lg:z-40 lg:flex lg:top-[126px]">

@@ -16,11 +16,11 @@
                         class="seva-fields formkit-fields flex flex-col w-full md:w-auto md:flex-row md:justify-center items-center mt-8">
                             <div class="formkit-field w-full md:w-auto">
                                 <input
-                                    class="formkit-input mb-4 md:mb-0 md:mr-4 w-full md:w-80 text-[#F5F5F6] p-[14px] rounded-lg bg-[#0C111D] border border-[#333741] shadow-sm font-sans text-base outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-offset-0 placeholder:text-[#85888E] "
+                                    class="formkit-input mb-4 md:mb-0 md:mr-4 w-full md:w-80 text-[#F5F5F6] p-[14px] rounded-lg bg-[#0C111D] border border-[#333741] shadow-sm font-sans text-base outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-offset-0 placeholder:text-[#85888E]"
                                     name="email_address"
                                     aria-label="Email Address"
                                     placeholder="Email Address"
-                                    required=""
+                                    required
                                     type="email"/>
                             </div>
                             <button

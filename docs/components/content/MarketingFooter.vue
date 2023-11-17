@@ -4,40 +4,48 @@
         <div class="text-[#94969C] font-sans text-xl font-normal">Get involved to help people take control of their personal finances.</div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-[10px] py-16 mx-auto w-full max-w-[940px]">
-            <NuxtLink to="https://twitter.com/serversideup" target="_blank" class="p-[10px] flex flex-col">
-                <div class="flex w-8 h-8 mb-1 items-center justify-center">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.2971 13.85L28.4914 2H26.0756L17.224 12.2892L10.1542 2H2L12.6909 17.5591L2 29.9856H4.41585L13.7634 19.1199L21.2297 29.9856H29.3838L18.2965 13.85H18.2971ZM14.9883 17.6962L13.9051 16.1468L5.28631 3.81862H8.99691L15.9523 13.7679L17.0356 15.3172L26.0768 28.2497H22.3662L14.9883 17.6967V17.6962Z" fill="white"/>
-                    </svg>
-                </div>
-                <span class="py-1 text-[#F5F5F6] font-sans text-2xl font-bold">X (Twitter)</span>
-                <div class="font-sans text-xl font-normal text-[#94969C]">Follow along <span class="text-[#2970FF]">@serversideup</span> for our latest updates and project.</div>
-            </NuxtLink>
-            <NuxtLink to="https://serversideup.net/discord" target="_blank" class="p-[10px] flex flex-col">
-                <div class="flex w-8 h-8 mb-1 items-center justify-center">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 11.6C2 8.23969 2 6.55953 2.65396 5.27606C3.2292 4.14708 4.14708 3.2292 5.27606 2.65396C6.55953 2 8.23969 2 11.6 2H20.4C23.7603 2 25.4405 2 26.7239 2.65396C27.8529 3.2292 28.7708 4.14708 29.346 5.27606C30 6.55953 30 8.23969 30 11.6V20.4C30 23.7603 30 25.4405 29.346 26.7239C28.7708 27.8529 27.8529 28.7708 26.7239 29.346C25.4405 30 23.7603 30 20.4 30H11.6C8.23969 30 6.55953 30 5.27606 29.346C4.14708 28.7708 3.2292 27.8529 2.65396 26.7239C2 25.4405 2 23.7603 2 20.4V11.6Z" fill="url(#paint0_linear_8800_1839)"/>
-                        <path d="M24.2752 10.0267C22.7615 8.74667 20.945 8.10667 19.0275 8L18.7248 8.32C20.4404 8.74667 21.9541 9.6 23.367 10.7733C21.6514 9.81333 19.7339 9.17333 17.7156 8.96C17.1101 8.85333 16.6055 8.85333 16 8.85333C15.3945 8.85333 14.8899 8.85333 14.2844 8.96C12.2661 9.17333 10.3486 9.81333 8.63303 10.7733C10.0459 9.6 11.5596 8.74667 13.2752 8.32L12.9725 8C11.055 8.10667 9.23853 8.74667 7.72477 10.0267C6.00917 13.44 5.10092 17.28 5 21.2267C6.51376 22.9333 8.63303 24 10.8532 24C10.8532 24 11.5596 23.1467 12.0642 22.4C10.7523 22.08 9.54128 21.3333 8.73395 20.16C9.44037 20.5867 10.1468 21.0133 10.8532 21.3333C11.7615 21.76 12.6697 21.9733 13.578 22.1867C14.3853 22.2933 15.1927 22.4 16 22.4C16.8073 22.4 17.6147 22.2933 18.422 22.1867C19.3303 21.9733 20.2385 21.76 21.1468 21.3333C21.8532 21.0133 22.5596 20.5867 23.2661 20.16C22.4587 21.3333 21.2477 22.08 19.9358 22.4C20.4404 23.1467 21.1468 24 21.1468 24C23.367 24 25.4862 22.9333 27 21.2267C26.8991 17.28 25.9908 13.44 24.2752 10.0267ZM12.6697 19.3067C11.6606 19.3067 10.7523 18.3467 10.7523 17.1733C10.7523 16 11.6606 15.04 12.6697 15.04C13.6789 15.04 14.5872 16 14.5872 17.1733C14.5872 18.3467 13.6789 19.3067 12.6697 19.3067ZM19.3303 19.3067C18.3211 19.3067 17.4128 18.3467 17.4128 17.1733C17.4128 16 18.3211 15.04 19.3303 15.04C20.3394 15.04 21.2477 16 21.2477 17.1733C21.2477 18.3467 20.3394 19.3067 19.3303 19.3067Z" fill="white"/>
-                        <defs>
-                            <linearGradient id="paint0_linear_8800_1839" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#687EC9"/>
-                            <stop offset="1" stop-color="#5971C3"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-                <span class="py-1 text-[#F5F5F6] font-sans text-2xl font-bold">Discord</span>
-                <div class="font-sans text-xl font-normal text-[#94969C]">Chat with the maintainers and meet friendly people who share the same interests as you.</div>
-            </NuxtLink>
-            <NuxtLink to="https://github.com/serversideup" target="_blank" class="p-[10px] flex flex-col">
-                <div class="flex w-8 h-8 mb-1 items-center justify-center">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 2C8.265 2 2 8.265 2 16C2 22.195 6.0075 27.4275 11.5725 29.2825C12.2725 29.405 12.535 28.985 12.535 28.6175C12.535 28.285 12.5175 27.1825 12.5175 26.01C9 26.6575 8.09 25.1525 7.81 24.365C7.6525 23.9625 6.97 22.72 6.375 22.3875C5.885 22.125 5.185 21.4775 6.3575 21.46C7.46 21.4425 8.2475 22.475 8.51 22.895C9.77 25.0125 11.7825 24.4175 12.5875 24.05C12.71 23.14 13.0775 22.5275 13.48 22.1775C10.365 21.8275 7.11 20.62 7.11 15.265C7.11 13.7425 7.6525 12.4825 8.545 11.5025C8.405 11.1525 7.915 9.7175 8.685 7.7925C8.685 7.7925 9.8575 7.425 12.535 9.2275C13.655 8.9125 14.845 8.755 16.035 8.755C17.225 8.755 18.415 8.9125 19.535 9.2275C22.2125 7.4075 23.385 7.7925 23.385 7.7925C24.155 9.7175 23.665 11.1525 23.525 11.5025C24.4175 12.4825 24.96 13.725 24.96 15.265C24.96 20.6375 21.6875 21.8275 18.5725 22.1775C19.08 22.615 19.5175 23.455 19.5175 24.7675C19.5175 26.64 19.5 28.145 19.5 28.6175C19.5 28.985 19.7625 29.4225 20.4625 29.2825C23.2418 28.3443 25.6568 26.5581 27.3677 24.1753C29.0786 21.7926 29.9993 18.9334 30 16C30 8.265 23.735 2 16 2Z" fill="white"/>
-                    </svg>
-                </div>
-                <span class="py-1 text-[#F5F5F6] font-sans text-2xl font-bold">GitHub</span>
-                <div class="font-sans text-xl font-normal text-[#94969C]">Help us squash bugs, request features, and improve the documentation.</div>
-            </NuxtLink>
+            <div class="block w-full p-[1px] hover:rounded-lg hover:bg-gradient-to-r hover:from-[#155EEF] hover:to-[#BA6BFF]">
+                <NuxtLink to="https://twitter.com/serversideup" target="_blank" class="p-[10px] flex flex-col bg-[#161B26] rounded-lg h-full" >
+                    <div class="flex w-8 h-8 mb-1 items-center justify-center">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.2971 13.85L28.4914 2H26.0756L17.224 12.2892L10.1542 2H2L12.6909 17.5591L2 29.9856H4.41585L13.7634 19.1199L21.2297 29.9856H29.3838L18.2965 13.85H18.2971ZM14.9883 17.6962L13.9051 16.1468L5.28631 3.81862H8.99691L15.9523 13.7679L17.0356 15.3172L26.0768 28.2497H22.3662L14.9883 17.6967V17.6962Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span class="py-1 text-[#F5F5F6] font-sans text-2xl font-bold">X (Twitter)</span>
+                    <div class="font-sans text-xl font-normal text-[#94969C]">Follow along <span class="text-[#2970FF]">@serversideup</span> for our latest updates and project.</div>
+                </NuxtLink>
+            </div>
+            
+            <div class="block w-full p-[1px] hover:rounded-lg hover:bg-gradient-to-r hover:from-[#155EEF] hover:to-[#BA6BFF]">
+                <NuxtLink to="https://serversideup.net/discord" target="_blank" class="p-[10px] flex flex-col bg-[#161B26] rounded-lg h-full">
+                    <div class="flex w-8 h-8 mb-1 items-center justify-center">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 11.6C2 8.23969 2 6.55953 2.65396 5.27606C3.2292 4.14708 4.14708 3.2292 5.27606 2.65396C6.55953 2 8.23969 2 11.6 2H20.4C23.7603 2 25.4405 2 26.7239 2.65396C27.8529 3.2292 28.7708 4.14708 29.346 5.27606C30 6.55953 30 8.23969 30 11.6V20.4C30 23.7603 30 25.4405 29.346 26.7239C28.7708 27.8529 27.8529 28.7708 26.7239 29.346C25.4405 30 23.7603 30 20.4 30H11.6C8.23969 30 6.55953 30 5.27606 29.346C4.14708 28.7708 3.2292 27.8529 2.65396 26.7239C2 25.4405 2 23.7603 2 20.4V11.6Z" fill="url(#paint0_linear_8800_1839)"/>
+                            <path d="M24.2752 10.0267C22.7615 8.74667 20.945 8.10667 19.0275 8L18.7248 8.32C20.4404 8.74667 21.9541 9.6 23.367 10.7733C21.6514 9.81333 19.7339 9.17333 17.7156 8.96C17.1101 8.85333 16.6055 8.85333 16 8.85333C15.3945 8.85333 14.8899 8.85333 14.2844 8.96C12.2661 9.17333 10.3486 9.81333 8.63303 10.7733C10.0459 9.6 11.5596 8.74667 13.2752 8.32L12.9725 8C11.055 8.10667 9.23853 8.74667 7.72477 10.0267C6.00917 13.44 5.10092 17.28 5 21.2267C6.51376 22.9333 8.63303 24 10.8532 24C10.8532 24 11.5596 23.1467 12.0642 22.4C10.7523 22.08 9.54128 21.3333 8.73395 20.16C9.44037 20.5867 10.1468 21.0133 10.8532 21.3333C11.7615 21.76 12.6697 21.9733 13.578 22.1867C14.3853 22.2933 15.1927 22.4 16 22.4C16.8073 22.4 17.6147 22.2933 18.422 22.1867C19.3303 21.9733 20.2385 21.76 21.1468 21.3333C21.8532 21.0133 22.5596 20.5867 23.2661 20.16C22.4587 21.3333 21.2477 22.08 19.9358 22.4C20.4404 23.1467 21.1468 24 21.1468 24C23.367 24 25.4862 22.9333 27 21.2267C26.8991 17.28 25.9908 13.44 24.2752 10.0267ZM12.6697 19.3067C11.6606 19.3067 10.7523 18.3467 10.7523 17.1733C10.7523 16 11.6606 15.04 12.6697 15.04C13.6789 15.04 14.5872 16 14.5872 17.1733C14.5872 18.3467 13.6789 19.3067 12.6697 19.3067ZM19.3303 19.3067C18.3211 19.3067 17.4128 18.3467 17.4128 17.1733C17.4128 16 18.3211 15.04 19.3303 15.04C20.3394 15.04 21.2477 16 21.2477 17.1733C21.2477 18.3467 20.3394 19.3067 19.3303 19.3067Z" fill="white"/>
+                            <defs>
+                                <linearGradient id="paint0_linear_8800_1839" x1="16" y1="2" x2="16" y2="30" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#687EC9"/>
+                                <stop offset="1" stop-color="#5971C3"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="py-1 text-[#F5F5F6] font-sans text-2xl font-bold">Discord</span>
+                    <div class="font-sans text-xl font-normal text-[#94969C]">Chat with the maintainers and meet friendly people who share the same interests as you.</div>
+                </NuxtLink>
+            </div>
+
+            <div class="block w-full p-[1px] hover:rounded-lg hover:bg-gradient-to-r hover:from-[#155EEF] hover:to-[#BA6BFF]">
+                <NuxtLink to="https://github.com/serversideup" target="_blank" class="p-[10px] flex flex-col bg-[#161B26] rounded-lg h-full">
+                    <div class="flex w-8 h-8 mb-1 items-center justify-center">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 2C8.265 2 2 8.265 2 16C2 22.195 6.0075 27.4275 11.5725 29.2825C12.2725 29.405 12.535 28.985 12.535 28.6175C12.535 28.285 12.5175 27.1825 12.5175 26.01C9 26.6575 8.09 25.1525 7.81 24.365C7.6525 23.9625 6.97 22.72 6.375 22.3875C5.885 22.125 5.185 21.4775 6.3575 21.46C7.46 21.4425 8.2475 22.475 8.51 22.895C9.77 25.0125 11.7825 24.4175 12.5875 24.05C12.71 23.14 13.0775 22.5275 13.48 22.1775C10.365 21.8275 7.11 20.62 7.11 15.265C7.11 13.7425 7.6525 12.4825 8.545 11.5025C8.405 11.1525 7.915 9.7175 8.685 7.7925C8.685 7.7925 9.8575 7.425 12.535 9.2275C13.655 8.9125 14.845 8.755 16.035 8.755C17.225 8.755 18.415 8.9125 19.535 9.2275C22.2125 7.4075 23.385 7.7925 23.385 7.7925C24.155 9.7175 23.665 11.1525 23.525 11.5025C24.4175 12.4825 24.96 13.725 24.96 15.265C24.96 20.6375 21.6875 21.8275 18.5725 22.1775C19.08 22.615 19.5175 23.455 19.5175 24.7675C19.5175 26.64 19.5 28.145 19.5 28.6175C19.5 28.985 19.7625 29.4225 20.4625 29.2825C23.2418 28.3443 25.6568 26.5581 27.3677 24.1753C29.0786 21.7926 29.9993 18.9334 30 16C30 8.265 23.735 2 16 2Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span class="py-1 text-[#F5F5F6] font-sans text-2xl font-bold">GitHub</span>
+                    <div class="font-sans text-xl font-normal text-[#94969C]">Help us squash bugs, request features, and improve the documentation.</div>
+                </NuxtLink>
+            </div>
         </div>
 
         <div class="w-full mx-auto flex flex-col items-center justify-center max-w-[940px]">

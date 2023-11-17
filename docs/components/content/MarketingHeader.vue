@@ -1,7 +1,7 @@
 <template>
     <div class="w-full">
-        <header class="w-full" :class="{ 'fixed top-[43px]': fixed, 'backdrop-blur': bgOpacity }">
-            <div class="w-full max-w-7xl mx-auto flex items-center justify-between py-[18px] px-8">
+        <header class="w-full" :class="{ 'fixed top-[43px]': fixed, 'backdrop-blur': bgOpacity, 'bg-[#0C111D]': showMobileMenu }">
+            <div class="w-full mx-auto flex items-center justify-between py-[18px] px-8">
                 <div class="flex items-center">
                     <NuxtLink :to="'/'" class="mr-10">
                         <img class="h-8" src="/images/logos/financial-freedom-white-logo.svg"/>
@@ -49,22 +49,31 @@
                         Star On GitHub
                     </NuxtLink>
 
-                    <a href="#ff-follow-along" class="py-[10px] px-4 rounded-md border border-[#155EEF] text-white bg-[#155EEF] font-inter text-base font-semibold leading-0">
+                    <NuxtLink v-if="docs" to="/#ff-follow-along" class="py-[10px] px-4 rounded-md border border-[#155EEF] text-white bg-[#155EEF] font-inter text-base font-semibold leading-0">
+                        Get Notified
+                    </NuxtLink>
+
+                    <a v-if="!docs" href="#ff-follow-along" class="py-[10px] px-4 rounded-md border border-[#155EEF] text-white bg-[#155EEF] font-inter text-base font-semibold leading-0">
                         Get Notified
                     </a>
                 </div>
 
-                <button class="p-2 flex items-center justify-center lg:hidden">
-                    <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <button class="p-2 flex items-center justify-center lg:hidden" @click="toggleMobileNav()">
+                    <svg v-show="!showMobileMenu" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 7H19M1 1H19M1 13H19" stroke="#CECFD2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+                    <svg v-show="showMobileMenu" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 1L1 13M1 1L13 13" stroke="#CECFD2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
                 </button>
             </div>
         </header>
 
-        <!-- <GlobalMobileMenu
+        <GlobalMobileMenu
             :show="showMobileMenu"
-            :navigation="navigation[0]"/> -->
+            :navigation="navigation[0]"
+            @close-mobile-menu="showMobileMenu = false"/>
     </div>
 </template>
 
@@ -73,6 +82,10 @@ import { onMounted } from '#imports';
 
 const props = defineProps({ 
     fixed: {
+        default: false
+    },
+
+    docs: {
         default: false
     }
 });

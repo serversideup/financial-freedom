@@ -1,5 +1,9 @@
 <template>
-    <div class="w-full flex flex-col min-h-screen bg-[#0C111D] bg-[url(images/ui/background-pattern.svg)] bg-no-repeat scroll-smooth">
+    <div class="w-full flex flex-col min-h-screen scroll-smooth bg-[url('images/ui/background-pattern.svg'),url('images/ui/light-accent.png')] bg-no-repeat" 
+        :style="{
+            backgroundColor: '#0C111D',
+            backgroundPosition: 'top, right 5%'
+        }">
         <Head>
             <Link rel="preconnect" href="https://fonts.googleapis.com"/>
             <Link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -18,7 +22,7 @@
 
         <MarketingHeader
             :fixed="true"/>
-            
+
         <div class="w-full flex flex-col">
             <slot></slot>
         </div>

@@ -33,9 +33,6 @@
                                     GitHub
                                 </NuxtLink>
                             </li>
-                            <li>
-                                Search
-                            </li>
                         </ul>
                     </nav>
                 </div>

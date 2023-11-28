@@ -40,9 +40,17 @@ services:
       - .:/var/www/html/
     networks:
       - development
-    # # 🔥 Uncomment for debugging
-    # environment:
-    #   LOG_LEVEL: "debug"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.financialfreedom.rule=Host(`financialfreedom.dev.test`)"
+      - "traefik.http.routers.financialfreedom.entrypoints=websecure"
+      - "traefik.http.routers.financialfreedom.tls=true"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=443"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
+    environment:
+      # LOG_LEVEL: "debug" # 🔥 Uncomment for debugging
+      AUTORUN_ENABLED: "false"
+      SSL_MODE: "full"
 
   node:
     build:

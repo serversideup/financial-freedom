@@ -1,4 +1,4 @@
-FROM serversideup/php:beta-8.2.12-unit-bookworm as base
+FROM serversideup/php:8.2.12-unit-bookworm as base
 
 ### Development
 FROM base as development

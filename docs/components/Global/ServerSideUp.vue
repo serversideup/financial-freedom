@@ -14,7 +14,7 @@
 
                     <div v-show="showMenu"
                         ref="menuRef"
-                        class="absolute shadow-sm z-10 bg-white rounded-b-lg p-4 w-64 top-[28px] flex flex-col content-left text-left">
+                        class="absolute shadow-sm z-50 bg-white rounded-b-lg p-4 w-64 top-[28px] flex flex-col content-left text-left">
                             <span class="font-inter font-bold text-black text-[14px]">Books</span>
                             <NuxtLink
                                 @click="showMenu = false"
@@ -41,6 +41,31 @@
                                         </svg>
                                     </div>
                                     <span class="group-hover:underline">Ultimate Guide To APIs & SPAs</span>
+                            </NuxtLink>
+                            <NuxtLink
+                                @click="showMenu = false"
+                                :to="'https://serversideup.net/building-multi-platform-browser-extensions/'"
+                                class="flex items-center text-[12px] font-medium font-inter py-2 group">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-2">
+                                        <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.00024 1.03275C6.00024 1.03275 9.22375 0.888613 10.9328 4.11716H5.72595C5.72595 4.11716 4.74333 4.0856 3.90394 5.27342C3.66282 5.77198 3.40364 6.28555 3.69449 7.29768C3.2755 6.59038 1.47009 3.45796 1.47009 3.45796C1.47009 3.45796 2.74353 1.16039 6.0002 1.03275H6.00024Z" fill="#EF3F36"/>
+                                        <path d="M10.7655 9.22877C10.7655 9.22877 9.27804 12.0834 5.61902 11.9422C6.07113 11.1629 8.22314 7.4493 8.22314 7.4493C8.22314 7.4493 8.74308 6.61739 8.12971 5.29895C7.81772 4.84094 7.49974 4.36192 6.475 4.1066C7.29936 4.09914 10.9238 4.1066 10.9238 4.1066C10.9238 4.1066 12.2815 6.35461 10.7655 9.22877Z" fill="#FCD900"/>
+                                        <path d="M1.25759 9.25132C1.25759 9.25132 -0.480029 6.54081 1.47307 3.45341C1.92369 4.23279 4.07571 7.94638 4.07571 7.94638C4.07571 7.94638 4.53989 8.81135 5.99115 8.94043C6.54427 8.89992 7.11994 8.86538 7.85541 8.11006C7.44995 8.82487 5.63093 11.9483 5.63093 11.9483C5.63093 11.9483 2.99666 11.9964 1.25755 9.25132H1.25759Z" fill="#61BC5B"/>
+                                        <path d="M5.61743 11.9693L6.34984 8.92396C6.34984 8.92396 7.15461 8.86084 7.82979 8.12357C7.4108 8.8579 5.61743 11.9693 5.61743 11.9693V11.9693Z" fill="#5AB055"/>
+                                        <path d="M3.54688 6.53477C3.54688 5.19233 4.63949 4.10362 5.98676 4.10362C7.33402 4.10362 8.42664 5.19233 8.42664 6.53477C8.42664 7.87725 7.33402 8.96592 5.98676 8.96592C4.63949 8.96443 3.54688 7.87725 3.54688 6.53477V6.53477Z" fill="white"/>
+                                        <path d="M3.9552 6.53482C3.9552 5.4176 4.86397 4.51059 5.98672 4.51059C7.10793 4.51059 8.0182 5.41611 8.0182 6.53482C8.0182 7.65207 7.10947 8.55909 5.98672 8.55909C4.86546 8.55909 3.9552 7.65207 3.9552 6.53482V6.53482Z" fill="url(#paint0_linear_1438_183)"/>
+                                        <path d="M10.9222 4.10815L7.90666 4.98963C7.90666 4.98963 7.45156 4.32436 6.47351 4.10815C7.32197 4.10363 10.9222 4.10815 10.9222 4.10815V4.10815Z" fill="#EACA05"/>
+                                        <path d="M3.63573 7.18659C3.2122 6.45527 1.47009 3.45795 1.47009 3.45795L3.70352 5.65938C3.70352 5.65938 3.47442 6.12941 3.56036 6.80214L3.63568 7.18659H3.63573Z" fill="#DF3A32"/>
+                                            <defs>
+                                                <linearGradient id="paint0_linear_1438_183" x1="5.98662" y1="4.53917" x2="5.98662" y2="8.43723" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#86BBE5"/>
+                                                    <stop offset="1" stop-color="#1072BA"/>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+
+                                    </div>
+                                    <span class="group-hover:underline">Building Multi-Platform Browser Extensions</span>
                             </NuxtLink>
                             <span class="font-inter font-bold text-black text-[14px] mt-2">Open-Source Projects</span>
                             <NuxtLink
@@ -99,10 +124,10 @@
                                 :to="'https://serversideup.net/open-source/spin'"
                                 class="flex items-center text-[12px] font-medium font-inter py-2 group">
                                     <div class="w-3 h-3 flex items-center justify-center mr-2">
-                                        <svg width="106" height="105" class="w-full max-h-full" viewBox="0 0 106 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect y="52.7411" width="34.9627" height="34.9627" transform="rotate(-45 0 52.7411)" fill="#3B82F6"/>
-                                            <rect x="28.0186" y="24.7224" width="34.9627" height="34.9627" transform="rotate(-45 28.0186 24.7224)" fill="#3B82F6"/>
-                                            <rect x="56.0374" y="52.7411" width="34.9627" height="34.9627" transform="rotate(-45 56.0374 52.7411)" fill="#3B82F6"/>
+                                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect y="32" width="16.5728" height="16.5728" transform="rotate(-45 0 32)" fill="#1CE783"/>
+                                            <rect x="13.2812" y="18.7188" width="16.5728" height="16.5728" transform="rotate(-45 13.2812 18.7188)" fill="#1CE783"/>
+                                            <rect x="26.5625" y="32" width="16.5728" height="16.5728" transform="rotate(-45 26.5625 32)" fill="#1CE783"/>
                                         </svg>
                                     </div>
                                     <span class="group-hover:underline">Spin</span>

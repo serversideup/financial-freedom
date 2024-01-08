@@ -6,7 +6,7 @@
             </span>
         </div>
         <h2 class="mt-4 text-center font-sans text-3xl md:text-4xl font-semibold text-[#F5F5F6]">Trust Our Code, Not Our Words</h2>
-        <span class="mt-5 text-[#94969C] text-center font-sans text-base md:text-xl font-normal">The best person to trust to host your data is yourself. Built on premium open-source technologies.</span>
+        <span class="mt-5 text-[#94969C] text-center font-sans text-base md:text-xl font-normal">The best person to trust to host your data is yourself. Financial Freedom is built on premium open-source technologies.</span>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10 md:gap-y-16 mt-16">
             <div class="flex flex-col items-center justify-center">

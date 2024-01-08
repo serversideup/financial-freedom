@@ -1,8 +1,20 @@
 ---
 layout: marketing
 ---
-::marketing-hero
+::landing-hero
 ::
 
-::marketing-follow-along
+::landing-screenshot
+::
+
+::landing-decentralized
+::
+
+::landing-stack
+::
+
+::landing-signup
+::
+
+::marketing-footer
 ::

@@ -5,3 +5,6 @@ Dockerfile*
 docker-compose*
 docs/
 .gitpod*
+.infrastructure
+.github
+.gitlab-ci.yml

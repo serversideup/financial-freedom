@@ -1,7 +1,3 @@
-# Do not panic if using a self-signed cert
-serversTransport:
-  insecureSkipVerify: true
-
 # Cloudflare TrustedIPs
 x-trustedIps: &trustedIPs
   - "173.245.48.0/20"
@@ -27,13 +23,16 @@ x-trustedIps: &trustedIPs
   - "2a06:98c0::/29"
   - "2c0f:f248::/32"
 
-### Providers
+# Allow self-signed certificates
+serversTransport:
+  insecureSkipVerify: true
+
 providers:
   docker:
     network: web-public
     exposedbydefault: false
     swarmMode: true
-## Entry points (trust from CloudFlare)
+
 entryPoints:
   web:
     address: ":80"
@@ -53,6 +52,7 @@ entryPoints:
       trustedIPs: *trustedIPs
     proxyProtocol:
       trustedIPs: *trustedIPs
+
 accessLog: {}
 log:
   level: ERROR
@@ -64,7 +64,7 @@ api:
 certificatesResolvers:
   letsencryptresolver:
     acme:
-      email: ''
+      email: "changeme@example.com"
       storage: "/certificates/acme.json"
       httpChallenge:
         entryPoint: web

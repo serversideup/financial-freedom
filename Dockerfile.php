@@ -1,12 +1,15 @@
-FROM serversideup/php:beta-8.2.12-unit-bookworm as base
+# Learn more about the Server Side Up PHP Docker Images at:
+# https://serversideup.net/open-source/docker-php/
 
-### Development
+FROM serversideup/php:beta-8.2-unit as base
+
 FROM base as development
+
+# Fix permission issues in development by setting the "www-data"
+# user to the same user and group that is running docker.
 ARG USER_ID
+ARG GROUP_ID
+RUN docker-php-serversideup-set-id www-data ${USER_ID} ${GROUP_ID}
 
-RUN usermod -u $USER_ID www-data
-
-### Deploy
 FROM base as deploy
-LABEL maintainer="Server Side Up <@serversideup>"
-COPY --chown=33:33 . /var/www/html
+COPY --chown=www-data:www-data . /var/www/html

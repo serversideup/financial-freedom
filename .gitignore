@@ -20,3 +20,4 @@ report.xml
 # Ignore the _volumes folder, except certain Traefik configs
 /_volumes/*
 !/_volumes/traefik
+.vault-password

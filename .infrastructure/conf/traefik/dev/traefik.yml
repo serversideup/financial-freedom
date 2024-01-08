@@ -1,11 +1,11 @@
-# Do not panic if using a self-signed cert
+# Allow self-signed certificates
 serversTransport:
   insecureSkipVerify: true
 
-### Providers
 providers:
   docker:
-    exposedByDefault: false
+    network: development
+    exposedbydefault: false
   file:
       filename: /traefik-certs.yml
       watch: true
@@ -28,4 +28,3 @@ log:
 api:
   dashboard: true
   insecure: true
-  

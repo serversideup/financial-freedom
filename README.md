@@ -1,5 +1,5 @@
 <p align="center">
-		<a href="https://financialfreedom.app/"><img src="./.github/images/header.png" width="1280" alt="Financial Freedom"></a>
+		<a href="https://serversideup.net/open-source/financial-freedom/"><img src="https://raw.githubusercontent.com/serversideup/financial-freedom/main/.github/images/header.png" width="1280" alt="Financial Freedom"></a>
 </p>
 <p align="center">
 	<a href="https://github.com/serversideup/financial-freedom/blob/main/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/financial-freedom" alt="License"></a>

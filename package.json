@@ -17,5 +17,8 @@
         "tailwindcss": "^3.2.1",
         "vite": "^5.0.0",
         "vue": "^3.4.0"
+    },
+    "dependencies": {
+        "zxcvbn": "^4.4.2"
     }
 }

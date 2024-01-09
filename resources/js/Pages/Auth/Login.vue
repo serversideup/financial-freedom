@@ -44,8 +44,7 @@
                         class="mt-1 block w-full bg-transparent text-[#CECFD2]"
                         v-model="form.password"
                         required
-                        autocomplete="current-password"
-                    />
+                        autocomplete="current-password"/>
 
                     <InputError class="mt-2" :message="form.errors.password" />
                 </div>
@@ -68,6 +67,17 @@
                         Sign in
                     </PrimaryButton>
                 </div>
+
+                <div v-if="canRegister" class="mt-8 text-center">
+                    <span class="font-sans text-sm text-[#CECFD2]">
+                        Don't have an account?
+                    </span>
+                    <Link
+                        :href="route('register')"
+                        class="font-sans text-sm text-[#CECFD2] font-semibold hover:underline">
+                            Sign up
+                    </Link>
+                </div>
             </form>
         </div>
     </GuestLayout>
@@ -83,6 +93,9 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
+    canRegister: {
+        type: Boolean,
+    },
     canResetPassword: {
         type: Boolean,
     },

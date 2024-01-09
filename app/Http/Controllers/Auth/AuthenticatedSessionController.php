@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,10 +18,16 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): Response
+    public function create(): RedirectResponse|Response
     {
+        $users = User::count();
+
+        if( $users == 0 ) {
+            return redirect()->route('register');
+        }
+
         return Inertia::render('Auth/Login', [
-            'canRegister' => '',
+            'canRegister' => config('financial-freedom.can_register'),
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
         ]);

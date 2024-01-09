@@ -13,15 +13,5 @@ services:
       - traefik
       - mariadb
 
-  meilisearch:
-    image: getmeili/meilisearch:v1.3.3
-    depends_on:
-      - "redis"
-    environment:
-      MEILI_NO_ANALYTICS: "true"
-
   mariadb:
     image: mariadb:10.11
-  
-  redis:
-    image: redis:7.2

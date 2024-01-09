@@ -31,5 +31,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          repository: serversideup/php
+          repository: serversideup/financial-freedom
           short-description: ${{ github.event.repository.description }}

@@ -7,7 +7,7 @@ const host = 'vite.dev.test'
 
 export default defineConfig({
     plugins: [
-        basicSSL(),
+        basicSsl(),
         laravel({
             input: 'resources/js/app.js',
             refresh: true,

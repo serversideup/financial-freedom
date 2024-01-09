@@ -19,8 +19,14 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): Response
+    public function create(): RedirectResponse|Response
     {
+        $users = User::count();
+
+        if( $users > 0 && !config('financial-freedom.can_register') ) {
+            return redirect()->route('login');
+        }
+        
         return Inertia::render('Auth/Register');
     }
 

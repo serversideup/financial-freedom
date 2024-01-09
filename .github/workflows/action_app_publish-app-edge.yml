@@ -32,4 +32,4 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           repository: serversideup/financial-freedom
-          short-description: ${{ github.event.repository.description }}
+          short-description: "🔥🔥🔥 An open source alternative to Mint, YNAB, and more. Stay on budget and build wealth."

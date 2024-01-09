@@ -77,6 +77,9 @@ The server expects a URL of "https://financialfreedom.dev.test". For that to res
 
 # For accessing Mailpit locally
 127.0.0.1 mailpit.dev.test
+
+# For using Vite in development
+127.0.0.1 vite.dev.test
 ```
 
 ### If you're making changes to the front-end

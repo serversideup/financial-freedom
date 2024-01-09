@@ -63,27 +63,6 @@ services:
     volumes:
       - .:/usr/src/app/:cached
     working_dir: /usr/src/app/
-  
-  meilisearch:
-    environment: 
-      MEILI_MASTER_KEY: "developmentMasterKey"
-    networks:
-        - development
-    volumes: 
-      - ./.infrastructure/volume_data/meilisearch/meilisearch_data:/meili_data:cached
-    depends_on:
-      - "mariadb"
-      - "php"
-
-  redis:
-    networks:
-      - development
-    volumes:
-     - ./.infrastructure/volume_data/redis/data:/data:cached
-    depends_on:
-      - "mariadb"
-      - "php"
-    command: "redis-server --appendonly yes --requirepass redispassword"
 
   mailpit:
     image: axllent/mailpit

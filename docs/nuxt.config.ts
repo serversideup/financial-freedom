@@ -40,7 +40,13 @@ export default defineNuxtConfig({
               dark: 'github-dark',
               // Theme used if `html.sepia`
               sepia: 'monokai'
-            }
+            },
+            preload: [
+                'dockerfile',
+                'php',
+                'ini',
+                'yaml'
+            ]
         }
     },
 

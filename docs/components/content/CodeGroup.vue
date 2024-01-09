@@ -24,7 +24,7 @@
                         :label="label"/>
 
                     <div class="relative overflow-x-auto p-4 text-xs text-white">
-                        <ContentSlot :use="$slots[tab.key]" unwrap="pre"/>
+                        <ContentSlot :use="$slots[tab.key]"/>
                         <CopyButton :code="$slots[tab.key]()[0].props.code"/>
                     </div>
                 </div>

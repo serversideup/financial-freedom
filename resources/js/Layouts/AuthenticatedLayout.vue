@@ -56,7 +56,7 @@
                             <ul role="list" class="-mx-2 space-y-1">
                                 <li v-for="item in navigation" :key="item.name">
                                     <a :href="item.href" :class="[item.current ? 'bg-[#1F242F] text-[#ECECED]' : 'text-gray-400 hover:text-white hover:bg-[#1F242F]', 'group flex font-sans gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                                        <component :is="item.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+                                        <component :is="item.icon" class="h-6 w-6 group-hover:stroke-[#ECECED] shrink-0" aria-hidden="true" />
                                         {{ item.name }}
                                     </a>
                                 </li>

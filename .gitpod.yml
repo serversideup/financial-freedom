@@ -9,7 +9,6 @@ tasks:
                 cp .env.example .env
                 sed -i 's/APP_ENV=production/APP_ENV=local/' .env
                 sed -i 's/APP_DEBUG=false/APP_DEBUG=true/' .env
-
             fi
           )
     init: |

@@ -14,6 +14,9 @@ on:
         type: string
         default: 'deploy'
 
+env:
+  DOCKER_COMPOSE_CMD: docker compose -f docker-compose.yml -f docker-compose.ci.yml
+
 jobs:
   php-install-and-test:
     uses: ./.github/workflows/service_tests-phpunit.yml

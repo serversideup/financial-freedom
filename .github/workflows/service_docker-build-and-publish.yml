@@ -15,17 +15,13 @@ on:
         default: 'deploy'
 
 jobs:
-  php-build-and-test:
+  php-install-and-test:
     uses: ./.github/workflows/service_tests-phpunit.yml
-
-  node-build:
-    uses: ./.github/workflows/service_node-install.yml
 
   docker-publish:
     runs-on: ubuntu-22.04
     needs:
-      - php-build-and-test
-      - node-build
+      - php-install-and-test
     steps:
 
       - name: Checkout
@@ -43,17 +39,27 @@ jobs:
         if: steps.composer-cache-restore.outputs.cache-hit != 'true'
         run: exit 1
 
-      - name: Restore node_modules cache
+      - name: Restore node_modules cache (if available)
+        id: node-modules-restore
         uses: actions/cache/restore@v3
-        id: node-cache-restore
         with:
           path: node_modules/
-          fail-on-cache-miss: true
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
-      
-      - name: Check node_modules cache
-        if: steps.node-cache-restore.outputs.cache-hit != 'true'
-        run: exit 1
+             
+      - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
+        name: Run "yarn install"
+        run: |
+          $DOCKER_COMPOSE_CMD \
+          run \
+          node \
+          yarn install --frozen-lockfile
+
+      - name: Run "yarn build"
+        run: |
+          $DOCKER_COMPOSE_CMD \
+          run \
+          node \
+          yarn build
 
       - name: docker-build-action
         uses: serversideup/github-action-docker-build@v4

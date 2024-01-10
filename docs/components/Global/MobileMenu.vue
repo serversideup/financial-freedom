@@ -72,7 +72,7 @@
                 </NuxtLink>
             </div>
 
-            <!-- <div class="w-full">
+            <div class="w-full px-4">
                 <h2 class="text-xs font-semibold text-white">
                     {{ navigation.title }}
                 </h2>
@@ -90,7 +90,7 @@
                                 
                                 <span class="truncate"
                                     :class="{
-                                        '-ml-[17px] pl-[17px] border-l border-[#1CE783]': navigation._path === route.path,
+                                        '-ml-[17px] pl-[17px] border-l border-[#155EEF]': navigation._path === route.path,
                                     }">{{ navigation.title }}</span>
                                 
                         </NuxtLink>
@@ -98,7 +98,7 @@
                 </ul>
             </div>
 
-            <div class="w-full" v-for="(group, groupIndex) in navigation.children" :key="'mobile-navigation-group-'+groupIndex">
+            <div class="w-full px-4" v-for="(group, groupIndex) in navigation.children" :key="'mobile-navigation-group-'+groupIndex">
                 <h2 class="text-xs font-semibold text-white" v-if="group._path != '/docs'">
                     {{ group.title }}
                 </h2>
@@ -116,13 +116,13 @@
                                 
                                 <span class="pl-4 truncate"
                                     :class="{
-                                        '-ml-[1px] border-l border-[#1CE783]': link._path === route.path
+                                        '-ml-[1px] border-l border-[#155EEF]': link._path === route.path
                                     }">{{ link.title }}</span>
                                 
                         </NuxtLink>
                     </li>
                 </ul>
-            </div> -->
+            </div>
         </div>
     </transition>
 </template>

@@ -4,7 +4,7 @@ Thanks for checking out Financial Freedom! There are a lot of things in motion r
 # Submitting a PR
 Since everything is so new, please explain your intentions on our community before going through the effort of making a PR: https://github.com/serversideup/financial-freedom/discussions/63
 
-# Running locally in your development
+# Running locally on your development machine
 We encourage you to replicate this on your machine and tinker around with it. Here is how you can run it.
 
 **Important notes:**

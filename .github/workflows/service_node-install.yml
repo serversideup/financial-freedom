@@ -30,7 +30,7 @@ jobs:
           $DOCKER_COMPOSE_CMD \
           run \
           node \
-          yarn production
+          yarn build
 
       - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
         name: Upload node_modules cache

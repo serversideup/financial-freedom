@@ -32,8 +32,7 @@ tasks:
         sleep 5
         spin exec php php artisan migrate
         gp sync-done node
-    command: spin run node yarn watch
-    openMode: split-right
+    command: spin run node yarn dev
   
   - name: Terminal & Welcome
     init: |

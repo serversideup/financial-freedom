@@ -36,6 +36,7 @@ services:
       target: development
       args:
         USER_ID: ${SPIN_USER_ID}
+        GROUP_ID: ${SPIN_GROUP_ID}
     volumes:
       - .:/var/www/html/
     networks:
@@ -63,27 +64,13 @@ services:
     volumes:
       - .:/usr/src/app/:cached
     working_dir: /usr/src/app/
-  
-  meilisearch:
-    environment: 
-      MEILI_MASTER_KEY: "developmentMasterKey"
-    networks:
-        - development
-    volumes: 
-      - ./.infrastructure/volume_data/meilisearch/meilisearch_data:/meili_data:cached
-    depends_on:
-      - "mariadb"
-      - "php"
-
-  redis:
-    networks:
-      - development
-    volumes:
-     - ./.infrastructure/volume_data/redis/data:/data:cached
-    depends_on:
-      - "mariadb"
-      - "php"
-    command: "redis-server --appendonly yes --requirepass redispassword"
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.vite.rule=HostRegexp(`vite.dev.test`)"
+        - "traefik.http.routers.vite.entrypoints=websecure"
+        - "traefik.http.routers.vite.tls=true"
+        - "traefik.http.services.vite.loadbalancer.server.port=5173"
+        - "traefik.http.services.vite.loadbalancer.server.scheme=https"
 
   mailpit:
     image: axllent/mailpit

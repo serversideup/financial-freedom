@@ -1,0 +1,65 @@
+on:
+  workflow_call:
+
+env:
+  DOCKER_COMPOSE_CMD: docker compose -f docker-compose.yml -f docker-compose.ci.yml
+
+jobs:
+  node-build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore composer cache
+        uses: actions/cache/restore@v3
+        id: composer-cache-restore
+        with:
+          path: vendor/
+          fail-on-cache-miss: true
+          key: ${{ runner.os }}-composer-vendor-${{ hashFiles('composer.lock') }}
+
+      - name: Check composer cache
+        if: steps.composer-cache-restore.outputs.cache-hit != 'true'
+        run: exit 1
+
+      - name: Restore node_modules cache (if available)
+        id: node-modules-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+         
+      - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
+        name: Run "yarn install"
+        run: |
+          $DOCKER_COMPOSE_CMD \
+          run \
+          node \
+          yarn install --frozen-lockfile
+
+      - name: Run "yarn build"
+        run: |
+          $DOCKER_COMPOSE_CMD \
+          run \
+          node \
+          yarn build
+
+      - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
+        name: Upload node_modules cache
+        uses: actions/cache/save@v3
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+
+      - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
+        name: Upload node_modules cache
+        uses: actions/cache/save@v3
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Upload public/build cache
+        uses: actions/cache/save@v3
+        with:
+          path: public/build/
+          key: ${{ runner.os }}-public-build-${{ github.sha }}

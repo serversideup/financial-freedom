@@ -1,19 +1,14 @@
-name: Docker Publish (Edge Image)
+name: Docker Publish (Release)
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths-ignore:
-        - 'docs/**'
-  schedule:
-    - cron: '0 8 * * 1'
+  release:
+    types: [published]
 
 jobs:
-  build-edge-images:
+  release:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
-      docker-tags: "serversideup/financial-freedom:edge"
+      docker-tags: "serversideup/financial-freedom:latest,serversideup/financial-freedom:${{ github.ref_name }}"
       dockerfile: "./Dockerfile.php"
     secrets: inherit
 
@@ -22,7 +17,7 @@ jobs:
     name: Push README to Docker Hub
     steps:
       - name: git checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
 

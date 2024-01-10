@@ -15,8 +15,9 @@
 
 Break free from third parties tracking every financial footstep you have. Run this application on any device or host that supports Docker -- if that's something like AWS, Digital Ocean, or even your own Raspberry Pi running in your basement.
 
-### ⚠️ This product is actively being developed
-This started as a fun side project that took off faster than we expected. We're currently revamping the product to make it easier for everyone to use and contribute.
+> [!IMPORTANT]  
+> **⚠️ This product is actively being developed**
+> This started as a fun side project that took off faster than we expected. We're currently revamping the product to make it easier for everyone to use and contribute.
 
 **Here's what you can do right now:**
 - **[Watch our progress](https://github.com/orgs/serversideup/projects/6/views/2)**: Watch us in realtime with GitHub projects.

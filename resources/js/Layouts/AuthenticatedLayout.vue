@@ -55,10 +55,10 @@
                         <li>
                             <ul role="list" class="-mx-2 space-y-1">
                                 <li v-for="item in navigation" :key="item.name">
-                                    <a :href="item.href" :class="[item.current ? 'bg-[#1F242F] text-[#ECECED]' : 'text-gray-400 hover:text-white hover:bg-[#1F242F]', 'group flex font-sans gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
+                                    <Link :href="item.href" :class="[item.current ? 'bg-[#1F242F] text-[#ECECED]' : 'text-gray-400 hover:text-white hover:bg-[#1F242F]', 'group flex font-sans gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
                                         <component :is="item.icon" class="h-6 w-6 group-hover:stroke-[#ECECED] shrink-0" aria-hidden="true" />
                                         {{ item.name }}
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
@@ -101,20 +101,54 @@ import TransactionsIcon from '@/Components/Icons/TransactionsIcon.vue'
 import CashFlowIcon from '@/Components/Icons/CashFlowIcon.vue'
 import BudgetPlanIcon from '@/Components/Icons/BudgetPlanIcon.vue';
 import GoalsIcon from '@/Components/Icons/GoalsIcon.vue';
+import SettingsIcon from '@/Components/Icons/SettingsIcon.vue';
 import { computed, ref } from 'vue'
-import { usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
     Bars3Icon,
     XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
+const group = computed(() => usePage().props.group);
+
 const navigation = [
-    { name: 'Dashboard', href: '#', icon: DashboardIcon, current: true },
-    { name: 'Transactions', href: '#', icon: TransactionsIcon, current: false },
-    { name: 'Cash Flow', href: '#', icon: CashFlowIcon, current: false },
-    { name: 'Budget Plan', href: '#', icon: BudgetPlanIcon, current: false },
-    { name: 'Goals', href: '#', icon: GoalsIcon, current: false },
+    { 
+        name: 'Dashboard', 
+        href: '#', 
+        icon: DashboardIcon, 
+        current: group.value == 'dashboard' ? true : false
+    },
+    { 
+        name: 'Transactions', 
+        href: '#', 
+        icon: TransactionsIcon, 
+        current: group.value == 'transactions' ? true : false
+    },
+    { 
+        name: 'Cash Flow', 
+        href: '#', 
+        icon: CashFlowIcon, 
+        current: group.value == 'cash-flow' ? true : false
+    },
+    { 
+        name: 'Budget Plan', 
+        href: '#', 
+        icon: BudgetPlanIcon, 
+        current: group.value == 'budget-plan' ? true : false
+    },
+    { 
+        name: 'Goals', 
+        href: '#', 
+        icon: GoalsIcon, 
+        current: group.value == 'goals' ? true : false
+    },
+    {
+        name: 'Settings', 
+        href: '/settings', 
+        icon: SettingsIcon, 
+        current: group.value == 'settings' ? true : false
+    },
 ]
 
 const sidebarOpen = ref(false);

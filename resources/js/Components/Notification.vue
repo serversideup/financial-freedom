@@ -27,7 +27,7 @@ import { ref } from 'vue';
 import { useEventBus } from '@vueuse/core'
 
 const bus = useEventBus('ff-notification-event-bus')
-const show = ref(true);
+const show = ref(false);
 
 const title = ref('');
 const body = ref('');

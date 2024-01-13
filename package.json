@@ -21,6 +21,7 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.17",
         "@heroicons/vue": "^2.1.1",
+        "@vueuse/core": "^10.7.1",
         "zxcvbn": "^4.4.2"
     }
 }

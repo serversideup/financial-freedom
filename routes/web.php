@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
@@ -30,6 +31,11 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/settings/portfolio', [PortfolioController::class, 'update'])
         ->name('settings.portfolio.update');
+
+    Route::get('/settings/categories', [CategoryController::class, 'index'])
+        ->name('settings.categories.index');
+    Route::put('/settings/categories/{category}', [CategoryController::class, 'update'])
+        ->name('settings.categories.update');
         
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
         ->name('settings.categories.index');
     Route::put('/settings/categories/{category}', [CategoryController::class, 'update'])
         ->name('settings.categories.update');
+    Route::delete('/settings/categories/{category}', [CategoryController::class, 'destroy'])
+        ->name('settings.categories.delete');
         
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

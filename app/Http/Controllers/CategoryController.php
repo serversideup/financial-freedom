@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Services\Categories\DeleteCategory;
 use App\Services\Categories\IndexCategories;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,6 +23,12 @@ class CategoryController extends Controller
 
     public function update()
     {
+        return redirect()->back();
+    }
+
+    public function destroy( Category $category ): RedirectResponse
+    {
+        ( new DeleteCategory() )->delete( $category );
         return redirect()->back();
     }
 }

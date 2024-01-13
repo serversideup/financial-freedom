@@ -15,7 +15,7 @@ class UpdatePortfolioRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'defualt_currency' => ['required', 'string'],
+            'default_currency' => ['required', 'string'],
         ];
     }
 }

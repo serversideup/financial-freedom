@@ -37,6 +37,10 @@ const listener = ( event, data ) => {
     body.value = data.body;
 
     show.value = true;
+
+    setTimeout(() => {
+        show.value = false;
+    }, 3000);
 }
 bus.on(listener);
 </script>

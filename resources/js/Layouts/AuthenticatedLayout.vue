@@ -91,11 +91,14 @@
                 <slot/>
             </div>
         </main>
+
+        <Notification/>
     </div>
   </template>
   
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
+import Notification from '@/Components/Notification.vue';
 import DashboardIcon from '@/Components/Icons/DashboardIcon.vue'
 import TransactionsIcon from '@/Components/Icons/TransactionsIcon.vue'
 import CashFlowIcon from '@/Components/Icons/CashFlowIcon.vue'

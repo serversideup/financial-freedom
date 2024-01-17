@@ -20,8 +20,6 @@ class IndexCategories
         $this->applySearch();
         $this->applyOrder();
 
-        $this->query->with('parent');
-
         if( $this->paginate ){
             $categories = $this->query->paginate( $this->take );
         }else{

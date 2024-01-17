@@ -5,21 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Group extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories';
+    protected $table = 'groups';
     
     protected $fillable = [
         'user_id',
-        'group_id',
         'name',
         'color'
     ];
 
-    public function group()
+    public function categories()
     {
-        return $this->hasOne('App\Models\Group', 'id', 'group_id');
+        return $this->hasMany('App\Models\Category', 'group_id', 'id');
     }
 }

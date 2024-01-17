@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/settings/categories', [CategoryController::class, 'index'])
         ->name('settings.categories.index');
+    Route::post('/settings/categories', [CategoryController::class, 'store'])
+        ->name('settings.categories.store');
     Route::put('/settings/categories/{category}', [CategoryController::class, 'update'])
         ->name('settings.categories.update');
     Route::delete('/settings/categories/{category}', [CategoryController::class, 'destroy'])

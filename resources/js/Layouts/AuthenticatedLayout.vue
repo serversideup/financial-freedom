@@ -115,10 +115,10 @@ import {
 
 const group = computed(() => usePage().props.group);
 
-const navigation = [
+const navigation = computed(() => [
     { 
         name: 'Dashboard', 
-        href: '#', 
+        href: '/', 
         icon: DashboardIcon, 
         current: group.value == 'dashboard' ? true : false
     },
@@ -152,7 +152,7 @@ const navigation = [
         icon: SettingsIcon, 
         current: group.value == 'settings' ? true : false
     },
-]
+]);
 
 const sidebarOpen = ref(false);
 

@@ -4,7 +4,6 @@
     <div class="w-full flex flex-col">
         <h1 class="font-semibold font-sans text-[#F5F5F6] text-3xl">Categories</h1>
         
-        
         <Navigation/>
 
         <div class="flex items-center justify-between py-5">
@@ -18,12 +17,15 @@
                     <path d="M9.99984 4.16669V15.8334M4.1665 10H15.8332" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
 
-                Add Category
+                Add Group
             </button>
         </div>
 
-        <CategoriesTable/>
-
+        <GroupTable v-for="group in groups"
+            :group="group"/>
+        
+        <AddCategoryModal/>
+        <EditCategoryModal/>
         <DeleteCategoryModal/>
     </div>
 </template>
@@ -37,9 +39,14 @@ export default {
 </script>
 
 <script setup>
-import CategoriesTable from './Partials/CategoriesTable.vue';
+import AddCategoryModal from './Partials/AddCategoryModal.vue';
 import DeleteCategoryModal from './Partials/DeleteCategoryModal.vue';
+import EditCategoryModal from './Partials/EditCategoryModal.vue';
+import GroupTable from './Partials/GroupTable.vue';
 import Navigation from '../Partials/Navigation.vue';
-import { Head } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { Head, usePage } from '@inertiajs/vue3';
+
+const groups = computed(() => usePage().props.groups);
 
 </script>

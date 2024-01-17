@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Categories\StoreCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\Categories\DeleteCategory;
-use App\Services\Categories\IndexCategories;
+use App\Services\Categories\StoreCategory;
+use App\Services\Categories\UpdateCategory;
+use App\Services\Groups\IndexGroups;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,12 +21,19 @@ class CategoryController extends Controller
         return Inertia::render('Settings/Categories/Index', [
             'group' => 'settings',
             'subGroup' => 'categories',
-            'categories' => fn () => ( new IndexCategories() )->index( $request ),
+            'groups' => fn () => ( new IndexGroups() )->index( $request ),
         ]);
     }
 
-    public function update()
+    public function store( StoreCategoryRequest $request )
     {
+        ( new StoreCategory() )->store( $request );
+        return redirect()->back();
+    }
+
+    public function update( UpdateCategoryRequest $request, Category $category )
+    {
+        ( new UpdateCategory() )->update( $request, $category );
         return redirect()->back();
     }
 

@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function( Blueprint $table ){
-            $table->bigIncrements('id')->unsigned();
+        Schema::create('groups', function( Blueprint $table ){
+            $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigInteger('group_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups');
             $table->string('name');
-            $table->string('color');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        //
     }
 };

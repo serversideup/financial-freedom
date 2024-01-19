@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\InstitutionsController;
+use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
@@ -42,15 +42,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/settings/categories/{category}', [CategoryController::class, 'destroy'])
         ->name('settings.categories.delete');
         
-    Route::get('/settings/institutions', [InstitutionsController::class, 'index'])
+    Route::get('/settings/institutions', [InstitutionController::class, 'index'])
         ->name('settings.institutions.index');
-    Route::post('/settings/institutions', [InstitutionsController::class, 'store'])
+    Route::post('/settings/institutions', [InstitutionController::class, 'store'])
         ->name('settings.institutions.store');
-    Route::get('/settings/institutions/{institution}', [InstitutionsController::class, 'show'])
-        ->name('settings.institutions.show');
-    Route::put('/settings/institutions/{institution}', [InstitutionsController::class, 'update'])
+    Route::put('/settings/institutions/{institution}', [InstitutionController::class, 'update'])
         ->name('settings.institutions.update');
-    Route::delete('/settings/institutions/{institution}', [InstitutionsController::class, 'destroy'])
+    Route::delete('/settings/institutions/{institution}', [InstitutionController::class, 'destroy'])
         ->name('settings.institutions.delete');
     
     

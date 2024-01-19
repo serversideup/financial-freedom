@@ -1,5 +1,5 @@
 <template>
-    <Head :title="'Settings'"/>
+    <Head :title="'Categories - Settings'"/>
 
     <div class="w-full flex flex-col">
         <h1 class="font-semibold font-sans text-[#F5F5F6] text-3xl">Categories</h1>

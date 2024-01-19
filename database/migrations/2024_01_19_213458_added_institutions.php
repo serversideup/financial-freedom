@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('institutions', function( Blueprint $table ){
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('url');
-            $table->text('logo');
+            $table->string('url')->nullable();
+            $table->text('logo')->nullable();
             $table->timestamps();
         });
     }

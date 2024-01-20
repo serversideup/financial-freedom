@@ -18,7 +18,8 @@ return new class extends Migration
             $table->bigInteger('institution_id')->unsigned();
             $table->foreign('institution_id')->references('id')->on('institutions');
             $table->string('name');
-            $table->string('number');
+            $table->string('type')->nullable();
+            $table->string('number')->nullable();
             $table->string('description')->nullable();
             $table->date('opened_at')->nullable();
             $table->decimal('interest_rate', 5, 3)->default(0);

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->bigInteger('institution_id')->unsigned();
             $table->foreign('institution_id')->references('id')->on('institutions');
-            $table->string('type');
+            $table->string('brand')->nullable();
             $table->string('name');
             $table->string('description')->nullable();
             $table->decimal('interest_rate', 5, 3)->default(0);

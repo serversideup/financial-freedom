@@ -92,6 +92,8 @@ const currencies = [
     { value: 'USD', name: 'USD' },
     { value: 'EUR', name: 'EUR' },
     { value: 'GBP', name: 'GBP' },
+    { value: 'JPY', name: 'JPY' },
+    { value: 'INR', name: 'INR' }
 ];
 
 const submit = () => {

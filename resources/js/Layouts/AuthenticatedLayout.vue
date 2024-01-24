@@ -102,6 +102,7 @@ import Notification from '@/Components/Notification.vue';
 import DashboardIcon from '@/Components/Icons/DashboardIcon.vue'
 import TransactionsIcon from '@/Components/Icons/TransactionsIcon.vue'
 import CashFlowIcon from '@/Components/Icons/CashFlowIcon.vue'
+import CoinsIcon from '@/Components/Icons/CoinsIcon.vue';
 import BudgetPlanIcon from '@/Components/Icons/BudgetPlanIcon.vue';
 import GoalsIcon from '@/Components/Icons/GoalsIcon.vue';
 import SettingsIcon from '@/Components/Icons/SettingsIcon.vue';
@@ -127,6 +128,12 @@ const navigation = computed(() => [
         href: '#', 
         icon: TransactionsIcon, 
         current: group.value == 'transactions' ? true : false
+    },
+    {
+        name: 'Accounts',
+        href: '/accounts',
+        icon: CoinsIcon,
+        current: group.value == 'accounts' ? true : false
     },
     { 
         name: 'Cash Flow', 

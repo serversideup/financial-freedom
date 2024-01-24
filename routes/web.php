@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstitutionController;
@@ -27,6 +28,12 @@ Route::middleware(['auth'])->group( function(){
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/accounts', [AccountController::class, 'index'])
+        ->name('accounts.index');
+    Route::post('/accounts', [AccountController::class, 'store'])
+        ->name('accounts.store');
+        
     Route::get('/settings', [SettingsController::class, 'index'])
         ->name('settings.index');
 

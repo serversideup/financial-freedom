@@ -22,6 +22,8 @@
                     v-if="cashAccounts.length > 0"/>
                 <CreditCardsTable
                     v-if="creditCards.length > 0"/>
+                <LoansTable
+                    v-if="loans.length > 0"/>
             </div>
 
             <div class="md:col-span-2">
@@ -48,6 +50,7 @@ import AccountSummary from './Partials/AccountSummary.vue';
 import AddAccountModal from './Partials/AddAccountModal.vue';
 import CashAccountsTable from './Partials/CashAccountsTable.vue';
 import CreditCardsTable from './Partials/CreditCardsTable.vue';
+import LoansTable from './Partials/LoansTable.vue';
 import EmptyState from './Partials/EmptyState.vue';
 import NetWorth from './Partials/NetWorth.vue';
 import { computed } from 'vue';
@@ -56,6 +59,7 @@ import { useEventBus } from '@vueuse/core'
 
 const cashAccounts = computed(() => usePage().props.cashAccounts);
 const creditCards = computed(() => usePage().props.creditCards);
+const loans = computed(() => usePage().props.loans);
 const hasAccounts = computed(() => cashAccounts.value.length > 0 || creditCards.value.length > 0);
 
 const promptBus = useEventBus('ff-prompt-event-bus')

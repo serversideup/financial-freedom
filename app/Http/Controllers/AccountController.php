@@ -7,6 +7,7 @@ use App\Models\Institution;
 use App\Services\Accounts\StoreAccount;
 use App\Services\CashAccounts\IndexCashAccounts;
 use App\Services\CreditCards\IndexCreditCards;
+use App\Services\Loans\IndexLoans;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -20,6 +21,7 @@ class AccountController extends Controller
             'group' => 'accounts',
             'cashAccounts' => fn() => ( new IndexCashAccounts() )->index(),
             'creditCards' => fn() => ( new IndexCreditCards() )->index(),
+            'loans' => fn() => ( new IndexLoans() )->index(),
             'institutions' => fn () => ( Institution::orderBy('name', 'ASC')->get() ),
         ]);
     }

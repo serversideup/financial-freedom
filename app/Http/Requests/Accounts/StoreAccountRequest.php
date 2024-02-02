@@ -19,7 +19,7 @@ class StoreAccountRequest extends FormRequest
             'institution_id' => 'required|exists:institutions,id',
             'description' => 'nullable|string',
             'type' => 'nullable|required_unless:account_type,credit-card|string',
-            'balance' => 'required|numeric',
+            'balance' => 'nullable|numeric',
             'remaining_balance' => 'nullable|required_if:account_type,loan|numeric',
             'original_balance' => 'nullable|required_if:account_type,loan|numeric',
             'payment_amount' => 'nullable|required_if:account_type,loan|numeric',

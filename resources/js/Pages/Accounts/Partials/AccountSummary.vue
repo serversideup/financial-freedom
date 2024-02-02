@@ -26,6 +26,7 @@ const { currency } = useFormatters();
 
 const cashAccounts = computed(() => usePage().props.cashAccounts);
 const creditCards = computed(() => usePage().props.creditCards);
+const loans = computed(() => usePage().props.loans);
 
 const assets = computed(() => {
     return cashAccounts.value.reduce((acc, account) => {
@@ -33,9 +34,19 @@ const assets = computed(() => {
     }, 0);
 });
 
-const liabilities = computed(() => {
+const creditCardTotal = computed(() => {
     return creditCards.value.reduce((acc, account) => {
         return parseFloat( acc ) + parseFloat( account.balance );
     }, 0);
+});
+
+const loansTotal = computed(() => {
+    return loans.value.reduce((acc, account) => {
+        return parseFloat( acc ) + parseFloat( account.remaining_balance );
+    }, 0);
+});
+
+const liabilities = computed(() => {
+    return parseFloat( creditCardTotal.value ) + parseFloat( loansTotal.value );
 });
 </script>

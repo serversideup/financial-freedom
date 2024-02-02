@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Accounts\StoreAccountRequest;
 use App\Models\Institution;
 use App\Services\Accounts\StoreAccount;
+use App\Services\CashAccounts\IndexCashAccounts;
+use App\Services\CreditCards\IndexCreditCards;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,7 +18,8 @@ class AccountController extends Controller
     {
         return Inertia::render('Accounts/Index', [
             'group' => 'accounts',
-            'accounts' => '',
+            'cashAccounts' => fn() => ( new IndexCashAccounts() )->index(),
+            'creditCards' => fn() => ( new IndexCreditCards() )->index(),
             'institutions' => fn () => ( Institution::orderBy('name', 'ASC')->get() ),
         ]);
     }

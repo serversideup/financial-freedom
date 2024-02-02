@@ -6,6 +6,7 @@ use App\Data\CashAccountData;
 use App\Data\CreditCardData;
 use App\Data\LoanData;
 use App\Services\CashAccounts\StoreCashAccount;
+use App\Services\CreditCards\StoreCreditCard;
 
 class StoreAccount
 {
@@ -19,8 +20,9 @@ class StoreAccount
             case 'loan':
                 // $account = LoanData::fromRequest( $request );
                 break;
-            case 'credit_card':
-                // $account = CreditCardData::fromRequest( $request );
+            case 'credit-card':
+                $creditCard = CreditCardData::fromCreateRequest( $request );
+                ( new StoreCreditCard() )->store( $creditCard );
                 break;
         }
 

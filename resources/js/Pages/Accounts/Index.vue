@@ -2,7 +2,7 @@
     <Head :title="'Accounts'"/>
 
     <div class="w-full flex flex-col overflow-y-scroll">
-        <div class="flex w-full justify-between">
+        <div class="flex w-full justify-between mb-6">
             <h1 class="font-semibold font-sans text-[#F5F5F6] text-3xl">Accounts</h1>
             <div class="flex items-center space-x-3">
                 <button @click="addAccount" class="px-[14px] py-[10px] rounded-lg bg-[#155EEF] flex items-center text-[#F5F5F6] font-semibold">
@@ -13,6 +13,23 @@
                 </button>
             </div>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6" v-if="hasAccounts">
+            <NetWorth :transactions="[]"/>
+
+            <div class="grid grid-cols-1 gap-6 md:col-span-3">
+                <CashAccountsTable
+                    v-if="cashAccounts.length > 0"/>
+                <CreditCardsTable
+                    v-if="creditCards.length > 0"/>
+            </div>
+
+            <div class="md:col-span-2">
+                <AccountSummary/>
+            </div>
+        </div>
+
+        <EmptyState v-else/>
     </div>
 
     <AddAccountModal/>
@@ -27,9 +44,19 @@ export default {
 </script>
 
 <script setup>
+import AccountSummary from './Partials/AccountSummary.vue';
 import AddAccountModal from './Partials/AddAccountModal.vue';
-import { Head } from '@inertiajs/vue3';
+import CashAccountsTable from './Partials/CashAccountsTable.vue';
+import CreditCardsTable from './Partials/CreditCardsTable.vue';
+import EmptyState from './Partials/EmptyState.vue';
+import NetWorth from './Partials/NetWorth.vue';
+import { computed } from 'vue';
+import { Head, usePage } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'
+
+const cashAccounts = computed(() => usePage().props.cashAccounts);
+const creditCards = computed(() => usePage().props.creditCards);
+const hasAccounts = computed(() => cashAccounts.value.length > 0 || creditCards.value.length > 0);
 
 const promptBus = useEventBus('ff-prompt-event-bus')
 

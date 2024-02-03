@@ -125,7 +125,7 @@ const navigation = computed(() => [
     },
     { 
         name: 'Transactions', 
-        href: '#', 
+        href: '/transactions', 
         icon: TransactionsIcon, 
         current: group.value == 'transactions' ? true : false
     },

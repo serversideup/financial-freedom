@@ -7,7 +7,8 @@ use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\TransactionsController;
+use App\Http\Controllers\TransactionsImportController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -28,6 +29,16 @@ Route::middleware(['auth'])->group( function(){
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/transactions', [TransactionsController::class, 'index'])
+        ->name('transactions.index');
+    Route::post('/transactions', [TransactionsController::class, 'store'])
+        ->name('transactions.store');
+
+    Route::get('/transactions/import', [TransactionsImportController::class, 'index'])
+        ->name('transactions.import.index');
+    Route::post('/transactions/import', [TransactionsImportController::class, 'store'])
+        ->name('transactions.import.store');
 
     Route::get('/accounts', [AccountController::class, 'index'])
         ->name('accounts.index');

@@ -52,7 +52,14 @@ ports:
   - port: 443
     onOpen: notify
     name: HTTPS
+    protocol: https
     description: Web server port
+  - port: 5173
+    onOpen: notify
+    name: Vite
+    protocol: https
+    description: Vite server port
+    visibility: public
   - port: 8025
     name: Mailtrap
     description: Access trapped SMTP emails.

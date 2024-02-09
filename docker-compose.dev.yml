@@ -11,6 +11,7 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
+      - 5173:5173
     volumes:
       # Add Docker as a mounted volume, so that Traefik can read the labels of other services
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -52,6 +53,7 @@ services:
       # LOG_LEVEL: "debug" # 🔥 Uncomment for debugging
       AUTORUN_ENABLED: "false"
       SSL_MODE: "full"
+      APP_URL: "https://financialfreedom.dev.test"
 
   node:
     build:
@@ -61,6 +63,8 @@ services:
         USER_ID: ${SPIN_USER_ID}
     networks:
       - development
+    environment:
+      VITE_HOST: "vite.dev.test"
     volumes:
       - .:/usr/src/app/:cached
     working_dir: /usr/src/app/

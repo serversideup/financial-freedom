@@ -59,7 +59,7 @@ ports:
     protocol: https
     description: Web server port
   - port: 5173
-    onOpen: notify
+    onOpen: ignore
     name: Vite
     protocol: https
     description: Vite server port

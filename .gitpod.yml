@@ -44,6 +44,10 @@ tasks:
         echo "👋 Welcome $GITPOD_GIT_USER_NAME!"
         echo "🚀 Your development environment is available at:"
         gp url 443
+        while [ ! -f ./public/hot ]; do
+          sleep 1
+        done
+        gp preview $(gp url 443)
     openMode: split-right
 
 ports:
@@ -52,7 +56,14 @@ ports:
   - port: 443
     onOpen: notify
     name: HTTPS
+    protocol: https
     description: Web server port
+  - port: 5173
+    onOpen: ignore
+    name: Vite
+    protocol: https
+    description: Vite server port
+    visibility: public
   - port: 8025
     name: Mailtrap
     description: Access trapped SMTP emails.

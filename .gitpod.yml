@@ -44,6 +44,7 @@ tasks:
         echo "👋 Welcome $GITPOD_GIT_USER_NAME!"
         echo "🚀 Your development environment is available at:"
         gp url 443
+        gp preview $(gp url 443)
     openMode: split-right
 
 ports:

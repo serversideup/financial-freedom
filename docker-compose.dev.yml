@@ -47,7 +47,7 @@ services:
       - "traefik.http.routers.financialfreedom.rule=Host(`financialfreedom.dev.test`)"
       - "traefik.http.routers.financialfreedom.entrypoints=websecure"
       - "traefik.http.routers.financialfreedom.tls=true"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.port=443"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=8443"
       - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
     environment:
       # LOG_LEVEL: "debug" # 🔥 Uncomment for debugging

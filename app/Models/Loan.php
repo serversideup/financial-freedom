@@ -24,6 +24,12 @@ class Loan extends Model
         'payment_amount'
     ];
 
+    protected $appends = ['type'];
+
+    protected $casts = [
+        'import_map' => 'object'
+    ];
+    
     public function user()
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
@@ -32,5 +38,10 @@ class Loan extends Model
     public function institution()
     {
         return $this->hasOne('App\Models\Institution', 'id', 'institution_id');
+    }
+
+    public function getTypeAttribute()
+    {
+        return 'loan';
     }
 }

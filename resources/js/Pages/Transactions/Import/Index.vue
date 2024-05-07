@@ -6,26 +6,17 @@
             <h1 class="font-semibold font-sans text-[#F5F5F6] text-3xl">Import Transactions</h1>
         </div>
 
-        <div class="grid grid-cols-5 gap-6">
-            <div class="col-span-3">
-                <EmptyState v-if="!file"/>
-                <ImportTable v-else/>
-            </div>
-            <div class="col-span-2">
-                <div class="rounded-xl flex flex-col border border-[#1F242F]">
-                    <div class="p-4 flex flex-col border-b border-[#1F242F]">
-                        <span class="text-[#F5F5F6] font-medium text-xl font-sans">Account</span>
-                    </div>
-                    
-                    <div class="p-4 flex flex-col">
-                        
-                    </div>
-                </div>
+        <ImportStep/>
+
+        <div class="grid grid-cols-5 gap-6 mt-6">
+            <div class="col-span-5">
+                <SelectAccount v-if="step == 'select-account'"/>
+                <UploadFile v-if="step == 'upload-file'"/>
+                <MapFields v-if="step == 'map-fields'"/>
+                <ImportTable v-if="step == 'review-transactions'"/>
             </div>
         </div>
-        
-
-        
+    
     </div>
 </template>
 
@@ -38,15 +29,18 @@ export default {
 </script>
 
 <script setup>
-import EmptyState from './Partials/EmptyState.vue';
+import SelectAccount from './Partials/SelectAccount.vue';
+import UploadFile from './Partials/UploadFile.vue';
+import MapFields from './Partials/MapFields.vue';
+import ImportStep from './Partials/ImportStep.vue';
 import ImportTable from './Partials/ImportTable.vue';
 import { useImportTransactions } from '@/Composables/useImportTransactions';
 import { Head, Link } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'
 
-const { file } = useImportTransactions();
+const {
+    step, 
+    file 
+} = useImportTransactions();
 
-const addTransaction = () => {
-    
-}
 </script>

@@ -47,8 +47,14 @@
         <div class="hidden border-r border-[#1F242F] lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
             <!-- Sidebar component, swap this element with another sidebar if you like -->
             <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-[#0C111D] px-6">
-                <div class="flex h-16 shrink-0 items-center">
+                <div class="flex h-16 shrink-0 items-center justify-between">
                     <ApplicationLogo class="h-8 w-auto" />
+
+                    <button @click="minimizeSidebar = minimizeSidebar ? false : true">
+                        <svg :class="[!minimizeSidebar ? 'rotate-180' : '']" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="#94969C" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
                 <nav class="flex flex-1 flex-col">
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -164,4 +170,6 @@ const navigation = computed(() => [
 const sidebarOpen = ref(false);
 
 const user = computed(() => usePage().props.auth.user);
+
+const minimizeSidebar = ref(false);
 </script>

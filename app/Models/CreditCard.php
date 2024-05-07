@@ -22,6 +22,12 @@ class CreditCard extends Model
         'balance'
     ];
 
+    protected $appends = ['type'];
+
+    protected $casts = [
+        'import_map' => 'object'
+    ];
+
     public function user()
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
@@ -30,5 +36,10 @@ class CreditCard extends Model
     public function institution()
     {
         return $this->hasOne('App\Models\Institution', 'id', 'institution_id');
+    }
+
+    public function getTypeAttribute()
+    {
+        return 'credit-card';
     }
 }

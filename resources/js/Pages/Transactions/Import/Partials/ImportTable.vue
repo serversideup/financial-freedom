@@ -6,9 +6,10 @@
                     <table class="min-w-full divide-y divide-[#1F242F]">
                         <thead class="bg-[#161B26]">
                             <tr>
-                                <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-medium text-[#94969C] sm:pl-6">Type</th>
+                                <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-medium text-[#94969C] sm:pl-6">Import</th>
+                                <th scope="col" class="px-2 py-4 text-left text-xs font-medium text-[#94969C]">Type</th>
                                 <th scope="col" class="px-2 py-4 text-left text-xs font-medium text-[#94969C]">Category</th>
-                                <th scope="col" class="px-2 py-4 text-left text-xs font-medium text-[#94969C]">Merchant</th>
+                                <th scope="col" class="px-2 py-4 text-left text-xs font-medium text-[#94969C]">Name</th>
                                 <th scope="col" class="px-2 py-4 text-left text-xs font-medium text-[#94969C]">Amount</th>
                                 <th scope="col" class="px-2 py-4 text-left text-xs font-medium text-[#94969C]">Date</th>
                                 <th scope="col" class="relative py-2 pl-3 pr-4 sm:pr-6">
@@ -17,7 +18,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <ImportRow v-for="(transaction, index) in transactions" 
+                            <ImportRow 
+                                v-for="(transaction, index) in transactions" 
                                 :key="index" 
                                 :transaction="transaction"/>
                         </tbody>
@@ -29,10 +31,16 @@
 </template>
 
 <script setup>
-import { useImportTransactions } from '@/Composables/useImportTransactions';
 import ImportRow from './ImportRow.vue';
+import { 
+    useImportTransactions 
+} from '@/Composables/useImportTransactions';
 
-const { account, transactions } = useImportTransactions();
+
+const { 
+    account, 
+    transactions 
+} = useImportTransactions();
 
 
 </script>

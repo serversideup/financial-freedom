@@ -8,12 +8,26 @@ services:
           - 443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}
 
   php:
+    environment:
+      APP_URL: "https://443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.financialfreedom.rule=Host(`443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}`)"
       - "traefik.http.routers.financialfreedom.entrypoints=websecure"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.port=80"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=http"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=443"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
+
+  node:
+    environment:
+      VITE_HOST: "5173-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      APP_URL: "https://443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.vite.rule=HostRegexp(`5173-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}`)"
+        - "traefik.http.routers.vite.entrypoints=vite"
+        - "traefik.http.routers.vite.tls=true"
+        - "traefik.http.services.vite.loadbalancer.server.port=5173"
+        - "traefik.http.services.vite.loadbalancer.server.scheme=https"
 
   mailpit:
     ports:

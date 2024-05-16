@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col max-w-md">
-        <p class="font-sans text-base font-semibold text-[#F5F5F6]">Account: <span class="font-normal text-sm">{{ account.name }}</span></p>
+        <p class="font-sans text-base font-semibold text-[#F5F5F6]">Account: <span class="font-normal text-sm">{{ form.account.name }}</span></p>
         <label class="text-[#CECFD2] font-sans font-medium text-sm mt-5">Upload Transactions File</label>
         <div class="mt-1 flex flex-col items-center justify-center mx-auto w-full rounded-xl border border-[#1F242F] px-6 py-4">
             <div class="rounded-lg border border-[#333741] p-[10px] flex items-center justify-center mb-3">
@@ -25,7 +25,7 @@ import { useImportTransactions } from '@/Composables/useImportTransactions';
 import { ref } from 'vue';
 
 const { 
-    account,
+    form,
     file, 
     parseUpload 
 } = useImportTransactions();

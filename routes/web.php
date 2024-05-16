@@ -9,11 +9,11 @@ use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RulesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\TransactionsImportController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group( function(){
 });
 
 Route::middleware('auth')->group(function () {
+    Route::post('/rules', [RulesController::class, 'store'])
+        ->name('rules.store');
 
     Route::get('/transactions', [TransactionsController::class, 'index'])
         ->name('transactions.index');

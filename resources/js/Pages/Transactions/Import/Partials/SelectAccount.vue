@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col max-w-md">
         <label class="text-[#CECFD2] font-sans font-medium text-sm">Select Account</label>
-        <select v-model="account" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
+        <select v-model="form.account" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
             <option value="" disabled>Select an account</option>
             <option 
                 v-for="account in cashAccounts" 
@@ -40,12 +40,14 @@ const creditCards = computed(() => usePage().props.creditCards);
 const loans = computed(() => usePage().props.loans);
 
 const { 
-    account, 
+    form, 
+    rules,
     step 
 } = useImportTransactions();
 
 const next = () => {
-    if (account.value) {
+    if (form.account) {
+        rules.value = form.account.rules;
         step.value = 'upload-file';
     }
 }

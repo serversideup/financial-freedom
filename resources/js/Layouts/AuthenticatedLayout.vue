@@ -44,18 +44,26 @@
         </TransitionRoot>
   
         <!-- Static sidebar for desktop -->
-        <div class="hidden border-r border-[#1F242F] lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div class="hidden border-r border-[#1F242F] lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col"
+            :class="minimizeSidebar ? 'lg:w-[74px]' : 'lg:w-72'">
             <!-- Sidebar component, swap this element with another sidebar if you like -->
             <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-[#0C111D] px-6">
                 <div class="flex h-16 shrink-0 items-center justify-between">
                     <ApplicationLogo class="h-8 w-auto" />
 
-                    <button @click="minimizeSidebar = minimizeSidebar ? false : true">
+                    <button v-show="!minimizeSidebar" @click="minimizeSidebar = minimizeSidebar ? false : true">
                         <svg :class="[!minimizeSidebar ? 'rotate-180' : '']" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M7.5 15L12.5 10L7.5 5" stroke="#94969C" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                 </div>
+
+                <button v-show="minimizeSidebar" @click="minimizeSidebar = minimizeSidebar ? false : true">
+                    <svg :class="[!minimizeSidebar ? 'rotate-180' : '']" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7.5 15L12.5 10L7.5 5" stroke="#94969C" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
                 <nav class="flex flex-1 flex-col">
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
                         <li>
@@ -63,7 +71,7 @@
                                 <li v-for="item in navigation" :key="item.name">
                                     <Link :href="item.href" :class="[item.current ? 'bg-[#1F242F] text-[#ECECED]' : 'text-gray-400 hover:text-white hover:bg-[#1F242F]', 'group flex font-sans gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
                                         <component :is="item.icon" class="h-6 w-6 group-hover:stroke-[#ECECED] shrink-0" aria-hidden="true" />
-                                        {{ item.name }}
+                                        <span v-show="!minimizeSidebar">{{ item.name }}</span>
                                     </Link>
                                 </li>
                             </ul>
@@ -72,7 +80,7 @@
                             <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-[#1F242F]">
                                 <img class="h-8 w-8 rounded-full bg-gray-800" :src="user.profile_picture" alt="" />
                                 <span class="sr-only">Your profile</span>
-                                <span aria-hidden="true">{{ user.name }}</span>
+                                <span aria-hidden="true" v-show="!minimizeSidebar">{{ user.name }}</span>
                             </a>
                         </li>
                     </ul>
@@ -92,7 +100,8 @@
             </a>
         </div>
   
-        <main class="py-10 lg:pl-72">
+        <main class="py-10 "
+            :class="minimizeSidebar ? 'lg:pl-[74px]' : 'lg:pl-72'">
             <div class="px-4 sm:px-6 lg:px-8">
                 <slot/>
             </div>
@@ -119,7 +128,9 @@ import {
     Bars3Icon,
     XMarkIcon,
 } from '@heroicons/vue/24/outline'
+import { useDisplay } from '@/Composables/useDisplay';
 
+const { minimizeSidebar } = useDisplay();
 const group = computed(() => usePage().props.group);
 
 const navigation = computed(() => [
@@ -170,6 +181,4 @@ const navigation = computed(() => [
 const sidebarOpen = ref(false);
 
 const user = computed(() => usePage().props.auth.user);
-
-const minimizeSidebar = ref(false);
 </script>

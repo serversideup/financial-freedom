@@ -40,6 +40,11 @@ class Loan extends Model
         return $this->hasOne('App\Models\Institution', 'id', 'institution_id');
     }
 
+    public function rules()
+    {
+        return $this->morphMany(Rule::class, 'accountable');
+    }
+
     public function getTypeAttribute()
     {
         return 'loan';

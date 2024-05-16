@@ -6,6 +6,7 @@ use App\Services\CashAccounts\IndexCashAccounts;
 use App\Services\CreditCards\IndexCreditCards;
 use App\Services\Groups\IndexGroups;
 use App\Services\Loans\IndexLoans;
+use App\Services\Transactions\ImportTransactions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -24,8 +25,14 @@ class TransactionsImportController extends Controller
         ]);
     }
 
-    public function store(): RedirectResponse
+    public function store( Request $request ): RedirectResponse
     {
-        return redirect()->back();
+        ( new ImportTransactions() )
+            ->execute( 
+                $request->get('account'),
+                $request->get('transactions')
+            );
+
+        return redirect('/transactions');
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <p class="font-sans text-base font-semibold text-[#F5F5F6]">Account: <span class="font-normal text-sm">{{ account.name }}</span></p>
+    <p class="font-sans text-base font-semibold text-[#F5F5F6]">Account: <span class="font-normal text-sm">{{ form.account.name }}</span></p>
     <div class="px-4 sm:px-6 lg:px-8 mt-5">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle">
@@ -82,8 +82,8 @@
 
     <div class="mt-5 flex items-center justify-between">
         <div class="flex items-center pl-1">
-            <Checkbox v-model="saveMapping" :checked="saveMapping" v-show="account.import_map == null"/>
-            <span class="text-[#CECFD2] text-sm ml-2" v-show="account.import_map == null">Save this mapping for future imports</span>
+            <Checkbox v-model="saveMapping" :checked="saveMapping" v-show="form.account.import_map == null"/>
+            <span class="text-[#CECFD2] text-sm ml-2" v-show="form.account.import_map == null">Save this mapping for future imports</span>
         </div>
 
         <button @click="next()" class="bg-[#155EEF] text-white cursor-pointer px-4 py-[10px] rounded-lg font-semibold border border-[#155EEF]">
@@ -100,7 +100,7 @@ import { router } from '@inertiajs/vue3';
 
 const { 
     step,
-    account,
+    form,
     fieldMap,
     header,
     csvData,
@@ -109,10 +109,10 @@ const {
 
 const saveMapping = ref(false);
 
-if( account.value.import_map ){
-    fieldMap.name = account.value.import_map.name;
-    fieldMap.date = account.value.import_map.date;
-    fieldMap.amount = account.value.import_map.amount
+if( form.account.import_map ){
+    fieldMap.name = form.account.import_map.name;
+    fieldMap.date = form.account.import_map.date;
+    fieldMap.amount = form.account.import_map.amount
 }
 
 const namePreview = computed(() => {
@@ -158,15 +158,15 @@ const amountPreview = computed(() => {
 });
 
 const accountMapUrl = computed(() => {
-    switch( account.value.type ){
+    switch( form.account.type ){
         case 'credit-card':
-            return `/credit-cards/${account.value.id}`;
+            return `/credit-cards/${form.account.id}`;
         break;
         case 'loan':
-        return `/credit-cards/${account.value.id}`;
+        return `/credit-cards/${form.account.id}`;
         break;
         case 'cash-account':
-            return `/cash-accounts/${account.value.id}`;
+            return `/cash-accounts/${form.account.id}`;
         break;
     }
 });
@@ -187,7 +187,6 @@ const next = () => {
 }
 
 const reviewTransactions = () => {
-    // load rules
     // Duplicates
     convertTransactions();
     step.value = 'review-transactions';

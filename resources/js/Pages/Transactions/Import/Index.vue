@@ -16,7 +16,9 @@
                 <ImportTable v-if="step == 'review-transactions'"/>
             </div>
         </div>
-    
+
+        <FloatingActions v-show="step == 'review-transactions'"/>
+        <AddRuleSlideout :apply="true"/>
     </div>
 </template>
 
@@ -29,18 +31,54 @@ export default {
 </script>
 
 <script setup>
+import AddRuleSlideout from './Partials/AddRuleSlideout.vue';
+import FloatingActions from './Partials/FloatingActions.vue';
 import SelectAccount from './Partials/SelectAccount.vue';
 import UploadFile from './Partials/UploadFile.vue';
 import MapFields from './Partials/MapFields.vue';
 import ImportStep from './Partials/ImportStep.vue';
 import ImportTable from './Partials/ImportTable.vue';
 import { useImportTransactions } from '@/Composables/useImportTransactions';
-import { Head, Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { Head, usePage } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'
 
 const {
-    step, 
-    file 
+    step,
+    account, 
+    rules,
+    applyRules
 } = useImportTransactions();
 
+const functionBus = useEventBus('ff-function-event-bus');
+
+const listener = ( event, data ) => {
+    if( event == 'apply-rules' ){
+        updateRules();
+        applyRules();
+    }
+}
+
+functionBus.on(listener);
+
+const cashAccounts = computed(() => usePage().props.cashAccounts);
+const creditCards = computed(() => usePage().props.creditCards);
+const loans = computed(() => usePage().props.loans);
+
+const updateRules = () => {
+    switch( account.value.type ){
+        case 'cash-account':
+            let cashAccount = cashAccounts.value.find( cashAccount => cashAccount.id == account.value.id );
+            rules.value = cashAccount.rules;
+            break;
+        case 'credit-card':
+            let creditCard = creditCards.value.find( creditCard => creditCard.id == account.value.id );
+            rules.value = creditCard.rules;
+            break;
+        case 'loan':
+            let loan = loans.value.find( loan => loan.id == account.value.id );
+            rules.value = loan.rules;
+            break;
+    }
+}
 </script>

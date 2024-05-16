@@ -30,12 +30,17 @@ class CreditCard extends Model
 
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function institution()
     {
-        return $this->hasOne('App\Models\Institution', 'id', 'institution_id');
+        return $this->hasOne(Institution::class, 'id', 'institution_id');
+    }
+
+    public function rules()
+    {
+        return $this->morphMany(Rule::class, 'accountable');
     }
 
     public function getTypeAttribute()

@@ -1,0 +1,32 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+      target: ci
+    networks:
+      - ci
+    volumes:
+      - .:/var/www/html/
+    working_dir: /var/www/html/
+    depends_on:
+      - mariadb
+
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      target: base
+    networks:
+      - ci
+    volumes:
+      - .:/usr/src/app/:cached
+    working_dir: /usr/src/app/
+
+  mailpit:
+    image: axllent/mailpit
+    networks:
+      - ci
+
+networks:
+  ci:

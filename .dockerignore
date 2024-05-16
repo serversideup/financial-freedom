@@ -1,0 +1,7 @@
+.vault-password
+.github
+.git
+.infrastructure
+Dockerfile
+docker-*.yml
+.gitlab-ci.yml

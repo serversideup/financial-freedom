@@ -1,0 +1,62 @@
+services:
+  traefik:
+    ports:
+    - "80:80"
+    - "443:443"
+    networks:
+      development:
+    volumes:
+      # Mount the Docker socket as read-only so Traefik can listen to events
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./.infrastructure/conf/traefik/dev/traefik.yml:/traefik.yml:ro
+      - ./.infrastructure/conf/traefik/dev/traefik-certs.yml:/traefik-certs.yml
+      - ./.infrastructure/conf/traefik/dev/certificates/:/certificates
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+      target: development
+      args:
+        USER_ID: ${SPIN_USER_ID}
+        GROUP_ID: ${SPIN_GROUP_ID}
+    environment:
+      SSL_MODE: "full"
+    volumes:
+      - .:/var/www/html/
+    networks:
+      - development
+    depends_on:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"
+      - "traefik.http.routers.financialfreedom.entrypoints=websecure"
+      - "traefik.http.routers.financialfreedom.tls=true"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=8443"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
+  
+  node:
+    image: node:20
+    volumes:
+      - .:/usr/src/app/
+    working_dir: /usr/src/app/
+    networks: 
+      - development
+
+  mailpit:
+      image: axllent/mailpit
+      networks:
+        - development
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.mailpit.rule=Host(`mailpit.dev.test`)"
+        - "traefik.http.routers.mailpit.entrypoints=websecure"
+        - "traefik.http.routers.mailpit.tls=true"
+        - "traefik.http.services.mailpit.loadbalancer.server.port=8025"
+        - "traefik.http.services.mailpit.loadbalancer.server.scheme=http"
+      depends_on:
+        - traefik
+
+networks:
+  development:

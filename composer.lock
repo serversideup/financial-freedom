@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b3d0b32ece7ed030124196dbfc03c25",
+    "content-hash": "ebddae746cb61102f4b31b32f5ff0cbb",
     "packages": [
         {
             "name": "amphp/amp",
@@ -9488,16 +9488,16 @@
         },
         {
             "name": "serversideup/spin",
-            "version": "v2.0.0-beta-3",
+            "version": "dev-75-spin-deploy-allow-deployments-without-cicd",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serversideup/spin.git",
-                "reference": "4c045dfb49f9f6472f91aba9c93ecd1abb78f4a2"
+                "reference": "8d546f7fe6b9555abeb0bf414cb561b9d650d666"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serversideup/spin/zipball/4c045dfb49f9f6472f91aba9c93ecd1abb78f4a2",
-                "reference": "4c045dfb49f9f6472f91aba9c93ecd1abb78f4a2",
+                "url": "https://api.github.com/repos/serversideup/spin/zipball/8d546f7fe6b9555abeb0bf414cb561b9d650d666",
+                "reference": "8d546f7fe6b9555abeb0bf414cb561b9d650d666",
                 "shasum": ""
             },
             "bin": [
@@ -9521,7 +9521,7 @@
             "description": "Replicate your production environment locally using Docker. Just run \"spin up\". It's really that easy.",
             "support": {
                 "issues": "https://github.com/serversideup/spin/issues",
-                "source": "https://github.com/serversideup/spin/tree/v2.0.0-beta-3"
+                "source": "https://github.com/serversideup/spin/tree/75-spin-deploy-allow-deployments-without-cicd"
             },
             "funding": [
                 {
@@ -9529,7 +9529,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-08T23:13:38+00:00"
+            "time": "2024-05-16T19:06:20+00:00"
         },
         {
             "name": "spatie/backtrace",
@@ -9892,7 +9892,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "serversideup/spin": 10
+        "serversideup/spin": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

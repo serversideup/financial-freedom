@@ -5,5 +5,5 @@ on:
 jobs:
 
   testing:
-    uses: ./.github/workflows/service_tests-phpunit.yml
+    uses: ./.github/workflows/service_install-and-test-php.yml
     secrets: inherit

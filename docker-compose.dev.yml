@@ -3,8 +3,11 @@ services:
     ports:
     - "80:80"
     - "443:443"
+    - 5173:5173
     networks:
       development:
+        aliases:
+          - financialfreedom.dev.test
     volumes:
       # Mount the Docker socket as read-only so Traefik can listen to events
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -37,12 +40,25 @@ services:
       - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
   
   node:
-    image: node:20
-    volumes:
-      - .:/usr/src/app/
-    working_dir: /usr/src/app/
-    networks: 
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        USER_ID: ${SPIN_USER_ID}
+    networks:
       - development
+    environment:
+      VITE_HOST: "vite.dev.test"
+    volumes:
+      - .:/usr/src/app/:cached
+    working_dir: /usr/src/app/
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.vite.rule=HostRegexp(`vite.dev.test`)"
+        - "traefik.http.routers.vite.entrypoints=websecure"
+        - "traefik.http.routers.vite.tls=true"
+        - "traefik.http.services.vite.loadbalancer.server.port=5173"
+        - "traefik.http.services.vite.loadbalancer.server.scheme=https"
 
   mailpit:
       image: axllent/mailpit

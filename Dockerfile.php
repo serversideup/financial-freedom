@@ -46,6 +46,9 @@ RUN echo "user = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-p
 ############################################
 # Production Image
 ############################################
-FROM base as deploy
+FROM base as release
 COPY --chown=www-data:www-data . /var/www/html
+
+ENV SSL_MODE=mixed
+
 USER www-data

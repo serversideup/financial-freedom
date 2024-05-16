@@ -1,4 +1,3 @@
-version: '3.8'
 services:
 
   traefik:
@@ -14,7 +13,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.financialfreedom.rule=Host(`443-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}`)"
       - "traefik.http.routers.financialfreedom.entrypoints=websecure"
-      - "traefik.http.services.financialfreedom.loadbalancer.server.port=443"
+      - "traefik.http.services.financialfreedom.loadbalancer.server.port=8443"
       - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
 
   node:

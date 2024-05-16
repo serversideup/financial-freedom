@@ -11,20 +11,3 @@ jobs:
       docker-tags: "serversideup/financial-freedom:latest,serversideup/financial-freedom:${{ github.ref_name }}"
       dockerfile: "./Dockerfile.php"
     secrets: inherit
-
-  update_container_readme:
-    runs-on: ubuntu-22.04
-    name: Push README to Docker Hub
-    steps:
-      - name: git checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: push README to Dockerhub
-        uses: peter-evans/dockerhub-description@v3
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          repository: serversideup/financial-freedom
-          short-description: "🔥🔥🔥 An open source alternative to Mint, YNAB, and more. Stay on budget and build wealth."

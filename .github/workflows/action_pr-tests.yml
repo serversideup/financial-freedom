@@ -1,9 +1,0 @@
-name: Deploy
-on:
-  pull_request:
-
-jobs:
-
-  testing:
-    uses: ./.github/workflows/service_tests-phpunit.yml
-    secrets: inherit

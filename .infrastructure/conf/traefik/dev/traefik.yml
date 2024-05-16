@@ -4,8 +4,7 @@ serversTransport:
 
 providers:
   docker:
-    network: development
-    exposedbydefault: false
+    exposedByDefault: false
   file:
       filename: /traefik-certs.yml
       watch: true

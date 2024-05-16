@@ -2,7 +2,7 @@
     <Head :title="'Dashboard'"/>
 
     <div>
-        
+
     </div>
 </template>
 

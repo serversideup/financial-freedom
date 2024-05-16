@@ -26,10 +26,6 @@ tasks:
   - name: Node Watch & Migrations.
     init: |
         clear
-        echo "⚡️ Waiting for build to complete..."
-        gp ports await 3306
-        echo "⚡️ Waiting for database to provision..."
-        sleep 5
         spin exec php php artisan migrate
         gp sync-done node
     command: spin run node yarn dev
@@ -71,7 +67,4 @@ ports:
   - port: 8080
     name: Traefik
     description: Traefik Dashboard
-    onOpen: ignore
-  - port: 3306
-    name: MySQL
     onOpen: ignore

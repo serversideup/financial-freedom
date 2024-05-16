@@ -1,59 +1,44 @@
 services:
-
   traefik:
-    restart: "no"
+    ports:
+    - "80:80"
+    - "443:443"
+    - 5173:5173
     networks:
       development:
         aliases:
           - financialfreedom.dev.test
-    ports:
-      - 80:80
-      - 443:443
-      - 8080:8080
-      - 5173:5173
     volumes:
-      # Add Docker as a mounted volume, so that Traefik can read the labels of other services
+      # Mount the Docker socket as read-only so Traefik can listen to events
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./.infrastructure/conf/traefik/dev/traefik.yml:/traefik.yml:ro
       - ./.infrastructure/conf/traefik/dev/traefik-certs.yml:/traefik-certs.yml
       - ./.infrastructure/conf/traefik/dev/certificates/:/certificates
-  
-  mariadb:
-    networks:
-      - development
-    volumes:
-      - ./.infrastructure/volume_data/mariadb/database_data/:/var/lib/mysql
-    environment:
-        MARIADB_ROOT_PASSWORD: "rootpassword"
-        MARIADB_DATABASE: "financialfreedom"
-        MARIADB_USER: "financialfreedom_dbuser"
-        MARIADB_PASSWORD: "financialfreedom_dbpassword"
-    ports:
-      - 3306:3306
 
   php:
     build:
+      context: .
+      dockerfile: Dockerfile.php
       target: development
       args:
         USER_ID: ${SPIN_USER_ID}
         GROUP_ID: ${SPIN_GROUP_ID}
+    environment:
+      SSL_MODE: "full"
     volumes:
       - .:/var/www/html/
     networks:
       - development
+    depends_on:
+      - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.financialfreedom.rule=Host(`financialfreedom.dev.test`)"
+      - "traefik.http.routers.financialfreedom.rule=HostRegexp(`financialfreedom.dev.test`)"
       - "traefik.http.routers.financialfreedom.entrypoints=websecure"
       - "traefik.http.routers.financialfreedom.tls=true"
       - "traefik.http.services.financialfreedom.loadbalancer.server.port=8443"
       - "traefik.http.services.financialfreedom.loadbalancer.server.scheme=https"
-    environment:
-      # LOG_LEVEL: "debug" # 🔥 Uncomment for debugging
-      AUTORUN_ENABLED: "false"
-      SSL_MODE: "full"
-      APP_URL: "https://financialfreedom.dev.test"
-
+  
   node:
     build:
       context: .
@@ -76,18 +61,18 @@ services:
         - "traefik.http.services.vite.loadbalancer.server.scheme=https"
 
   mailpit:
-    image: axllent/mailpit
-    networks:
-      - development
-    depends_on:
-      - traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.mailpit.rule=Host(`mailpit.dev.test`)"
-      - "traefik.http.routers.mailpit.entrypoints=websecure"
-      - "traefik.http.routers.mailpit.tls=true"
-      - "traefik.http.services.mailpit.loadbalancer.server.port=8025"
-      - "traefik.http.services.mailpit.loadbalancer.server.scheme=http"
+      image: axllent/mailpit
+      networks:
+        - development
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.mailpit.rule=Host(`mailpit.dev.test`)"
+        - "traefik.http.routers.mailpit.entrypoints=websecure"
+        - "traefik.http.routers.mailpit.tls=true"
+        - "traefik.http.services.mailpit.loadbalancer.server.port=8025"
+        - "traefik.http.services.mailpit.loadbalancer.server.scheme=http"
+      depends_on:
+        - traefik
 
 networks:
   development:

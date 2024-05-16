@@ -23,15 +23,13 @@ x-trustedIps: &trustedIPs
   - "2a06:98c0::/29"
   - "2c0f:f248::/32"
 
-# Allow self-signed certificates
 serversTransport:
   insecureSkipVerify: true
 
 providers:
-  docker:
-    network: web-public
-    exposedbydefault: false
-    swarmMode: true
+  swarm:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false  
 
 entryPoints:
   web:

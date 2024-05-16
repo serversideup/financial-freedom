@@ -1,0 +1,86 @@
+services:
+
+  traefik:
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+    networks:
+        - web-public
+    deploy:
+      update_config:
+        parallelism: 1
+        delay: 5s
+        order: stop-first
+      placement:
+        constraints:
+          - node.role==manager
+    volumes:
+      # Mount the Docker socket as read-only so Traefik can listen to events
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certificates:/certificates
+    configs:
+      - source: traefik
+        target: /etc/traefik/traefik.yml
+
+  php:
+    image: ${SPIN_IMAGE_NAME} # 👈 Change this if you're not using `spin deploy`
+    environment:
+      PHP_OPCACHE_ENABLE: "1"
+    networks:
+      - web-public
+    volumes:
+      - "storage_private:/var/www/html/storage/app/private/"
+      - "storage_public:/var/www/html/storage/app/public/"
+      - "storage_sessions:/var/www/html/storage/framework/sessions"
+      - "storage_logs:/var/www/html/storage/logs"
+      - "database_sqlite:/var/www/html/.infrastructure/volume_data/sqlite/"
+    deploy:
+      replicas: 1
+      update_config:
+        failure_action: rollback
+        parallelism: 1
+        delay: 5s
+        order: start-first
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.my-php-app.rule=Host(`myapp.example.com`)"
+        - "traefik.http.routers.my-php-app.entrypoints=websecure"
+        - "traefik.http.routers.my-php-app.tls=true"
+        - "traefik.http.routers.my-php-app.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.my-php-app.loadbalancer.server.port=8080"
+        - "traefik.http.services.my-php-app.loadbalancer.server.scheme=http"
+        # Health check
+        - "traefik.http.services.my-php-app.loadbalancer.healthcheck.path=/healthcheck"
+        - "traefik.http.services.my-php-app.loadbalancer.healthcheck.interval=30s"
+        - "traefik.http.services.my-php-app.loadbalancer.healthcheck.timeout=5s"
+        - "traefik.http.services.my-php-app.loadbalancer.healthcheck.scheme=http"
+
+configs:
+  traefik:
+    name: "traefik-${SPIN_TRAEFIK_CONFIG_MD5_HASH}.yml"
+    file: ./.infrastructure/conf/traefik/prod/traefik.yml
+
+volumes:
+  certificates:
+  storage_private:
+  storage_public:
+  storage_sessions:
+  storage_logs:
+  database_sqlite:
+
+networks:
+  web-public:

@@ -9,8 +9,6 @@ services:
     volumes:
       - .:/var/www/html/
     working_dir: /var/www/html/
-    depends_on:
-      - mariadb
 
   node:
     build:

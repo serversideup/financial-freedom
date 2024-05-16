@@ -12,7 +12,7 @@ on:
         default: './Dockerfile'
       target:
         type: string
-        default: 'deploy'
+        default: 'release'
 
 jobs:
   php-build-and-test:

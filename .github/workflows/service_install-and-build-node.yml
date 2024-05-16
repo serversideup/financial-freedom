@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Restore composer cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         id: composer-cache-restore
         with:
           path: vendor/
@@ -24,7 +24,7 @@ jobs:
 
       - name: Restore node_modules cache (if available)
         id: node-modules-restore
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: node_modules/
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
@@ -46,20 +46,20 @@ jobs:
 
       - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
         name: Upload node_modules cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: node_modules/
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
 
       - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
         name: Upload node_modules cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: node_modules/
           key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
 
       - name: Upload public/build cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: public/build/
           key: ${{ runner.os }}-public-build-${{ github.sha }}

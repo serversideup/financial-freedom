@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Restore composer cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         id: composer-cache-restore
         with:
           path: vendor/
@@ -46,7 +46,7 @@ jobs:
         run: exit 1
 
       - name: Restore public/build cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         id: public-build-restore
         with:
           path: public/build/

@@ -37,7 +37,7 @@ Break free from third parties tracking every financial footstep you have. Run th
 </details>
 
 ## Contributing
-As an open-source project, we strive for transparency and collaboration in our development process. We greatly appreciate any contributions members of our community can provide. Whether you're fixing bugs, proposing features, improving documentation, or spreading awareness - your involvement strengthens the project. Please review our [contribution guidelines](https://serversideup.net/open-source/docker-php/docs/getting-started/contributing) and [code of conduct](./.github/code_of_conduct.md) to understand how we work together respectfully.
+As an open-source project, we strive for transparency and collaboration in our development process. We greatly appreciate any contributions members of our community can provide. Whether you're fixing bugs, proposing features, improving documentation, or spreading awareness - your involvement strengthens the project. Please review our [contribution guidelines](https://serversideup.net/open-source/financial-freedom/docs/community/contributing) and [code of conduct](./.github/code_of_conduct.md) to understand how we work together respectfully.
 
 - **Bug Report**: If you're experiencing an issue while using these images, please [create an issue](https://github.com/serversideup/financial-freedom/issues/new/choose).
 - **Feature Request**: Make this project better by [submitting a feature request](https://github.com/serversideup/financial-freedom/discussions/63).

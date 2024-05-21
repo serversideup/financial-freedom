@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col max-w-md">
-        <label class="text-[#CECFD2] font-sans font-medium text-sm">Select Account</label>
+        <InputLabel value="Select Account"/>
         <select v-model="form.account" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
             <option value="" disabled>Select an account</option>
             <option 
@@ -31,6 +31,7 @@
 </template>
 
 <script setup>
+import InputLabel from '@/Components/InputLabel.vue';
 import { useImportTransactions } from '@/Composables/useImportTransactions';
 import { computed, ref } from 'vue';
 import { usePage } from '@inertiajs/vue3';

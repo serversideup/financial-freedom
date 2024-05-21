@@ -15,7 +15,7 @@
 
             <form @submit.prevent="submit">
                 <div>
-                    <InputLabel for="name" value="Name*" class="text-[#CECFD2]" />
+                    <InputLabel for="name" value="Name*" />
 
                     <TextInput
                         id="name"

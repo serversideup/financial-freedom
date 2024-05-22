@@ -25,18 +25,18 @@
 
             <div class="grid grid-cols-3 gap-8 max-w-4xl py-5 border-b border-[#1F242F]">
                 <div class="flex flex-col">
-                    <label for="username" class="font-sans text-sm font-semibold text-[#CECFD2]">Name</label>
+                    <InputLabel for="name" value="Name"/>
                     <span class="text-[#94969C] font-sans text-sm">Your full name.</span>
                 </div>
                 <div class="col-span-2">
-                    <input type="text" v-model="form.name" id="name" name="name" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
+                    <TextInput v-model="form.name" id="name" name="name" class="mt-1"/>
                     <InputError class="mt-2" :message="form.errors.name" />
                 </div>
             </div>
 
             <div class="grid grid-cols-3 gap-8 max-w-4xl py-5 border-b border-[#1F242F]">
                 <div class="flex flex-col">
-                    <label for="currency" class="font-sans text-sm font-semibold text-[#CECFD2]">Default Currency</label>
+                    <InputLabel for="currency" value="Default Currency"/>
                     <span class="text-[#94969C] font-sans text-sm">Select the currency used across the app.</span>
                 </div>
                 <div class="col-span-2">
@@ -74,7 +74,9 @@ export default {
 
 <script setup>
 import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
 import Navigation from './Partials/Navigation.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { computed } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'

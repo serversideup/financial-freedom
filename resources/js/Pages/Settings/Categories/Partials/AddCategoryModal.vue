@@ -13,13 +13,13 @@
             <span class="font-sans text-sm text-[#94969C]">Add a new category for your transactions</span>
 
             <div class="flex flex-col mt-5">
-                <label class="text-[#CECFD2] font-sans font-medium text-sm">Name</label>
-                <input v-model="form.name" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
+                <InputLabel value="Name"/>
+                <TextInput v-model="form.name" class="mt-1"/>
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div class="flex flex-col mt-4">
-                <label class="text-[#CECFD2] font-sans font-medium text-sm">Group</label>
+                <InputLabel value="Group"/>
                 <select v-model="form.group_id" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
                     <option value="" disabled>Select a group</option>
                     <option v-for="group in groups"
@@ -29,7 +29,7 @@
             </div>
 
             <div class="flex flex-col mt-5">
-                <label class="text-[#CECFD2] font-sans font-medium text-sm">Color</label>
+                <InputLabel value="Color"/>
                 <select v-model="form.color" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
                     <option value="" disabled>Select a color</option>
                     <option value="green">Green</option>
@@ -60,6 +60,8 @@ import Modal from '@/Components/Modal.vue';
 import ModalCloseIcon from '@/Components/Icons/ModalCloseIcon.vue';
 import FolderModalIcon from '@/Components/Icons/FolderModalIcon.vue';
 import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { computed, ref } from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'

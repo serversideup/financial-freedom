@@ -8,24 +8,24 @@
             <template #body>
                 <div class="flex flex-col w-full">
                     <div class="flex flex-col mt-5">
-                        <label class="text-[#CECFD2] font-sans font-medium text-sm">Adding Rule to Account</label>
+                        <InputLabel value="Adding Rule to Account"/>
                         <span class="text-[#94969C] font-sans text-sm">{{ account.name }}</span>
                     </div>
 
                     <div class="flex flex-col mt-5">
-                        <label class="text-[#CECFD2] font-sans font-medium text-sm">Text to match</label>
+                        <InputLabel value="Text to match"/>
                         <TextInput class="mt-1" v-model="form.search_string" placeholder="Text to match against"/>
                         <InputError class="mt-2" :message="form.errors.search_string" />
                     </div>
 
                     <div class="flex flex-col mt-5">
-                        <label class="text-[#CECFD2] font-sans font-medium text-sm">Replace String</label>
+                        <InputLabel value="Replace String"/>
                         <TextInput class="mt-1" v-model="form.replace_string" placeholder="Text to replace"/>
                         <InputError class="mt-2" :message="form.errors.replace_string" />
                     </div>
 
                     <div class="flex flex-col mt-5">
-                        <label class="text-[#CECFD2] font-sans font-medium text-sm">Apply Category</label>
+                        <InputLabel value="Apply Category"/>
                         <Combobox v-model="form.category">
                             <div class="relative mt-1">
                                 <ComboboxInput 
@@ -97,6 +97,7 @@
 
 <script setup>
 import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
 import SlideOut from '@/Components/SlideOut.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useForm, usePage } from '@inertiajs/vue3';

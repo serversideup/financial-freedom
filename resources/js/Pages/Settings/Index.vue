@@ -29,7 +29,7 @@
                     <span class="text-[#94969C] font-sans text-sm">Your full name.</span>
                 </div>
                 <div class="col-span-2">
-                    <input type="text" v-model="form.name" id="name" name="name" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
+                    <TextInput v-model="form.name" id="name" name="name" class="mt-1"/>
                     <InputError class="mt-2" :message="form.errors.name" />
                 </div>
             </div>
@@ -76,6 +76,7 @@ export default {
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Navigation from './Partials/Navigation.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { computed } from 'vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'

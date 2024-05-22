@@ -2,7 +2,7 @@
     <Modal @close="closeModal" :show="show" :max-width="'2xl'">
         <form class="flex flex-col w-full" @submit.prevent="submit">
             <div class="flex items-center justify-between w-full">
-                <CoinsIcon class="flex-shrink-0"/>
+                <CoinsIcon class="flex-shrink-0 text-[#CECFD2]"/>
                 
                 <button type="button" @click="closeModal">
                     <ModalCloseIcon/>
@@ -26,7 +26,7 @@
             <div class="grid grid-cols-2 gap-4 mt-4">
                 <div class="flex flex-col">
                     <InputLabel value="Name"/>
-                    <input v-model="form.name" placeholder="What is the name of your account?" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
+                    <TextInput v-model="form.name" placeholder="What is the name of your account?" class="mt-1"/>
                     <InputError class="mt-2" :message="form.errors.name" />
                 </div>
                 <div class="flex flex-col">
@@ -67,19 +67,17 @@
 
                 <div class="flex flex-col" v-if="form.account_type == 'cash' || form.account_type == 'credit-card'">
                     <InputLabel value="Balance"/>
-                    <div class="w-full mt-1 flex items-center">
-                        <span class="font-sans rounded-l-md text-[#94969C] flex-shrink-0 border-t border-l border-b border-[#333741] py-2 px-4">$</span>
-                        <input v-model="form.balance" class="block flex-1 rounded-r-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                    </div>
+                    <PrefixTextInput v-model="form.balance" class="mt-1">
+                        <span>$</span>
+                    </PrefixTextInput>
                     <InputError class="mt-2" :message="form.errors.balance" />
                 </div>
 
                 <div class="flex flex-col">
                     <InputLabel value="Interest Rate"/>
-                    <div class="w-full mt-1 flex items-center">
-                        <input v-model="form.interest_rate" class="block flex-1 rounded-l-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                        <span class="font-sans rounded-r-md text-[#94969C] flex-shrink-0 border-t border-r border-b border-[#333741] py-2 px-4">%</span>
-                    </div>
+                    <SuffixTextInput v-model="form.interest_rate" class="mt-1">
+                        <span>%</span>
+                    </SuffixTextInput>
                     <InputError class="mt-2" :message="form.errors.interest_rate" />
                 </div>
 
@@ -98,50 +96,46 @@
 
                 <div class="flex flex-col" v-if="form.account_type == 'credit-card'">
                     <InputLabel value="Credit Limit"/>
-                    <div class="w-full mt-1 flex items-center">
-                        <span class="font-sans rounded-l-md text-[#94969C] flex-shrink-0 border-t border-l border-b border-[#333741] py-2 px-4">$</span>
-                        <input v-model="form.credit_limit" class="block flex-1 rounded-r-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                    </div>
+                    <PrefixTextInput v-model="form.credit_limit" class="mt-1">
+                        <span>$</span>
+                    </PrefixTextInput>
                     <InputError class="mt-2" :message="form.errors.credit_limit" />
                 </div>
 
                 <div class="flex flex-col" v-if="form.account_type == 'loan'">
                     <InputLabel value="Date opened"/>
-                    <input v-model="form.date_opened" placeholder="When did you open your loan?" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
+                    <TextInput v-model="form.date_opened" placeholder="When did you open your loan?" class="mt-1"/>
                     <InputError class="mt-2" :message="form.errors.date_opened" />
                 </div>
 
                 <div class="flex flex-col" v-if="form.account_type == 'loan'">
                     <InputLabel value="Remaining Balance"/>
-                    <div class="w-full mt-1 flex items-center">
-                        <span class="font-sans rounded-l-md text-[#94969C] flex-shrink-0 border-t border-l border-b border-[#333741] py-2 px-4">$</span>
-                        <input v-model="form.remaining_balance" class="block flex-1 rounded-r-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                    </div>
+                    <PrefixTextInput v-model="form.remaining_balance" class="mt-1">
+                        <span>$</span>
+                    </PrefixTextInput>
                     <InputError class="mt-2" :message="form.errors.remaining_balance" />
                 </div>
 
                 <div class="flex flex-col" v-if="form.account_type == 'loan'">
                     <InputLabel value="Original Balance"/>
-                    <div class="w-full mt-1 flex items-center">
-                        <span class="font-sans rounded-l-md text-[#94969C] flex-shrink-0 border-t border-l border-b border-[#333741] py-2 px-4">$</span>
-                        <input v-model="form.original_balance" class="block flex-1 rounded-r-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                    </div>
+                    <PrefixTextInput v-model="form.original_balance" class="mt-1">
+                        <span>$</span>
+                    </PrefixTextInput>
                     <InputError class="mt-2" :message="form.errors.original_balance" />
                 </div>
 
                 <div class="flex flex-col" v-if="form.account_type == 'loan'">
                     <InputLabel value="Payment Amount"/>
-                    <div class="w-full mt-1 flex items-center">
-                        <span class="font-sans rounded-l-md text-[#94969C] flex-shrink-0 border-t border-l border-b border-[#333741] py-2 px-4">$</span>
-                        <input v-model="form.payment_amount" class="block flex-1 rounded-r-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                    </div>
+                    <PrefixTextInput v-model="form.payment_amount" class="mt-1">
+                        <span>$</span>
+                    </PrefixTextInput>
                     <InputError class="mt-2" :message="form.errors.payment_amount" />
                 </div>
             </div>
 
             <div class="flex flex-col mt-4">
                 <InputLabel value="Description"/>
-                <input v-model="form.description" placeholder="Enter some information about what this account is used for.." class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
+                <TextInput v-model="form.description" placeholder="Enter some information about what this account is used for.." class="mt-1"/>
                 <InputError class="mt-2" :message="form.errors.description" />
             </div>
 
@@ -163,6 +157,9 @@ import CoinsIcon from '@/Components/Icons/CoinsIcon.vue';
 import ModalCloseIcon from '@/Components/Icons/ModalCloseIcon.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
+import PrefixTextInput from '@/Components/PrefixTextInput.vue';
+import SuffixTextInput from '@/Components/SuffixTextInput.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'
 import { computed, ref } from 'vue';

@@ -14,13 +14,13 @@
 
             <div class="flex flex-col mt-5">
                 <InputLabel value="Name"/>
-                <input v-model="form.name" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
+                <TextInput v-model="form.name" class="mt-1"/>
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div class="flex flex-col mt-5">
                 <InputLabel value="URL"/>
-                <input v-model="form.url" class="mt-1 block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
+                <TextInput v-model="form.url" class="mt-1"/>
                 <InputError class="mt-2" :message="form.errors.url" />
             </div>
 
@@ -43,6 +43,7 @@ import BankModalIcon from '@/Components/Icons/BankModalIcon.vue';
 import ModalCloseIcon from '@/Components/Icons/ModalCloseIcon.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'

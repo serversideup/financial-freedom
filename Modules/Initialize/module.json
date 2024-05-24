@@ -1,0 +1,11 @@
+{
+    "name": "Initialize",
+    "alias": "initialize",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Initialize\\Providers\\InitializeServiceProvider"
+    ],
+    "files": []
+}

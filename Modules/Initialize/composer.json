@@ -1,0 +1,30 @@
+{
+    "name": "financial-freedom/initialize",
+    "description": "",
+    "authors": [
+        {
+            "name": "Dan Pastori",
+            "email": "dan@serversideup.net"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Initialize\\": "app/",
+            "Modules\\Initialize\\Database\\Factories\\": "database/factories/",
+            "Modules\\Initialize\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Initialize\\Tests\\": "tests/"
+        }
+    }
+}

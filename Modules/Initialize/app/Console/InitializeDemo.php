@@ -56,11 +56,9 @@ class InitializeDemo extends Command
             $this->info('💰 Creating accounts...');
             ( new CreateAccounts($user) )->handle();
 
-            /**
-             * 3. Create accounts
-             * 4. Create transactions
-             * 5. Create rules
-             */
+            // Create Transactions
+
+            // Create Rules
             $this->info('🎉 Demo initialized successfully.');
         } else {
             $this->info('❌ Demo initialization cancelled.');

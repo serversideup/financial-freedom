@@ -1,22 +1,22 @@
 <?php
 
-namespace Modules\Demo\Console;
+namespace Modules\Initialize\Console;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class InitializeDemo extends Command
+class InitializeFresh extends Command
 {
     /**
      * The name and signature of the console command.
      */
-    protected $signature = 'ff:initialize-demo';
+    protected $signature = 'ff:initialize-fresh';
 
     /**
      * The console command description.
      */
-    protected $description = 'Initializes a demo of Financial Freedom.';
+    protected $description = 'Initializes a fresh version of Financial Freedom.';
 
     /**
      * Create a new command instance.
@@ -31,7 +31,7 @@ class InitializeDemo extends Command
      */
     public function handle()
     {
-        
+        //
     }
 
     /**

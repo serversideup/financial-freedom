@@ -1,15 +1,14 @@
 <?php
 
-namespace Modules\Demo\Providers;
+namespace Modules\Initialize\Providers;
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-class DemoServiceProvider extends ServiceProvider
+class InitializeServiceProvider extends ServiceProvider
 {
-    protected string $moduleName = 'Demo';
+    protected string $moduleName = 'Initialize';
 
-    protected string $moduleNameLower = 'demo';
+    protected string $moduleNameLower = 'initialize';
 
     /**
      * Boot the application events.
@@ -37,7 +36,8 @@ class DemoServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
-            \Modules\Demo\Console\InitializeDemo::class,
+            \Modules\Initialize\Console\InitializeDemo::class,
+            \Modules\Initialize\Console\InitializeFresh::class,
         ]);
     }
 

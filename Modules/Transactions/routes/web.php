@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Transactions\Http\Controllers\TransactionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,15 @@ use Modules\Transactions\Http\Controllers\TransactionsController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('transactions', TransactionsController::class)->names('transactions');
+Route::middleware('auth')->group(function () {
+    Route::get('/transactions', [TransactionsController::class, 'index'])
+        ->name('transactions.index');
+    Route::post('/transactions', [TransactionsController::class, 'store'])
+        ->name('transactions.store');
+
+    Route::get('/transactions/import', [TransactionsImportController::class, 'index'])
+        ->name('transactions.import.index');
+    Route::post('/transactions/import', [TransactionsImportController::class, 'store'])
+        ->name('transactions.import.store');
+
 });

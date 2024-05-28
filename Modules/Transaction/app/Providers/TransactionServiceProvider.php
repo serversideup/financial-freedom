@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Transactions\Providers;
+namespace Modules\Transaction\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-class TransactionsServiceProvider extends ServiceProvider
+class TransactionServiceProvider extends ServiceProvider
 {
-    protected string $moduleName = 'Transactions';
+    protected string $moduleName = 'Transaction';
 
-    protected string $moduleNameLower = 'transactions';
+    protected string $moduleNameLower = 'transaction';
 
     /**
      * Boot the application events.

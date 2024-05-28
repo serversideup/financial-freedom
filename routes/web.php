@@ -11,8 +11,6 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\TransactionsController;
-use App\Http\Controllers\TransactionsImportController;
 use Illuminate\Support\Facades\Route;
 
 /*

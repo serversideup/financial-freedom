@@ -1,0 +1,11 @@
+{
+    "name": "Transaction",
+    "alias": "transaction",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Transaction\\Providers\\TransactionServiceProvider"
+    ],
+    "files": []
+}

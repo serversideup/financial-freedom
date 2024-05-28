@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Transactions;
+namespace Modules\Transaction\Services;
 
 use App\Models\CashAccount;
 use App\Models\CreditCard;

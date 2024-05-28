@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Modules\Transaction\Http\Controllers\ImportController;
+use Modules\Transaction\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,14 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/transactions', [TransactionsController::class, 'index'])
+    Route::get('/transactions', [TransactionController::class, 'index'])
         ->name('transactions.index');
-    Route::post('/transactions', [TransactionsController::class, 'store'])
+    Route::post('/transactions', [TransactionController::class, 'store'])
         ->name('transactions.store');
 
-    Route::get('/transactions/import', [TransactionsImportController::class, 'index'])
+    Route::get('/transactions/import', [ImportController::class, 'index'])
         ->name('transactions.import.index');
-    Route::post('/transactions/import', [TransactionsImportController::class, 'store'])
+    Route::post('/transactions/import', [ImportController::class, 'store'])
         ->name('transactions.import.store');
-
 });

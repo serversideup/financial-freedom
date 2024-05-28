@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/transactions",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Transactions\\": "app/",
+            "Modules\\Transactions\\Database\\Factories\\": "database/factories/",
+            "Modules\\Transactions\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Transactions\\Tests\\": "tests/"
+        }
+    }
+}

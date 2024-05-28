@@ -108,6 +108,7 @@
         </main>
 
         <Notification/>
+        <Modal/>
     </div>
   </template>
   
@@ -121,6 +122,7 @@ import CoinsIcon from '@/Components/Icons/CoinsIcon.vue';
 import BudgetPlanIcon from '@/Components/Icons/BudgetPlanIcon.vue';
 import GoalsIcon from '@/Components/Icons/GoalsIcon.vue';
 import SettingsIcon from '@/Components/Icons/SettingsIcon.vue';
+import { Modal } from 'momentum-modal'
 import { computed, ref } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3';
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'

@@ -24,8 +24,8 @@ class CreateAccounts
     private function createCashAccounts()
     {
         $names = [
-            'Checking Account',
-            'Savings Account',
+            'Primary Checking Account',
+            'Fun Money Account',
         ];
 
         for( $i = 0; $i < 2; $i++ ) {

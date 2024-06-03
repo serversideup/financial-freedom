@@ -4,28 +4,28 @@
             <span class="text-[#F5F5F6] font-medium text-xl font-sans">Recent Transactions</span>
         </div>
         <div class="flex flex-col w-full">
-            <!-- <div class="flex items-center justify-between">
-                <span class="text-[#F5F5F6] font-medium text-xl font-sans">Recent Transactions</span>
-            </div> -->
             <table class="w-full">
-                <thead>
-                    <tr class="border-b border-[#1F242F]">
-                        <th class="pl-6 font-sans text-xs font-medium text-[#94969C] py-3 text-left">Transaction</th>
-                        <th class="font-sans text-xs font-medium text-[#94969C] py-3 text-left">Amount</th>
-                        <th class="font-sans text-xs font-medium text-[#94969C] py-3 text-left">Date</th>
-                        <th class="font-sans text-xs font-medium text-[#94969C] py-3 text-left">Category</th>
-                        <th class="font-sans text-xs font-medium text-[#94969C] py-3 text-left">Account</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    <!-- <tr v-for="transaction in transactions" :key="transaction.id" class="border-b border-[#1F242F]">
-                        <td class="pl-6 py-4 text-[#F5F5F6] font-sans text-sm">{{ transaction.name }}</td>
-                        <td class="py-4 text-[#F5F5F6] font-sans text-sm">{{ transaction.amount }}</td>
-                        <td class="py-4 text-[#F5F5F6] font-sans text-sm">{{ transaction.date }}</td>
-                        <td class="py-4 text-[#F5F5F6] font-sans text-sm">{{ transaction.category.name }}</td>
-                        <td class="py-4 text-[#F5F5F6] font-sans text-sm">{{ transaction.account.name }}</td>
-                    </tr> -->
-                    <tr v-if="transactions.length == 0">
+                    <template v-for="(transactions, date) in groupedTransactions">
+                        <tr class="bg-[#1F242F] text-[#ECECED] border-b border-[#1F242F]">
+                            <td class="font-sans text-xs font-semibold text-[#94969C] pl-6 py-3" :colspan="3">
+                                {{ formatDate( date ) }}
+                            </td>
+                        </tr>
+                        <tr v-for="(transaction, transactionIndex) in transactions" 
+                            :key="'transaction-'+transaction.id" class="border-b border-[#1F242F]">
+                                <td class="pl-6 py-4 text-[#F5F5F6] font-sans text-sm">{{ transaction.merchant }}</td>
+                                <td class="py-4 text-[#F5F5F6] font-sans text-sm">{{ currency.format( transaction.amount ) }}</td>
+                                <td class="py-4 font-sans text-sm text-[#F5F5F6] font-medium">
+                                    <span class="text-xs font-sans font-medium leading-[18px] px-[6px] py-[2px] inline-flex items-center border border-[#333741] rounded-md">
+                                        <span :style="{ backgroundColor: getCategoryColor(transaction.category.color) }" class="w-2 h-2 rounded-full mr-1"></span>
+                                        {{ transaction.category.name }}
+                                    </span>
+                                </td>
+                        </tr>
+                    </template>
+                    
+                    <tr v-if="transactions.data.length == 0">
                         <td colspan="5">
                             <div class="py-12 flex flex-col items-center justify-center">
                                 <div class="flex items-center justify-center w-12 h-12 rounded-[10px] border border-[#333741]">
@@ -54,12 +54,47 @@
                                         Add Transaction
                                     </button>
                                 </div>
-                                
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <!-- <tfoot>
+                <tr>
+                    <td colspan="3" class="py-[14px] px-4">
+                        <div class="w-full flex items-center justify-between">
+                            <button @click="previous()" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
+                                <div class="w-5 h-5 flex items-center justify-center mr-1">
+                                    <ArrowLeftIcon/>
+                                </div>
+                                
+                                Previous
+                            </button>
+
+                            <div class="flex items-center">
+                                <button
+                                    v-for="link in paginationNumbers" 
+                                    @click="link.url != null ? toPage( link.url ) : null"
+                                    v-text="link.label"
+                                    class="w-8 h-8 flex items-center justify-center font-sans text-sm font-medium hover:text-[#ECECED]"
+                                    :class="link.active 
+                                        ? 'text-[#ECECED] bg-[#1F242F] rounded-lg' 
+                                        : 'text-[#94969C]'">
+                                </button>
+                            </div>
+                            
+
+                            <button @click="next()" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
+                                Next
+                                
+                                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                    <ArrowRightIcon/>
+                                </div>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot> -->
         </div>
     </div>
 </template>
@@ -67,6 +102,37 @@
 <script setup>
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import { useFormatters } from '@/Composables/useFormatters';
+import { 
+    useCategoryColor 
+} from '@/Composables/useCategoryColor.js';
+
+const { currency } = useFormatters();
+
+const {
+    getCategoryColor
+} = useCategoryColor();
 
 const transactions = computed(() => usePage().props.transactions);
+
+const groupedTransactions = computed(() => {
+    return transactions.value.data.reduce((acc, transaction) => {
+        if ( !acc[transaction.date] ) {
+            acc[transaction.date] = [];
+        }
+
+        acc[transaction.date].push(transaction);
+
+        return acc;
+    }, {});
+});
+
+const formatDate = (date) => {
+    return new Date(date).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
 </script>

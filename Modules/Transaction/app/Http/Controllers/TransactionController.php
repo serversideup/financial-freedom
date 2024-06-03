@@ -19,7 +19,7 @@ class TransactionController extends Controller
     {
         return Inertia::render( 'Transactions/Index', [
             'group' => 'transactions',
-            'transactions' => fn () => ( new IndexTransactions() )->execute( $request),
+            'transactions' => fn () => ( new IndexTransactions() )->execute( $request ),
             'groups' => fn () => ( new IndexGroups() )->index( $request ),
             'cashAccounts' => fn() => ( new IndexCashAccounts() )->index(),
             'creditCards' => fn() => ( new IndexCreditCards() )->index(),

@@ -13,6 +13,9 @@ class IndexTransactions
     {
         $this->query = Transaction::query();
 
-        return $this->query->get();
+        $this->query->with( 'category' );
+        $this->query->orderBy( 'date', 'desc' );
+
+        return $this->query->paginate();
     }
 }

@@ -88,7 +88,7 @@ class CreateTransactions
                 'accountable_id' => $account->id,
                 'accountable_type' => get_class( $account ),
                 'category_id' => $transaction['category_id'],
-                'amount' => $transaction['amount'],
+                'amount' => number_format( $transaction['amount'] / 100, 2, '.', '' ),
                 'date' => date( 'Y-m-d', strtotime( $transaction['date'] ) ),
                 'merchant' => $transaction['merchant'],
                 'description' => null,

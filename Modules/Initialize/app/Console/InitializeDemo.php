@@ -2,8 +2,10 @@
 
 namespace Modules\Initialize\Console;
 
+use GuzzleHttp\Promise\Create;
 use Illuminate\Console\Command;
 use Modules\Initialize\Actions\CreateAccounts;
+use Modules\Initialize\Actions\CreateTransactions;
 use Modules\Initialize\Actions\CreateUser;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -57,6 +59,8 @@ class InitializeDemo extends Command
             ( new CreateAccounts($user) )->handle();
 
             // Create Transactions
+            $this->info('💸 Creating transactions...');
+            ( new CreateTransactions($user) )->handle();
 
             // Create Rules
             $this->info('🎉 Demo initialized successfully.');

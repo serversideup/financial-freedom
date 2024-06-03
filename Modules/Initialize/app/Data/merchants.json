@@ -1,0 +1,132 @@
+[
+    {
+        "name": "Amazon",
+        "amount_range": {
+            "min": 100,
+            "max": 45000
+        },
+        "categories": [
+            "Home Decor",
+            "Books",
+            "Groceries"
+        ]
+    },
+    {
+        "name": "Mobil Gas",
+        "amount_range": {
+            "min": 100,
+            "max": 15000
+        },
+        "categories": [
+            "Gas"
+        ]
+    },
+    {
+        "name": "Starbucks",
+        "amount_range": {
+            "min": 100,
+            "max": 5000
+        },
+        "categories": [
+            "Coffee Shops",
+            "Lunch"
+        ]
+    },
+    {
+        "name": "Walmart",
+        "amount_range": {
+            "min": 100,
+            "max": 20000
+        },
+        "categories": [
+            "Home Decor",
+            "Books",
+            "Groceries"
+        ]
+    },
+    {
+        "name": "Target",
+        "amount_range": {
+            "min": 100,
+            "max": 20000
+        },
+        "categories": [
+            "Home Decor",
+            "Books",
+            "Groceries"
+        ]
+    },
+    {
+        "name": "Costco",
+        "amount_range": {
+            "min": 100,
+            "max": 60000
+        },
+        "categories": [
+            "Home Decor",
+            "Books",
+            "Groceries"
+        ]
+    },
+    {
+        "name": "Home Depot",
+        "amount_range": {
+            "min": 100,
+            "max": 20000
+        },
+        "categories": [
+            "Home Improvement",
+            "Cleaning Supplies"
+        ]
+    },
+    {
+        "name": "Best Buy",
+        "amount_range": {
+            "min": 100,
+            "max": 20000
+        },
+        "categories": [
+            "Computer / Computer Accessories"
+        ]
+    }, 
+    {
+        "name": "Kroger",
+        "amount_range": {
+            "min": 100,
+            "max": 20000
+        },
+        "categories": [
+            "Groceries"
+        ]
+    },
+    {
+        "name": "United Health Care",
+        "amount_range": {
+            "min": 100,
+            "max": 20000
+        },
+        "categories": [
+            "Health Insurance"
+        ]
+    },
+    {
+        "name": "AT&T",
+        "amount_range": {
+            "min": 100,
+            "max": 20000
+        },
+        "categories": [
+            "Mobile Phone"
+        ]
+    },
+    {
+        "name": "Panera Bread",
+        "amount_range": {
+            "min": 100,
+            "max": 5000
+        },
+        "categories": [
+            "Lunch"
+        ]
+    }
+]

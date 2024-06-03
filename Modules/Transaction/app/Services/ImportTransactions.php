@@ -5,7 +5,7 @@ namespace Modules\Transaction\Services;
 use App\Models\CashAccount;
 use App\Models\CreditCard;
 use App\Models\Loan;
-use App\Models\Transaction;
+use Modules\Transaction\Models\Transaction;
 use Illuminate\Support\Str;
 
 class ImportTransactions

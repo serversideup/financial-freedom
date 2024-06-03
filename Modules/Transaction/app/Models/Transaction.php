@@ -19,7 +19,7 @@ class Transaction extends Model
         'amount',
         'date',
         'merchant',
-        'description',
+        'notes',
         'type',
         'reconciled',
         'receipt_url',

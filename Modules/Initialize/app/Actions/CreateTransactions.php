@@ -91,7 +91,7 @@ class CreateTransactions
                 'amount' => number_format( $transaction['amount'] / 100, 2, '.', '' ),
                 'date' => date( 'Y-m-d', strtotime( $transaction['date'] ) ),
                 'merchant' => $transaction['merchant'],
-                'description' => null,
+                'notes' => null,
                 'type' => $transaction['type'],
                 'reconciled' => true,
                 'original' => null

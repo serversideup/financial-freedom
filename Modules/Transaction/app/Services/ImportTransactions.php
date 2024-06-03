@@ -45,7 +45,7 @@ class ImportTransactions
                 'amount' => $transaction['amount'],
                 'date' => date( 'Y-m-d', strtotime( $transaction['date'] ) ),
                 'merchant' => $transaction['name'],
-                'description' => $transaction['description'],
+                'notes' => $transaction['notes'],
                 'type' => $transaction['direction'],
                 'reconciled' => true,
                 'original' => json_encode( $transaction )

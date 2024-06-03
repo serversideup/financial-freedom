@@ -62,7 +62,7 @@
                     <tr>
                         <td colspan="4" class="py-[14px] px-4">
                             <div class="w-full flex items-center justify-between">
-                                <Link :href="transactions.prev_page_url" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
+                                <Link :href="transactions.prev_page_url ? transactions.prev_page_url : '#'" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
                                     <div class="w-5 h-5 flex items-center justify-center mr-1">
                                         <ArrowLeftIcon/>
                                     </div>
@@ -83,7 +83,7 @@
                                 </div>
                                 
 
-                                <Link :href="transactions.next_page_url" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
+                                <Link :href="transactions.next_page_url ? transactions.next_page_url : '#'" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
                                     Next
                                     
                                     <div class="w-5 h-5 flex items-center justify-center ml-1">

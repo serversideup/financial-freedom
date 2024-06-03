@@ -46,7 +46,7 @@ export const useImportTransactions = () => {
             form.transactions.push({
                 name: csvData.value[i][fieldMap.name],
                 raw_name: csvData.value[i][fieldMap.name],
-                description: '',
+                notes: '',
                 amount: csvData.value[i][fieldMap.amount],
                 direction: parseFloat( csvData.value[i][fieldMap.amount] ) > 0 ? 'credit' : 'debit',
                 date: csvData.value[i][fieldMap.date],

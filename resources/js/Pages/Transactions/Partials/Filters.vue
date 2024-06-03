@@ -2,7 +2,7 @@
     <div class="rounded-xl flex flex-col border border-[#1F242F]">
         <div class="p-4 flex items-center justify-between border-b border-[#1F242F]">
             <span class="text-[#F5F5F6] font-medium text-xl font-sans">Filters</span>
-            <button class="text-sm text-[#F5F5F6] underline">Clear</button>
+            <button class="text-sm text-[#F5F5F6] underline" @click="clear()">Clear</button>
         </div>
         
         <div class="p-4 flex flex-col space-y-3">
@@ -22,7 +22,7 @@
                             @change="accountQuery = $event.target.value"
                             :displayValue="(account) => account ? account.name : ''" 
                             class="block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                        <ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronDownIcon class="h-5 w-5 text-[#6C727F]"/>
                         </ComboboxButton>
                     </div>
@@ -69,12 +69,12 @@
             <div class="flex flex-col">
                 <InputLabel value="Category" />
                 <Combobox v-model="filters.category">
-                    <div class="relative">
+                    <div class="relative mt-1">
                         <ComboboxInput 
                             @change="categoryQuery = $event.target.value"
                             :displayValue="(category) => category ? category.name : ''" 
                             class="block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                        <ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronDownIcon class="h-5 w-5 text-[#6C727F]"/>
                         </ComboboxButton>
                     </div>
@@ -119,16 +119,6 @@
                     </TransitionRoot>
                 </Combobox>
             </div>
-
-            <div class="flex flex-col">
-                <InputLabel value="Type" />
-                
-            </div>
-
-            <div class="flex flex-col">
-                <InputLabel value="Date Range" />
-                
-            </div>
         </div>
     </div>
 </template>
@@ -136,8 +126,9 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { computed, ref } from 'vue';
-import { useForm, usePage } from '@inertiajs/vue3';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
+import { router, usePage } from '@inertiajs/vue3';
+import { useDebounceFn } from '@vueuse/core';
 import { ChevronDownIcon } from '@heroicons/vue/20/solid';
 import {
     Combobox,
@@ -156,11 +147,74 @@ const creditCards = computed(() => usePage().props.creditCards);
 const loans = computed(() => usePage().props.loans);
 const groups = computed(() => usePage().props.groups);
 
-const filters = useForm({
+const filters = reactive({
     search: '',
     account: '',
     category: ''
-})
+});
+
+onMounted(() => {
+    if( usePage().props.filters?.search ) {
+        filters.search = usePage().props.filters.search;
+    }
+
+    if( usePage().props.filters?.account_id 
+        && usePage().props.filters?.account_type ) {
+            switch(usePage().props.filters.account_type) {
+                case 'cash-account':
+                    filters.account = cashAccounts.value.find(account => account.id == usePage().props.filters.account_id);
+                break;
+                case 'credit_cards':
+                    filters.account = creditCards.value.find(account => account.id == usePage().props.filters.account_id);
+                break;
+                case 'loans':
+                    filters.account = loans.value.find(account => account.id == usePage().props.filters.account_id);
+                break;
+            }
+    }
+
+    if( usePage().props.filters?.category_id ) {
+        filters.category = groups.value.reduce((acc, group) => {
+            let category = group.categories.find(category => category.id == usePage().props.filters.category_id);
+
+            if( category ) {
+                acc = category;
+            }
+
+            return acc;
+        }, {});
+    }
+});
+
+watch( filters, useDebounceFn(() => {
+    let params = {}
+
+    if( filters.search ) {
+        params.search = filters.search;
+    }
+
+    if( filters.account ) {
+        params.account_id = filters.account.id;
+        params.account_type = filters.account.type;
+    }
+
+    if( filters.category ) {
+        params.category_id = filters.category.id;
+    }
+
+    router.visit('/transactions', {
+        data: params,
+        only: ['transactions'],
+        replace: true, 
+        preserveState: true
+    });
+}), { deep: true });
+
+const clear = () => {
+    filters.search = '';
+    filters.account = '';
+    filters.category = '';
+}
 
 /**
  * Account Filters

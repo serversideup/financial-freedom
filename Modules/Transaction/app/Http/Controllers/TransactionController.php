@@ -24,6 +24,7 @@ class TransactionController extends Controller
             'cashAccounts' => fn() => ( new IndexCashAccounts() )->index(),
             'creditCards' => fn() => ( new IndexCreditCards() )->index(),
             'loans' => fn() => ( new IndexLoans() )->index(),
+            'filters' => $request->all()
         ] );
     }
 }

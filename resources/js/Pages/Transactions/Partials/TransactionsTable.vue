@@ -8,7 +8,7 @@
                 <tbody>
                     <template v-for="(transactions, date) in groupedTransactions">
                         <tr class="bg-[#1F242F] text-[#ECECED] border-b border-[#1F242F]">
-                            <td class="font-sans text-xs font-semibold text-[#94969C] pl-6 py-3" :colspan="3">
+                            <td class="font-sans text-xs font-semibold text-[#94969C] pl-6 py-3" :colspan="4">
                                 {{ formatDate( date ) }}
                             </td>
                         </tr>
@@ -26,7 +26,7 @@
                     </template>
                     
                     <tr v-if="transactions.data.length == 0">
-                        <td colspan="5">
+                        <td colspan="4">
                             <div class="py-12 flex flex-col items-center justify-center">
                                 <div class="flex items-center justify-center w-12 h-12 rounded-[10px] border border-[#333741]">
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,48 +58,50 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
-            <!-- <tfoot>
-                <tr>
-                    <td colspan="3" class="py-[14px] px-4">
-                        <div class="w-full flex items-center justify-between">
-                            <button @click="previous()" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
-                                <div class="w-5 h-5 flex items-center justify-center mr-1">
-                                    <ArrowLeftIcon/>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="py-[14px] px-4">
+                            <div class="w-full flex items-center justify-between">
+                                <Link :href="transactions.prev_page_url" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
+                                    <div class="w-5 h-5 flex items-center justify-center mr-1">
+                                        <ArrowLeftIcon/>
+                                    </div>
+                                    
+                                    Previous
+                                </Link>
+
+                                <div class="flex items-center">
+                                    <Link
+                                        v-for="link in paginationNumbers" 
+                                        :href="link.url"
+                                        v-text="link.label"
+                                        class="w-8 h-8 flex items-center justify-center font-sans text-sm font-medium hover:text-[#ECECED]"
+                                        :class="link.active 
+                                            ? 'text-[#ECECED] bg-[#1F242F] rounded-lg' 
+                                            : 'text-[#94969C]'">
+                                    </Link>
                                 </div>
                                 
-                                Previous
-                            </button>
 
-                            <div class="flex items-center">
-                                <button
-                                    v-for="link in paginationNumbers" 
-                                    @click="link.url != null ? toPage( link.url ) : null"
-                                    v-text="link.label"
-                                    class="w-8 h-8 flex items-center justify-center font-sans text-sm font-medium hover:text-[#ECECED]"
-                                    :class="link.active 
-                                        ? 'text-[#ECECED] bg-[#1F242F] rounded-lg' 
-                                        : 'text-[#94969C]'">
-                                </button>
+                                <Link :href="transactions.next_page_url" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
+                                    Next
+                                    
+                                    <div class="w-5 h-5 flex items-center justify-center ml-1">
+                                        <ArrowRightIcon/>
+                                    </div>
+                                </Link>
                             </div>
-                            
-
-                            <button @click="next()" class="text-sm inline-flex items-center px-3 py-2 rounded-lg border border-[#333741] font-sans font-semibold text-[#CECFD2] bg-[#161B26]">
-                                Next
-                                
-                                <div class="w-5 h-5 flex items-center justify-center ml-1">
-                                    <ArrowRightIcon/>
-                                </div>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tfoot> -->
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </template>
 
 <script setup>
+import ArrowLeftIcon from '@/Components/Icons/LeftArrowIcon.vue';
+import ArrowRightIcon from '@/Components/Icons/RightArrowIcon.vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import { useFormatters } from '@/Composables/useFormatters';
@@ -125,6 +127,12 @@ const groupedTransactions = computed(() => {
 
         return acc;
     }, {});
+});
+
+const paginationNumbers = computed(() => {
+    return transactions.value.links 
+        ? transactions.value.links.splice(1, transactions.value.links.length - 2) 
+        : [];
 });
 
 const formatDate = (date) => {

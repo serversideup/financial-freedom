@@ -17,6 +17,7 @@
             </div>
         </div>
 
+        <CheckDuplicateModal/>
         <FloatingActions v-show="step == 'review-transactions'"/>
         <AddRuleSlideout :apply="true"/>
     </div>
@@ -32,6 +33,7 @@ export default {
 
 <script setup>
 import AddRuleSlideout from './Partials/AddRuleSlideout.vue';
+import CheckDuplicateModal from './Partials/CheckDuplicateModal.vue';
 import FloatingActions from './Partials/FloatingActions.vue';
 import SelectAccount from './Partials/SelectAccount.vue';
 import UploadFile from './Partials/UploadFile.vue';

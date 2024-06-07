@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Transaction\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Services\CashAccounts\IndexCashAccounts;
 use App\Services\CreditCards\IndexCreditCards;
 use App\Services\Groups\IndexGroups;
 use App\Services\Loans\IndexLoans;
-use App\Services\Transactions\ImportTransactions;
+use Modules\Transaction\Services\ImportTransactions;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class TransactionsImportController extends Controller
+class ImportController extends Controller
 {
     public function index( Request $request ): Response
     {

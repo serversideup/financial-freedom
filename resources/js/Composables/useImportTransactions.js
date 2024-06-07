@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+import moment from 'moment';
 import { computed, reactive, ref } from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 
@@ -19,10 +20,12 @@ const header = ref([]);
 const csvData = ref([]);
 const transactions = ref([]);
 const importing = ref(false);
+const filters = reactive({
+    matched: true,
+});
+const potentialDuplicates = ref([]);
 
 export const useImportTransactions = () => {
-    
-
     const groups = computed(() => usePage().props.groups);
 
     const parseUpload = () => {
@@ -46,7 +49,7 @@ export const useImportTransactions = () => {
             form.transactions.push({
                 name: csvData.value[i][fieldMap.name],
                 raw_name: csvData.value[i][fieldMap.name],
-                description: '',
+                notes: '',
                 amount: csvData.value[i][fieldMap.amount],
                 direction: parseFloat( csvData.value[i][fieldMap.amount] ) > 0 ? 'credit' : 'debit',
                 date: csvData.value[i][fieldMap.date],
@@ -57,7 +60,9 @@ export const useImportTransactions = () => {
             });
         }
 
+        orderTransactions();
         applyRules();
+        checkDuplicates();
 
         parsing.value = false;
     }
@@ -73,6 +78,15 @@ export const useImportTransactions = () => {
                 }
             });
         }
+    }
+
+    const orderTransactions = () => {
+        form.transactions.sort((a, b) => {
+            let dateA = new Date(a.date);
+            let dateB = new Date(b.date);
+
+            return dateA - dateB;
+        });
     }
 
     const applyRules = () => {
@@ -105,6 +119,41 @@ export const useImportTransactions = () => {
         }
     }
 
+    const checkDuplicates = () => {
+        let startDate = form.transactions[0].date;
+        let endDate = form.transactions[form.transactions.length - 1].date;
+
+        axios.get('/api/transactions', {
+            params: {
+                start_date: startDate,
+                end_date: endDate,
+                account_id: form.account.id,
+                account_type: form.account.type,
+            }
+        }).then((response) => {
+            potentialDuplicates.value = response.data;
+            compareDuplicates();
+        });
+    }
+
+    const compareDuplicates = () => {
+        for( let i = 0; i < form.transactions.length; i++ ){
+            for( let j = 0; j < potentialDuplicates.value.length; j++ ){
+                let transactionDate = new Date( form.transactions[i].date );
+                let duplicateDate = new Date( potentialDuplicates.value[j].date );
+                
+                if( moment( form.transactions[i].date ).format('YYYY-MM-DD') === moment( potentialDuplicates.value[j].date ).format('YYYY-MM-DD')
+                    && Math.abs( parseFloat( form.transactions[i].amount ) ) === potentialDuplicates.value[j].amount ){
+                    form.transactions[i].potential_duplicate = potentialDuplicates.value[j];
+                }
+            }
+        }
+    }
+
+    const removeTransaction = (transactionIndex) => {
+        form.transactions.splice(transactionIndex, 1);
+    }
+
     const reset = () => {
         step.value = 'select-account';
         file.value = null;
@@ -126,6 +175,7 @@ export const useImportTransactions = () => {
         file,
         parsing,
         importing,
+        filters,
         
         fieldMap,
         header,
@@ -134,6 +184,7 @@ export const useImportTransactions = () => {
         parseUpload,
         convertTransactions,
         importTransactions,
-        applyRules
+        applyRules,
+        removeTransaction
     }
 }

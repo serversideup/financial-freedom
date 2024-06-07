@@ -985,6 +985,16 @@ minimatch@^9.0.1:
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-7.0.4.tgz#dbce03740f50a4786ba994c1fb908844d27b038c"
   integrity sha512-jYofLM5Dam9279rdkWzqHozUo4ybjdZmCsDHePy5V/PbBcVMiSZR97gmAy45aqi8CK1lG2ECd356FU86avfwUQ==
 
+moment@^2.30.1:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
+
+momentum-modal@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/momentum-modal/-/momentum-modal-0.2.2.tgz#98c7c646f2f19676d1cffe1b0e4abb6fad03ee1a"
+  integrity sha512-ZwQaeW3VXU+C1Hwmpe3PqaiylYooZNPj+8z0JEDUwysMGvbQIfMUCyJCWej3lr8OztBA+bggKJ+mYn4bplATbQ==
+
 mz@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/mz/-/mz-2.7.0.tgz#95008057a56cafadc2bc63dde7f9ff6955948e32"

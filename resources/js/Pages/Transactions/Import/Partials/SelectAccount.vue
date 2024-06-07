@@ -7,7 +7,7 @@
                     @change="accountQuery = $event.target.value"
                     :displayValue="(account) => account ? account.name : ''" 
                     class="block w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3"/>
-                <ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-2">
                     <ChevronDownIcon class="h-5 w-5 text-[#6C727F]"/>
                 </ComboboxButton>
             </div>

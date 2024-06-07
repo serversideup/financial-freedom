@@ -24,13 +24,8 @@ class CreateAccounts
     private function createCashAccounts()
     {
         $names = [
-            'Checking Account',
-            'Savings Account',
-            'Emergency Fund',
-            'Vacation Fund',
-            'Car Fund',
-            'House Fund',
-            'Investment Account'
+            'Primary Checking Account',
+            'Fun Money Account',
         ];
 
         for( $i = 0; $i < 2; $i++ ) {
@@ -40,7 +35,7 @@ class CreateAccounts
                 'user_id' => $this->user->id,
                 'institution_id' => $institution->id,
                 'type' => 'checking',
-                'name' => $names[rand(0, 6)], 
+                'name' => $names[rand(0, 1)], 
                 'description' => 'This is a checking account.',
                 'balance' => rand(1000, 10000),
                 'interest_rate' => 0.01,
@@ -97,8 +92,6 @@ class CreateAccounts
 
         for( $i = 0; $i < 2; $i++ ) {
             $institution = Institution::inRandomOrder()->first();
-
-            $name = $names[rand(0, 3)];
 
             CreditCard::create([
                 'user_id' => $this->user->id,

@@ -11,8 +11,6 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\TransactionsController;
-use App\Http\Controllers\TransactionsImportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,16 +32,6 @@ Route::middleware(['auth'])->group( function(){
 Route::middleware('auth')->group(function () {
     Route::post('/rules', [RulesController::class, 'store'])
         ->name('rules.store');
-
-    Route::get('/transactions', [TransactionsController::class, 'index'])
-        ->name('transactions.index');
-    Route::post('/transactions', [TransactionsController::class, 'store'])
-        ->name('transactions.store');
-
-    Route::get('/transactions/import', [TransactionsImportController::class, 'index'])
-        ->name('transactions.import.index');
-    Route::post('/transactions/import', [TransactionsImportController::class, 'store'])
-        ->name('transactions.import.store');
 
     Route::get('/accounts', [AccountController::class, 'index'])
         ->name('accounts.index');

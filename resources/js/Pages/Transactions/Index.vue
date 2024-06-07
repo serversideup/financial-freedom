@@ -24,14 +24,16 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-5 gap-6">
-            <div class="col-span-3">
-
+        <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-8">
+                <TransactionsTable/>
             </div>
-            <div class="col-span-2">
-
+            <div class="col-span-4">
+                <Filters/>
             </div>
         </div>
+
+        <AddTransactionModal/>
     </div>
 </template>
 
@@ -44,10 +46,15 @@ export default {
 </script>
 
 <script setup>
+import AddTransactionModal from './Partials/AddTransactionModal.vue';
+import Filters from './Partials/Filters.vue';
+import TransactionsTable from './Partials/TransactionsTable.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'
 
+const promptBus = useEventBus('ff-prompt-event-bus')
+
 const addTransaction = () => {
-    
+    promptBus.emit('prompt-add-transaction');
 }
 </script>

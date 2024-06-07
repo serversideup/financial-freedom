@@ -22,6 +22,11 @@
                                         {{ transaction.category.name }}
                                     </span>
                                 </td>
+                                <td class="py-4 text-[#F5F5F6] font-sans text-sm">
+                                    <Link :href="'/transactions/'+transaction.id" class="text-[#155EEF] font-medium">
+                                        View
+                                    </Link>
+                                </td>
                         </tr>
                     </template>
                     
@@ -108,6 +113,7 @@ import { useFormatters } from '@/Composables/useFormatters';
 import { 
     useCategoryColor 
 } from '@/Composables/useCategoryColor.js';
+import moment from 'moment';
 
 const { currency } = useFormatters();
 
@@ -136,11 +142,6 @@ const paginationNumbers = computed(() => {
 });
 
 const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
+    return moment(date).format('dddd, MMMM Do YYYY');
 }
 </script>

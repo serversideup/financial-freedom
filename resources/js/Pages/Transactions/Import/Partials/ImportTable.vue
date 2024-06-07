@@ -1,5 +1,19 @@
 <template>
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-end">
+        <span class="isolate inline-flex rounded-md shadow-sm">
+            <button type="button" @click="filters.matched = !filters.matched" class="relative inline-flex items-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-[#CECFD2] border border-[#333741] focus:z-10"
+            :class="{
+                'bg-gray-50/10': !filters.matched
+            }">
+                <EyeIcon v-show="filters.matched" class="-ml-0.5 h-5 w-5 text-[#CECFD2]" aria-hidden="true" />
+                <EyeSlashIcon v-show="!filters.matched" class="-ml-0.5 h-5 w-5 text-[#CECFD2]" aria-hidden="true" />
+                <span v-show="!filters.matched">Show transactions that match rule</span>
+                <span v-show="filters.matched">Hide transactions that match rule</span>
+            </button>
+        </span>
+    </div>
+    
+    <div class="px-4 sm:px-6 lg:px-8 pb-32">
         <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle">
                 <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-xl border border-[#1F242F]">
@@ -35,9 +49,13 @@ import ImportRow from './ImportRow.vue';
 import { 
     useImportTransactions 
 } from '@/Composables/useImportTransactions';
-
+import {
+    EyeIcon,
+    EyeSlashIcon
+} from '@heroicons/vue/20/solid';
 
 const { 
+    filters,
     form 
 } = useImportTransactions();
 

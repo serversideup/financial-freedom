@@ -19,6 +19,10 @@ Route::middleware('auth')->group(function () {
         ->name('transactions.index');
     Route::post('/transactions', [TransactionController::class, 'store'])
         ->name('transactions.store');
+    Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])
+        ->name('transactions.show');
+    Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])
+        ->name('transactions.update');
 
     Route::get('/transactions/import', [ImportController::class, 'index'])
         ->name('transactions.import.index');

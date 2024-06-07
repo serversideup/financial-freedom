@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Transaction\Http\Controllers\Api\TransactionController;
 
 /*
  *--------------------------------------------------------------------------
@@ -13,4 +14,8 @@ use Illuminate\Support\Facades\Route;
  *
 */
 
+Route::group(['prefix' => 'transactions'], function () {
+    Route::get('/', [TransactionController::class, 'index'])
+        ->name('transaction.index');
+});
 

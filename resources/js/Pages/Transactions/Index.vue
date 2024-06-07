@@ -32,6 +32,8 @@
                 <Filters/>
             </div>
         </div>
+
+        <AddTransactionModal/>
     </div>
 </template>
 
@@ -44,12 +46,15 @@ export default {
 </script>
 
 <script setup>
+import AddTransactionModal from './Partials/AddTransactionModal.vue';
 import Filters from './Partials/Filters.vue';
 import TransactionsTable from './Partials/TransactionsTable.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'
 
+const promptBus = useEventBus('ff-prompt-event-bus')
+
 const addTransaction = () => {
-    
+    promptBus.emit('prompt-add-transaction');
 }
 </script>

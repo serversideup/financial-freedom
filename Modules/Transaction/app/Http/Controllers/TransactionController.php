@@ -11,7 +11,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Transaction\Http\Requests\StoreTransactionRequest;
+use Modules\Transaction\Http\Requests\UpdateTransactionRequest;
+use Modules\Transaction\Models\Transaction;
 use Modules\Transaction\Services\IndexTransactions;
+use Modules\Transaction\Services\StoreTransaction;
+use Modules\Transaction\Services\UpdateTransaction;
 
 class TransactionController extends Controller
 {
@@ -26,5 +31,29 @@ class TransactionController extends Controller
             'loans' => fn() => ( new IndexLoans() )->index(),
             'filters' => $request->all()
         ] );
+    }
+
+    public function store( StoreTransactionRequest $request ): RedirectResponse
+    {
+        ( new StoreTransaction() )->execute( $request );
+
+        return redirect()->route( 'transactions.index' );
+    }
+
+    public function show( Transaction $transaction )
+    {
+        $transaction->load('accountable');
+
+        return Inertia::modal('Transactions/Show', [
+            'transaction' => $transaction
+        ])
+        ->baseRoute('transactions.index');
+    }
+
+    public function update( UpdateTransactionRequest $request, Transaction $transaction ): RedirectResponse
+    {
+        ( new UpdateTransaction() )->execute( $request, $transaction );        
+
+        return redirect()->route( 'transactions.index' );
     }
 }

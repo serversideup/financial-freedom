@@ -14,7 +14,7 @@ class IndexTransactions
     protected $request;
     private $query;
 
-    public function execute( Request $request )
+    public function execute( Request $request, $paginate = true )
     {
         $this->request = $request;
         $this->query = Transaction::query();
@@ -22,11 +22,12 @@ class IndexTransactions
         $this->applySearch();
         $this->filterAccount();
         $this->filterCategory();
+        $this->filterDates();
 
         $this->query->with( 'category' );
         $this->query->orderBy( 'date', 'desc' );
 
-        return $this->query->paginate();
+        return $paginate ? $this->query->paginate() : $this->query->get();
     }
 
     private function applySearch()
@@ -76,5 +77,16 @@ class IndexTransactions
     }
 
 
+    private function filterDates()
+    {
+        if ( $this->request->has( 'start_date' ) ) {
+            $startDate = date( 'Y-m-d', strtotime( $this->request->input( 'start_date' ) ) );
+            $this->query->where( 'date', '>=', $startDate );
+        }
 
+        if ( $this->request->has( 'end_date' ) ) {
+            $endDate = date( 'Y-m-d', strtotime( $this->request->input( 'end_date' ) ) );
+            $this->query->where( 'date', '<=', $endDate );
+        }
+    }
 }

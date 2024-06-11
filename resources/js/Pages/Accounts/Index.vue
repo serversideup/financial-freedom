@@ -15,7 +15,10 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-6" v-if="hasAccounts">
-            <NetWorth :transactions="[]"/>
+            <NetWorth 
+                :transactions="[]"
+                :assets="assets"
+                :liabilities="liabilities"/>
 
             <div class="grid grid-cols-1 gap-6 md:col-span-3">
                 <CashAccountsTable
@@ -27,7 +30,9 @@
             </div>
 
             <div class="md:col-span-2">
-                <AccountSummary/>
+                <AccountSummary
+                    :assets="assets"
+                    :liabilities="liabilities"/>
             </div>
         </div>
 
@@ -67,5 +72,27 @@ const promptBus = useEventBus('ff-prompt-event-bus')
 const addAccount = () => {
     promptBus.emit('prompt-add-account');
 }
+
+const assets = computed(() => {
+    return cashAccounts.value.reduce((acc, account) => {
+        return parseFloat( acc ) + parseFloat( account.balance );
+    }, 0);
+});
+
+const creditCardTotal = computed(() => {
+    return creditCards.value.reduce((acc, account) => {
+        return parseFloat( acc ) + parseFloat( account.balance );
+    }, 0);
+});
+
+const loansTotal = computed(() => {
+    return loans.value.reduce((acc, account) => {
+        return parseFloat( acc ) + parseFloat( account.remaining_balance );
+    }, 0);
+});
+
+const liabilities = computed(() => {
+    return parseFloat( creditCardTotal.value ) + parseFloat( loansTotal.value );
+});
 
 </script>

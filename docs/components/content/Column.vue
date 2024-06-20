@@ -10,7 +10,7 @@
 <script setup>
 const props = defineProps({
     sticky: {
-        defualt: false
+        default: false
     }
 })
 </script>

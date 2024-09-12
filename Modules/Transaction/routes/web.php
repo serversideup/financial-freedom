@@ -15,6 +15,11 @@ use Modules\Transaction\Http\Controllers\TransactionController;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/transactions/import', [ImportController::class, 'index'])
+        ->name('transactions.import.index');
+    Route::post('/transactions/import', [ImportController::class, 'store'])
+        ->name('transactions.import.store');
+
     Route::get('/transactions', [TransactionController::class, 'index'])
         ->name('transactions.index');
     Route::post('/transactions', [TransactionController::class, 'store'])
@@ -23,9 +28,4 @@ Route::middleware('auth')->group(function () {
         ->name('transactions.show');
     Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])
         ->name('transactions.update');
-
-    Route::get('/transactions/import', [ImportController::class, 'index'])
-        ->name('transactions.import.index');
-    Route::post('/transactions/import', [ImportController::class, 'store'])
-        ->name('transactions.import.store');
 });

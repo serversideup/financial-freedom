@@ -25,6 +25,8 @@ class IndexTransactions
         $this->filterDates();
 
         $this->query->with( 'category' );
+        $this->query->with( 'category.group' );
+        
         $this->query->orderBy( 'date', 'desc' );
 
         return $paginate ? $this->query->paginate() : $this->query->get();

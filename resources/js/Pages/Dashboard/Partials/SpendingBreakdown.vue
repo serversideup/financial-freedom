@@ -1,7 +1,11 @@
 <template>
     <div class="col-span-4 p-6 border border-[#1F242F] rounded-xl">
         <div class="flex items-center justify-between">
-            <h3 class="text-[#F5F5F6] font-sans font-semibold">Spending Breakdown</h3>
+            <div class="flex flex-col">
+                <h3 class="text-[#F5F5F6] font-sans font-semibold">Spending Breakdown</h3>
+                <span class="mt-1 text-[#94969C] font-sans text-sm">September 2024</span>
+            </div>
+            
             <button class="w-5 h-5 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M9.99984 10.8334C10.4601 10.8334 10.8332 10.4603 10.8332 10C10.8332 9.5398 10.4601 9.16671 9.99984 9.16671C9.5396 9.16671 9.1665 9.5398 9.1665 10C9.1665 10.4603 9.5396 10.8334 9.99984 10.8334Z" stroke="#85888E" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
@@ -10,5 +14,101 @@
                 </svg>
             </button>
         </div>
+        <div class="w-full flex items-start mt-6 space-x-4" v-if="!building">
+            <div class="w-1/2">
+                <Doughnut 
+                    :data="chartData"
+                    :options="chartOptions"/>
+            </div>
+            <div class="w-1/2">
+            
+            </div>
+        </div>
     </div>
 </template>
+
+<script setup>
+import { computed, onMounted, ref } from 'vue';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Doughnut } from 'vue-chartjs'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
+
+const transactions = ref([]);
+
+const date = new Date();
+const monthStartDate = new Date(date.getFullYear(), date.getMonth(), 1);
+const monthEndDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+onMounted(() => {
+    loadTransactions();
+});
+
+const building = ref(false);
+
+const loadTransactions = () => {
+    building.value = true;
+    
+    axios.get('/api/transactions', {
+        params: {
+            start_date: monthStartDate.getFullYear() + '-' + (monthStartDate.getMonth() + 1).toString().padStart(2, '0') + '-' + monthStartDate.getDate().toString().padStart(2, '0'),
+            end_date: monthEndDate.getFullYear() + '-' + (monthEndDate.getMonth() + 1).toString().padStart(2, '0') + '-' + monthEndDate.getDate().toString().padStart(2, '0')
+        }
+    }).then(response => {
+        transactions.value = response.data;
+
+        buildChart();
+    });
+};
+
+const labels = ref([]);
+const colors = ref([]);
+const totals = ref([]);
+
+const chartData = ref({
+    labels: [],
+    datasets: [{
+        data: [],
+        backgroundColor: [],
+        borderWidth: 0
+    }]
+});
+
+const buildChart = () => {
+    transactions.value.forEach(transaction => {
+        if (!labels.value.includes(transaction.category.name)) {
+            labels.value.push(transaction.category.name);
+            colors.value.push(transaction.category.color);
+            totals.value.push(transaction.amount);
+        } else {
+            const index = labels.value.indexOf(transaction.category.name);
+            totals.value[index] += transaction.amount;
+        }
+    });
+
+    chartData.value.labels = labels.value;
+    chartData.value.datasets[0].data = totals.value;
+    chartData.value.datasets[0].backgroundColor = colors.value;
+
+    building.value = false;
+}
+
+const chartOptions = computed(() => {
+    return {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return '$' + context.formattedValue;
+                    }
+                }
+            }
+        }
+    }
+})
+
+</script>

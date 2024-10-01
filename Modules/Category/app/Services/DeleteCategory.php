@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Categories;
+namespace Modules\Category\Services;
 
 class DeleteCategory
 {

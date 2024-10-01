@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Category\Http\Controllers;
 
-use App\Http\Requests\Categories\StoreCategoryRequest;
-use App\Http\Requests\Categories\UpdateCategoryRequest;
-use App\Models\Category;
-use App\Services\Categories\DeleteCategory;
-use App\Services\Categories\StoreCategory;
-use App\Services\Categories\UpdateCategory;
-use App\Services\Groups\IndexGroups;
+use App\Http\Controllers\Controller;
+use Modules\Category\Http\Requests\StoreCategoryRequest;
+use Modules\Category\Http\Requests\UpdateCategoryRequest;
+use Modules\Category\Services\DeleteCategory;
+use Modules\Category\Services\StoreCategory;
+use Modules\Category\Services\UpdateCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Inertia\Response;
+use Modules\Category\Models\Category;
+use Modules\Category\Services\IndexGroups;
 
 class CategoryController extends Controller
 {

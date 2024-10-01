@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Category\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Category\Database\Factories\GroupFactory;
 
 class Group extends Model
 {
@@ -19,6 +20,6 @@ class Group extends Model
 
     public function categories()
     {
-        return $this->hasMany('App\Models\Category', 'group_id', 'id');
+        return $this->hasMany('Modules\Category\Models\Category', 'group_id', 'id');
     }
 }

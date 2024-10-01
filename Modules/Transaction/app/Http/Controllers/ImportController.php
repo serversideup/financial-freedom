@@ -5,7 +5,7 @@ namespace Modules\Transaction\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Services\CashAccounts\IndexCashAccounts;
 use App\Services\CreditCards\IndexCreditCards;
-use App\Services\Groups\IndexGroups;
+use Modules\Category\Services\IndexGroups;
 use App\Services\Loans\IndexLoans;
 use Modules\Transaction\Services\ImportTransactions;
 use Illuminate\Http\RedirectResponse;

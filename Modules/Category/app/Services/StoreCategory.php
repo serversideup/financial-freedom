@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Categories;
+namespace Modules\Category\Services;
 
-use App\Models\Category;
+use Modules\Category\Models\Category;
 
 class StoreCategory
 {

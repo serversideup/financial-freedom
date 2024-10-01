@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Services\Categories;
+namespace Modules\Category\Services;
+
+use Modules\Category\Models\Category;
 
 class UpdateCategory
 {

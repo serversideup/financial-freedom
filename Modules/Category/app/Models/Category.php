@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Category\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Category\Models\Group;
 
 class Category extends Model
 {
@@ -14,12 +15,11 @@ class Category extends Model
     protected $fillable = [
         'user_id',
         'group_id',
-        'name',
-        'color'
+        'name'
     ];
 
     public function group()
     {
-        return $this->hasOne('App\Models\Group', 'id', 'group_id');
+        return $this->belongsTo(Group::class);
     }
 }

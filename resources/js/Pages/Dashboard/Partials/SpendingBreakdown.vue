@@ -14,7 +14,7 @@
                 </svg>
             </button>
         </div>
-        <div class="w-full flex items-start mt-6 space-x-4" v-if="!building">
+        <div class="w-full flex items-start mt-6 space-x-4" >
             <div class="w-1/2">
                 <Doughnut 
                     :data="chartData"
@@ -44,10 +44,10 @@ onMounted(() => {
     loadTransactions();
 });
 
-const building = ref(false);
+const loading = ref(false);
 
 const loadTransactions = () => {
-    building.value = true;
+    loading.value = true;
     
     axios.get('/api/transactions', {
         params: {
@@ -57,41 +57,35 @@ const loadTransactions = () => {
     }).then(response => {
         transactions.value = response.data;
 
-        buildChart();
+        loading.value = false;
     });
 };
 
-const labels = ref([]);
-const colors = ref([]);
-const totals = ref([]);
+const chartData = computed(() => {
+    let labels = [];
+    let colors = [];
+    let totals = [];
 
-const chartData = ref({
-    labels: [],
-    datasets: [{
-        data: [],
-        backgroundColor: [],
-        borderWidth: 0
-    }]
-});
-
-const buildChart = () => {
     transactions.value.forEach(transaction => {
-        if (!labels.value.includes(transaction.category.name)) {
-            labels.value.push(transaction.category.name);
-            colors.value.push(transaction.category.color);
-            totals.value.push(transaction.amount);
+        if (!labels.includes(transaction.category.group.name)) {
+            labels.push(transaction.category.group.name);
+            colors.push(transaction.category.group.color);
+            totals.push(transaction.amount);
         } else {
-            const index = labels.value.indexOf(transaction.category.name);
-            totals.value[index] += transaction.amount;
+            const index = labels.indexOf(transaction.category.group.name);
+            totals[index] += transaction.amount;
         }
     });
 
-    chartData.value.labels = labels.value;
-    chartData.value.datasets[0].data = totals.value;
-    chartData.value.datasets[0].backgroundColor = colors.value;
-
-    building.value = false;
-}
+    return {
+        labels: labels,
+        datasets: [{
+            data: totals,
+            backgroundColor: colors,
+            borderWidth: 0
+        }]
+    }
+});
 
 const chartOptions = computed(() => {
     return {

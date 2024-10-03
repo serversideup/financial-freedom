@@ -29,7 +29,6 @@
                                         <option value="gray">Gray</option>
                                         <option value="blue">Blue</option>
                                         <option value="pink">Pink</option>
-                                        <option value="red">Red</option>
                                     </select>
                                 </td>
                                 <td class="py-3 pl-4 font-sans text-sm text-[#F5F5F6] font-medium border-b border-[#1F242F]">

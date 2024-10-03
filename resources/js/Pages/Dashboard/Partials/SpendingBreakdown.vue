@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between">
             <div class="flex flex-col">
                 <h3 class="text-[#F5F5F6] font-sans font-semibold">Spending Breakdown</h3>
-                <span class="mt-1 text-[#94969C] font-sans text-sm">September 2024</span>
+                <span class="mt-1 text-[#94969C] font-sans text-sm">{{ monthStartDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) }}</span>
             </div>
             
             <button class="w-5 h-5 flex items-center justify-center">
@@ -21,7 +21,20 @@
                     :options="chartOptions"/>
             </div>
             <div class="w-1/2">
-            
+                <ul class="space-y-[6px]">
+                    <li v-for="(label, labelIndex) in chartData.labels" :key="labelIndex">
+                        <div class="flex items-start space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                                <circle cx="5" cy="5" r="5" :fill="chartData.datasets[0].backgroundColor[labelIndex]"/>
+                            </svg>
+                            <div class="flex flex-col">
+                                <span class="text-[#94969C] font-sans font-medium text-xs leading-none">{{ label }}</span>
+                                <span class="text-[#F5F5F6] font-sans font-semibold text-base mt-1">{{ currency.format(chartData.datasets[0].data[labelIndex]) }}</span>
+                            </div>
+                        </div>
+                        
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -29,10 +42,15 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
+import { useCategoryColor } from '@/Composables/useCategoryColor';
+import { useFormatters } from '@/Composables/useFormatters';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
+
+const { getCategoryColor } = useCategoryColor();
+const { currency } = useFormatters();
 
 const transactions = ref([]);
 
@@ -69,7 +87,7 @@ const chartData = computed(() => {
     transactions.value.forEach(transaction => {
         if (!labels.includes(transaction.category.group.name)) {
             labels.push(transaction.category.group.name);
-            colors.push(transaction.category.group.color);
+            colors.push(getCategoryColor(transaction.category.group.color));
             totals.push(transaction.amount);
         } else {
             const index = labels.indexOf(transaction.category.group.name);

@@ -1,11 +1,10 @@
 const colors = {
-    'green': '#16B364',
-    'purple': '#7A5AF8',
-    'orange': '#EF6820',
-    'gray': '#737373',
+    'green': '#17B26A',
+    'purple': '#6172F3',
+    'orange': '#F79009',
+    'gray': '#4E5BA6',
     'blue': '#2E90FA',
-    'pink': '#EE46BC',
-    'red': '#F63D68',
+    'pink': '#EE46BC'
 };
 
 export const useCategoryColor = () => {

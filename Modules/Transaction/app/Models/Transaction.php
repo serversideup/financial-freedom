@@ -2,7 +2,7 @@
 
 namespace Modules\Transaction\Models;
 
-use App\Models\Category;
+use Modules\Category\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,5 +34,5 @@ class Transaction extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }    
+    }
 }

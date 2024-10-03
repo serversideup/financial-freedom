@@ -22,11 +22,11 @@
         "@headlessui/vue": "^1.7.17",
         "@heroicons/vue": "^2.1.1",
         "@vueuse/core": "^10.7.1",
-        "chart.js": "^4.4.1",
+        "chart.js": "^4.4.4",
         "moment": "^2.30.1",
         "momentum-modal": "^0.2.2",
         "papaparse": "^5.4.1",
-        "vue-chartjs": "^5.3.0",
+        "vue-chartjs": "^5.3.1",
         "zxcvbn": "^4.4.2"
     }
 }

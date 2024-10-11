@@ -8,6 +8,7 @@ export default defineNuxtConfig({
         '@nuxt/content',
         '@nuxtjs/plausible',
         '@nuxtjs/tailwindcss',
+        '@stefanobartoletti/nuxt-social-share',
         '@vueuse/nuxt'
     ],
 
@@ -69,6 +70,10 @@ export default defineNuxtConfig({
             basePath: process.env.NUXT_APP_BASE_URL,
             domain: process.env.TOP_LEVEL_DOMAIN
         }
+    },
+
+    socialShare: {
+        baseUrl: 'https://serversideup.net/open-source/financial-freedom'
     },
 
     tailwindcss: {

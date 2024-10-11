@@ -13,6 +13,7 @@
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/plausible": "^0.2.3",
     "@nuxtjs/tailwindcss": "^6.9.4",
+    "@stefanobartoletti/nuxt-social-share": "^1.1.2",
     "@tailwindcss/typography": "^0.5.9",
     "@vueuse/core": "^10.6.1",
     "@vueuse/nuxt": "^10.6.1",

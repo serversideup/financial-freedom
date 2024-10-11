@@ -16,6 +16,13 @@
             </NuxtLink> 
 
             <NuxtLink 
+                @click.native="closeMenu()"
+                href="/blog"
+                class="flex items-center font-inter font-bold text-[#F5F5F6] text-base py-3 px-6 mb-2">
+                    Blog
+            </NuxtLink>
+
+            <NuxtLink 
                 href="https://serversideup.net/discord"
                 class="flex items-center font-inter font-bold text-[#F5F5F6] text-base py-3 px-6 mb-2">
                     <div class="flex items-center justify-center w-5 h-5 mr-4">

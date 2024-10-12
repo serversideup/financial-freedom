@@ -18,7 +18,7 @@
                                 <td class="py-4 text-[#F5F5F6] font-sans text-sm">{{ currency.format( transaction.amount ) }}</td>
                                 <td class="py-4 font-sans text-sm text-[#F5F5F6] font-medium">
                                     <span class="text-xs font-sans font-medium leading-[18px] px-[6px] py-[2px] inline-flex items-center border border-[#333741] rounded-md">
-                                        <span :style="{ backgroundColor: getCategoryColor(transaction.category.color) }" class="w-2 h-2 rounded-full mr-1"></span>
+                                        <span :style="{ backgroundColor: getCategoryColor(transaction.category.group.color) }" class="w-2 h-2 rounded-full mr-1"></span>
                                         {{ transaction.category.name }}
                                     </span>
                                 </td>

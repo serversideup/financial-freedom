@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashAccountController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CreditCardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstitutionController;
@@ -24,10 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->group( function(){
-    Route::get('/', [DashboardController::class, 'index'])
-        ->name('dashboard');
-});
+
 
 Route::middleware('auth')->group(function () {
     Route::post('/rules', [RulesController::class, 'store'])
@@ -54,15 +50,6 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/settings/portfolio', [PortfolioController::class, 'update'])
         ->name('settings.portfolio.update');
-
-    Route::get('/settings/categories', [CategoryController::class, 'index'])
-        ->name('settings.categories.index');
-    Route::post('/settings/categories', [CategoryController::class, 'store'])
-        ->name('settings.categories.store');
-    Route::put('/settings/categories/{category}', [CategoryController::class, 'update'])
-        ->name('settings.categories.update');
-    Route::delete('/settings/categories/{category}', [CategoryController::class, 'destroy'])
-        ->name('settings.categories.delete');
         
     Route::get('/settings/institutions', [InstitutionController::class, 'index'])
         ->name('settings.institutions.index');

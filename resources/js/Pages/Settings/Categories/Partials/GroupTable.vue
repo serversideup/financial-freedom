@@ -12,9 +12,12 @@
                             </span>
                         </div>
 
-                        <div class="flex items-center justify-center">
-                            <button @click="addCategory()" class="py-[10px] px-[14px] font-sans text-sm font-semibold cursor-pointer bg-[#155EEF] text-[#FFF] rounded-lg">
-                                Add Category
+                        <div class="flex items-center justify-center space-x-2">
+                            <button @click="addCategory()" class="p-2 rounded-lg border border-[#333741]">
+                                <PlusIcon class="w-4 h-4 text-[#94969C]"/>
+                            </button>
+                            <button @click="editGroup()" class="p-2 rounded-lg border border-[#333741]">
+                                <PencilSquareIcon class="w-4 h-4 text-[#94969C]"/>
                             </button>
                         </div>
                     </div>
@@ -22,7 +25,6 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium text-[#94969C]">Name</th>
-                                <th scope="col" class="px-3 py-4 text-left text-xs font-medium text-[#94969C]">Color</th>
                                 <th scope="col" class="px-3 py-4 text-left text-xs font-medium text-[#94969C]">Preview</th>
                                 <th scope="col" class="relative py-4 pl-3 pr-4 sm:pr-6">
                                     <span class="sr-only">Edit</span>
@@ -34,21 +36,9 @@
                                 <td class="py-3 pl-4 w-80 font-sans text-sm text-[#F5F5F6] font-medium border-b border-[#1F242F]">
                                     {{ category.name }}
                                 </td>
-                                <td class="py-3 pl-4 w-32 font-sans text-sm text-[#F5F5F6] font-medium border-b border-[#1F242F]">
-                                    <select @change="updateColor( category )" v-model="group.categories[index].color" class="block text-sm w-full rounded-md bg-transparent border border-[#333741] text-[#CECFD2] py-2 px-3">
-                                        <option value="" disabled>Select a color</option>
-                                        <option value="green">Green</option>
-                                        <option value="purple">Purple</option>
-                                        <option value="orange">Orange</option>
-                                        <option value="gray">Gray</option>
-                                        <option value="blue">Blue</option>
-                                        <option value="pink">Pink</option>
-                                        <option value="red">Red</option>
-                                    </select>
-                                </td>
                                 <td class="py-3 pl-4 font-sans text-sm text-[#F5F5F6] font-medium border-b border-[#1F242F]">
                                     <span class="text-xs font-sans font-medium leading-[18px] px-[6px] py-[2px] inline-flex items-center border border-[#333741] rounded-md">
-                                        <span :style="{ backgroundColor: getCategoryColor(category.color) }" class="w-2 h-2 rounded-full mr-1"></span>
+                                        <span :style="{ backgroundColor: getCategoryColor(group.color) }" class="w-2 h-2 rounded-full mr-1"></span>
                                         {{ category.name }}
                                     </span>
                                 </td>
@@ -71,9 +61,12 @@
 import { useCategoryColor } from '@/Composables/useCategoryColor.js';
 import { router } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core'
+import { 
+    PencilSquareIcon,
+    PlusIcon
+} from '@heroicons/vue/24/outline';
 
 const bus = useEventBus('ff-prompt-event-bus')
-const notifyBus = useEventBus('ff-notification-event-bus')
 
 const {
     getCategoryColor
@@ -86,6 +79,10 @@ const props = defineProps({
     }
 });
 
+const editGroup = () => {
+    bus.emit('prompt-edit-group', props.group);
+}
+
 const addCategory = () => {
     bus.emit('prompt-add-category', props.group);
 }
@@ -96,20 +93,5 @@ const editCategory = ( category ) => {
 
 const deleteCategory = ( category ) => {
     bus.emit('prompt-delete-category', category);
-}
-
-const updateColor = ( category ) => {
-    router.put(`/settings/categories/${category.id}`, {
-        'color': category.color
-    }, {
-        preserveScroll: true,
-        onSuccess: () => {
-            notifyBus.emit('notify', {
-                title: 'Category Updated',
-                body: 'The category color has been updated.',
-                type: 'success'
-            });
-        }
-    })
 }
 </script>

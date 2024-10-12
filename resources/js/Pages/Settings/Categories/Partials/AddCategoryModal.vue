@@ -38,7 +38,6 @@
                     <option value="gray">Gray</option>
                     <option value="blue">Blue</option>
                     <option value="pink">Pink</option>
-                    <option value="red">Red</option>
                 </select>
                 <InputError class="mt-2" :message="form.errors.color" />
             </div>

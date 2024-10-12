@@ -2,8 +2,8 @@
 
 namespace App\Services\Categories;
 
-use App\Models\Category;
-use App\Models\Group;
+use Modules\Category\Models\Category;
+use Modules\Category\Models\Group;
 
 class SeedUserCategories
 {

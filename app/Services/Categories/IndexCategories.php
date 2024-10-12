@@ -2,7 +2,7 @@
 
 namespace App\Services\Categories;
 
-use App\Models\Category;
+use Modules\Category\Models\Category;
 
 class IndexCategories
 {

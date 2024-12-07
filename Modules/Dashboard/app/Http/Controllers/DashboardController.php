@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function index( Request $request ): Response
     {
-        return Inertia::render( 'Dashboard/Index', [
+        return Inertia::render( 'Dashboard::Index', [
             'group' => 'dashboard'
         ] );
     }

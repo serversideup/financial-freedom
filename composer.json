@@ -5,12 +5,12 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "based/momentum-modal": "^0.3.0",
         "guzzlehttp/guzzle": "^7.2",
-        "inertiajs/inertia-laravel": "^0.6.8",
-        "laravel/framework": "^10.10",
-        "laravel/sanctum": "^3.2",
+        "inertiajs/inertia-laravel": "^1.0",
+        "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
         "nwidart/laravel-modules": "^11.0",
         "spatie/laravel-data": "^3.11",
@@ -18,12 +18,12 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "laravel/breeze": "^1.28",
+        "laravel/breeze": "^2.0",
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
+        "nunomaduro/collision": "^8.1",
         "phpunit/phpunit": "^10.1",
-        "serversideup/spin": "dev-75-spin-deploy-allow-deployments-without-cicd",
+        "serversideup/spin": "^2.3.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

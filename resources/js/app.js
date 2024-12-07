@@ -4,7 +4,6 @@ import '../css/app.css';
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { modal } from "momentum-modal"
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { resolvePage } from './resolvePage';
 
@@ -16,7 +15,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(modal, {
-                resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob("./Pages/**/*.vue")),
+                resolve: (name) => resolvePage(name),
             })
             .use(plugin)
             .use(ZiggyVue)

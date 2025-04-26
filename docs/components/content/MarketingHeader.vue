@@ -20,6 +20,11 @@
                                 </NuxtLink>
                             </li>
                             <li>
+                                <NuxtLink :to="'/blog'" class="font-inter text-[#94969C] font-semibold text-base">
+                                    Blog
+                                </NuxtLink>
+                            </li>
+                            <li>
                                 <NuxtLink to="https://serversideup.net/discord" target="_blank" class="font-inter text-[#94969C] font-semibold text-base">
                                     Discord
                                 </NuxtLink>

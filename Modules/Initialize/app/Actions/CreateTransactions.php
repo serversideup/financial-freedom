@@ -3,7 +3,7 @@
 namespace Modules\Initialize\Actions;
 
 use App\Models\CashAccount;
-use App\Models\Category;
+use Modules\Category\Models\Category;
 use App\Models\CreditCard;
 use App\Models\User;
 use Illuminate\Support\Facades\File;

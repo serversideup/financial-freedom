@@ -1,4 +1,6 @@
 {
     "Initialize": true,
-    "Transaction": true
+    "Transaction": true,
+    "Dashboard": true,
+    "Category": true
 }

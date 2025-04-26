@@ -13,7 +13,12 @@
 
         <!-- Scripts -->
         @routes
-        @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
+        @vite([
+            'resources/js/app.js',
+            str_contains($page['component'], '::') 
+                ? "Modules/" . str_replace('::', '/resources/assets/js/Pages/', $page['component']) . '.vue'
+                : "resources/js/Pages/{$page['component']}.vue"
+        ])
         @inertiaHead
     </head>
     <body class="font-sans antialiased h-full bg-[#0C111D]">

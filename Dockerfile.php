@@ -4,7 +4,7 @@
 
 # Learn more about the Server Side Up PHP Docker Images at:
 # https://serversideup.net/open-source/docker-php/
-FROM serversideup/php-dev:523-8.3-fpm-nginx-alpine as base
+FROM serversideup/php-dev:523-8.3-fpm-nginx-alpine AS base
 
 ## Uncomment if you need to install additional PHP extensions
 # USER root
@@ -13,7 +13,7 @@ FROM serversideup/php-dev:523-8.3-fpm-nginx-alpine as base
 ############################################
 # Development Image
 ############################################
-FROM base as development
+FROM base AS development
 
 # We can pass USER_ID and GROUP_ID as build arguments
 # to ensure the www-data user has the same UID and GID
@@ -34,7 +34,7 @@ USER www-data
 ############################################
 # CI image
 ############################################
-FROM base as ci
+FROM base AS ci
 
 # Sometimes CI images need to run as root
 # so we set the ROOT user and configure
@@ -46,7 +46,7 @@ RUN echo "user = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-p
 ############################################
 # Production Image
 ############################################
-FROM base as release
+FROM base AS release
 COPY --chown=www-data:www-data . /var/www/html
 
 ENV SSL_MODE=mixed

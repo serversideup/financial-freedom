@@ -1,7 +1,7 @@
-FROM node:20 as base
+FROM node:20 AS base
 
 ### Development
-FROM base as development
+FROM base AS development
 ARG USER_ID
 
 RUN usermod -u $USER_ID node

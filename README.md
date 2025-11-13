@@ -10,20 +10,21 @@
 	<a href="https://gitpod.io/#https://github.com/serversideup/financial-freedom/"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod"></a>
 </p>
 
-## ⚠️ Important Update: This project is on hold because we need sustainable self-funding
-We have sooooo many ideas for Financial Freedom, but it does come with some head wind. [Maybe Finance paused their project](https://github.com/maybe-finance/maybe/releases/tag/v0.6.0) and their post resonated with the same challenges we saw.
-
-In order for this project to be successful, we need to secure working capital so we can dedicate the time to getting the app done. If you're thinking that we want to raise money to seek investors, that's not the case. We're a two-person bootstrapped team and we're pursuing ways to self-fund the project. This will give the project the best advantage where it doesn't owe anything back to anyone.
-
-Since we're bootstrappers at heart, [we're working on more professional products and SaaS services](https://serversideup.net/products/) in hopes to help self-fund Financial Freedom. The reason why we're looking to other sources of revenue is because the market is loaded with options like Monarch Money who charge $8/mo, but probably makes revenue through other means (ie. stock investment, selling "metadata", etc). It's very challenging for a bootstrapped team to enter into a sustainable business model because these venture funded structures keep the prices so low to keep competition out but make their profits elsewhere (the whole reason why we started playing around with the idea of Financial Freedom in the first place).
-
-**Long story short:**
-- This started as a fun side project that took off faster than we expected
-- We're working as hard as we can to make Financial Freedom possible, but we need to fund this project ourselves so we don't end up like other
-- We appreciate you patience and understanding that we're sticking to our values and making sure this project is built to last
-
+## ⚠️ Project On Hold - Pursuing Sustainable Self-Funding
 > [!CAUTION]  
 > Do not attempt to install this project until this message is removed. It's in the middle of a major refactor and you'll just see a blank screen (we were working on the release process first before we put the project on hold). You can review/fork the code if you'd like to see where we left off.
+
+We have many ideas for Financial Freedom, but we're facing the same headwinds that led [Maybe Finance to pause their project](https://github.com/maybe-finance/maybe/releases/tag/v0.6.0). Their post resonated deeply with the challenges we're experiencing.
+
+**Here's the reality:** To make this project successful, we need working capital to dedicate proper time to development. We're *not* seeking venture capital or investors. As a two-person bootstrapped team, we're committed to self-funding this project so it doesn't owe anything to anyone.
+
+We're currently [building professional products and SaaS services](https://serversideup.net/products/) to generate revenue that will fund Financial Freedom's development. The market reality is challenging—competitors like Monarch Money charge $8/mo while likely profiting through other means (stock investments, selling metadata, etc.). Venture-funded companies can keep prices artificially low to squeeze out competition while making money elsewhere. This is exactly why Financial Freedom needs to exist, but it also makes sustainable bootstrapping difficult.
+
+**Bottom line:**
+- This started as a side project that grew faster than expected
+- We're determined to build Financial Freedom the right way—self-funded and sustainable
+- We won't compromise by taking VC money or selling user data
+- We appreciate your patience as we stick to our values and build this project to last
 
 ## Introduction
 `Financial Freedom` is an open source alternative to Mint, YNAB, and more. With open source at its core, you have the freedom to review exactly what's happening with your data and participate in the improvement of the product.

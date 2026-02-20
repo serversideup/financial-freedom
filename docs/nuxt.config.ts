@@ -7,8 +7,7 @@ export default defineNuxtConfig({
         '@nuxtjs/color-mode',
         '@nuxt/content',
         '@nuxtjs/plausible',
-        '@nuxtjs/tailwindcss',
-        '@vueuse/nuxt'
+        '@nuxtjs/tailwindcss'
     ],
 
     algolia: {

@@ -72,6 +72,9 @@ export default defineNuxtConfig({
 
     tailwindcss: {
         config: {
+            content: [
+                './node_modules/@serversideup/project-switcher-bar/src/**/*.{vue,js}'
+            ],
             plugins: [tailwindTypography]
         },
         cssPath: '~/assets/css/tailwind.css',

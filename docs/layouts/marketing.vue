@@ -17,7 +17,9 @@
             <Meta name="theme-color" content="#ffffff"/>
         </Head>
         
-        <ProjectSwitcherBar/>
+        <div class="sticky top-0 z-[99]">
+            <ProjectSwitcherBar/>
+        </div>
 
         <MarketingHeader
             :fixed="true"/>

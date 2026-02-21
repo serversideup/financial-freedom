@@ -1633,10 +1633,10 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@serversideup/project-switcher-bar@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@serversideup/project-switcher-bar/-/project-switcher-bar-0.0.4.tgz#2fea80366357d02e6abb16ea6dce454fae439370"
-  integrity sha512-Oj+W0geNSVm9yza0VvuMDtZKdikRzciKR3LXDd8rO60MItFAIcjFmo0L/pfL4/O1asMCaowEkd5uN1ZnVJ52TQ==
+"@serversideup/project-switcher-bar@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@serversideup/project-switcher-bar/-/project-switcher-bar-0.0.5.tgz#8ffe02facd4b2824afd35624e79865efd899ba99"
+  integrity sha512-ApbquhEYzXFdhmK1XkQTIvHA93iaNvhLGAwjKwzr/q3sCtsuHDlo5U8ergEkZmXH951e6jsaHFgGKp2XDQhY9A==
 
 "@sigstore/bundle@^2.1.0":
   version "2.1.0"

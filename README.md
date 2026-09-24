@@ -92,6 +92,16 @@ We're [Dan](https://x.com/danpastori) and [Jay](https://x.com/jaydrogers) - a tw
 
 </div>
 
+### Hire Us
+Get two senior Laravel experts who deliver quality code with predictable monthly pricing. [Dan](https://x.com/danpastori) and [Jay](https://x.com/jaydrogers) have 30+ years of combined experience building scalable Laravel applications.
+
+- **🎯 Complete Laravel expertise** - Full-stack development, CI/CD, database optimization, mobile apps
+- **💰 Predictable pricing** - Fixed monthly subscription, no hourly billing surprises, 40%+ savings
+- **⚡ Maximum productivity** - 90%+ development time, no meetings, results in days not weeks
+- **🛡️ Risk-free** - 7-day money-back guarantee, cancel anytime
+
+**[💬 Discuss Your Project →](https://serversideup.net/hire-us)**
+
 ### Find us at:
 
 * **📖 [Blog](https://serversideup.net)** - Get the latest guides and free courses on all things web/mobile development.

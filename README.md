@@ -117,7 +117,6 @@ If you appreciate this project, be sure to check out our other projects.
 
 ### 🛠️ Premium
 - **[Self-Host Pro](https://selfhostpro.com)**: Sell self-hosted software in minutes.
-- **[Bugflow](https://bugflow.io)**: Get product feedback directly in GitHub, GitLab, and more.
 - **[Spin Pro](https://getspin.pro)**: Production-ready Docker templates for shipping quickly.
 
 ### 🌍 Open Source

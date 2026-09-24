@@ -1,0 +1,10 @@
+name: Update README
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 30 15 * * 0
+jobs:
+  update-readme:
+    uses: serversideup/.github/.github/workflows/update-readme.yml@master
+    permissions:
+      contents: write
